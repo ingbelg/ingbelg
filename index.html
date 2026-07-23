@@ -61,6 +61,7 @@
         <li><a href="#diensten">Diensten</a></li>
         <li><a href="#realisaties">Realisaties</a></li>
         <li><a href="#voordelen">Waarom INGBELG</a></li>
+        <li><a href="#calculator">Premie-check</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -364,6 +365,85 @@
   </div>
 </section>
 
+<!-- ============ PREMIE-CALCULATOR ============ -->
+<section class="section calc-sec" id="calculator">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Exclusief bij INGBELG</p>
+      <h2 class="h2">Bereken uw <em>premies &amp; subsidies</em></h2>
+      <p class="sechead__sub">Geen enkele andere dakwerker in de regio biedt dit. Vul uw gegevens in en ontvang meteen een indicatie van de premies waarop u mogelijk recht hebt.</p>
+    </header>
+
+    <div class="calc reveal">
+      <form class="calc__form" id="calcForm" novalidate>
+        <label class="field">
+          <span>Type werk</span>
+          <select name="type" id="calcType">
+            <option value="hellend">Dakisolatie — hellend dak</option>
+            <option value="plat">Dakisolatie — plat dak</option>
+            <option value="totaal">Dakisolatie + zonnepanelen (totaalrenovatie)</option>
+          </select>
+        </label>
+
+        <div class="calc__row">
+          <label class="field">
+            <span>Dakoppervlakte (m²)</span>
+            <input type="number" name="m2" id="calcM2" min="1" max="500" step="1" value="100">
+          </label>
+          <label class="field">
+            <span>Beoogde R-waarde na isolatie</span>
+            <select name="rwaarde" id="calcR">
+              <option value="hoog">R ≥ 4,5 (aanbevolen)</option>
+              <option value="midden">R 3 – 4,5</option>
+              <option value="laag">R &lt; 3</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="calc__row">
+          <label class="field">
+            <span>Geschatte kostprijs werken (€)</span>
+            <input type="number" name="kost" id="calcKost" min="0" step="100" value="8000">
+          </label>
+          <label class="field">
+            <span>Bouwjaar woning</span>
+            <select name="bouwjaar" id="calcBouwjaar">
+              <option value="oud">Voor 2000</option>
+              <option value="midden">2000 – 2015</option>
+              <option value="nieuw">Na 2015</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="calc__row">
+          <label class="field">
+            <span>Inkomen huishouden</span>
+            <select name="inkomen" id="calcInkomen">
+              <option value="regulier">Regulier inkomen</option>
+              <option value="verhoogd">Verhoogde tegemoetkoming (BIM/OMNIO)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Gemeente</span>
+            <input type="text" name="gemeente" id="calcGemeente" placeholder="Bv. Zottegem">
+          </label>
+        </div>
+
+        <button class="btn btn--primary btn--lg btn--block" type="submit">
+          <span>Bereken mijn premies</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+
+      <div class="calc__result" id="calcResult">
+        <p class="calc__placeholder">Vul het formulier in en klik op <strong>“Bereken mijn premies”</strong> om uw indicatieve totaal te bekijken.</p>
+      </div>
+    </div>
+
+    <p class="calc__disclaimer">* Indicatieve demoberekening op basis van vereenvoudigde vuistregels — geen officiële simulatie. De exacte bedragen worden pas bevestigd na plaatsbezoek en de officiële premie-aanvraag bij Fluvius, de Vlaamse overheid en uw gemeente.</p>
+  </div>
+</section>
+
 <!-- ============ CTA BAND ============ -->
 <section class="cta">
   <div class="container cta__in reveal">
@@ -532,6 +612,7 @@
         <li><a href="#over">Over ons</a></li>
         <li><a href="#realisaties">Realisaties</a></li>
         <li><a href="#voordelen">Waarom INGBELG</a></li>
+        <li><a href="#calculator">Premie-check</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -570,6 +651,7 @@
   <div class="lb__counter" id="lbCount"></div>
 </div>
 
+<script src="js/calculator.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
