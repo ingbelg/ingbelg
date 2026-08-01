@@ -24,15 +24,4 @@ const gallery = defineCollection({
   }),
 });
 
-const testimonials = defineCollection({
-  loader: glob({ pattern: '*.json', base: './src/content/testimonials' }),
-  schema: z.object({
-    rating: z.number().min(1).max(5),
-    text: z.string(),
-    author: z.string(),
-    city: z.string(),
-    demo: z.boolean().default(true),
-  }),
-});
-
-export const collections = { services, gallery, testimonials };
+export const collections = { services, gallery };

@@ -1,18 +1,15 @@
 ---
 /*
-  Integratiepunt voor het echte Google-reviews widget.
-  Zodra het Google Bedrijfsprofiel + een widget-account (bv. Elfsight, Trustindex)
-  of een eigen koppeling met de Google Places API klaar is: vervang de kop hieronder
-  door het embed-script van de gekozen provider. De rest van de testimonials-sectie
-  (kaarten uit src/content/testimonials/) hoeft dan niet te wijzigen — of vervang
-  die net door de widget zelf, naar keuze.
+  Live Google-reviews widget via Trustindex, gekoppeld aan het Google
+  Bedrijfsprofiel van IngBelg Dakwerken (9.8/10, 54 reviews op het moment van
+  koppelen — 2026-08-01). Van provider wisselen (Elfsight, eigen Places API-
+  koppeling, ...) betekent enkel dit bestand aanpassen.
 */
 ---
 <header class="sechead sechead--center reveal">
-  <p class="eyebrow eyebrow--center">
-    <span class="eyebrow__bar"></span>Wat klanten zeggen
-    <span class="tag-demo">voorbeeld</span>
-  </p>
-  <h2 class="h2">Binnenkort met <em>echte</em> reviews</h2>
-  <p class="sechead__sub">Deze kaarten tonen hoe het eruitziet — ze worden vervangen door geverifieerde Google-reviews van INGBELG-klanten.</p>
+  <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Wat klanten zeggen</p>
+  <h2 class="h2">Live <em>Google-reviews</em></h2>
+  <p class="sechead__sub">Echte, geverifieerde reviews van INGBELG-klanten — rechtstreeks van Google.</p>
 </header>
+
+<script is:inline defer async src="https://cdn.trustindex.io/loader.js?8426404783e9265f9d669f3f74e"></script>

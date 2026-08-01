@@ -7,7 +7,6 @@ export const prerender = true;
 
 const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
 const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
-const testimonials = await getCollection('testimonials');
 
 const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', normal: '' };
 ---
@@ -471,19 +470,6 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <section class="section">
   <div class="container">
     <GoogleReviews />
-
-    <div class="reviews">
-      {testimonials.map((t) => (
-        <article class="rev reveal">
-          <div class="rev__stars">{'★'.repeat(t.data.rating)}</div>
-          <p>&ldquo;{t.data.text}&rdquo;</p>
-          <div class="rev__who">
-            <span class="rev__avatar">{t.data.author.charAt(0)}</span>
-            <div><strong>{t.data.author}</strong><em>{t.data.city}</em></div>
-          </div>
-        </article>
-      ))}
-    </div>
   </div>
 </section>
 
