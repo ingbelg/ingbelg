@@ -457,19 +457,12 @@ a.topbar__item:hover svg{transform:scale(1.2)}
   font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
   background:rgba(211,55,44,.1);color:var(--red);vertical-align:middle;
 }
-.hero__trust .tag-demo{background:rgba(255,255,255,.18);color:#fff}
 .footer__trust .tag-demo{background:rgba(255,255,255,.14);color:#fff;margin-left:6px}
 
 /* ============================================================
-   HERO TRUST BADGE
+   HERO TRUST BADGE (live Trustindex-widget)
    ============================================================ */
-.hero__trust{
-  display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:11px 20px;
-  border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);
-  backdrop-filter:blur(10px);color:#fff;font-size:14.5px;
-}
-.hero__trust-stars{color:#F5B400;letter-spacing:2px;font-size:15px}
-.hero__trust-txt strong{font-family:var(--font-head);font-size:17px;margin-right:4px}
+.hero__trust{display:block;margin-top:26px}
 
 /* ============================================================
    MERKEN / MATERIALEN STRIP
