@@ -2,3 +2,12 @@
 Thumbs.db
 .claude/settings.local.json
 CLAUDE.md
+
+# Astro / Node
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+.vercel/
+

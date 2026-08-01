@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INGBELG — Algemene dakwerken en renovatie | Platte &amp; hellende daken</title>
-<meta name="description" content="INGBELG is uw specialist in dakwerken en algemene renovatie: platte daken, hellende daken, timmerwerken, gevelbekleding, zonnepanelen en ecopanelen. Gratis offerte binnen 48u.">
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="assets/logo.png" type="image/png">
-<meta property="og:title" content="INGBELG — Algemene dakwerken en renovatie">
-<meta property="og:description" content="Kwaliteit in werk, materiaal en service. Gratis offerte binnen 48u.">
-<meta property="og:image" content="assets/logo.png">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+---
+import Layout from '../layouts/Layout.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
+const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
+const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
+const testimonials = await getCollection('testimonials');
+
+const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', normal: '' };
+---
+<Layout>
 
 <a class="skip-link" href="#diensten">Ga naar inhoud</a>
 
@@ -51,7 +46,7 @@
 <header class="header" id="header">
   <div class="container header__in">
     <a class="brand" href="#top" aria-label="INGBELG home">
-      <img src="assets/logo.png" alt="INGBELG — algemene dakwerken en renovatie">
+      <img src="/assets/logo.png" alt="INGBELG — algemene dakwerken en renovatie">
     </a>
 
     <nav class="nav" id="nav" aria-label="Hoofdnavigatie">
@@ -86,8 +81,8 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero__media">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/services/hellende-daken.jpg">
-      <source src="assets/hero.mp4" type="video/mp4">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/services/hellende-daken.jpg">
+      <source src="/assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero__scrim"></div>
     <div class="hero__grain"></div>
@@ -169,10 +164,10 @@
   <div class="container about__grid">
     <div class="about__media reveal">
       <div class="about__img about__img--main">
-        <img src="assets/work/work-05.jpg" alt="Dakwerken door INGBELG" loading="lazy">
+        <img src="/assets/work/work-05.jpg" alt="Dakwerken door INGBELG" loading="lazy">
       </div>
       <div class="about__img about__img--sub">
-        <img src="assets/services/platte-daken.jpg" alt="Plat dak met EPDM" loading="lazy">
+        <img src="/assets/services/platte-daken.jpg" alt="Plat dak met EPDM" loading="lazy">
       </div>
       <div class="about__badge">
         <strong>15</strong>
@@ -237,96 +232,22 @@
     </header>
 
     <div class="services">
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/platte-daken.jpg" alt="Platte daken" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">01</span>
-          <h3>Platte daken</h3>
-          <p>Duurzaam en praktisch: platte daken zijn perfect voor moderne woningen. Wij plaatsen EPDM, Resistrix en Firestone, steeds in combinatie met degelijk isolatiewerk.</p>
-          <ul class="svc__tags"><li>EPDM</li><li>Resistrix</li><li>Firestone</li><li>Isolatie</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/hellende-daken.jpg" alt="Hellende daken" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">02</span>
-          <h3>Hellende daken</h3>
-          <p>Hellende daken dragen bij aan een klassieke uitstraling en zorgen voor een optimale afvoer van regenwater. Wij werken met dakpannen én natuurleien.</p>
-          <ul class="svc__tags"><li>Dakpannen</li><li>Leien</li><li>Onderdak</li><li>PIR-isolatie</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/work/work-09.jpg" alt="Asbestverwijdering" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">03</span>
-          <h3>Asbestverwijdering</h3>
-          <p>Vóór de plaatsing van uw nieuwe dak verwijderen wij asbesthoudende materialen veilig en volgens de wettelijke voorschriften, met het nodige eindattest.</p>
-          <ul class="svc__tags"><li>Veilige afbraak</li><li>Wettelijk attest</li><li>WTCB-conform</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/timmerwerken.jpg" alt="Timmerwerken" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">04</span>
-          <h3>Timmerwerken</h3>
-          <p>Houten constructies zorgen voor een warme, natuurlijke uitstraling. Wij realiseren dakkapellen, volledige dakconstructies, dakgoten en afwerking.</p>
-          <ul class="svc__tags"><li>Dakkapellen</li><li>Dakconstructies</li><li>Dakgoten</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/gevelbekleding.jpg" alt="Gevelbekleding" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">05</span>
-          <h3>Gevelbekleding</h3>
-          <p>Gevelbekleding beschermt niet alleen uw woning, maar verhoogt ook de esthetische waarde. Keuze uit planchetten, Padouk, Trespa en Rockpanel.</p>
-          <ul class="svc__tags"><li>Planchetten</li><li>Padouk</li><li>Trespa</li><li>Rockpanel</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/zonnepanelen.jpg" alt="Zonnepanelen" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">06</span>
-          <h3>Zonnepanelen</h3>
-          <p>Zonnepanelen zetten zonlicht om in schone energie en helpen u de energiekosten drastisch te verlagen. Wij plaatsen ze meteen mee bij uw dakrenovatie.</p>
-          <ul class="svc__tags"><li>Plaatsing</li><li>Omvormer</li><li>Keuring</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="svc reveal">
-        <div class="svc__img"><img src="assets/services/ecopanelen.jpg" alt="Ecopanelen" loading="lazy"></div>
-        <div class="svc__body">
-          <span class="svc__num">07</span>
-          <h3>Ecopanelen</h3>
-          <p>Ecopanelen zijn een duurzame keuze voor energiebesparing: ze bieden zowel thermische als akoestische isolatie en zijn snel te plaatsen.</p>
-          <ul class="svc__tags"><li>Thermisch</li><li>Akoestisch</li><li>Duurzaam</li></ul>
-          <a class="svc__link" href="#contact">Offerte aanvragen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </article>
+      {services.map((s) => (
+        <article class="svc reveal">
+          <div class="svc__img"><img src={s.data.image} alt={s.data.title} loading="lazy" /></div>
+          <div class="svc__body">
+            <span class="svc__num">{s.data.num}</span>
+            <h3>{s.data.title}</h3>
+            <p>{s.data.description}</p>
+            <ul class="svc__tags">
+              {s.data.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+            <a class="svc__link" href="#contact">Offerte aanvragen
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
@@ -346,8 +267,8 @@
   <div class="container">
     <div class="ba reveal">
       <div class="ba__slider" id="baSlider">
-        <div class="ba__img ba__img--before"><img src="assets/work/work-06.jpg" alt="Dak voor renovatie — demo" loading="lazy"></div>
-        <div class="ba__img ba__img--after"><img src="assets/work/work-05.jpg" alt="Dak na renovatie — demo" loading="lazy"></div>
+        <div class="ba__img ba__img--before"><img src="/assets/work/work-06.jpg" alt="Dak voor renovatie — demo" loading="lazy"></div>
+        <div class="ba__img ba__img--after"><img src="/assets/work/work-05.jpg" alt="Dak na renovatie — demo" loading="lazy"></div>
         <input class="ba__range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
         <div class="ba__handle" aria-hidden="true"></div>
         <span class="ba__tag ba__tag--before">Voor</span>
@@ -357,18 +278,12 @@
     </div>
 
     <div class="gallery" id="gallery">
-      <figure class="gal reveal gal--tall"><img src="assets/work/work-01.jpg" alt="Realisatie dakwerken INGBELG" loading="lazy"><figcaption><span>Hellend dak</span><em>Volledige renovatie</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-02.jpg" alt="Realisatie plat dak" loading="lazy"><figcaption><span>Plat dak</span><em>EPDM &amp; isolatie</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-03.jpg" alt="Realisatie dakconstructie" loading="lazy"><figcaption><span>Timmerwerk</span><em>Nieuwe dakconstructie</em></figcaption></figure>
-      <figure class="gal reveal gal--wide"><img src="assets/work/work-04.jpg" alt="Realisatie gevel" loading="lazy"><figcaption><span>Gevelbekleding</span><em>Trespa panelen</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-05.jpg" alt="Realisatie dakwerken" loading="lazy"><figcaption><span>Hellend dak</span><em>Pannen &amp; onderdak</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-06.jpg" alt="Realisatie dakrenovatie" loading="lazy"><figcaption><span>Dakrenovatie</span><em>Isolatie PIR 12 cm</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-07.jpg" alt="Realisatie dakgoot" loading="lazy"><figcaption><span>Dakgoten</span><em>Zink &amp; afvoer</em></figcaption></figure>
-      <figure class="gal reveal gal--tall"><img src="assets/work/work-08.jpg" alt="Realisatie leien dak" loading="lazy"><figcaption><span>Leien dak</span><em>Natuurleien</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-09.jpg" alt="Realisatie dakkapel" loading="lazy"><figcaption><span>Dakkapel</span><em>Maatwerk in hout</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-10.jpg" alt="Realisatie renovatie" loading="lazy"><figcaption><span>Totaalrenovatie</span><em>Dak &amp; gevel</em></figcaption></figure>
-      <figure class="gal reveal"><img src="assets/work/work-11.jpg" alt="Realisatie plat dak" loading="lazy"><figcaption><span>Plat dak</span><em>Naadloos EPDM</em></figcaption></figure>
-      <figure class="gal reveal gal--wide"><img src="assets/work/work-12.jpg" alt="Realisatie dakwerken" loading="lazy"><figcaption><span>Dakwerken</span><em>Oplevering 2024</em></figcaption></figure>
+      {gallery.map((g) => (
+        <figure class={`gal reveal${sizeClass[g.data.size]}`}>
+          <img src={g.data.image} alt={g.data.alt} loading="lazy" />
+          <figcaption><span>{g.data.label}</span><em>{g.data.caption}</em></figcaption>
+        </figure>
+      ))}
     </div>
   </div>
 </section>
@@ -555,40 +470,19 @@
 <!-- ============ TESTIMONIALS ============ -->
 <section class="section">
   <div class="container">
-    <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center">
-        <span class="eyebrow__bar"></span>Wat klanten zeggen
-        <span class="tag-demo">voorbeeld</span>
-      </p>
-      <h2 class="h2">Binnenkort met <em>echte</em> reviews</h2>
-      <p class="sechead__sub">Deze kaarten tonen hoe het eruitziet — ze worden vervangen door geverifieerde Google-reviews van INGBELG-klanten.</p>
-    </header>
+    <GoogleReviews />
 
     <div class="reviews">
-      <article class="rev reveal">
-        <div class="rev__stars">★★★★★</div>
-        <p>“Voorbeeldtekst van een klantreview: duidelijke communicatie, nette werf en het dak was op tijd klaar.”</p>
-        <div class="rev__who">
-          <span class="rev__avatar">K</span>
-          <div><strong>Klant</strong><em>Zottegem</em></div>
-        </div>
-      </article>
-      <article class="rev reveal">
-        <div class="rev__stars">★★★★★</div>
-        <p>“Voorbeeldtekst van een klantreview: goed advies over de premies en een correcte, eerlijke prijs.”</p>
-        <div class="rev__who">
-          <span class="rev__avatar">K</span>
-          <div><strong>Klant</strong><em>Gent</em></div>
-        </div>
-      </article>
-      <article class="rev reveal">
-        <div class="rev__stars">★★★★★</div>
-        <p>“Voorbeeldtekst van een klantreview: vakkundig team en een dak dat er tien jaar later nog perfect bij ligt.”</p>
-        <div class="rev__who">
-          <span class="rev__avatar">K</span>
-          <div><strong>Klant</strong><em>Melle</em></div>
-        </div>
-      </article>
+      {testimonials.map((t) => (
+        <article class="rev reveal">
+          <div class="rev__stars">{'★'.repeat(t.data.rating)}</div>
+          <p>&ldquo;{t.data.text}&rdquo;</p>
+          <div class="rev__who">
+            <span class="rev__avatar">{t.data.author.charAt(0)}</span>
+            <div><strong>{t.data.author}</strong><em>{t.data.city}</em></div>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
@@ -635,7 +529,7 @@
 <!-- ============ CTA IMAGE BANNER ============ -->
 <section class="ctaimg">
   <div class="ctaimg__media">
-    <img src="assets/work/work-10.jpg" alt="" loading="lazy">
+    <img src="/assets/work/work-10.jpg" alt="" loading="lazy">
     <div class="ctaimg__scrim"></div>
   </div>
   <div class="container ctaimg__in reveal">
@@ -736,7 +630,7 @@
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <img src="assets/logo.png" alt="INGBELG" class="footer__logo">
+      <img src="/assets/logo.png" alt="INGBELG" class="footer__logo">
       <p>INGBELG — Algemene dak- en renovatiewerken. Uw specialist in dakwerken en algemene renovatie, actief in heel Vlaanderen.</p>
       <p class="footer__vat">BTW BE 0721.841.831</p>
     </div>
@@ -801,7 +695,4 @@
   <div class="lb__counter" id="lbCount"></div>
 </div>
 
-<script src="js/calculator.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
+</Layout>

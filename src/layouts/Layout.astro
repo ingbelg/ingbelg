@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'INGBELG — Algemene dakwerken en renovatie | Platte & hellende daken',
+  description = 'INGBELG is uw specialist in dakwerken en algemene renovatie: platte daken, hellende daken, timmerwerken, gevelbekleding, zonnepanelen en ecopanelen. Gratis offerte binnen 48u.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/assets/logo.png" type="image/png">
+<meta property="og:title" content="INGBELG — Algemene dakwerken en renovatie">
+<meta property="og:description" content="Kwaliteit in werk, materiaal en service. Gratis offerte binnen 48u.">
+<meta property="og:image" content="/assets/logo.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<slot />
+<script is:inline src="/js/calculator.js"></script>
+<script is:inline src="/js/main.js"></script>
+</body>
+</html>

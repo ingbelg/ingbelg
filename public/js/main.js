@@ -107,6 +107,20 @@
     });
   });
 
+  /* ---------- Voor/na slider ---------- */
+  var baRange = $('#baRange');
+  var baAfter = $('#baSlider .ba__img--after');
+  var baHandle = $('#baSlider .ba__handle');
+  if (baRange && baAfter && baHandle) {
+    var updateBa = function () {
+      var v = baRange.value;
+      baAfter.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
+      baHandle.style.left = v + '%';
+    };
+    baRange.addEventListener('input', updateBa);
+    updateBa();
+  }
+
   /* ---------- Lightbox ---------- */
   var figures = $$('#gallery .gal');
   var lb = $('#lightbox'), lbImg = $('#lbImg'), lbCount = $('#lbCount');
@@ -169,22 +183,51 @@
       return;
     }
 
-    // Geen backend: aanvraag wordt via de mailclient verstuurd.
     var d = new FormData(form);
-    var body =
-      'Naam: ' + d.get('naam') + '\n' +
-      'Telefoon: ' + d.get('telefoon') + '\n' +
-      'E-mail: ' + d.get('email') + '\n' +
-      'Gemeente: ' + (d.get('gemeente') || '-') + '\n' +
-      'Dienst: ' + d.get('dienst') + '\n\n' +
-      'Project:\n' + (d.get('bericht') || '-');
+    var payload = {
+      naam: d.get('naam'),
+      telefoon: d.get('telefoon'),
+      email: d.get('email'),
+      gemeente: d.get('gemeente') || '',
+      dienst: d.get('dienst'),
+      bericht: d.get('bericht') || ''
+    };
 
-    window.location.href = 'mailto:info@ingbelg.be'
-      + '?subject=' + encodeURIComponent('Offerteaanvraag — ' + d.get('dienst'))
-      + '&body=' + encodeURIComponent(body);
+    var fallbackToMailto = function () {
+      var body =
+        'Naam: ' + payload.naam + '\n' +
+        'Telefoon: ' + payload.telefoon + '\n' +
+        'E-mail: ' + payload.email + '\n' +
+        'Gemeente: ' + (payload.gemeente || '-') + '\n' +
+        'Dienst: ' + payload.dienst + '\n\n' +
+        'Project:\n' + (payload.bericht || '-');
 
-    msg.className = 'cform__msg ok';
-    msg.textContent = 'Bedankt! Uw e-mailprogramma opent met de aanvraag. Wij antwoorden binnen 48 uur.';
-    form.reset();
+      window.location.href = 'mailto:info@ingbelg.be'
+        + '?subject=' + encodeURIComponent('Offerteaanvraag — ' + payload.dienst)
+        + '&body=' + encodeURIComponent(body);
+
+      msg.className = 'cform__msg ok';
+      msg.textContent = 'Bedankt! Uw e-mailprogramma opent met de aanvraag. Wij antwoorden binnen 48 uur.';
+      form.reset();
+    };
+
+    msg.className = 'cform__msg';
+    msg.textContent = 'Verzenden…';
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (res) {
+      if (!res.ok) throw new Error('server responded ' + res.status);
+      return res.json();
+    }).then(function () {
+      msg.className = 'cform__msg ok';
+      msg.textContent = 'Bedankt! Uw aanvraag is verstuurd. Wij antwoorden binnen 48 uur.';
+      form.reset();
+    }).catch(function () {
+      // Server niet bereikbaar (bv. statische hosting zonder /api) — terugval op mailto.
+      fallbackToMailto();
+    });
   });
 })();
