@@ -462,7 +462,7 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 /* ============================================================
    HERO TRUST BADGE (live Trustindex-widget)
    ============================================================ */
-.hero__trust{display:block;margin-top:26px}
+.hero__trust{display:block;margin:-8px 0 26px}
 
 /* ============================================================
    MERKEN / MATERIALEN STRIP
