@@ -412,10 +412,11 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 /* ============================================================
    VOORDELEN
    ============================================================ */
-.adv__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.adv__grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
 .adv__card{
   position:relative;padding:36px 32px;border-radius:var(--r-lg);background:#fff;
   border:1px solid var(--line);overflow:hidden;
+  flex:1 1 300px;max-width:390px;
   transition:transform .55s var(--ease-out),box-shadow .55s var(--ease-out),background .5s var(--ease),border-color .4s var(--ease);
 }
 .adv__card::before{
