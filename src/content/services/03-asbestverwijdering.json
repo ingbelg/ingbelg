@@ -1,7 +1,13 @@
 {
   "num": "03",
   "title": "Asbestverwijdering",
-  "image": "/assets/work/work-09.jpg",
+  "image": "/assets/work/work-09.webp",
   "description": "Vóór de plaatsing van uw nieuwe dak verwijderen wij asbesthoudende materialen veilig en volgens de wettelijke voorschriften, met het nodige eindattest.",
-  "tags": ["Veilige afbraak", "Wettelijk attest", "WTCB-conform"]
+  "tags": [
+    "Veilige afbraak",
+    "Wettelijk attest",
+    "WTCB-conform"
+  ],
+  "imageWidth": 1600,
+  "imageHeight": 1200
 }

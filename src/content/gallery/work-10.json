@@ -1,8 +1,10 @@
 {
   "order": 10,
-  "image": "/assets/work/work-10.jpg",
+  "image": "/assets/work/work-10.webp",
   "alt": "Realisatie renovatie",
   "label": "Totaalrenovatie",
   "caption": "Dak & gevel",
-  "size": "normal"
+  "size": "normal",
+  "imageWidth": 1600,
+  "imageHeight": 900
 }

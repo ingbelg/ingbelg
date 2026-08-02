@@ -1,8 +1,10 @@
 {
   "order": 3,
-  "image": "/assets/work/work-03.jpg",
+  "image": "/assets/work/work-03.webp",
   "alt": "Realisatie dakconstructie",
   "label": "Timmerwerk",
   "caption": "Nieuwe dakconstructie",
-  "size": "normal"
+  "size": "normal",
+  "imageWidth": 1600,
+  "imageHeight": 900
 }

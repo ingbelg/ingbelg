@@ -1,8 +1,10 @@
 {
   "order": 1,
-  "image": "/assets/work/work-01.jpg",
+  "image": "/assets/work/work-01.webp",
   "alt": "Realisatie dakwerken INGBELG",
   "label": "Hellend dak",
   "caption": "Volledige renovatie",
-  "size": "tall"
+  "size": "tall",
+  "imageWidth": 1600,
+  "imageHeight": 900
 }

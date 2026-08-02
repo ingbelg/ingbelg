@@ -1,7 +1,14 @@
 {
   "num": "02",
   "title": "Hellende daken",
-  "image": "/assets/services/hellende-daken.jpg",
+  "image": "/assets/services/hellende-daken.webp",
   "description": "Hellende daken dragen bij aan een klassieke uitstraling en zorgen voor een optimale afvoer van regenwater. Wij werken met dakpannen én natuurleien.",
-  "tags": ["Dakpannen", "Leien", "Onderdak", "PIR-isolatie"]
+  "tags": [
+    "Dakpannen",
+    "Leien",
+    "Onderdak",
+    "PIR-isolatie"
+  ],
+  "imageWidth": 1024,
+  "imageHeight": 794
 }

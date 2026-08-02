@@ -45,7 +45,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <header class="header" id="header">
   <div class="container header__in">
     <a class="brand" href="#top" aria-label="INGBELG home">
-      <img src="/assets/logo-transparent.png" alt="INGBELG — algemene dakwerken en renovatie">
+      <img src="/assets/logo-transparent.png" alt="INGBELG — algemene dakwerken en renovatie" width="430" height="207">
     </a>
 
     <nav class="nav" id="nav" aria-label="Hoofdnavigatie">
@@ -80,7 +80,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero__media">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/services/hellende-daken.jpg">
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/services/hellende-daken.webp">
       <source src="/assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero__scrim"></div>
@@ -162,10 +162,10 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   <div class="container about__grid">
     <div class="about__media reveal">
       <div class="about__img about__img--main">
-        <img src="/assets/work/work-05.jpg" alt="Dakwerken door INGBELG" loading="lazy">
+        <img src="/assets/work/work-05.webp" alt="Dakwerken door INGBELG" width="1600" height="1200" loading="lazy">
       </div>
       <div class="about__img about__img--sub">
-        <img src="/assets/services/platte-daken.jpg" alt="Plat dak met EPDM" loading="lazy">
+        <img src="/assets/services/platte-daken.webp" alt="Plat dak met EPDM" width="1024" height="806" loading="lazy">
       </div>
       <div class="about__badge">
         <strong>15</strong>
@@ -232,7 +232,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
     <div class="services">
       {services.map((s) => (
         <article class="svc reveal">
-          <div class="svc__img"><img src={s.data.image} alt={s.data.title} loading="lazy" /></div>
+          <div class="svc__img"><img src={s.data.image} alt={s.data.title} width={s.data.imageWidth} height={s.data.imageHeight} loading="lazy" /></div>
           <div class="svc__body">
             <span class="svc__num">{s.data.num}</span>
             <h3>{s.data.title}</h3>
@@ -265,8 +265,8 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   <div class="container">
     <div class="ba reveal">
       <div class="ba__slider" id="baSlider">
-        <div class="ba__img ba__img--before"><img src="/assets/work/work-06.jpg" alt="Dak voor renovatie — demo" loading="lazy"></div>
-        <div class="ba__img ba__img--after"><img src="/assets/work/work-05.jpg" alt="Dak na renovatie — demo" loading="lazy"></div>
+        <div class="ba__img ba__img--before"><img src="/assets/work/work-06.webp" alt="Dak voor renovatie — demo" width="1600" height="1200" loading="lazy"></div>
+        <div class="ba__img ba__img--after"><img src="/assets/work/work-05.webp" alt="Dak na renovatie — demo" width="1600" height="1200" loading="lazy"></div>
         <input class="ba__range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
         <div class="ba__handle" aria-hidden="true"></div>
         <span class="ba__tag ba__tag--before">Voor</span>
@@ -278,7 +278,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
     <div class="gallery" id="gallery">
       {gallery.map((g) => (
         <figure class={`gal reveal${sizeClass[g.data.size]}`}>
-          <img src={g.data.image} alt={g.data.alt} loading="lazy" />
+          <img src={g.data.image} alt={g.data.alt} width={g.data.imageWidth} height={g.data.imageHeight} loading="lazy" />
           <figcaption><span>{g.data.label}</span><em>{g.data.caption}</em></figcaption>
         </figure>
       ))}
@@ -514,7 +514,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <!-- ============ CTA IMAGE BANNER ============ -->
 <section class="ctaimg">
   <div class="ctaimg__media">
-    <img src="/assets/work/work-10.jpg" alt="" loading="lazy">
+    <img src="/assets/work/work-10.webp" alt="" width="1600" height="900" loading="lazy">
     <div class="ctaimg__scrim"></div>
   </div>
   <div class="container ctaimg__in reveal">
@@ -615,7 +615,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <img src="/assets/logo.png" alt="INGBELG" class="footer__logo">
+      <img src="/assets/logo.png" alt="INGBELG" class="footer__logo" width="430" height="207">
       <p>INGBELG — Algemene dak- en renovatiewerken. Uw specialist in dakwerken en algemene renovatie, actief in heel Vlaanderen.</p>
       <p class="footer__vat">BTW BE 0721.841.831</p>
     </div>

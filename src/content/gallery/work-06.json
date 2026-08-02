@@ -1,8 +1,10 @@
 {
   "order": 6,
-  "image": "/assets/work/work-06.jpg",
+  "image": "/assets/work/work-06.webp",
   "alt": "Realisatie dakrenovatie",
   "label": "Dakrenovatie",
   "caption": "Isolatie PIR 12 cm",
-  "size": "normal"
+  "size": "normal",
+  "imageWidth": 1600,
+  "imageHeight": 1200
 }

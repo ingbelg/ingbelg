@@ -1,8 +1,10 @@
 {
   "order": 4,
-  "image": "/assets/work/work-04.jpg",
+  "image": "/assets/work/work-04.webp",
   "alt": "Realisatie gevel",
   "label": "Gevelbekleding",
   "caption": "Trespa panelen",
-  "size": "wide"
+  "size": "wide",
+  "imageWidth": 1600,
+  "imageHeight": 900
 }

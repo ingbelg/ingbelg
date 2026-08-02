@@ -1,8 +1,10 @@
 {
   "order": 12,
-  "image": "/assets/work/work-12.jpg",
+  "image": "/assets/work/work-12.webp",
   "alt": "Realisatie dakwerken",
   "label": "Dakwerken",
   "caption": "Oplevering 2024",
-  "size": "wide"
+  "size": "wide",
+  "imageWidth": 1600,
+  "imageHeight": 900
 }

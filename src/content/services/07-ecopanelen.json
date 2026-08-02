@@ -1,7 +1,13 @@
 {
   "num": "07",
   "title": "Ecopanelen",
-  "image": "/assets/services/ecopanelen.jpg",
+  "image": "/assets/services/ecopanelen.webp",
   "description": "Ecopanelen zijn een duurzame keuze voor energiebesparing: ze bieden zowel thermische als akoestische isolatie en zijn snel te plaatsen.",
-  "tags": ["Thermisch", "Akoestisch", "Duurzaam"]
+  "tags": [
+    "Thermisch",
+    "Akoestisch",
+    "Duurzaam"
+  ],
+  "imageWidth": 1024,
+  "imageHeight": 778
 }

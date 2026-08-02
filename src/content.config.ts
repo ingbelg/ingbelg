@@ -7,6 +7,8 @@ const services = defineCollection({
     num: z.string(),
     title: z.string(),
     image: z.string(),
+    imageWidth: z.number(),
+    imageHeight: z.number(),
     description: z.string(),
     tags: z.array(z.string()),
   }),
@@ -17,6 +19,8 @@ const gallery = defineCollection({
   schema: z.object({
     order: z.number(),
     image: z.string(),
+    imageWidth: z.number(),
+    imageHeight: z.number(),
     alt: z.string(),
     label: z.string(),
     caption: z.string(),

@@ -1,7 +1,14 @@
 {
   "num": "05",
   "title": "Gevelbekleding",
-  "image": "/assets/services/gevelbekleding.jpg",
+  "image": "/assets/services/gevelbekleding.webp",
   "description": "Gevelbekleding beschermt niet alleen uw woning, maar verhoogt ook de esthetische waarde. Keuze uit planchetten, Padouk, Trespa en Rockpanel.",
-  "tags": ["Planchetten", "Padouk", "Trespa", "Rockpanel"]
+  "tags": [
+    "Planchetten",
+    "Padouk",
+    "Trespa",
+    "Rockpanel"
+  ],
+  "imageWidth": 1024,
+  "imageHeight": 685
 }

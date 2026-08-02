@@ -26,6 +26,42 @@ const {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'RoofingContractor',
+  name: 'INGBELG',
+  alternateName: 'IngBelg Dakwerken',
+  image: 'https://ingbelg.be/assets/logo-transparent.png',
+  url: 'https://ingbelg.be',
+  telephone: '+32488876061',
+  email: 'info@ingbelg.be',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Hoogstraat 59',
+    postalCode: '9620',
+    addressLocality: 'Zottegem',
+    addressCountry: 'BE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 50.8696,
+    longitude: 3.8107,
+  },
+  areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen', 'Vlaams-Brabant', 'Antwerpen'],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  sameAs: ['https://maps.app.goo.gl/cxndFzpCFZBJqECCA'],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    bestRating: '5',
+    reviewCount: '54',
+  },
+})} />
 </head>
 <body>
 <slot />
