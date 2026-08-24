@@ -494,7 +494,9 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 /* ============================================================
    VOOR / NA SLIDER
    ============================================================ */
-.ba{margin-bottom:56px}
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-bottom:56px}
+.ba{margin-bottom:0}
+.ba__label{margin:16px 0 0;text-align:center;font-family:var(--font-head);font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .ba__slider{
   position:relative;aspect-ratio:16/8;border-radius:var(--r-lg);overflow:hidden;
   box-shadow:var(--shadow);background:var(--ink);user-select:none;
@@ -523,7 +525,6 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 }
 .ba__tag--before{left:18px}
 .ba__tag--after{right:18px}
-.ba__note{margin:16px 0 0;text-align:center;font-size:14px;color:var(--slate)}
 
 /* ============================================================
    WERKWIJZE
@@ -828,6 +829,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   .about__media{padding-bottom:50px;padding-right:40px;max-width:620px}
   .steps{grid-template-columns:repeat(2,1fr)}
   .reviews{grid-template-columns:1fr}
+  .ba-grid{grid-template-columns:1fr;gap:40px}
   .ba__slider{aspect-ratio:4/3.4}
   .faq__wrap{grid-template-columns:1fr}
   .faq__intro{position:static}

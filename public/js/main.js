@@ -107,19 +107,20 @@
     });
   });
 
-  /* ---------- Voor/na slider ---------- */
-  var baRange = $('#baRange');
-  var baAfter = $('#baSlider .ba__img--after');
-  var baHandle = $('#baSlider .ba__handle');
-  if (baRange && baAfter && baHandle) {
+  /* ---------- Voor/na sliders ---------- */
+  $$('.ba__slider').forEach(function (slider) {
+    var range = $('.ba__range', slider);
+    var after = $('.ba__img--after', slider);
+    var handle = $('.ba__handle', slider);
+    if (!range || !after || !handle) return;
     var updateBa = function () {
-      var v = baRange.value;
-      baAfter.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
-      baHandle.style.left = v + '%';
+      var v = range.value;
+      after.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
+      handle.style.left = v + '%';
     };
-    baRange.addEventListener('input', updateBa);
+    range.addEventListener('input', updateBa);
     updateBa();
-  }
+  });
 
   /* ---------- Lightbox ---------- */
   var figures = $$('#gallery .gal');
