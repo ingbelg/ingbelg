@@ -503,6 +503,10 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 }
 .ba__img{position:absolute;inset:0}
 .ba__img img{width:100%;height:100%;object-fit:cover}
+/* .ba__img--after is the clipped top layer and renders on the LEFT
+   (where the "Voor" tag sits); .ba__img--before shows through on the
+   RIGHT ("Na" tag). Put the "voor" photo's src in the --after div and
+   the "na" photo's src in the --before div. */
 .ba__img--after{clip-path:inset(0 50% 0 0)}
 .ba__range{
   position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;
