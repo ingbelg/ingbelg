@@ -1,10 +1,10 @@
 {
   "order": 7,
   "image": "/assets/work/work-07.webp",
-  "alt": "Realisatie dakgoot",
-  "label": "Dakgoten",
-  "caption": "Zink & afvoer",
+  "alt": "Realisatie plat dak met dakopbouw en gevelbekleding",
+  "label": "Plat dak",
+  "caption": "Dakopbouw & bekleding",
   "size": "normal",
-  "imageWidth": 1600,
-  "imageHeight": 1200
+  "imageWidth": 1024,
+  "imageHeight": 576
 }
