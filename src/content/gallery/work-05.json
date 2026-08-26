@@ -1,10 +1,10 @@
 {
   "order": 5,
   "image": "/assets/work/work-05.webp",
-  "alt": "Realisatie dakwerken",
-  "label": "Hellend dak",
-  "caption": "Pannen & onderdak",
+  "alt": "Realisatie zonnepanelen op hellend dak met dakvenster",
+  "label": "Zonnepanelen",
+  "caption": "Plaatsing op pannendak",
   "size": "normal",
-  "imageWidth": 1600,
-  "imageHeight": 1200
+  "imageWidth": 1024,
+  "imageHeight": 768
 }
