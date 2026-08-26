@@ -293,7 +293,6 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       {gallery.map((g) => (
         <figure class={`gal reveal${sizeClass[g.data.size]}`}>
           <img src={g.data.image} alt={g.data.alt} width={g.data.imageWidth} height={g.data.imageHeight} loading="lazy" />
-          <figcaption><span>{g.data.label}</span><em>{g.data.caption}</em></figcaption>
         </figure>
       ))}
     </div>

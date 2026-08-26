@@ -400,22 +400,8 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 .gal--tall{grid-row:span 2}
 .gal--wide{grid-column:span 2}
 .gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out),filter .6s var(--ease)}
-.gal::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(211,55,44,0) 35%,rgba(168,39,30,.9) 100%);
-  opacity:0;transition:opacity .5s var(--ease);
-}
-.gal figcaption{
-  position:absolute;left:0;right:0;bottom:0;z-index:3;padding:22px 22px 20px;
-  display:flex;flex-direction:column;gap:2px;color:#fff;
-  transform:translateY(14px);opacity:0;transition:transform .55s var(--ease-out),opacity .45s var(--ease);
-}
-.gal figcaption span{font-family:var(--font-head);font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
-.gal figcaption em{font-style:normal;font-size:14px;color:rgba(255,255,255,.85)}
 .gal:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .gal:hover img{transform:scale(1.1)}
-.gal:hover::after{opacity:1}
-.gal:hover figcaption{transform:translateY(0);opacity:1}
 
 /* ============================================================
    VOORDELEN
