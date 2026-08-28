@@ -116,10 +116,9 @@
       asbestBonus = Math.min(m2 * ASBEST_BONUS_M2, kostTotaal * 0.5);
     }
 
-    var subtotal = verbouwpremie + asbestBonus;
-
     return {
       m2: m2,
+      geenOppervlakte: m2 <= 0,
       kostIsolatie: kostIsolatie,
       kostTotaal: kostTotaal,
       rWaarde: (dikte / 100) / LAMBDA_PIR,
@@ -131,8 +130,7 @@
       asbest: data.asbest,
       asbestBonus: asbestBonus,
       asbestInAanmerking: asbestInAanmerking,
-      subtotalLow: subtotal,
-      subtotalHigh: subtotal > 0 ? subtotal * 1.1 : 0,
+      totaal: verbouwpremie + asbestBonus,
       gemeente: (data.gemeente || '').trim(),
       type: data.type,
       dikte: dikte
@@ -160,37 +158,53 @@
 
     rows += '<li><span>Rd-waarde isolatie (indicatief)</span><strong>R ' + r.rWaarde.toFixed(1) + '</strong></li>';
 
-    if (!r.inkomenIngevuld) {
-      rows += '<li><span>Mijn VerbouwPremie</span><em>Vul uw jaarinkomen in voor een berekening&sup1;</em></li>';
+    var sup1 = false, sup2 = false, sup3 = false;
+
+    if (r.geenOppervlakte) {
+      rows += '<li><span>Mijn VerbouwPremie</span><em>Vul de dakoppervlakte in&sup1;</em></li>';
+      sup1 = true;
+    } else if (!r.inkomenIngevuld) {
+      rows += '<li><span>Mijn VerbouwPremie</span><em>Vul uw jaarinkomen in voor een berekening&sup2;</em></li>';
+      sup2 = true;
     } else if (r.factuurTeLaag) {
       rows += '<li><span>Mijn VerbouwPremie</span><em>Factuurbedrag te laag (min. € 1.000 excl. btw)</em></li>';
     } else {
       rows += '<li><span>Mijn VerbouwPremie (' + CATEGORIE_LABEL[r.categorie] + ')</span>' +
-        (r.premieEligible ? '<strong>' + fmt(r.verbouwpremie) + '</strong>' : '<em>Niet beschikbaar bij dit inkomen&sup2;</em>') +
+        (r.premieEligible ? '<strong>' + fmt(r.verbouwpremie) + '</strong>' : '<em>Niet beschikbaar bij dit inkomen&sup3;</em>') +
         '</li>';
+      sup3 = !r.premieEligible;
     }
 
     if (r.asbest) {
+      var asbestReden;
+      if (r.geenOppervlakte) asbestReden = 'Vul de dakoppervlakte in';
+      else if (!r.inkomenIngevuld) asbestReden = 'Vul uw jaarinkomen in';
+      else if (r.factuurTeLaag) asbestReden = 'Niet van toepassing — factuurbedrag te laag';
+      else if (!r.asbestInAanmerking) asbestReden = 'Niet van toepassing bij dit inkomen';
+      else asbestReden = 'Niet van toepassing';
+
       rows += '<li><span>Asbestbonus</span>' +
-        (r.asbestBonus > 0 ? '<strong>' + fmt(r.asbestBonus) + '</strong>' : '<em>Niet van toepassing bij dit inkomen</em>') +
+        (r.asbestBonus > 0 ? '<strong>' + fmt(r.asbestBonus) + '</strong>' : '<em>' + asbestReden + '</em>') +
         '</li>';
     }
 
     rows += '<li><span>Gemeentelijke premie' + (r.gemeente ? ' (' + r.gemeente + ')' : '') + '</span><em>Te bevestigen — varieert per gemeente</em></li>';
 
     var footnotes = '';
-    if (!r.inkomenIngevuld) {
-      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup1; Zonder jaarinkomen kunnen we uw inkomenscategorie niet bepalen.</p>';
-    } else if (!r.premieEligible && !r.factuurTeLaag) {
-      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup2; Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie.</p>';
+    if (sup1) {
+      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup1; Zonder dakoppervlakte kunnen we geen kostprijs of premie berekenen.</p>';
+    }
+    if (sup2) {
+      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup2; Zonder jaarinkomen kunnen we uw inkomenscategorie niet bepalen.</p>';
+    }
+    if (sup3) {
+      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup3; Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie.</p>';
     }
 
     result.innerHTML =
       '<p class="calc__placeholder" style="margin-bottom:-4px"><strong>' + typeLabels[r.type] + ' — ' + r.dikte + ' cm PIR</strong></p>' +
       '<ul class="calc__breakdown">' + rows + '</ul>' +
-      '<div class="calc__total"><span>Geschatte totale premie</span><strong>' +
-        (r.subtotalHigh > r.subtotalLow ? fmt(r.subtotalLow) + ' – ' + fmt(r.subtotalHigh) : fmt(r.subtotalLow)) +
-      '</strong></div>' +
+      '<div class="calc__total"><span>Geschatte totale premie</span><strong>' + fmt(r.totaal) + '</strong></div>' +
       '<a class="btn btn--line calc__cta" href="#contact">Vraag de exacte berekening aan</a>' +
       footnotes;
   };
