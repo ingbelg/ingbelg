@@ -369,7 +369,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       <article class="adv__card reveal">
         <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm0 4.5 1.9 3.9 4.3.6-3.1 3 .7 4.3-3.8-2-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg></div>
         <h3>Premiebegeleiding</h3>
-        <p>Wij volgen de Fluvius-premies, de totaalrenovatiebonus en de Vlaamse renovatiepremie op en helpen u bij de aanvraag.</p>
+        <p>Wij volgen de Mijn VerbouwPremie en eventuele gemeentelijke premies op en helpen u bij de aanvraag.</p>
       </article>
       <article class="adv__card reveal">
         <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M20 6h-3V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2M9 4h6v2H9zm4 12h-2v2h-2v-2H7v-2h2v-2h2v2h2z"/></svg></div>
@@ -429,20 +429,29 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
           <span>Vóór de isolatie moet er asbest verwijderd worden</span>
         </label>
 
+        <label class="field">
+          <span>Geschatte kostprijs werken</span>
+          <input type="text" name="kost" id="calcKost" readonly>
+        </label>
+
         <div class="calc__row">
           <label class="field">
-            <span>Geschatte kostprijs werken</span>
-            <input type="text" name="kost" id="calcKost" readonly>
-          </label>
-          <label class="field">
-            <span>Inkomen huishouden</span>
-            <select name="inkomen" id="calcInkomen">
-              <option value="hoog">Hoger inkomen (alleenst. &gt; €43.240 / koppel &gt; €60.520)</option>
-              <option value="regulier" selected>Regulier inkomen (onder de grens)</option>
-              <option value="verhoogd">Verhoogde tegemoetkoming (BIM/OMNIO)</option>
+            <span>Gezinssamenstelling</span>
+            <select name="gezin" id="calcGezin">
+              <option value="alleenstaand">Alleenstaand</option>
+              <option value="koppel" selected>Koppel / gehuwd / wettelijk samenwonend</option>
             </select>
           </label>
+          <label class="field">
+            <span>Personen ten laste</span>
+            <input type="number" name="personen" id="calcPersonen" min="0" max="10" step="1" value="0">
+          </label>
         </div>
+
+        <label class="field">
+          <span>Gezamenlijk belastbaar jaarinkomen huishouden (€)</span>
+          <input type="number" name="inkomen" id="calcInkomen" min="0" step="500" placeholder="Bv. 55000">
+        </label>
 
         <label class="field">
           <span>Gemeente</span>
@@ -460,7 +469,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       </div>
     </div>
 
-    <p class="calc__disclaimer">* Indicatieve demoberekening op basis van de Mijn VerbouwPremie-regels (sinds 1 maart 2026: enkel inkomenscategorie 3 en 4 komen nog in aanmerking voor dakisolatie) — geen officiële simulatie. Voorwaarde: de woning moet minstens 15 jaar oud zijn en de isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen. De vroegere totaalrenovatiebonus/EPC-labelpremie is niet meer aanvraagbaar. De exacte bedragen worden pas bevestigd na plaatsbezoek en de officiële premie-aanvraag bij Mijn VerbouwPremie en uw gemeente.</p>
+    <p class="calc__disclaimer">* Indicatieve demoberekening op basis van de officiële Mijn VerbouwPremie-regels voor dakwerken (vlaanderen.be, geraadpleegd augustus 2026). Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie — dit is geen officiële simulatie. Voorwaarden: de woning moet aangesloten zijn op het elektriciteitsnet van vóór 1 januari 2006, de isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen, en het factuurbedrag moet minstens €1.000 (excl. btw) bedragen. Deze rekentool gaat uit van een eigenaar-bewoner van een eengezinswoning — voor verhuurders, investeerders en appartementsgebouwen gelden andere bedragen. De vroegere totaalrenovatiebonus/EPC-labelpremie is sinds 2026 volledig afgeschaft. De exacte inkomenscategorie en bedragen worden pas definitief bevestigd bij de officiële aanvraag via mijnverbouwpremie.be — gebruik deze tool als eerste inschatting, niet als eindresultaat.</p>
   </div>
 </section>
 
@@ -502,7 +511,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       </details>
       <details class="faq__item reveal">
         <summary>Kan ik nog genieten van premies?<i></i></summary>
-        <div class="faq__body"><p>In de meeste gevallen wel. Wij volgen vier kanalen voor u op: de Fluvius-dakisolatiepremie, de Fluvius-totaalrenovatiebonus, de Vlaamse renovatiepremie en eventuele gemeentelijke premies. Tijdens het plaatsbezoek berekenen we samen wat u in uw situatie kunt recupereren.</p></div>
+        <div class="faq__body"><p>In veel gevallen wel, via Mijn VerbouwPremie (sinds 1 maart 2026 enkel nog voor inkomenscategorie 3 en 4) en eventuele gemeentelijke premies. Gebruik onze Premie-check hierboven voor een eerste inschatting — tijdens het plaatsbezoek berekenen we samen wat u concreet kunt recupereren.</p></div>
       </details>
       <details class="faq__item reveal">
         <summary>Hoe dik wordt de isolatielaag?<i></i></summary>
