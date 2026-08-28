@@ -44,7 +44,11 @@
     hellend: { 12: 209, 14: 218, 16: 227 },
     plat: { 12: 171, 14: 180, 16: 190 }
   };
-  var PRIJS_ASBEST_M2 = 30; // nog niet bevestigd met een echte INGBELG-offerte voor asbestverwijdering
+  /* Gemiddelde marktprijs asbestverwijdering dak (onderzocht 2026, geen
+     eigen INGBELG-offerte): hechtgebonden golfplaten ~€8-11/m², leien/
+     dakpannen ~€20-40/m², algemeen "hechtgebonden dak" gemiddeld €10-35/m²
+     incl. afvoer. €25/m² als middenwaarde over materiaaltypes heen. */
+  var PRIJS_ASBEST_M2 = 25;
 
   /* ---------- Inkomensgrenzen per categorie, per huishoudtype ---------- */
   var GRENZEN = {
