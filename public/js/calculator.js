@@ -30,12 +30,21 @@
     return '€ ' + Math.round(n).toLocaleString('nl-BE');
   };
 
-  /* ---------- Richtprijzen isolatie per m² (incl. plaatsing, excl. btw) ---------- */
+  /* ---------- Richtprijzen isolatie per m² (incl. plaatsing, excl. btw) ----------
+     Afgeleid uit twee echte INGBELG-offertes (2026): "Renoveren en isoleren
+     hellend dak" (Zele, 84 m², 14 cm PIR) en "Vernieuwen en isoleren platdak
+     aanbouw" (65 m², 14 cm PIR). Vaste onderdelen (werfinrichting/stelling/
+     afvoer, dampscherm, onderdak, tengellatten, stormpan resp. bitumen-
+     herstel + Resitrix-dakbedekking) blijven ongewijzigd; enkel de PIR-laag
+     zelf (€65/m² bij 14 cm op beide offertes) wordt lineair herschaald naar
+     12/16 cm. Nok, gevelpannen, bakgoten, Velux-vensters en afvoeren staan
+     NIET in dit bedrag — die zijn per lopende meter/stuk en hangen af van de
+     specifieke woning, niet van de dakoppervlakte. */
   var PRIJS_ISOLATIE = {
-    hellend: { 12: 38, 14: 45, 16: 52 },
-    plat: { 12: 85, 14: 95, 16: 105 }
+    hellend: { 12: 209, 14: 218, 16: 227 },
+    plat: { 12: 171, 14: 180, 16: 190 }
   };
-  var PRIJS_ASBEST_M2 = 30;
+  var PRIJS_ASBEST_M2 = 30; // nog niet bevestigd met een echte INGBELG-offerte voor asbestverwijdering
 
   /* ---------- Inkomensgrenzen per categorie, per huishoudtype ---------- */
   var GRENZEN = {
