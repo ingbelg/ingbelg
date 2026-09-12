@@ -155,6 +155,10 @@ const faqItems = [
       een offerte waarin alles staat. Op het werk krijgt u <!-- ⚠️ CONFIRM C-06: garantieduur --><span data-confirm="C-06">{facts.warrantyYears} jaar garantie</span>, op papier.
     </p>
 
+    <div class="hero__trust reveal">
+      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?dee10da79b0d29741b4650657bf"></script>
+    </div>
+
     <div class="hero__cta reveal">
       <a class="btn btn--primary btn--lg" href="#contact">
         <span>Vraag een gratis plaatsbezoek</span>
@@ -375,6 +379,13 @@ const faqItems = [
     <p class="sechead sechead--center reveal" style="margin-top:36px">
       <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
     </p>
+
+    <!-- Live Trustindex-widget als aanvulling op de statische kaarten hierboven (T-03) —
+         als de widget ooit weer breekt (bv. abonnement verlopen), blijft het blok hierboven
+         gewoon gevuld i.p.v. leeg. -->
+    <div class="reviews-widget reveal" style="margin-top:40px">
+      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?1df435b79aed2975f776da650b5"></script>
+    </div>
   </div>
 </section>
 
@@ -792,6 +803,9 @@ const faqItems = [
     </div>
   </div>
   <div class="container footer__trust">
+    <span class="trustbadge trustbadge--widget">
+      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?e7a15f079662298de4363792727"></script>
+    </span>
     <span class="trustbadge">{facts.warrantyYears} jaar garantie</span>
     <span class="trustbadge" data-confirm="C-08">{facts.roofsDone}+ daken gerealiseerd</span>
     <a class="trustbadge" href={facts.reviews.googleUrl} target="_blank" rel="noopener">★ {facts.reviews.score} &middot; {facts.reviews.count} reviews</a>
