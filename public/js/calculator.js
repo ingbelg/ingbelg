@@ -75,6 +75,7 @@
       m2: $('#calcM2').value,
       dikte: $('#calcDikte').value,
       asbest: $('#calcAsbest').checked,
+      btw10jaar: $('#calcBtw10jaar').checked,
       gezin: $('#calcGezin').value,
       personen: $('#calcPersonen').value,
       inkomen: $('#calcInkomen').value,
@@ -116,6 +117,15 @@
       asbestBonus = Math.min(m2 * ASBEST_BONUS_M2, kostTotaal * 0.5);
     }
 
+    var totaal = verbouwpremie + asbestBonus;
+
+    /* Btw: 6% i.p.v. 21% voor een privéwoning ouder dan 10 jaar (fin.belgium.be),
+       los van de inkomenscategorie — geldt voor bijna elke klant. */
+    var btwTarief = data.btw10jaar ? 0.06 : 0.21;
+    var btwBedrag = kostTotaal * btwTarief;
+    var nettoKostprijs = kostTotaal + btwBedrag - totaal;
+    var btwVoordeel = data.btw10jaar ? kostTotaal * (0.21 - 0.06) : 0;
+
     return {
       m2: m2,
       geenOppervlakte: m2 <= 0,
@@ -130,7 +140,12 @@
       asbest: data.asbest,
       asbestBonus: asbestBonus,
       asbestInAanmerking: asbestInAanmerking,
-      totaal: verbouwpremie + asbestBonus,
+      totaal: totaal,
+      btw10jaar: data.btw10jaar,
+      btwTarief: btwTarief,
+      btwBedrag: btwBedrag,
+      nettoKostprijs: nettoKostprijs,
+      btwVoordeel: btwVoordeel,
       gemeente: (data.gemeente || '').trim(),
       type: data.type,
       dikte: dikte
@@ -190,6 +205,8 @@
 
     rows += '<li><span>Gemeentelijke premie' + (r.gemeente ? ' (' + r.gemeente + ')' : '') + '</span><em>Te bevestigen — varieert per gemeente</em></li>';
 
+    rows += '<li><span>Btw (' + (r.btwTarief * 100).toFixed(0) + ' %)</span><strong>' + fmt(r.btwBedrag) + '</strong></li>';
+
     var footnotes = '';
     if (sup1) {
       footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup1; Zonder dakoppervlakte kunnen we geen kostprijs of premie berekenen.</p>';
@@ -201,12 +218,29 @@
       footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup3; Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie.</p>';
     }
 
+    var btwVoordeelRow = r.btw10jaar
+      ? '<div class="calc__total"><span>Uw btw-voordeel t.o.v. 21 %</span><strong>' + fmt(r.btwVoordeel) + '</strong></div>'
+      : '<p class="calc__placeholder" style="margin-top:12px;font-size:13px">Vink hierboven aan of uw woning ouder dan 10 jaar is voor het btw-voordeel.</p>';
+
     result.innerHTML =
       '<p class="calc__placeholder" style="margin-bottom:-4px"><strong>' + typeLabels[r.type] + ' — ' + r.dikte + ' cm PIR</strong></p>' +
       '<ul class="calc__breakdown">' + rows + '</ul>' +
       '<div class="calc__total"><span>Geschatte totale premie</span><strong>' + fmt(r.totaal) + '</strong></div>' +
-      '<a class="btn btn--line calc__cta" href="#contact">Vraag de exacte berekening aan</a>' +
+      '<div class="calc__total"><span>Uw geschatte netto kostprijs (incl. btw, na premie)</span><strong>' + fmt(r.nettoKostprijs) + '</strong></div>' +
+      btwVoordeelRow +
+      '<a class="btn btn--line calc__cta" href="#contact" data-service="Premie-check">Laat dit nakijken tijdens een gratis plaatsbezoek</a>' +
       footnotes;
+
+    if (window.ingbelgTrack) window.ingbelgTrack('premie_check_complete', { totaal: Math.round(r.totaal) });
+
+    var summaryField = $('input[name="premie_summary"]');
+    if (summaryField) {
+      summaryField.value = typeLabels[r.type] + ', ' + r.m2 + ' m², ' + r.dikte + ' cm PIR' +
+        (r.asbest ? ', incl. asbestverwijdering' : '') +
+        (r.categorie ? ', ' + CATEGORIE_LABEL[r.categorie] : '') +
+        ', geschatte premie ' + fmt(r.totaal) +
+        ', geschatte netto kostprijs ' + fmt(r.nettoKostprijs);
+    }
   };
 
   form.addEventListener('submit', function (e) {

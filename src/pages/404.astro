@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import facts from '../data/site-facts.json';
+
+export const prerender = true;
+---
+<Layout title="Pagina niet gevonden | INGBELG" description="Deze pagina bestaat niet (meer).">
+<section class="section" style="min-height:60vh;display:flex;align-items:center">
+  <div class="container" style="text-align:center">
+    <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>404</p>
+    <h1 class="h2">Deze pagina bestaat <em>niet</em></h1>
+    <p class="lead" style="margin:18px auto 30px;max-width:60ch">
+      De pagina die u zocht, bestaat niet (meer). Ga terug naar de homepage of neem rechtstreeks contact op.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--primary btn--lg" href="/"><span>Naar de homepage</span></a>
+      <a class="btn btn--line btn--lg" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
+    </div>
+  </div>
+</section>
+</Layout>

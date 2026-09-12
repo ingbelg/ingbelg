@@ -1,16 +1,20 @@
 ---
+import facts from '../data/site-facts.json';
+
 interface Props {
   title?: string;
   description?: string;
 }
 const {
-  title = 'INGBELG — Algemene dakwerken en renovatie | Platte & hellende daken',
-  description = 'INGBELG is uw specialist in dakwerken en algemene renovatie: platte daken, hellende daken, timmerwerken, gevelbekleding, zonnepanelen en ecopanelen. Gratis offerte binnen 48u.',
+  title = 'Dakwerken Zottegem | Hellend & plat dak, asbest | INGBELG',
+  description = 'Dakwerker uit Zottegem met eigen ploeg: hellende en platte daken, asbestverwijdering, isolatie en gevel. Offerte binnen 48 uur, 15 jaar garantie.',
 } = Astro.props;
+
+const gaId = import.meta.env.PUBLIC_GA_ID || '';
 ---
 
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl-BE">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,28 +24,52 @@ const {
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/assets/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:title" content="INGBELG — Algemene dakwerken en renovatie">
-<meta property="og:description" content="Kwaliteit in werk, materiaal en service. Gratis offerte binnen 48u.">
-<meta property="og:image" content="/assets/logo.png">
+<meta property="og:title" content="INGBELG · Dakwerken in Zottegem en heel Oost-Vlaanderen">
+<meta property="og:description" content="Uw dak in één keer goed. Gratis plaatsbezoek, offerte binnen 48 uur.">
+<!-- ⚠️ CONFIRM T-06: og:image moet absolute URL zijn op het finale domein, en een foto "na" van een echt project i.p.v. het logo -->
+<meta property="og:image" content="/assets/logo.png" data-confirm="T-06">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="nl_BE">
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+<!-- T-06: dit is nog het *.vercel.app preview-domein, niet het finale. Noindex tot het echte
+     domein (ingbelg.be?) vastligt — dan deze regel verwijderen en enkel een 301 op het
+     preview-domein laten staan. -->
+<meta name="robots" content="noindex, nofollow">
+<!-- ⚠️ CONFIRM T-06: finaal domein nog niet gekend (ingbelg.be?) — astro.config.mjs "site" en de canonical hierboven bijwerken zodra bekend. Zolang dit een *.vercel.app-preview is, hoort er een noindex-regel op te staan; die volgt zodra het echte domein vastligt. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<script is:inline>
+  /* Consent Mode v2 — standaardwaarden vóór alles, ook vóór gtag.js zelf laadt (T-01/T-04). */
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500,
+  });
+  window.gtag = gtag;
+</script>
 <script is:inline type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'RoofingContractor',
   name: 'INGBELG',
+  legalName: facts.legalName,
   alternateName: 'IngBelg Dakwerken',
+  vatID: facts.vatCompact,
   image: 'https://ingbelg.be/assets/logo-transparent.png',
   url: 'https://ingbelg.be',
-  telephone: '+32488876061',
-  email: 'info@ingbelg.be',
+  telephone: facts.phoneE164,
+  email: facts.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Hoogstraat 59',
-    postalCode: '9620',
-    addressLocality: 'Zottegem',
+    streetAddress: facts.address.street,
+    postalCode: facts.address.postalCode,
+    addressLocality: facts.address.city,
+    addressRegion: 'Oost-Vlaanderen',
     addressCountry: 'BE',
   },
   geo: {
@@ -49,25 +77,48 @@ const {
     latitude: 50.8696,
     longitude: 3.8107,
   },
-  areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen', 'Vlaams-Brabant', 'Antwerpen'],
+  areaServed: [
+    'Zottegem', 'Velzeke-Ruddershove', 'Strijpen', 'Erwetegem', 'Grotenberge', 'Elene',
+    'Leeuwergem', 'Oombergen', 'Godveerdegem', 'Sint-Goriks-Oudenhove', 'Sint-Maria-Oudenhove',
+    'Herzele', 'Sint-Lievens-Houtem', 'Oosterzele', 'Zwalm', 'Brakel', 'Geraardsbergen',
+    'Ninove', 'Oudenaarde', 'Erpe-Mere', 'Aalst', 'Oost-Vlaanderen',
+  ],
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     opens: '08:00',
     closes: '18:00',
   },
-  sameAs: ['https://maps.app.goo.gl/cxndFzpCFZBJqECCA'],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    bestRating: '5',
-    reviewCount: '54',
+  sameAs: [facts.reviews.googleUrl, facts.social.instagram, facts.social.tiktok].filter(Boolean),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Dakwerken',
+    itemListElement: [
+      'Hellende daken', 'Platte daken EPDM', 'Asbestdak vervangen', 'Gevelbekleding',
+      'Timmerwerken en dakkapellen', 'Zonnepanelen', 'Ecopanelen',
+    ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   },
+  /* ⚠️ AggregateRating bewust NIET toegevoegd (T-07): Google toont dit niet voor
+     LocalBusiness/RoofingContractor op basis van eigen site-content en kan het als
+     manipulatie beschouwen. Rating/aantal reviews staat wel zichtbaar in de tekst (C-01, C-07, C-20). */
 })} />
 </head>
-<body>
+<body data-ga-id={gaId}>
 <slot />
+
+<!-- ============ COOKIEBANNER (T-04) ============ -->
+<div class="cookiebar" id="cookiebar" hidden>
+  <div class="cookiebar__in">
+    <p>We gebruiken cookies om deze site goed te laten werken en, enkel met uw toestemming, om bezoek te analyseren. Lees ons <a href="/cookiebeleid">cookiebeleid</a>.</p>
+    <div class="cookiebar__actions">
+      <button type="button" class="btn btn--glass" id="cookieReject"><span>Alleen noodzakelijke</span></button>
+      <button type="button" class="btn btn--primary" id="cookieAccept"><span>Alles aanvaarden</span></button>
+    </div>
+  </div>
+</div>
+
 <script is:inline src="/js/calculator.js"></script>
 <script is:inline src="/js/main.js"></script>
+<script is:inline src="/js/consent.js"></script>
 </body>
 </html>

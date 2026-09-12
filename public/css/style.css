@@ -84,7 +84,7 @@ button,input,select,textarea{font:inherit;color:inherit}
   --btn-bg:var(--red);--btn-fg:#fff;
   position:relative;display:inline-flex;align-items:center;justify-content:center;gap:11px;
   padding:15px 30px;border:0;border-radius:999px;cursor:pointer;
-  font-family:var(--font-head);font-size:16px;font-weight:700;
+  font-family:var(--font-head);font-size:16px;font-weight:700;white-space:nowrap;flex:none;
   letter-spacing:.05em;text-transform:uppercase;line-height:1;
   background:var(--btn-bg);color:var(--btn-fg);overflow:hidden;isolation:isolate;
   transition:transform .45s var(--ease-out),box-shadow .45s var(--ease-out),color .3s var(--ease);
@@ -102,6 +102,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .btn:hover svg{transform:translateX(5px)}
 .btn:active{transform:translateY(-1px)}
 .btn:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--red);outline-offset:2px;
+}
 .btn--lg{padding:19px 38px;font-size:17px}
 .btn--block{width:100%}
 
@@ -137,6 +140,7 @@ a.topbar__item:hover{color:#fff}
 a.topbar__item:hover svg{transform:scale(1.2)}
 .topbar__item--muted{color:#8E96A3}
 .topbar__badge{color:#7C8492;letter-spacing:.08em;font-size:13px}
+.topbar__rating span:first-child{color:var(--red);font-size:15px}
 .topbar__wa{
   display:inline-flex;align-items:center;gap:8px;padding:5px 15px;border-radius:999px;
   background:rgba(255,255,255,.08);font-weight:700;font-size:13.5px;
@@ -238,12 +242,22 @@ a.topbar__item:hover svg{transform:scale(1.2)}
   text-shadow:0 6px 40px rgba(0,0,0,.4);
 }
 .hero__title em{font-style:normal;color:var(--red);position:relative}
-.hero__motto{
-  font-family:var(--font-head);font-style:italic;font-size:16px;font-weight:600;
-  letter-spacing:.02em;color:var(--red-light);margin:0 0 24px;
+.hero__title .h1-main{display:block}
+.hero__title .h1-sub{
+  display:block;font-size:.32em;text-transform:none;letter-spacing:0;font-weight:600;
+  color:rgba(255,255,255,.78);margin-top:10px;
 }
 .hero__lead{max-width:60ch;font-size:clamp(17px,1.6vw,20px);color:rgba(255,255,255,.9);margin:0 0 40px}
 .hero__cta{display:flex;flex-wrap:wrap;gap:16px}
+.hero__note{
+  margin:16px 0 0;font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.6;
+}
+.hero__note a{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4)}
+.hero__note a:hover{text-decoration-color:#fff}
+.count-rating{
+  font-family:var(--font-head);font-size:clamp(30px,3.6vw,46px);font-weight:700;
+  color:#fff;line-height:1;letter-spacing:-.02em;
+}
 
 .hero__stats{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin:60px 0 0;
@@ -461,14 +475,6 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 .footer__trust .tag-demo{background:rgba(255,255,255,.14);color:#fff;margin-left:6px}
 
 /* ============================================================
-   HERO TRUST BADGE (live Trustindex-widget)
-   ============================================================ */
-.hero__trust{
-  position:absolute;top:32%;right:26px;transform:translateY(-50%);
-  z-index:3;margin:0;max-width:340px;
-}
-
-/* ============================================================
    MERKEN / MATERIALEN STRIP
    ============================================================ */
 .brands{padding:50px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -647,6 +653,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 }
 .cform__row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .field{display:block;margin-bottom:18px}
+.cform__honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .field>span{
   display:block;margin-bottom:8px;font-family:var(--font-head);font-size:14px;font-weight:600;
   letter-spacing:.1em;text-transform:uppercase;color:var(--slate);
@@ -710,6 +717,33 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 .calc__cta{align-self:center;color:#fff;border-color:rgba(255,255,255,.35)}
 .calc__cta:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .calc__disclaimer{margin-top:22px;font-size:13.5px;line-height:1.6;color:var(--slate);text-align:center;max-width:78ch;margin-inline:auto}
+.calc__details{max-width:78ch;margin:10px auto 0;text-align:center}
+.calc__details summary{cursor:pointer;font-size:13.5px;color:var(--red);font-weight:700}
+.calc__details .calc__disclaimer{margin-top:10px}
+
+/* ============================================================
+   LEGAL PAGES (privacybeleid / cookiebeleid)
+   ============================================================ */
+.legal{max-width:760px}
+.legal__body h2{font-size:22px;text-transform:none;margin:36px 0 12px;color:var(--ink)}
+.legal__body p{color:var(--ink-2)}
+.legal__body a{color:var(--red);text-decoration:underline}
+.legal__body code{background:var(--soft);padding:2px 6px;border-radius:4px;font-size:.9em}
+
+/* ============================================================
+   COOKIEBANNER (T-04)
+   ============================================================ */
+.cookiebar{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--ink);color:#C3C9D2;
+  box-shadow:0 -10px 30px rgba(0,0,0,.2);
+}
+.cookiebar__in{
+  max-width:var(--container);margin-inline:auto;padding:18px 26px;
+  display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
+}
+.cookiebar__in p{margin:0;font-size:14px;max-width:640px}
+.cookiebar__in a{color:#fff;text-decoration:underline}
+.cookiebar__actions{display:flex;gap:12px;flex-wrap:wrap}
 
 /* ============================================================
    FOOTER
@@ -819,7 +853,6 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   .nav>ul>li>a::after{display:none}
   .nav__mobilecta{display:grid;gap:12px;margin-top:30px}
 
-  .hero__trust{position:static;transform:none;margin:0 0 26px;max-width:none}
 
   .usp{margin-top:-56px}
   .usp__grid{grid-template-columns:1fr;gap:18px}
@@ -897,6 +930,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   .footer__bar-in{flex-direction:column;gap:6px;text-align:center;justify-content:center}
 
   .mobilebar{display:grid}
+  .cookiebar{bottom:calc(60px + env(safe-area-inset-bottom))}
 
   .lb__nav{width:44px;height:44px;font-size:30px}
   .lb__nav--prev{left:10px}

@@ -16,6 +16,14 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  // Honeypot (T-29): onzichtbaar veld voor mensen, bots vullen het vaak wel in.
+  if (data.website && String(data.website).trim()) {
+    return new Response(JSON.stringify({ ok: true, delivered: false }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   for (const field of REQUIRED_FIELDS) {
     if (!data[field] || !String(data[field]).trim()) {
       return new Response(JSON.stringify({ ok: false, error: 'missing_field', field }), {
@@ -32,10 +40,13 @@ export const POST: APIRoute = async ({ request }) => {
     `E-mail: ${data.email}`,
     `Gemeente: ${data.gemeente || '-'}`,
     `Dienst: ${data.dienst}`,
+    `Timing: ${data.timing || '-'}`,
+    `Bron: ${data.source_block || '-'}`,
+    data.premie_summary ? `Premie-check: ${data.premie_summary}` : null,
     '',
     'Project:',
     data.bericht || '-',
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 
   // Provider: Resend (resend.com) — kies zelf een andere provider indien gewenst,
   // dit is de enige plek die dan moet wijzigen.

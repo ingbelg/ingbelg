@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import facts from '../data/site-facts.json';
+
+export const prerender = true;
+---
+<Layout title="Cookiebeleid | INGBELG" description="Welke cookies de website van INGBELG gebruikt en waarom.">
+<section class="section">
+  <div class="container legal">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Cookiebeleid</p>
+      <h1 class="h2">Welke <em>cookies</em> gebruiken we?</h1>
+    </header>
+
+    <div class="legal__body reveal">
+      <p class="lead">Deze website gebruikt een beperkt aantal cookies. We onderscheiden noodzakelijke cookies en analytische cookies.</p>
+
+      <h2>Noodzakelijke cookies</h2>
+      <p>Deze zijn nodig om de website te laten werken en onthouden bijvoorbeeld uw keuze in de cookiebanner (via <code>localStorage</code>, niet via een klassieke cookie). Ze worden altijd geplaatst, ook als u analytische cookies weigert.</p>
+
+      <h2>Analytische cookies (enkel met toestemming)</h2>
+      <p>Als u "Alles aanvaarden" kiest, gebruiken we Google Analytics (GA4) om te zien hoeveel mensen de site bezoeken, welke pagina's ze bekijken en of ze de contactformulier of premie-check gebruiken. Deze cookies worden pas geplaatst na uw toestemming, in lijn met Google Consent Mode v2. Kiest u "Alleen noodzakelijke", dan laden deze cookies niet.</p>
+
+      <h2>Uw keuze aanpassen</h2>
+      <p>U kan uw toestemming op elk moment intrekken door de sitegegevens van uw browser voor deze website te wissen — de cookiebanner verschijnt dan opnieuw bij uw volgende bezoek.</p>
+
+      <!-- ⚠️ CONFIRM T-04: bijwerken zodra een definitieve GA4-koppeling (PUBLIC_GA_ID) en eventuele advertising-tools zijn ingesteld. -->
+    </div>
+  </div>
+</section>
+</Layout>

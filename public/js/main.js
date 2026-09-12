@@ -5,6 +5,13 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* ---------- Hero-video: niet laden bij Save-Data (T-08) ---------- */
+  var heroVideo = $('#heroVideo');
+  if (heroVideo && navigator.connection && navigator.connection.saveData) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.querySelectorAll('source').forEach(function (s) { s.remove(); });
+  }
+
   /* ---------- Jaartal in footer ---------- */
   var yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -57,8 +64,13 @@
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------- Tellers ---------- */
-  var counters = $$('[data-count]');
+  /* ---------- Tellers (T-02) ----------
+     De HTML draagt altijd al de finale waarde als tekst (zichtbaar voor Google,
+     bots en JS-loze bezoekers). Enkel als JS werkt én de gebruiker geen
+     prefers-reduced-motion heeft, zetten we 'm terug op 0 en laten 'm oplopen
+     zodra het blok in beeld komt. */
+  var counters = $$('.count[data-count]');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var runCounter = function (el) {
     var target = parseFloat(el.getAttribute('data-count'));
     var suffix = el.getAttribute('data-suffix') || '';
@@ -72,17 +84,14 @@
     };
     requestAnimationFrame(step);
   };
-  if ('IntersectionObserver' in window && counters.length) {
+  if (!reduceMotion && 'IntersectionObserver' in window && counters.length) {
+    counters.forEach(function (el) { el.textContent = '0'; });
     var cio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { runCounter(en.target); cio.unobserve(en.target); }
       });
     }, { threshold: 0.5 });
     counters.forEach(function (el) { cio.observe(el); });
-  } else {
-    counters.forEach(function (el) {
-      el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
-    });
   }
 
   /* ---------- Actieve nav-link ---------- */
@@ -160,6 +169,21 @@
     if (e.key === 'ArrowRight') show(idx + 1);
   });
 
+  /* ---------- Predvybor dienst (T-12) ---------- */
+  var dienstSelect = $('select[name="dienst"]');
+  var sourceBlockField = $('input[name="source_block"]');
+  $$('[data-service]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var service = a.getAttribute('data-service');
+      if (dienstSelect) {
+        var match = Array.prototype.find.call(dienstSelect.options, function (o) { return o.value === service; });
+        if (match) dienstSelect.value = service;
+      }
+      if (sourceBlockField) sourceBlockField.value = service;
+      if (service === 'Premie-check' && window.ingbelgTrack) window.ingbelgTrack('premie_check_to_form');
+    });
+  });
+
   /* ---------- Formulier ---------- */
   var form = $('#offerteForm');
   var msg = $('#formMsg');
@@ -191,7 +215,11 @@
       email: d.get('email'),
       gemeente: d.get('gemeente') || '',
       dienst: d.get('dienst'),
-      bericht: d.get('bericht') || ''
+      timing: d.get('timing') || '',
+      bericht: d.get('bericht') || '',
+      website: d.get('website') || '',
+      source_block: d.get('source_block') || '',
+      premie_summary: d.get('premie_summary') || ''
     };
 
     var fallbackToMailto = function () {
@@ -208,8 +236,9 @@
         + '&body=' + encodeURIComponent(body);
 
       msg.className = 'cform__msg ok';
-      msg.textContent = 'Bedankt! Uw e-mailprogramma opent met de aanvraag. Wij antwoorden binnen 48 uur.';
+      msg.textContent = 'Bedankt, ' + payload.naam + '. Uw e-mailprogramma opent met de aanvraag. We bellen u binnen 1 werkdag terug op ' + payload.telefoon + '.';
       form.reset();
+      if (window.ingbelgTrack) window.ingbelgTrack('lead_form_submit', { dienst: payload.dienst });
     };
 
     msg.className = 'cform__msg';
@@ -224,8 +253,9 @@
       return res.json();
     }).then(function () {
       msg.className = 'cform__msg ok';
-      msg.textContent = 'Bedankt! Uw aanvraag is verstuurd. Wij antwoorden binnen 48 uur.';
+      msg.textContent = 'Bedankt, ' + payload.naam + '. We bellen u binnen 1 werkdag terug op ' + payload.telefoon + '. Dringend? Bel +32 488 87 60 61.';
       form.reset();
+      if (window.ingbelgTrack) window.ingbelgTrack('lead_form_submit', { dienst: payload.dienst });
     }).catch(function () {
       // Server niet bereikbaar (bv. statische hosting zonder /api) — terugval op mailto.
       fallbackToMailto();

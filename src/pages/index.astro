@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GoogleReviews from '../components/GoogleReviews.astro';
 import { getCollection } from 'astro:content';
+import facts from '../data/site-facts.json';
 
 export const prerender = true;
 
@@ -9,34 +9,86 @@ const services = (await getCollection('services')).sort((a, b) => a.data.num.loc
 const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
 
 const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', normal: '' };
+
+const faqItems = [
+  {
+    q: 'Wat kost een nieuw dak?',
+    a: 'Dat hangt af van de oppervlakte, het type dak en wat er onder de pannen zit. Daarom geven we geen prijs aan de telefoon, wel een offerte binnen 48 uur na het plaatsbezoek, per post uitgeschreven. Met de premie-check hierboven ziet u vooraf al wat u terugkrijgt.',
+  },
+  {
+    q: 'Zijn de offertes gratis?',
+    a: 'Ja. Het plaatsbezoek en de offerte zijn gratis en vrijblijvend. Pas als u de offerte ondertekent, gaan we aan de slag.',
+  },
+  {
+    q: 'Betaal ik 6 % of 21 % btw?',
+    a: 'Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw op de werken in plaats van 21 %. Wij passen dat correct toe op de factuur. Voor een woning jonger dan 10 jaar geldt 21 %.',
+  },
+  {
+    q: 'Kan ik nog genieten van premies?',
+    a: 'Ja, als u in inkomenscategorie 3 of 4 valt. Sinds 1 maart 2026 krijgen de twee hoogste inkomenscategorieën geen dakpremie meer. Voor categorie 4 gaat het om maximaal 50 % van de factuur (tot € 5.750), voor categorie 3 om maximaal 35 % (tot € 4.025). Voorwaarde: het dak wordt tegelijk nieuw geïsoleerd, met een Rd-waarde van minstens 4,5 m²K/W. Soms komen er gemeentelijke premies bij. Tijdens het plaatsbezoek rekenen we het samen na.',
+  },
+  {
+    q: 'Hoe dik wordt de isolatielaag?',
+    a: 'Dik genoeg voor de premie-eis: een Rd-waarde van minstens 4,5 m²K/W. Met PIR komt dat neer op ongeveer 10 cm. Meestal adviseren we 12 tot 16 cm, afhankelijk van de dakopbouw en hoe zuinig u wilt wonen.',
+  },
+  {
+    q: 'Moet mijn asbestdak weg?',
+    a: 'Niet meteen, zolang het in goede staat is. Maar u mag een asbestdak niet reinigen, ontmossen of er zonnepanelen op plaatsen. Verkoopt u een woning van vóór 2001, dan hebt u een asbestattest nodig. Plant u toch dakwerken, laat het asbest dan meteen mee verwijderen: dat kan in één werf met het nieuwe dak.',
+  },
+  {
+    q: 'Ik kocht een woning met EPC E of F. Wat nu?',
+    a: 'Dan moet u de woning binnen zes jaar na de aankoop naar minstens label D brengen. Dakisolatie is daarvoor vaak een logische eerste stap. Breng uw EPC mee naar het plaatsbezoek, dan zeggen we welke dakwerken het meeste opleveren.',
+  },
+  {
+    q: 'Wat als het regent tijdens de werken?',
+    a: "Dan blijft uw woning droog. Elk dakvlak dat open ligt, dekken we aan het einde van de werkdag af met ons eigen zeil. Ook als er 's nachts een onverwachte bui valt.",
+  },
+  {
+    q: 'Hoe lang duren de werken?',
+    a: 'Een hellend dak van een gemiddelde rijwoning: 5 tot 10 werkdagen. Een plat dak of een gevelbekleding: meestal 2 tot 5 dagen. U krijgt de exacte planning vooraf op papier.',
+  },
+  {
+    q: 'Welke garantie krijg ik?',
+    a: `${facts.warrantyYears} jaar schriftelijke garantie op het uitgevoerde werk en de materialen. U krijgt het garantiedocument bij de oplevering.`,
+    confirm: 'C-26-10',
+  },
+  {
+    q: 'Heb ik een vergunning nodig?',
+    a: 'Voor het vernieuwen van een dak in dezelfde vorm meestal niet. Verandert de vorm, de hoogte of komt er een dakkapel bij, dan vaak wel. Informeer altijd bij uw gemeente; wij bezorgen u de technische gegevens voor de aanvraag.',
+  },
+  {
+    q: 'In welke regio werkt INGBELG?',
+    a: 'In Zottegem, de deelgemeenten en de buurgemeenten, en voor grotere projecten in heel Oost- en West-Vlaanderen, Vlaams-Brabant en Antwerpen. Twijfelt u of uw adres binnen ons werkgebied valt? Bel ons gerust.',
+  },
+];
 ---
 <Layout>
 
 <a class="skip-link" href="#diensten">Ga naar inhoud</a>
 
-<!-- ============ TOPBAR ============ -->
+<!-- ============ TOPBAR (C-01) ============ -->
 <div class="topbar">
   <div class="container topbar__in">
     <div class="topbar__left">
-      <a class="topbar__item" href="tel:+32488876061">
+      <a class="topbar__item" href={`tel:${facts.phoneE164}`}>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-        <span>+32 488 87 60 61</span>
+        <span>{facts.phone}</span>
       </a>
-      <a class="topbar__item" href="mailto:info@ingbelg.be">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg>
-        <span>info@ingbelg.be</span>
+      <a class="topbar__item" href={`https://wa.me/${facts.phoneE164.replace('+', '')}`} target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a class="topbar__item topbar__rating" href={facts.reviews.googleUrl} target="_blank" rel="noopener">
+        <span aria-hidden="true">★</span>
+        <span>{facts.reviews.score} · {facts.reviews.count} reviews</span>
       </a>
       <span class="topbar__item topbar__item--muted">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></svg>
-        <span>Hoogstraat 59, 9620 Zottegem</span>
+        <span>{facts.address.street}, {facts.address.city}</span>
       </span>
     </div>
     <div class="topbar__right">
-      <span class="topbar__badge">BTW BE 0721.841.831</span>
-      <a class="topbar__wa" href="https://wa.me/32488876061" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg>
-        WhatsApp
-      </a>
+      <span class="topbar__badge">BTW {facts.vat}</span>
     </div>
   </div>
 </div>
@@ -50,24 +102,26 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 
     <nav class="nav" id="nav" aria-label="Hoofdnavigatie">
       <ul>
-        <li><a href="#top" class="is-active">Home</a></li>
-        <li><a href="#over">Over ons</a></li>
         <li><a href="#diensten">Diensten</a></li>
         <li><a href="#realisaties">Realisaties</a></li>
-        <li><a href="#voordelen">Waarom INGBELG</a></li>
-        <li><a href="#calculator">Premie-check</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#voordelen">Onze afspraken</a></li>
+        <li><a href="#calculator">Premies &amp; btw</a></li>
+        <li><a href="#over">Over ons</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav__mobilecta">
-        <a class="btn btn--primary btn--block" href="#contact"><span>Offerte aanvragen</span></a>
-        <a class="btn btn--ghost btn--block" href="tel:+32488876061"><span>+32 488 87 60 61</span></a>
+        <a class="btn btn--primary btn--block" href="#contact"><span>Gratis plaatsbezoek</span></a>
+        <a class="btn btn--ghost btn--block" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
       </div>
     </nav>
 
     <div class="header__actions">
+      <a class="btn btn--line" href={`tel:${facts.phoneE164}`}>
+        <span>{facts.phone}</span>
+      </a>
       <a class="btn btn--primary" href="#contact">
-        <span>Offerte aanvragen</span>
+        <span>Gratis plaatsbezoek</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <button class="burger" id="burger" aria-label="Menu openen" aria-expanded="false" aria-controls="nav">
@@ -80,7 +134,8 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero__media">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/services/hellende-daken.webp">
+    <!-- T-08: preload="none" + Save-Data-check in main.js (skipVideoOnSaveData) laat op trage verbindingen enkel de poster zien -->
+    <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="none" poster="/assets/services/hellende-daken.webp">
       <source src="/assets/hero_mobile.mp4" type="video/mp4" media="(max-width: 760px)">
       <source src="/assets/hero.mp4" type="video/mp4">
     </video>
@@ -89,39 +144,36 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   </div>
 
   <div class="container hero__in">
-    <p class="hero__eyebrow reveal"><span class="hero__dot"></span>14+ jaar ervaring &middot; Zottegem &middot; Heel Vlaanderen</p>
+    <p class="hero__eyebrow reveal"><span class="hero__dot"></span>Dakwerker uit Zottegem &middot; eigen ploeg &middot; heel Oost-Vlaanderen</p>
     <h1 class="hero__title reveal">
-      Uw specialist op het gebied van<br>
-      <em>dakwerken</em>.
+      <span class="h1-main">Uw dak in één keer goed.</span><br>
+      <span class="h1-sub">Dakwerken in Zottegem en heel Oost-Vlaanderen</span>
     </h1>
-    <p class="hero__motto reveal">&ldquo;Uw dak, onze zorg &middot; kwaliteit van boven tot onder&rdquo;</p>
     <p class="hero__lead reveal">
-      INGBELG is uw garantie voor professioneel uitgevoerde werken met hoogwaardige
-      materialen, klantgerichte service en perfecte resultaten. Kwaliteit in werk,
-      materiaal én service.
+      Hellende en platte daken, asbestverwijdering, isolatie en gevelbekleding, gelegd
+      door onze eigen ploeg. Na het plaatsbezoek hebt u binnen {facts.quoteHoursAfterVisit} uur
+      een offerte waarin alles staat. Op het werk krijgt u <!-- ⚠️ CONFIRM C-06: garantieduur --><span data-confirm="C-06">{facts.warrantyYears} jaar garantie</span>, op papier.
     </p>
-
-    <div class="hero__trust reveal">
-      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?dee10da79b0d29741b4650657bf"></script>
-    </div>
 
     <div class="hero__cta reveal">
       <a class="btn btn--primary btn--lg" href="#contact">
-        <span>Gratis offerte aanvragen</span>
+        <span>Vraag een gratis plaatsbezoek</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="btn btn--glass btn--lg" href="#realisaties"><span>Bekijk onze realisaties</span></a>
-      <a class="btn btn--glass btn--lg" href="tel:+32488876061">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-        <span>Bel nu</span>
+      <a class="btn btn--glass btn--lg" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener">
+        <span>Stuur een foto via WhatsApp →</span>
       </a>
     </div>
+    <p class="hero__note reveal">
+      Gratis en vrijblijvend &middot; we bellen u binnen {facts.callbackWorkdays} werkdag terug<br>
+      <a href={facts.reviews.googleUrl} target="_blank" rel="noopener">★★★★★ {facts.reviews.score} &middot; {facts.reviews.count} reviews op Google</a>
+    </p>
 
     <ul class="hero__stats reveal">
-      <li><strong data-count="48" data-suffix="u">0</strong><span>Offerte binnen</span></li>
-      <li><strong data-count="14" data-suffix="+">0</strong><span>Jaar ervaring</span></li>
-      <li><strong data-count="400" data-suffix="+">0</strong><span>Daken gerealiseerd</span></li>
-      <li><strong data-count="15" data-suffix=" jaar">0</strong><span>Garantie op werken</span></li>
+      <li><strong class="count" data-count={facts.quoteHoursAfterVisit} data-suffix="u">{facts.quoteHoursAfterVisit}u</strong><span>Offerte na plaatsbezoek</span></li>
+      <li><strong class="count" data-count={facts.warrantyYears} data-suffix=" jaar">{facts.warrantyYears} jaar</strong><span>Garantie op papier</span></li>
+      <!-- ⚠️ CONFIRM C-08: aantal gerealiseerde daken --><li><strong class="count" data-count={facts.roofsDone} data-suffix="+" data-confirm="C-08">{facts.roofsDone}+</strong><span>Daken gelegd</span></li>
+      <li><strong class="count-rating">{facts.reviews.score} ★</strong><span>Uit {facts.reviews.count} reviews</span></li>
     </ul>
   </div>
 
@@ -131,93 +183,61 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   </a>
 </section>
 
-<!-- ============ USP STRIP ============ -->
-<section class="usp" id="usp">
-  <div class="container usp__grid">
-    <article class="usp__card reveal">
-      <div class="usp__icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10z"/></svg>
-      </div>
-      <h3>Veilig en voordelig</h3>
-      <p>Hellende daken in dakpannen of leien, platte daken met hoogwaardige EPDM — altijd volgens de regels van de kunst en met de juiste veiligheidsvoorzieningen.</p>
-    </article>
-    <article class="usp__card reveal">
-      <div class="usp__icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm0 4.5 1.9 3.9 4.3.6-3.1 3 .7 4.3-3.8-2-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg>
-      </div>
-      <h3>Zorgvuldigheid</h3>
-      <p>Wij voeren de werkzaamheden uit met respect voor uw wensen, uw budget en de afgesproken planning. Een propere werf is voor ons vanzelfsprekend.</p>
-    </article>
-    <article class="usp__card reveal">
-      <div class="usp__icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></svg>
-      </div>
-      <h3>Gratis offerte</h3>
-      <p>Van ontwerp tot oplevering. U ontvangt een heldere, vrijblijvende prijsofferte binnen de 48 uur — zonder verplichtingen en zonder verrassingen achteraf.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ============ OVER ONS ============ -->
-<section class="about section" id="over">
-  <div class="container about__grid">
-    <div class="about__media reveal">
-      <div class="about__img about__img--main">
-        <img src="/assets/work/work-05.webp" alt="Dakwerken door INGBELG" width="1600" height="1200" loading="lazy">
-      </div>
-      <div class="about__img about__img--sub">
-        <img src="/assets/services/platte-daken.webp" alt="Plat dak met EPDM" width="1024" height="806" loading="lazy">
-      </div>
-      <div class="about__badge">
-        <strong>15</strong>
-        <span>jaar<br>garantie</span>
-      </div>
-    </div>
-
-    <div class="about__body reveal">
-      <p class="eyebrow"><span class="eyebrow__bar"></span>Over INGBELG</p>
-      <h2 class="h2">Kwaliteit in werk,<br>materiaal <em>én</em> service.</h2>
-      <p class="lead">
-        INGBELG — Algemene dak- en renovatiewerken — is gevestigd in Zottegem en actief in
-        heel Vlaanderen. Wij verzorgen totaalrenovaties met een persoonlijke aanpak:
-        één aanspreekpunt van het eerste plaatsbezoek tot de definitieve oplevering.
-      </p>
-      <p>
-        Of het nu gaat om een plat dak in EPDM, een hellend dak in pannen of leien,
-        een nieuwe dakconstructie, gevelbekleding, zonnepanelen of ecopanelen — wij
-        werken uitsluitend met hoogwaardige materialen en vakmensen uit eigen team.
-      </p>
-
-      <ul class="ticks">
-        <li>Vast aanspreekpunt gedurende het volledige project</li>
-        <li>Eigen, ervaren dakdekkers</li>
-        <li>Duidelijke prijsafspraken en strikte planning</li>
-        <li>Advies over premies en subsidies inbegrepen</li>
-      </ul>
-
-      <div class="about__cta">
-        <a class="btn btn--primary" href="#contact"><span>Plan een gratis plaatsbezoek</span></a>
-        <a class="btn btn--line" href="tel:+32488876061">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-          <span>+32 488 87 60 61</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MERKEN / MATERIALEN ============ -->
+<!-- ============ TRUST STRIP (C-09) ============ -->
 <section class="brands">
   <div class="container">
-    <p class="brands__label">Wij werken met kwaliteitsmaterialen &amp; A-merken</p>
+    <!-- ⚠️ CONFIRM C-09: kopieën van certificaten opvragen bij Magomed vóór livegang (VM Building Solutions, NXTPRO, Trustlocal Top Score) -->
+    <p class="brands__label" data-confirm="C-09">Lid van het WTCB &middot; Attest asbest eenvoudige handelingen &middot; Opleiding leien- en pannendaken &middot; Top Score Trustlocal 2025 en 2026</p>
     <ul class="brands__row">
-      <li>EPDM</li>
-      <li>Firestone</li>
+      <li>WTCB</li>
+      <li>Asbestattest</li>
+      <li>Trustlocal Top Score</li>
+    </ul>
+    <p class="brands__label" style="margin-top:22px">Wij werken met:</p>
+    <ul class="brands__row">
+      <li>Firestone EPDM</li>
       <li>Resitrix</li>
       <li>Trespa</li>
       <li>Rockpanel</li>
       <li>PIR-isolatie</li>
     </ul>
+  </div>
+</section>
+
+<!-- ============ HERKENT U DIT? (C-10, vervangt USP) ============ -->
+<section class="section usp" id="usp">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <h2 class="h2">Vijf redenen waarom mensen ons <em>bellen</em></h2>
+    </header>
+    <div class="adv__grid">
+      <!-- ⚠️ CONFIRM C-10: enkel tonen als INGBELG ook herstellingen bij een lek doet -->
+      <article class="adv__card reveal" data-confirm="C-10">
+        <h3>Er komt water binnen.</h3>
+        <p>Een vochtvlek op het plafond of verschoven pannen na een storm. Hoe sneller we kijken, hoe kleiner de schade.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>Er ligt nog asbest op het dak.</h3>
+        <p>Leien of golfplaten van vóór 2001. We halen ze er veilig af en leggen in dezelfde werf uw nieuwe dak.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>De zolder is ijskoud in de winter.</h3>
+        <p>Vaak ontbreken isolatie en onderdak. Met 12 tot 16 cm PIR blijft de warmte binnen, en misschien hebt u recht op een premie.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>U kocht een woning met EPC E of F.</h3>
+        <p>Dan moet u binnen zes jaar naar label D. Een geïsoleerd dak is daarvoor een logische eerste stap.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>U wilt zonnepanelen, maar het dak is oud.</h3>
+        <p>Eerst het dak, dan de panelen. Zo moet er later niets opnieuw open.</p>
+      </article>
+    </div>
+    <!-- ⚠️ CONFIRM C-10: "ook als uw dak nog jaren meekan" is een eerlijkheidsbelofte — pas publiceren na akkoord Magomed -->
+    <p class="sechead sechead--center reveal" style="margin-top:36px" data-confirm="C-10">
+      Twijfelt u? <a class="btn btn--line" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener"><span>Stuur een foto van uw dak via WhatsApp</span></a><br>
+      U krijgt een eerlijk antwoord, ook als uw dak nog jaren meekan.
+    </p>
   </div>
 </section>
 
@@ -227,7 +247,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
     <header class="sechead reveal">
       <p class="eyebrow"><span class="eyebrow__bar"></span>Onze diensten</p>
       <h2 class="h2">Alles voor uw dak <em>en</em> uw gevel</h2>
-      <p class="sechead__sub">Zeven specialisaties onder één dak. U hoeft maar één aannemer te bellen.</p>
+      <p class="sechead__sub">Zeven vakgebieden, één eigen ploeg. U belt één aannemer en krijgt één planning en één factuur.</p>
     </header>
 
     <div class="services">
@@ -241,7 +261,7 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
             <ul class="svc__tags">
               {s.data.tags.map((tag) => <li>{tag}</li>)}
             </ul>
-            <a class="svc__link" href="#contact">Offerte aanvragen
+            <a class="svc__link" href="#contact" data-service={s.data.title}>Vraag een plaatsbezoek
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
@@ -257,9 +277,9 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
     <header class="sechead sechead--row reveal">
       <div>
         <p class="eyebrow"><span class="eyebrow__bar"></span>Realisaties</p>
-        <h2 class="h2">Werk dat voor <em>zichzelf</em> spreekt</h2>
+        <h2 class="h2">Voor en <em>na</em></h2>
       </div>
-      <p class="sechead__sub">Een selectie uit onze recent opgeleverde daken, gevels en renovaties in heel Vlaanderen.</p>
+      <p class="sechead__sub">Echte werven, geen stockfoto's. Schuif over de foto om het verschil te zien.</p>
     </header>
   </div>
 
@@ -274,7 +294,8 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
           <span class="ba__tag ba__tag--before">Voor</span>
           <span class="ba__tag ba__tag--after">Na</span>
         </div>
-        <p class="ba__label">Antraciet dakpannen</p>
+        <!-- ⚠️ CONFIRM C-19: gemeente, m² en werkdagen van dit project bevestigen -->
+        <p class="ba__label" data-confirm="C-19">Antraciet dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
       </div>
       <div class="ba">
         <div class="ba__slider">
@@ -285,7 +306,8 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
           <span class="ba__tag ba__tag--before">Voor</span>
           <span class="ba__tag ba__tag--after">Na</span>
         </div>
-        <p class="ba__label">Rode dakpannen</p>
+        <!-- ⚠️ CONFIRM C-19: gemeente, m² en werkdagen van dit project bevestigen -->
+        <p class="ba__label" data-confirm="C-19">Rode dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
       </div>
     </div>
 
@@ -296,97 +318,112 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
         </figure>
       ))}
     </div>
+
+    <p class="sechead sechead--center reveal" style="margin-top:36px">
+      <a class="btn btn--line" href={facts.social.instagram} target="_blank" rel="noopener"><span>Meer werven op Instagram →</span></a>
+    </p>
   </div>
 </section>
 
-<!-- ============ WERKWIJZE ============ -->
-<section class="section section--soft">
+<!-- ============ REVIEWS (C-20, verplaatst na Realisaties) ============ -->
+<section class="section section--soft" id="reviews">
   <div class="container">
     <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Werkwijze</p>
-      <h2 class="h2">In vijf stappen naar uw <em>nieuwe dak</em></h2>
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Wat klanten zeggen</p>
+      <h2 class="h2">Wat klanten zeggen <em>na de oplevering</em></h2>
+      <p class="sechead__sub">{facts.reviews.score} op 5 uit {facts.reviews.count} reviews. Een greep, woord voor woord.</p>
+    </header>
+
+    <div class="reviews">
+      <article class="rev reveal">
+        <p class="rev__stars">★★★★★</p>
+        <p>&ldquo;Zaakvoerder Magomed is iemand die zijn woord houdt.&rdquo;</p>
+        <div class="rev__who">
+          <span class="rev__avatar">J</span>
+          <div><strong>Jorun &amp; Yves</strong><br><em>Google, mei 2026</em></div>
+        </div>
+      </article>
+      <!-- ⚠️ CONFIRM C-20: exacte quote van Alex woord voor woord overnemen uit het Google-profiel (thema: prijs, punctualiteit, netheid) -->
+      <article class="rev reveal" data-confirm="C-20">
+        <p class="rev__stars">★★★★★</p>
+        <p>&ldquo;⚠️ citaat van Alex hier woord voor woord invullen (Google, 7 mei 2026).&rdquo;</p>
+        <div class="rev__who">
+          <span class="rev__avatar">A</span>
+          <div><strong>Alex</strong><br><em>Google, 7 mei 2026</em></div>
+        </div>
+      </article>
+      <!-- ⚠️ CONFIRM C-20: exacte quote van Kevin Oostens woord voor woord overnemen (thema: communicatie, werkende vakmensen) -->
+      <article class="rev reveal" data-confirm="C-20">
+        <p class="rev__stars">★★★★★</p>
+        <p>&ldquo;⚠️ citaat van Kevin Oostens hier woord voor woord invullen (Google, 2 mei 2026).&rdquo;</p>
+        <div class="rev__who">
+          <span class="rev__avatar">K</span>
+          <div><strong>Kevin Oostens</strong><br><em>Google, 2 mei 2026</em></div>
+        </div>
+      </article>
+      <!-- ⚠️ CONFIRM C-20: exacte quote van Abdel Agadir woord voor woord overnemen (thema: herstelling, afspraken nakomen) -->
+      <article class="rev reveal" data-confirm="C-20">
+        <p class="rev__stars">★★★★★</p>
+        <p>&ldquo;⚠️ citaat van Abdel Agadir hier woord voor woord invullen (Google, 18 maart 2026).&rdquo;</p>
+        <div class="rev__who">
+          <span class="rev__avatar">A</span>
+          <div><strong>Abdel Agadir</strong><br><em>Google, 18 maart 2026</em></div>
+        </div>
+      </article>
+    </div>
+
+    <p class="sechead sechead--center reveal" style="margin-top:36px">
+      <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ VIJF AFSPRAKEN (C-21, vervangt Werkwijze + Waarom) ============ -->
+<section class="section adv" id="voordelen">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Onze afspraken</p>
+      <h2 class="h2">Vijf afspraken die we <em>op papier</em> zetten</h2>
+      <p class="sechead__sub">Klanten schrijven het in hun reviews: we komen onze afspraken na. Daarom staan ze zwart op wit.</p>
     </header>
 
     <ol class="steps">
       <li class="steps__item reveal">
         <span class="steps__num">01</span>
         <h3>Gratis plaatsbezoek</h3>
-        <p>Wij komen ter plaatse, bekijken uw dak en luisteren naar uw wensen en budget.</p>
+        <!-- ⚠️ CONFIRM C-21: komt Magomed zelf op plaatsbezoeken? -->
+        <p data-confirm="C-21">We komen ter plaatse, bekijken uw dak van dichtbij en luisteren naar wat u wilt en wat u wilt uitgeven.</p>
       </li>
       <li class="steps__item reveal">
         <span class="steps__num">02</span>
-        <h3>Offerte binnen 48u</h3>
-        <p>U ontvangt een heldere, vrijblijvende prijsofferte rechtstreeks in uw mailbox.</p>
+        <h3>Offerte binnen {facts.quoteHoursAfterVisit} uur</h3>
+        <!-- ⚠️ CONFIRM C-21: wordt de offerte per positie opgesteld, incl. "wat niet inbegrepen is"? -->
+        <p data-confirm="C-21">Per post uitgeschreven: wat we doen, met welk materiaal, wat het kost. En ook wat er niet in zit.</p>
       </li>
       <li class="steps__item reveal">
         <span class="steps__num">03</span>
-        <h3>Planning &amp; akkoord</h3>
-        <p>Na uw akkoord leggen we een concrete startdatum en planning schriftelijk vast.</p>
+        <h3>Startdatum en planning op papier</h3>
+        <p>Na uw akkoord krijgt u een vaste startdatum. Een hellend dak van een rijwoning duurt meestal 5 tot 10 werkdagen.</p>
       </li>
       <li class="steps__item reveal">
         <span class="steps__num">04</span>
-        <h3>Uitvoering</h3>
-        <p>Ons eigen team voert de werken uit — met valbeveiliging en dagelijkse opruim.</p>
+        <h3>Elke avond waterdicht, elke dag opgeruimd</h3>
+        <p>Open dakvlakken gaan 's avonds onder ons zeil. Containers, valbeveiliging en opruim zitten in de prijs. Uw tuin en oprit blijven heel.</p>
       </li>
       <li class="steps__item reveal">
         <span class="steps__num">05</span>
-        <h3>Oplevering &amp; garantie</h3>
-        <p>U krijgt een schriftelijke garantie van 15 jaar en wij blijven nadien bereikbaar.</p>
+        <h3>{facts.warrantyYears} jaar schriftelijke garantie</h3>
+        <p>Op het werk en de materialen, bij de oplevering op papier. En daarna blijven we gewoon bereikbaar.</p>
       </li>
     </ol>
-  </div>
-</section>
 
-<!-- ============ VOORDELEN ============ -->
-<section class="section adv" id="voordelen">
-  <div class="container">
-    <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Waarom INGBELG</p>
-      <h2 class="h2">Acht redenen om met ons <em>in zee</em> te gaan</h2>
-    </header>
-
-    <div class="adv__grid">
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10z"/></svg></div>
-        <h3>15 jaar garantie</h3>
-        <p>Op alle uitgevoerde dakwerken en materialen krijgt u een schriftelijke garantie. Wij staan achter ons werk, ook jaren na de oplevering.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 10.6V6h-2v7.4l5.2 3.1 1-1.7z"/></svg></div>
-        <h3>Offerte binnen 48 uur</h3>
-        <p>Na het plaatsbezoek ontvangt u binnen twee werkdagen een gedetailleerde, vrijblijvende offerte in uw mailbox.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4m-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4m0 2c-3 0-8 1.5-8 4.5V21h10v-3.5A4.4 4.4 0 0 1 11 14a13 13 0 0 0-3-1m8 0a11 11 0 0 0-2 .2A5.3 5.3 0 0 1 16 17.5V21h8v-3.5c0-3-5-4.5-8-4.5"/></svg></div>
-        <h3>Eigen vast team</h3>
-        <p>Geen wisselende onderaannemers. Uw werf wordt uitgevoerd door onze eigen, ervaren dakdekkers en timmerlieden.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M11.8 2 2 12h3v8h6v-6h2v6h6v-8h3zM7 22h10v-2H7z"/></svg></div>
-        <h3>Totaaloplossing</h3>
-        <p>Dak, isolatie, gevel, goten, zonnepanelen en ecopanelen — alles bij dezelfde partner, met één planning en één factuur.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm0 4.5 1.9 3.9 4.3.6-3.1 3 .7 4.3-3.8-2-3.8 2 .7-4.3-3.1-3 4.3-.6z"/></svg></div>
-        <h3>Premiebegeleiding</h3>
-        <p>Wij volgen de Mijn VerbouwPremie en eventuele gemeentelijke premies op en helpen u bij de aanvraag.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M20 6h-3V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2M9 4h6v2H9zm4 12h-2v2h-2v-2H7v-2h2v-2h2v2h2z"/></svg></div>
-        <h3>Propere werf</h3>
-        <p>Containers, valbeveiliging en dagelijkse opruim horen standaard bij de prijs. Uw tuin en oprit blijven intact.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/></svg></div>
-        <h3>WTCB-richtlijnen</h3>
-        <p>Al onze werken worden uitgevoerd volgens de technische voorschriften van het WTCB — de Belgische bouwreferentie.</p>
-      </article>
-      <article class="adv__card reveal">
-        <div class="adv__ico"><svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 3.8 9.4 9 10 5.2-.6 9-5 9-10V6zm-1 14-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10z"/></svg></div>
-        <h3>Verzekerd &amp; attest</h3>
-        <p>Wij werken verzekerd en bezorgen u het nodige attest, ook bij asbestverwijdering vóór de dakwerken.</p>
-      </article>
-    </div>
+    <p class="sechead sechead--center reveal" style="margin-top:40px">
+      Altijd inbegrepen: eigen vaste ploeg &middot; één aanspreekpunt &middot; verzekerd &middot;
+      volgens de WTCB-richtlijnen &middot; hulp bij uw premieaanvraag &middot; attest bij asbestverwijdering
+    </p>
+    <p class="sechead sechead--center reveal" style="margin-top:20px">
+      <a class="btn btn--primary btn--lg" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+    </p>
   </div>
 </section>
 
@@ -394,9 +431,9 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
 <section class="section calc-sec" id="calculator">
   <div class="container">
     <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Exclusief bij INGBELG</p>
-      <h2 class="h2">Bereken uw <em>premies &amp; subsidies</em></h2>
-      <p class="sechead__sub">Geen enkele andere dakwerker in de regio biedt dit. Vul uw gegevens in en ontvang meteen een indicatie van de premies waarop u mogelijk recht hebt.</p>
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Premie-check &middot; 2 minuten</p>
+      <h2 class="h2">Wat betaalt u <em>echt</em>, na premie en btw?</h2>
+      <p class="sechead__sub">De Vlaamse dakpremie bestaat nog. Sinds 1 maart 2026 is ze er enkel voor inkomenscategorie 3 en 4; wie daarin valt, krijgt tot 50&nbsp;% van de factuur terug, met een maximum van &euro;5.750. Daarnaast betaalt u voor een woning ouder dan 10 jaar 6&nbsp;% btw in plaats van 21&nbsp;%, los van uw inkomen. Vul uw gegevens in en zie meteen wat dat voor u betekent.</p>
     </header>
 
     <div class="calc reveal">
@@ -430,8 +467,13 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
         </label>
 
         <label class="field">
-          <span>Geschatte kostprijs werken</span>
+          <span>Geschatte kostprijs werken (excl. btw)</span>
           <input type="text" name="kost" id="calcKost" readonly>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="btw10jaar" id="calcBtw10jaar">
+          <span>Mijn woning is ouder dan 10 jaar en ik gebruik ze zelf als woning</span>
         </label>
 
         <div class="calc__row">
@@ -469,69 +511,122 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       </div>
     </div>
 
-    <p class="calc__disclaimer">* Indicatieve demoberekening op basis van de officiële Mijn VerbouwPremie-regels voor dakwerken (vlaanderen.be, geraadpleegd augustus 2026). Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie — dit is geen officiële simulatie. Voorwaarden: de woning moet aangesloten zijn op het elektriciteitsnet van vóór 1 januari 2006, de isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen, en het factuurbedrag moet minstens €1.000 (excl. btw) bedragen. Deze rekentool gaat uit van een eigenaar-bewoner van een eengezinswoning — voor verhuurders, investeerders en appartementsgebouwen gelden andere bedragen. De vroegere totaalrenovatiebonus/EPC-labelpremie is sinds 2026 volledig afgeschaft. De exacte inkomenscategorie en bedragen worden pas definitief bevestigd bij de officiële aanvraag via mijnverbouwpremie.be — gebruik deze tool als eerste inschatting, niet als eindresultaat.</p>
+    <p class="calc__disclaimer">Indicatief. Het definitieve bedrag hoort u bij de officiële aanvraag.</p>
+    <details class="calc__details">
+      <summary>Voorwaarden en bronnen</summary>
+      <p class="calc__disclaimer">Indicatieve demoberekening op basis van de officiële Mijn VerbouwPremie-regels voor dakwerken (vlaanderen.be, geraadpleegd augustus 2026). Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie — dit is geen officiële simulatie. Voorwaarden: de woning moet aangesloten zijn op het elektriciteitsnet van vóór 1 januari 2006, de isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen, en het factuurbedrag moet minstens €1.000 (excl. btw) bedragen. Deze rekentool gaat uit van een eigenaar-bewoner van een eengezinswoning — voor verhuurders, investeerders en appartementsgebouwen gelden andere bedragen. De vroegere totaalrenovatiebonus/EPC-labelpremie is sinds 2026 volledig afgeschaft. De exacte inkomenscategorie en bedragen worden pas definitief bevestigd bij de officiële aanvraag via mijnverbouwpremie.be — gebruik deze tool als eerste inschatting, niet als eindresultaat.</p>
+    </details>
   </div>
 </section>
 
-<!-- ============ CTA BAND ============ -->
+<!-- ============ CTA BAND (C-23) ============ -->
 <section class="cta">
   <div class="container cta__in reveal">
     <div>
-      <h2 class="cta__title">Klaar voor een dak dat <em>decennia</em> meegaat?</h2>
-      <p class="cta__sub">Vraag vandaag nog uw gratis, vrijblijvende offerte aan. U betaalt niets en hebt geen enkele verplichting.</p>
+      <h2 class="cta__title">Eén plaatsbezoek. <em>Daarna weet u het.</em></h2>
+      <p class="cta__sub">Daarna weet u wat uw dak nodig heeft en wat het kost. Gratis en vrijblijvend. U beslist pas als u de offerte in handen hebt.</p>
     </div>
     <div class="cta__actions">
-      <a class="btn btn--white btn--lg" href="#contact"><span>Offerte aanvragen</span></a>
-      <a class="btn btn--glass btn--lg" href="tel:+32488876061"><span>+32 488 87 60 61</span></a>
+      <a class="btn btn--white btn--lg" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+      <a class="btn btn--glass btn--lg" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
     </div>
   </div>
 </section>
 
-<!-- ============ TESTIMONIALS ============ -->
-<section class="section">
-  <div class="container">
-    <GoogleReviews />
+<!-- ============ OVER ONS (C-24, verplaatst na de calculator) ============ -->
+<section class="about section" id="over">
+  <div class="container about__grid">
+    <div class="about__media reveal">
+      <div class="about__img about__img--main">
+        <img src="/assets/work/work-05.webp" alt="Dakwerken door INGBELG" width="1600" height="1200" loading="lazy">
+      </div>
+      <div class="about__img about__img--sub">
+        <img src="/assets/services/platte-daken.webp" alt="Plat dak met EPDM" width="1024" height="806" loading="lazy">
+      </div>
+    </div>
+
+    <div class="about__body reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Over INGBELG</p>
+      <h2 class="h2">Een dakwerker uit Zottegem, met de <em>zaakvoerder</em> zelf op de werf</h2>
+      <!-- ⚠️ CONFIRM C-24: teamgrootte (20 vakmensen) en of Magomed zelf op elke werf/plaatsbezoek komt -->
+      <p class="lead" data-confirm="C-24">
+        INGBELG is een dak- en renovatiebedrijf uit de {facts.address.street} in {facts.address.city}.
+        Zaakvoerder {facts.owner} bouwde het bedrijf op met een eigen, vaste ploeg van {facts.teamSize} vakmensen:
+        dakdekkers en timmerlieden die elk dak zelf leggen, zonder wisselende onderaannemers. U hebt één
+        aanspreekpunt, van het eerste plaatsbezoek tot de oplevering.
+      </p>
+
+      <p style="font-style:italic;color:var(--slate);margin-bottom:24px">&ldquo;Zaakvoerder {facts.owner} is iemand die zijn woord houdt&rdquo; — Jorun &amp; Yves, Google</p>
+
+      <ul class="ticks">
+        <li>Vast aanspreekpunt tijdens het hele project</li>
+        <li>Eigen, ervaren dakdekkers en timmerlieden</li>
+        <li>Duidelijke prijsafspraken en een strikte planning</li>
+        <li>Advies over premies en btw inbegrepen</li>
+      </ul>
+
+      <div class="about__cta">
+        <a class="btn btn--primary" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+        <a class="btn btn--line" href={`tel:${facts.phoneE164}`}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+          <span>{facts.phone}</span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
+<!-- ============ WAAR WE WERKEN (C-25, nieuw) ============ -->
+<section class="section section--soft" id="werkgebied">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Waar we werken</p>
+      <h2 class="h2">Zottegem <em>en omstreken</em></h2>
+    </header>
+    <!-- ⚠️ CONFIRM C-25: reële actieradius bevestigen -->
+    <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center" data-confirm="C-25">
+      Vanuit Zottegem werken we in alle deelgemeenten: Velzeke-Ruddershove, Strijpen, Erwetegem, Grotenberge,
+      Elene, Leeuwergem, Oombergen, Godveerdegem, Sint-Goriks-Oudenhove en Sint-Maria-Oudenhove. En in de
+      buurgemeenten Herzele, Sint-Lievens-Houtem, Oosterzele, Zwalm, Brakel, Geraardsbergen, Ninove, Oudenaarde,
+      Erpe-Mere en Aalst.
+    </p>
+    <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center">
+      Voor grotere projecten komen we in heel Oost- en West-Vlaanderen, Vlaams-Brabant en Antwerpen.
+      Twijfelt u? Bel ons gerust op <a href={`tel:${facts.phoneE164}`}>{facts.phone}</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAQ (C-26) ============ -->
 <section class="section section--soft" id="faq">
   <div class="container faq__wrap">
     <div class="faq__intro reveal">
       <p class="eyebrow"><span class="eyebrow__bar"></span>FAQ</p>
       <h2 class="h2">Veelgestelde <em>vragen</em></h2>
-      <p class="sechead__sub">Staat uw vraag er niet bij? Bel ons gerust — wij helpen u meteen verder.</p>
+      <p class="sechead__sub">Staat uw vraag er niet bij? Bel ons gerust, we helpen u meteen verder.</p>
       <a class="btn btn--line" href="mailto:info@ingbelg.be"><span>Stel uw vraag</span></a>
     </div>
 
     <div class="faq" id="faqList">
-      <details class="faq__item reveal">
-        <summary>Zijn de offertes gratis?<i></i></summary>
-        <div class="faq__body"><p>Ja. Een plaatsbezoek en de daaropvolgende prijsofferte zijn volledig gratis. U betaalt niets en hebt geen enkele verplichting. Pas wanneer u de offerte ondertekent, gaan wij aan de slag.</p></div>
-      </details>
-      <details class="faq__item reveal">
-        <summary>Kan ik nog genieten van premies?<i></i></summary>
-        <div class="faq__body"><p>In veel gevallen wel, via Mijn VerbouwPremie (sinds 1 maart 2026 enkel nog voor inkomenscategorie 3 en 4) en eventuele gemeentelijke premies. Gebruik onze Premie-check hierboven voor een eerste inschatting — tijdens het plaatsbezoek berekenen we samen wat u concreet kunt recupereren.</p></div>
-      </details>
-      <details class="faq__item reveal">
-        <summary>Hoe dik wordt de isolatielaag?<i></i></summary>
-        <div class="faq__body"><p>Wij adviseren minimaal 10 cm PIR-isolatie voor een optimaal rendement en om in aanmerking te komen voor de premies. Afhankelijk van de constructie en uw ambitie qua energieprestatie gaan we tot 14 of 16 cm.</p></div>
-      </details>
-      <details class="faq__item reveal">
-        <summary>Wat als het regent tijdens de werken?<i></i></summary>
-        <div class="faq__body"><p>Doordat we zoveel mogelijk naadloos werken, bedekt het meegebrachte INGBELG-zeil elk open dakvlak aan het einde van de werkdag. Uw woning blijft dus altijd waterdicht, ook bij plotse buien.</p></div>
-      </details>
-      <details class="faq__item reveal">
-        <summary>Hoe lang duren de werken?<i></i></summary>
-        <div class="faq__body"><p>Een gemiddeld hellend dak van een rijwoning nemen wij in 5 tot 10 werkdagen volledig onder handen. Voor een plat dak of een gevelbekleding rekenen we doorgaans 2 tot 5 dagen. U krijgt de exacte planning steeds vooraf op papier.</p></div>
-      </details>
-      <details class="faq__item reveal">
-        <summary>In welke regio werkt INGBELG?<i></i></summary>
-        <div class="faq__body"><p>Wij zijn gevestigd in Zottegem, Hoogstraat 59. Van daaruit werken we in heel Oost- en West-Vlaanderen, Vlaams-Brabant en Antwerpen. Twijfelt u of uw adres binnen ons werkgebied valt? Bel ons even.</p></div>
-      </details>
+      {faqItems.map((item) => (
+        <details class="faq__item reveal" data-confirm={item.confirm}>
+          <summary>{item.q}<i></i></summary>
+          <div class="faq__body"><p>{item.a}</p></div>
+        </details>
+      ))}
     </div>
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+})} />
 
 <!-- ============ CTA IMAGE BANNER ============ -->
 <section class="ctaimg">
@@ -541,8 +636,10 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   </div>
   <div class="container ctaimg__in reveal">
     <h2>Twijfelt u wat uw dak nodig heeft?</h2>
-    <p>Bel ons voor gratis, vrijblijvend advies op maat — geen verplichtingen.</p>
-    <a class="btn btn--white btn--lg" href="tel:+32488876061"><span>Bel nu +32 488 87 60 61</span></a>
+    <!-- ⚠️ CONFIRM C-27: eerlijkheidsbelofte "ook als uw dak nog jaren meekan" -->
+    <p data-confirm="C-27">Stuur een foto via WhatsApp. U krijgt een eerlijk antwoord, ook als uw dak nog jaren meekan.</p>
+    <a class="btn btn--white btn--lg" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener"><span>Stuur een foto via WhatsApp</span></a>
+    <p style="margin-top:14px"><a href={`tel:${facts.phoneE164}`} style="color:#fff;text-decoration:underline">of bel {facts.phone}</a></p>
   </div>
 </section>
 
@@ -551,27 +648,27 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
   <div class="container">
     <header class="sechead sechead--center reveal">
       <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Contact</p>
-      <h2 class="h2">Vraag uw <em>gratis offerte</em> aan</h2>
-      <p class="sechead__sub">Vul het formulier in of bel ons rechtstreeks. U hoort binnen 48 uur van ons.</p>
+      <h2 class="h2">Vraag uw <em>gratis plaatsbezoek</em> aan</h2>
+      <p class="sechead__sub">Vul het formulier in, bel of stuur een WhatsApp. We bellen u binnen {facts.callbackWorkdays} werkdag terug om een moment af te spreken.</p>
     </header>
 
     <div class="contact__grid">
       <div class="contact__info">
-        <a class="cinfo reveal" href="tel:+32488876061">
+        <a class="cinfo reveal" href={`tel:${facts.phoneE164}`}>
           <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg></span>
-          <span class="cinfo__txt"><strong>Telefoon</strong><em>+32 488 87 60 61</em></span>
+          <span class="cinfo__txt"><strong>Telefoon</strong><em>{facts.phone}</em></span>
         </a>
-        <a class="cinfo reveal" href="https://wa.me/32488876061" target="_blank" rel="noopener">
+        <a class="cinfo reveal" href={`https://wa.me/${facts.phoneE164.replace('+', '')}`} target="_blank" rel="noopener">
           <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg></span>
-          <span class="cinfo__txt"><strong>WhatsApp</strong><em>+32 488 87 60 61</em></span>
+          <span class="cinfo__txt"><strong>WhatsApp</strong><em>{facts.phone}</em></span>
         </a>
-        <a class="cinfo reveal" href="mailto:info@ingbelg.be">
+        <a class="cinfo reveal" href={`mailto:${facts.email}`}>
           <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
-          <span class="cinfo__txt"><strong>E-mail</strong><em>info@ingbelg.be</em></span>
+          <span class="cinfo__txt"><strong>E-mail</strong><em>{facts.email}</em></span>
         </a>
         <a class="cinfo reveal" href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">
           <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></svg></span>
-          <span class="cinfo__txt"><strong>Adres</strong><em>Hoogstraat 59, 9620 Zottegem</em></span>
+          <span class="cinfo__txt"><strong>Adres</strong><em>{facts.address.street}, {facts.address.postalCode} {facts.address.city}</em></span>
         </a>
         <div class="cinfo cinfo--static reveal">
           <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 10.6V6h-2v7.4l5.2 3.1 1-1.7z"/></svg></span>
@@ -596,59 +693,74 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
             <input type="email" name="email" required placeholder="naam@voorbeeld.be">
           </label>
           <label class="field">
-            <span>Gemeente</span>
-            <input type="text" name="gemeente" placeholder="Bv. Zottegem">
+            <span>Gemeente <i>*</i></span>
+            <input type="text" name="gemeente" required placeholder="Bv. Zottegem">
           </label>
         </div>
         <label class="field">
-          <span>Welke dienst? <i>*</i></span>
+          <span>Wat moet er gebeuren? <i>*</i></span>
           <select name="dienst" required>
             <option value="">Kies een dienst…</option>
-            <option>Platte daken</option>
-            <option>Hellende daken</option>
-            <option>Asbestverwijdering</option>
-            <option>Timmerwerken</option>
-            <option>Gevelbekleding</option>
-            <option>Zonnepanelen</option>
-            <option>Ecopanelen</option>
-            <option>Totaalrenovatie</option>
+            <option value="Hellende daken">Hellend dak</option>
+            <option value="Platte daken">Plat dak</option>
+            <option value="Asbestdak vervangen">Asbestdak vervangen</option>
+            <option value="Gevelbekleding">Gevelbekleding</option>
+            <option value="Timmerwerken en dakkapellen">Timmerwerken / dakkapel</option>
+            <option value="Zonnepanelen">Zonnepanelen</option>
+            <option value="Ecopanelen">Ecopanelen</option>
+            <option value="Daklek / herstelling">Daklek / herstelling</option>
+            <option value="Totaalrenovatie">Totaalrenovatie</option>
+            <option value="Weet ik nog niet">Weet ik nog niet</option>
           </select>
         </label>
         <label class="field">
-          <span>Uw project</span>
-          <textarea name="bericht" rows="5" placeholder="Vertel kort over uw dak, de oppervlakte en uw timing…"></textarea>
+          <span>Wanneer wilt u starten?</span>
+          <select name="timing">
+            <option value="">Kies een periode…</option>
+            <option>Zo snel mogelijk</option>
+            <option>Binnen 3 maanden</option>
+            <option>Later dit jaar</option>
+            <option>Ik oriënteer me nog</option>
+          </select>
         </label>
+        <label class="field">
+          <span>Uw project (optioneel)</span>
+          <textarea name="bericht" rows="5" placeholder="Bv. rijwoning, oude pannen, zolder niet geïsoleerd…"></textarea>
+        </label>
+        <input type="text" name="website" class="cform__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source_block">
+        <input type="hidden" name="premie_summary">
         <label class="check">
           <input type="checkbox" name="akkoord" required>
-          <span>Ik ga akkoord dat INGBELG mijn gegevens gebruikt om contact op te nemen.</span>
+          <span>Ik ga akkoord dat INGBELG mijn gegevens gebruikt om over deze aanvraag contact met mij op te nemen. Lees ons <a href="/privacybeleid">privacybeleid</a>.</span>
         </label>
         <button class="btn btn--primary btn--lg btn--block" type="submit">
-          <span>Verstuur aanvraag</span>
+          <span>Plaatsbezoek aanvragen</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="cform__note">Gratis en vrijblijvend · Antwoord binnen 48 uur</p>
+        <p class="cform__note">Gratis en vrijblijvend &middot; we bellen u binnen {facts.callbackWorkdays} werkdag terug</p>
         <p class="cform__msg" id="formMsg" role="status"></p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<!-- ============ FOOTER (C-30) ============ -->
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
       <img src="/assets/logo.png" alt="INGBELG" class="footer__logo" width="430" height="207">
-      <p>INGBELG — Algemene dak- en renovatiewerken. Uw specialist in dakwerken en algemene renovatie, actief in heel Vlaanderen.</p>
-      <p class="footer__vat">BTW BE 0721.841.831</p>
+      <p>INGBELG &middot; Dak- en renovatiewerken uit {facts.address.city}<br>Hellende en platte daken, asbestverwijdering, isolatie en gevelbekleding.</p>
+      <p class="footer__vat">BTW {facts.vat}</p>
     </div>
     <div class="footer__col">
       <h4>Diensten</h4>
       <ul>
-        <li><a href="#diensten">Platte daken</a></li>
         <li><a href="#diensten">Hellende daken</a></li>
-        <li><a href="#diensten">Asbestverwijdering</a></li>
-        <li><a href="#diensten">Timmerwerken</a></li>
+        <li><a href="#diensten">Platte daken</a></li>
+        <li><a href="#diensten">Asbestdak vervangen</a></li>
         <li><a href="#diensten">Gevelbekleding</a></li>
+        <li><a href="#diensten">Timmerwerken</a></li>
         <li><a href="#diensten">Zonnepanelen</a></li>
         <li><a href="#diensten">Ecopanelen</a></li>
       </ul>
@@ -658,8 +770,9 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
       <ul>
         <li><a href="#over">Over ons</a></li>
         <li><a href="#realisaties">Realisaties</a></li>
-        <li><a href="#voordelen">Waarom INGBELG</a></li>
-        <li><a href="#calculator">Premie-check</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#voordelen">Onze afspraken</a></li>
+        <li><a href="#calculator">Premies &amp; btw</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -667,32 +780,35 @@ const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wid
     <div class="footer__col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="tel:+32488876061">+32 488 87 60 61</a></li>
-        <li><a href="mailto:info@ingbelg.be">info@ingbelg.be</a></li>
-        <li><a href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">Hoogstraat 59, 9620 Zottegem</a></li>
+        <li><a href={`tel:${facts.phoneE164}`}>{facts.phone}</a></li>
+        <li><a href={`mailto:${facts.email}`}>{facts.email}</a></li>
+        <li><a href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">{facts.address.street}, {facts.address.postalCode} {facts.address.city}</a></li>
+      </ul>
+      <ul class="footer__social" style="margin-top:14px">
+        <li><a href={facts.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href={facts.social.tiktok} target="_blank" rel="noopener">TikTok</a></li>
+        {facts.social.facebook && <li><a href={facts.social.facebook} target="_blank" rel="noopener">Facebook</a></li>}
       </ul>
     </div>
   </div>
   <div class="container footer__trust">
-    <span class="trustbadge trustbadge--widget">
-      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?e7a15f079662298de4363792727"></script>
-    </span>
-    <span class="trustbadge">15 jaar garantie</span>
-    <span class="trustbadge">400+ daken gerealiseerd</span>
+    <span class="trustbadge">{facts.warrantyYears} jaar garantie</span>
+    <span class="trustbadge" data-confirm="C-08">{facts.roofsDone}+ daken gerealiseerd</span>
+    <a class="trustbadge" href={facts.reviews.googleUrl} target="_blank" rel="noopener">★ {facts.reviews.score} &middot; {facts.reviews.count} reviews</a>
   </div>
   <div class="footer__bar">
     <div class="container footer__bar-in">
-      <p>&copy; <span id="year">2026</span> INGBELG (CV). Alle rechten voorbehouden.</p>
-      <p>Kwaliteit in werk, materiaal en service.</p>
+      <p>&copy; <span id="year">2026</span> {facts.legalName}. Alle rechten voorbehouden.</p>
+      <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a></p>
     </div>
   </div>
 </footer>
 
-<!-- Sticky mobile action bar -->
+<!-- Sticky mobile action bar (C-31) -->
 <div class="mobilebar">
-  <a href="tel:+32488876061"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>Bellen</a>
-  <a href="https://wa.me/32488876061" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg>WhatsApp</a>
-  <a class="mobilebar__cta" href="#contact">Offerte</a>
+  <a href={`tel:${facts.phoneE164}`}><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>Bellen</a>
+  <a href={`https://wa.me/${facts.phoneE164.replace('+', '')}`} target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg>WhatsApp</a>
+  <a class="mobilebar__cta" href="#contact">Plaatsbezoek</a>
 </div>
 
 <!-- Lightbox -->

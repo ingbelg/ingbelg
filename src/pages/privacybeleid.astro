@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import facts from '../data/site-facts.json';
+
+export const prerender = true;
+---
+<Layout title="Privacybeleid | INGBELG" description="Hoe INGBELG omgaat met uw persoonsgegevens.">
+<section class="section">
+  <div class="container legal">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Privacybeleid</p>
+      <h1 class="h2">Uw <em>gegevens</em>, ons gebruik</h1>
+    </header>
+
+    <div class="legal__body reveal">
+      <p class="lead">Dit privacybeleid geldt voor de website van INGBELG ({facts.legalName}, {facts.address.street}, {facts.address.postalCode} {facts.address.city}, BTW {facts.vat}).</p>
+
+      <h2>Welke gegevens verzamelen we?</h2>
+      <p>Wanneer u het offerteformulier invult, verzamelen we de gegevens die u zelf meegeeft: naam, telefoonnummer, e-mailadres, gemeente, gewenste dienst, timing en eventuele projectomschrijving. Wanneer u ons belt, e-mailt of via WhatsApp contacteert, verwerken we de gegevens die u daarbij meedeelt.</p>
+
+      <h2>Waarvoor gebruiken we deze gegevens?</h2>
+      <p>Uitsluitend om contact met u op te nemen over uw offerteaanvraag of vraag, en om de eventueel overeengekomen werken uit te voeren en op te volgen (garantie, premieaanvraag, facturatie). We gebruiken uw gegevens niet voor ongevraagde marketing en verkopen ze niet aan derden.</p>
+
+      <h2>Hoe lang bewaren we uw gegevens?</h2>
+      <p>Aanvragen die niet tot een samenwerking leiden, bewaren we maximaal 2 jaar. Gegevens van klanten bewaren we zolang nodig voor de uitvoering van de werken, de garantietermijn en onze wettelijke (fiscale en boekhoudkundige) verplichtingen.</p>
+
+      <h2>Met wie delen we uw gegevens?</h2>
+      <p>Met de partij die de offerteformulieren technisch verzendt (e-mailprovider) en, indien van toepassing, met Google Analytics — enkel nadat u daarvoor toestemming hebt gegeven via de cookiebanner (zie ons <a href="/cookiebeleid">cookiebeleid</a>). We geven uw gegevens niet door aan andere derden, behalve wanneer de wet dit vereist.</p>
+
+      <h2>Wat zijn uw rechten?</h2>
+      <p>U hebt het recht op inzage, verbetering, verwijdering en overdracht van uw gegevens, en het recht om uw toestemming te allen tijde in te trekken. Neem daarvoor contact op via <a href={`mailto:${facts.email}`}>{facts.email}</a> of <a href={`tel:${facts.phoneE164}`}>{facts.phone}</a>. U kan ook een klacht indienen bij de Belgische Gegevensbeschermingsautoriteit (gegevensbeschermingsautoriteit.be).</p>
+
+      <!-- ⚠️ CONFIRM T-04: dit is een standaardtekst, geen juridisch sluitend advies. Laat vóór livegang nakijken door Magomed / een jurist, zeker de bewaartermijnen en de eventuele doorgifte aan een boekhouder. -->
+    </div>
+  </div>
+</section>
+</Layout>

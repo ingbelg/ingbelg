@@ -8,4 +8,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   output: 'server',
   adapter: vercel(),
+  // ⚠️ CONFIRM T-06: huidige Vercel-preview-URL, zet dit op het finale domein
+  // (ingbelg.be?) zodra dat bekend is — sitemap.xml en canonical-tags gebruiken dit.
+  site: 'https://ingbelg-site.vercel.app',
 });
