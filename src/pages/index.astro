@@ -338,52 +338,13 @@ const faqItems = [
       <p class="sechead__sub">{facts.reviews.score} op 5 uit {facts.reviews.count} reviews. Een greep, woord voor woord.</p>
     </header>
 
-    <div class="reviews">
-      <article class="rev reveal">
-        <p class="rev__stars">★★★★★</p>
-        <p>&ldquo;Zaakvoerder Magomed is iemand die zijn woord houdt.&rdquo;</p>
-        <div class="rev__who">
-          <span class="rev__avatar">J</span>
-          <div><strong>Jorun &amp; Yves</strong><br><em>Google, mei 2026</em></div>
-        </div>
-      </article>
-      <!-- ⚠️ CONFIRM C-20: exacte quote van Alex woord voor woord overnemen uit het Google-profiel (thema: prijs, punctualiteit, netheid) -->
-      <article class="rev reveal" data-confirm="C-20">
-        <p class="rev__stars">★★★★★</p>
-        <p>&ldquo;⚠️ citaat van Alex hier woord voor woord invullen (Google, 7 mei 2026).&rdquo;</p>
-        <div class="rev__who">
-          <span class="rev__avatar">A</span>
-          <div><strong>Alex</strong><br><em>Google, 7 mei 2026</em></div>
-        </div>
-      </article>
-      <!-- ⚠️ CONFIRM C-20: exacte quote van Kevin Oostens woord voor woord overnemen (thema: communicatie, werkende vakmensen) -->
-      <article class="rev reveal" data-confirm="C-20">
-        <p class="rev__stars">★★★★★</p>
-        <p>&ldquo;⚠️ citaat van Kevin Oostens hier woord voor woord invullen (Google, 2 mei 2026).&rdquo;</p>
-        <div class="rev__who">
-          <span class="rev__avatar">K</span>
-          <div><strong>Kevin Oostens</strong><br><em>Google, 2 mei 2026</em></div>
-        </div>
-      </article>
-      <!-- ⚠️ CONFIRM C-20: exacte quote van Abdel Agadir woord voor woord overnemen (thema: herstelling, afspraken nakomen) -->
-      <article class="rev reveal" data-confirm="C-20">
-        <p class="rev__stars">★★★★★</p>
-        <p>&ldquo;⚠️ citaat van Abdel Agadir hier woord voor woord invullen (Google, 18 maart 2026).&rdquo;</p>
-        <div class="rev__who">
-          <span class="rev__avatar">A</span>
-          <div><strong>Abdel Agadir</strong><br><em>Google, 18 maart 2026</em></div>
-        </div>
-      </article>
-    </div>
-
-    <p class="sechead sechead--center reveal" style="margin-top:36px">
+    <p class="sechead sechead--center reveal" style="margin-bottom:36px">
       <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
     </p>
 
-    <!-- Live Trustindex-widget als aanvulling op de statische kaarten hierboven (T-03) —
-         als de widget ooit weer breekt (bv. abonnement verlopen), blijft het blok hierboven
-         gewoon gevuld i.p.v. leeg. -->
-    <div class="reviews-widget reveal" style="margin-top:40px">
+    <!-- Live Trustindex-widget — klant heeft een betaald abonnement, statische kaarten
+         zijn bewust weer verwijderd op zijn verzoek. -->
+    <div class="reviews-widget reveal">
       <script is:inline defer async src="https://cdn.trustindex.io/loader.js?1df435b79aed2975f776da650b5"></script>
     </div>
   </div>
