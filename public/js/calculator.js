@@ -16,6 +16,10 @@
      alleenstaand:  cat4 ≤ 24.750 | cat3 ≤ 43.240 | cat2 ≤ 55.020 | cat1 hoger
      koppel:        cat4 ≤ 37.110 | cat3 ≤ 60.520 | cat2 ≤ 78.610 | cat1 hoger
    Vuistregels voor illustratieve doeleinden — geen officiële simulatie.
+   Bewust NIET getoond aan de klant: totale kostprijs en netto kostprijs (2026-09-19). De prijs
+   per m² dekt enkel de kern van de werken en zou als anker dienen voor de echte offerte.
+   De schatting blijft intern (premiegrenzen, min. factuur, asbestbonus) en gaat mee in het
+   verborgen veld premie_summary voor de e-mail aan INGBELG.
    Vóór livegang: bedragen/grenzen herbevestigen op mijnverbouwpremie.be. */
 (function () {
   'use strict';
@@ -122,9 +126,6 @@
     /* Btw: 6% i.p.v. 21% voor een privéwoning ouder dan 10 jaar (fin.belgium.be),
        los van de inkomenscategorie — geldt voor bijna elke klant. */
     var btwTarief = data.btw10jaar ? 0.06 : 0.21;
-    var btwBedrag = kostTotaal * btwTarief;
-    var nettoKostprijs = kostTotaal + btwBedrag - totaal;
-    var btwVoordeel = data.btw10jaar ? kostTotaal * (0.21 - 0.06) : 0;
 
     return {
       m2: m2,
@@ -143,33 +144,16 @@
       totaal: totaal,
       btw10jaar: data.btw10jaar,
       btwTarief: btwTarief,
-      btwBedrag: btwBedrag,
-      nettoKostprijs: nettoKostprijs,
-      btwVoordeel: btwVoordeel,
       gemeente: (data.gemeente || '').trim(),
       type: data.type,
       dikte: dikte
     };
   };
 
-  /* ---------- Kostprijs leeft mee met de invoer ---------- */
-  var updateKost = function () {
-    var r = calculate(readForm());
-    $('#calcKost').value = r.kostTotaal ? fmt(r.kostTotaal) : '';
-  };
-  ['calcType', 'calcM2', 'calcDikte', 'calcAsbest'].forEach(function (id) {
-    var el = $('#' + id);
-    el.addEventListener('input', updateKost);
-    el.addEventListener('change', updateKost);
-  });
-  updateKost();
-
   var CATEGORIE_LABEL = { cat4: 'categorie 4', cat3: 'categorie 3', ineligible: 'categorie 1 of 2' };
 
   var render = function (r) {
     var rows = '';
-
-    rows += '<li><span>Geschatte kostprijs werken</span><strong>' + fmt(r.kostTotaal) + '</strong></li>';
 
     rows += '<li><span>Rd-waarde isolatie (indicatief)</span><strong>R ' + r.rWaarde.toFixed(1) + '</strong></li>';
 
@@ -205,11 +189,9 @@
 
     rows += '<li><span>Gemeentelijke premie' + (r.gemeente ? ' (' + r.gemeente + ')' : '') + '</span><em>Te bevestigen — varieert per gemeente</em></li>';
 
-    rows += '<li><span>Btw (' + (r.btwTarief * 100).toFixed(0) + ' %)</span><strong>' + fmt(r.btwBedrag) + '</strong></li>';
-
     var footnotes = '';
     if (sup1) {
-      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup1; Zonder dakoppervlakte kunnen we geen kostprijs of premie berekenen.</p>';
+      footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup1; Zonder dakoppervlakte kunnen we geen premie berekenen.</p>';
     }
     if (sup2) {
       footnotes += '<p class="calc__placeholder" style="margin-top:16px;font-size:13px">&sup2; Zonder jaarinkomen kunnen we uw inkomenscategorie niet bepalen.</p>';
@@ -219,14 +201,13 @@
     }
 
     var btwVoordeelRow = r.btw10jaar
-      ? '<div class="calc__total"><span>Uw btw-voordeel t.o.v. 21 %</span><strong>' + fmt(r.btwVoordeel) + '</strong></div>'
+      ? '<div class="calc__total"><span>Btw op de werken</span><strong>6 % i.p.v. 21 %</strong></div>'
       : '<p class="calc__placeholder" style="margin-top:12px;font-size:13px">Vink hierboven aan of uw woning ouder dan 10 jaar is voor het btw-voordeel.</p>';
 
     result.innerHTML =
       '<p class="calc__placeholder" style="margin-bottom:-4px"><strong>' + typeLabels[r.type] + ' — ' + r.dikte + ' cm PIR</strong></p>' +
       '<ul class="calc__breakdown">' + rows + '</ul>' +
       '<div class="calc__total"><span>Geschatte totale premie</span><strong>' + fmt(r.totaal) + '</strong></div>' +
-      '<div class="calc__total"><span>Uw geschatte netto kostprijs (incl. btw, na premie)</span><strong>' + fmt(r.nettoKostprijs) + '</strong></div>' +
       btwVoordeelRow +
       '<a class="btn btn--line calc__cta" href="#contact" data-service="Premie-check"><span>Laat dit nakijken tijdens een gratis plaatsbezoek</span></a>' +
       footnotes;
@@ -238,8 +219,9 @@
       summaryField.value = typeLabels[r.type] + ', ' + r.m2 + ' m², ' + r.dikte + ' cm PIR' +
         (r.asbest ? ', incl. asbestverwijdering' : '') +
         (r.categorie ? ', ' + CATEGORIE_LABEL[r.categorie] : '') +
+        ', btw ' + (r.btw10jaar ? '6 %' : '21 %') +
         ', geschatte premie ' + fmt(r.totaal) +
-        ', geschatte netto kostprijs ' + fmt(r.nettoKostprijs);
+        ', intern richtbedrag werken ' + fmt(r.kostTotaal) + ' excl. btw (niet getoond aan de klant)';
     }
   };
 
