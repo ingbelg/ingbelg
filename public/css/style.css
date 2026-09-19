@@ -774,8 +774,8 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 }
 .calc__total span{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 .calc__total strong{font-family:var(--font-head);font-size:clamp(22px,2.2vw,30px);font-weight:700;color:var(--red-light);white-space:nowrap}
-.calc__cta{align-self:center;color:#fff;border-color:rgba(255,255,255,.35)}
-.calc__cta:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.calc__cta{align-self:center;color:#fff;line-height:1.25;text-align:center;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.calc__cta:hover{box-shadow:inset 0 0 0 2px var(--red)}
 .calc__disclaimer{margin-top:22px;font-size:13.5px;line-height:1.6;color:var(--slate);text-align:center;max-width:78ch;margin-inline:auto}
 .calc__details{max-width:78ch;margin:10px auto 0;text-align:center}
 .calc__details summary{cursor:pointer;font-size:13.5px;color:var(--red);font-weight:700}

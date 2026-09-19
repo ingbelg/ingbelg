@@ -228,7 +228,7 @@
       '<div class="calc__total"><span>Geschatte totale premie</span><strong>' + fmt(r.totaal) + '</strong></div>' +
       '<div class="calc__total"><span>Uw geschatte netto kostprijs (incl. btw, na premie)</span><strong>' + fmt(r.nettoKostprijs) + '</strong></div>' +
       btwVoordeelRow +
-      '<a class="btn btn--line calc__cta" href="#contact" data-service="Premie-check">Laat dit nakijken tijdens een gratis plaatsbezoek</a>' +
+      '<a class="btn btn--line calc__cta" href="#contact" data-service="Premie-check"><span>Laat dit nakijken tijdens een gratis plaatsbezoek</span></a>' +
       footnotes;
 
     if (window.ingbelgTrack) window.ingbelgTrack('premie_check_complete', { totaal: Math.round(r.totaal) });
