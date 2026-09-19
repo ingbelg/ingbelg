@@ -9,5 +9,6 @@ dist/
 .astro/
 .env
 .env.production
+.env*.local
 .vercel/
 
