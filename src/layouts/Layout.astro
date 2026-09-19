@@ -83,12 +83,12 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
     'Herzele', 'Sint-Lievens-Houtem', 'Oosterzele', 'Zwalm', 'Brakel', 'Geraardsbergen',
     'Ninove', 'Oudenaarde', 'Erpe-Mere', 'Aalst', 'Oost-Vlaanderen',
   ],
-  openingHoursSpecification: {
+  openingHoursSpecification: facts.openingHours.map((slot) => ({
     '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '08:00',
-    closes: '18:00',
-  },
+    dayOfWeek: slot.days,
+    opens: slot.opens,
+    closes: slot.closes,
+  })),
   sameAs: [facts.reviews.googleUrl, facts.social.instagram, facts.social.tiktok].filter(Boolean),
   hasOfferCatalog: {
     '@type': 'OfferCatalog',

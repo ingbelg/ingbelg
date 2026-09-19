@@ -691,8 +691,12 @@ const faqItems = [
           <span class="cinfo__txt"><strong>Adres</strong><em>{facts.address.street}, {facts.address.postalCode} {facts.address.city}</em></span>
         </a>
         <div class="cinfo cinfo--static reveal">
-          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 10.6V6h-2v7.4l5.2 3.1 1-1.7z"/></svg></span>
-          <span class="cinfo__txt"><strong>Openingsuren</strong><em>Ma – vr: 08:00 – 18:00 &middot; Za: op afspraak</em></span>
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 4h-2v7.4l5.2 3.1 1-1.7-4.2-2.5z"/></svg></span>
+          <span class="cinfo__txt">
+            <strong>Openingsuren</strong>
+            {facts.openingHours.map((slot) => <em>{slot.label}: {slot.opens} – {slot.closes}</em>)}
+            {facts.closedDays.map((day) => <em>{day}: gesloten</em>)}
+          </span>
         </div>
       </div>
 

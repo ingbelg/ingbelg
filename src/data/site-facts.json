@@ -14,7 +14,12 @@
   "reviews": { "score": "5,0", "count": 54, "googleUrl": "https://maps.app.goo.gl/cxndFzpCFZBJqECCA" },
   "quoteHoursAfterVisit": 48,
   "callbackWorkdays": 1,
-  "openingHours": "Ma–vr 08:00–18:00 · za op afspraak",
+  "openingHours": [
+    { "label": "Ma – do", "days": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:00", "closes": "19:00" },
+    { "label": "Vr", "days": ["Friday"], "opens": "07:00", "closes": "13:00" },
+    { "label": "Za", "days": ["Saturday"], "opens": "07:00", "closes": "19:00" }
+  ],
+  "closedDays": ["Zo"],
   "social": {
     "instagram": "https://www.instagram.com/ingbelg_belgium/",
     "tiktok": "https://www.tiktok.com/@ingbelg_belgium",
