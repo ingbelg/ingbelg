@@ -790,11 +790,31 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 /* ============================================================
    LEGAL PAGES (privacybeleid / cookiebeleid)
    ============================================================ */
-.legal{max-width:760px}
 .legal__body h2{font-size:22px;text-transform:none;margin:36px 0 12px;color:var(--ink)}
 .legal__body p{color:var(--ink-2)}
 .legal__body a{color:var(--red);text-decoration:underline}
 .legal__body code{background:var(--soft);padding:2px 6px;border-radius:4px;font-size:.9em}
+.legal__body h3{font-size:18px;text-transform:none;margin:24px 0 8px;color:var(--ink)}
+.legal__body ul{list-style:disc;padding-left:22px;margin:0 0 1.1em}
+.legal__body li{margin-bottom:6px;color:var(--ink-2)}
+.legal__tablewrap{overflow-x:auto;margin:0 0 1.4em;border:1px solid var(--line);border-radius:var(--r)}
+.legal__table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.legal__table th,.legal__table td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.legal__table th{background:var(--soft);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--ink)}
+.legal__table tr:last-child td{border-bottom:0}
+.legal{max-width:860px}
+
+/* Bovenbalk en voet voor juridische pagina's en de 404 */
+.legalbar{background:#fff;border-bottom:1px solid var(--line)}
+.legalbar__in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:76px}
+.legalbar__brand img{height:44px;width:auto}
+.legalbar__back{font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:15px;transition:color .3s var(--ease)}
+.legalbar__back:hover{color:var(--red)}
+.legalfoot{background:var(--ink);color:#8E96A3;font-size:14px;padding:26px 0}
+.legalfoot__in{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.legalfoot p{margin:0}
+.legalfoot a,.legalfoot .linkbtn{color:#C3C9D2}
+.legalfoot a:hover,.legalfoot .linkbtn:hover{color:#fff}
 
 /* ============================================================
    COOKIEBANNER (T-04)
@@ -810,6 +830,30 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 .cookiebar__in p{margin:0;font-size:14px;max-width:640px}
 .cookiebar__in a{color:#fff;text-decoration:underline}
 .cookiebar__actions{display:flex;gap:12px;flex-wrap:wrap}
+.cookiebar{max-height:calc(100dvh - 12px);overflow-y:auto}
+.cookiebar__txt{flex:1 1 420px;min-width:0}
+.cookiebar__txt p{max-width:680px}
+.cookiebar__prefs{display:grid;gap:10px;margin-top:14px;max-width:680px}
+.cookiebar__prefs[hidden]{display:none}
+.cookiebar__pref{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;color:#C3C9D2;cursor:pointer}
+.cookiebar__pref input{flex:none;width:18px;height:18px;margin-top:2px;accent-color:var(--red);cursor:pointer}
+.cookiebar__pref input:disabled{cursor:default;opacity:.6}
+.cookiebar__pref strong{color:#fff}
+.cookiebar__actions .btn{padding:12px 20px;font-size:14px}
+
+/* Knop die als tekstlink oogt (bv. 'Cookie-instellingen' in de footer) */
+.linkbtn{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+.linkbtn:hover{color:#fff}
+.legal__body .linkbtn{color:var(--red)}
+.legal__body .linkbtn:hover{color:var(--red-dark)}
+
+/* Externe widgets (Trustindex): pas na toestemming geladen; zonder toestemming blijft de slot leeg */
+.ti-slot:empty{display:none}
+.hero__trust:has(> .ti-slot:empty){display:none}
+.trustbadge--widget:has(> .ti-slot:empty){display:none}
+.ti-placeholder{max-width:640px;margin:0 auto;text-align:center;padding:30px 26px;border:1px dashed #CFD4DB;border-radius:var(--r-lg);background:#fff}
+.ti-placeholder p{color:var(--slate);margin:0 0 18px}
+.ti-placeholder strong{color:var(--ink)}
 
 /* ============================================================
    FOOTER
@@ -969,6 +1013,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 
   .hero{min-height:640px}
   .hero__eyebrow{padding:9px 16px;gap:9px;font-size:12.5px;letter-spacing:.08em}
+  .cookiebar__actions .btn{flex:1 1 auto;padding:12px 14px}
   /* Grote knoppen ("Vraag een gratis plaatsbezoek") moeten op één regel passen */
   .btn--lg{padding:17px 20px;gap:9px;font-size:15px;letter-spacing:.03em}
   .hero__in{padding-top:44px;padding-bottom:96px}

@@ -5,25 +5,60 @@
   "phone": "+32 488 87 60 61",
   "phoneE164": "+32488876061",
   "email": "info@ingbelg.be",
-  "address": { "street": "Hoogstraat 59", "postalCode": "9620", "city": "Zottegem" },
+  "address": {
+    "street": "Hoogstraat 59",
+    "postalCode": "9620",
+    "city": "Zottegem"
+  },
   "owner": "Magomed",
   "warrantyYears": 15,
   "roofsDone": 400,
   "teamSize": 20,
   "foundedYear": null,
-  "reviews": { "score": "5,0", "count": 54, "googleUrl": "https://maps.app.goo.gl/cxndFzpCFZBJqECCA" },
+  "reviews": {
+    "score": "5,0",
+    "count": 54,
+    "googleUrl": "https://maps.app.goo.gl/cxndFzpCFZBJqECCA"
+  },
   "quoteHoursAfterVisit": 48,
   "callbackWorkdays": 1,
   "openingHours": [
-    { "label": "Ma – do", "days": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "07:00", "closes": "19:00" },
-    { "label": "Vr", "days": ["Friday"], "opens": "07:00", "closes": "13:00" },
-    { "label": "Za", "days": ["Saturday"], "opens": "07:00", "closes": "19:00" }
+    {
+      "label": "Ma – do",
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday"
+      ],
+      "opens": "07:00",
+      "closes": "19:00"
+    },
+    {
+      "label": "Vr",
+      "days": [
+        "Friday"
+      ],
+      "opens": "07:00",
+      "closes": "13:00"
+    },
+    {
+      "label": "Za",
+      "days": [
+        "Saturday"
+      ],
+      "opens": "07:00",
+      "closes": "19:00"
+    }
   ],
-  "closedDays": ["Zo"],
+  "closedDays": [
+    "Zo"
+  ],
   "social": {
     "instagram": "https://www.instagram.com/ingbelg_belgium/",
     "tiktok": "https://www.tiktok.com/@ingbelg_belgium",
     "facebook": ""
   },
-  "_confirm": "⚠️ Nog te bevestigen door Magomed vóór livegang: roofsDone (400+), teamSize (20), foundedYear, of hij zelf op plaatsbezoeken komt, legalName (CV of BV — Trustlocal-profiel wijkt af), facebook-link. warrantyYears (15) en de ervaring van 14+ jaar blijven behouden zoals eerder bevestigd op basis van de brochure, ook al toont het Trustlocal-profiel andere cijfers (12 jaar garantie / 13 jaar ervaring / 7 jaar op de markt / 20 medewerkers / 'Ing Belg BV') — bewust niet overgenomen, wel te heroverwegen als de klant dit expliciet aangeeft."
+  "_confirm": "⚠️ Nog te bevestigen door Magomed vóór livegang: roofsDone (400+), teamSize (20), foundedYear, of hij zelf op plaatsbezoeken komt, legalName (CV of BV — Trustlocal-profiel wijkt af), facebook-link. warrantyYears (15) en de ervaring van 14+ jaar blijven behouden zoals eerder bevestigd op basis van de brochure, ook al toont het Trustlocal-profiel andere cijfers (12 jaar garantie / 13 jaar ervaring / 7 jaar op de markt / 20 medewerkers / 'Ing Belg BV') — bewust niet overgenomen, wel te heroverwegen als de klant dit expliciet aangeeft.",
+  "privacyUpdated": "19 september 2026"
 }

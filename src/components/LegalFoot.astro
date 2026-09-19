@@ -1,0 +1,9 @@
+---
+import facts from '../data/site-facts.json';
+---
+<footer class="legalfoot">
+  <div class="container legalfoot__in">
+    <p>&copy; {new Date().getFullYear()} {facts.legalName} &middot; BTW {facts.vat} &middot; {facts.address.street}, {facts.address.postalCode} {facts.address.city}</p>
+    <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a> &middot; <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button></p>
+  </div>
+</footer>

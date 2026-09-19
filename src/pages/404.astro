@@ -1,10 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LegalBar from '../components/LegalBar.astro';
+import LegalFoot from '../components/LegalFoot.astro';
 import facts from '../data/site-facts.json';
 
 export const prerender = true;
 ---
 <Layout title="Pagina niet gevonden | INGBELG" description="Deze pagina bestaat niet (meer).">
+<LegalBar />
+<main id="main">
 <section class="section" style="min-height:60vh;display:flex;align-items:center">
   <div class="container" style="text-align:center">
     <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>404</p>
@@ -18,4 +22,6 @@ export const prerender = true;
     </div>
   </div>
 </section>
+</main>
+<LegalFoot />
 </Layout>

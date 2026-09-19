@@ -1,37 +1,103 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LegalBar from '../components/LegalBar.astro';
+import LegalFoot from '../components/LegalFoot.astro';
 import facts from '../data/site-facts.json';
 
 export const prerender = true;
 ---
-<Layout title="Privacybeleid | INGBELG" description="Hoe INGBELG omgaat met uw persoonsgegevens.">
+<Layout title="Privacybeleid | INGBELG" description="Hoe INGBELG omgaat met uw persoonsgegevens: welke gegevens, waarom, hoe lang, met wie en welke rechten u hebt.">
+{/* ⚠️ CONFIRM T-04: dit is een standaardtekst op basis van de AVG/GDPR, geen juridisch sluitend advies.
+    Laat vóór livegang nakijken door Magomed / een jurist. Te bevestigen: (1) bewaartermijnen (2 jaar voor aanvragen zonder opdracht),
+    (2) of een boekhouder/accountant gegevens ontvangt, (3) juridische vorm (CV of BV) in site-facts.json,
+    (4) Google Analytics: bewaartermijn van gebruikersgegevens op 14 maanden zetten in de GA4-eigenschap. */}
+<LegalBar />
+<main id="main">
 <section class="section">
   <div class="container legal">
     <header class="sechead reveal">
       <p class="eyebrow"><span class="eyebrow__bar"></span>Privacybeleid</p>
       <h1 class="h2">Uw <em>gegevens</em>, ons gebruik</h1>
+      <p class="sechead__sub">Laatst bijgewerkt op {facts.privacyUpdated}.</p>
     </header>
 
     <div class="legal__body reveal">
-      <p class="lead">Dit privacybeleid geldt voor de website van INGBELG ({facts.legalName}, {facts.address.street}, {facts.address.postalCode} {facts.address.city}, BTW {facts.vat}).</p>
+      <p class="lead">We vinden het belangrijk dat u weet wat we met uw gegevens doen. Hieronder leest u dat in gewone taal.</p>
 
-      <h2>Welke gegevens verzamelen we?</h2>
-      <p>Wanneer u het offerteformulier invult, verzamelen we de gegevens die u zelf meegeeft: naam, telefoonnummer, e-mailadres, gemeente, gewenste dienst, timing en eventuele projectomschrijving. Wanneer u ons belt, e-mailt of via WhatsApp contacteert, verwerken we de gegevens die u daarbij meedeelt.</p>
+      <h2>1. Wie is verantwoordelijk?</h2>
+      <p>
+        <strong>{facts.legalName}</strong> (handelsnaam INGBELG)<br>
+        {facts.address.street}, {facts.address.postalCode} {facts.address.city}<br>
+        BTW-/ondernemingsnummer {facts.vat}<br>
+        E-mail: <a href={`mailto:${facts.email}`}>{facts.email}</a> &middot; Telefoon: <a href={`tel:${facts.phoneE164}`}>{facts.phone}</a>
+      </p>
+      <p>Wij zijn de verwerkingsverantwoordelijke voor de gegevens die u via deze website of rechtstreeks aan ons bezorgt.</p>
 
-      <h2>Waarvoor gebruiken we deze gegevens?</h2>
-      <p>Uitsluitend om contact met u op te nemen over uw offerteaanvraag of vraag, en om de eventueel overeengekomen werken uit te voeren en op te volgen (garantie, premieaanvraag, facturatie). We gebruiken uw gegevens niet voor ongevraagde marketing en verkopen ze niet aan derden.</p>
+      <h2>2. Welke gegevens gebruiken we, waarom en op welke basis?</h2>
 
-      <h2>Hoe lang bewaren we uw gegevens?</h2>
-      <p>Aanvragen die niet tot een samenwerking leiden, bewaren we maximaal 2 jaar. Gegevens van klanten bewaren we zolang nodig voor de uitvoering van de werken, de garantietermijn en onze wettelijke (fiscale en boekhoudkundige) verplichtingen.</p>
+      <h3>Offerteformulier</h3>
+      <p>Naam, telefoonnummer, e-mailadres, gemeente, gewenste dienst, gewenste timing en uw projectomschrijving. Hebt u eerst de premie-check gebruikt, dan sturen we een korte samenvatting mee (daktype, oppervlakte, isolatiedikte, inkomenscategorie en geschatte premie). Uw exacte inkomen wordt niet verstuurd: de premie-check rekent volledig in uw browser.</p>
+      <p><em>Waarom:</em> om u terug te bellen, een plaatsbezoek af te spreken en een offerte op te stellen. <em>Basis:</em> maatregelen op uw verzoek voorafgaand aan een overeenkomst (art. 6.1.b AVG). Zonder de verplichte velden kunnen we niet op uw aanvraag antwoorden.</p>
 
-      <h2>Met wie delen we uw gegevens?</h2>
-      <p>Met de partij die de offerteformulieren technisch verzendt (e-mailprovider) en, indien van toepassing, met Google Analytics — enkel nadat u daarvoor toestemming hebt gegeven via de cookiebanner (zie ons <a href="/cookiebeleid">cookiebeleid</a>). We geven uw gegevens niet door aan andere derden, behalve wanneer de wet dit vereist.</p>
+      <h3>Contact via telefoon, e-mail of WhatsApp</h3>
+      <p>De gegevens die u zelf meedeelt (bv. naam, nummer, foto's van uw dak). <em>Waarom:</em> om uw vraag te beantwoorden. <em>Basis:</em> uw verzoek en ons gerechtvaardigd belang om vragen te beantwoorden (art. 6.1.b en 6.1.f AVG). WhatsApp is een dienst van Meta; voor het gebruik ervan gelden het privacybeleid en de voorwaarden van WhatsApp.</p>
 
-      <h2>Wat zijn uw rechten?</h2>
-      <p>U hebt het recht op inzage, verbetering, verwijdering en overdracht van uw gegevens, en het recht om uw toestemming te allen tijde in te trekken. Neem daarvoor contact op via <a href={`mailto:${facts.email}`}>{facts.email}</a> of <a href={`tel:${facts.phoneE164}`}>{facts.phone}</a>. U kan ook een klacht indienen bij de Belgische Gegevensbeschermingsautoriteit (gegevensbeschermingsautoriteit.be).</p>
+      <h3>Uitvoering van de werken en administratie</h3>
+      <p>Adres van de werf, contactgegevens, offerte, facturatie, garantiedocumenten en, indien u dat wenst, hulp bij de premieaanvraag. <em>Basis:</em> uitvoering van de overeenkomst en onze wettelijke boekhoudkundige en fiscale verplichtingen (art. 6.1.b en 6.1.c AVG).</p>
 
-      <!-- ⚠️ CONFIRM T-04: dit is een standaardtekst, geen juridisch sluitend advies. Laat vóór livegang nakijken door Magomed / een jurist, zeker de bewaartermijnen en de eventuele doorgifte aan een boekhouder. -->
+      <h3>Beveiliging van de website</h3>
+      <p>Bij elk bezoek verwerkt de hostingdienst technische gegevens (zoals uw IP-adres, tijdstip en gevraagde pagina) in serverlogs. Het formulier bevat een onzichtbaar veld om spam-robots te herkennen. <em>Basis:</em> ons gerechtvaardigd belang om de website veilig en beschikbaar te houden (art. 6.1.f AVG).</p>
+
+      <h3>Bezoekersstatistieken (Google Analytics)</h3>
+      <p>Enkel als u daarvoor toestemming geeft in de cookiebanner. We zien dan hoeveel mensen de site bezoeken, welke onderdelen ze bekijken en of ze het formulier of de premie-check gebruiken. <em>Basis:</em> uw toestemming (art. 6.1.a AVG), die u op elk moment kan intrekken.</p>
+
+      <h3>Externe inhoud (Google-reviews via Trustindex)</h3>
+      <p>Enkel als u daarvoor toestemming geeft, laden we de reviewwidget van Trustindex. Uw browser maakt dan verbinding met die dienst. <em>Basis:</em> uw toestemming (art. 6.1.a AVG), die u op elk moment kan intrekken.</p>
+
+      <h2>3. Hoe lang bewaren we uw gegevens?</h2>
+      <ul>
+        <li><strong>Aanvragen die niet tot een opdracht leiden:</strong> maximaal 2 jaar na ons laatste contact.</li>
+        <li><strong>Klanten:</strong> zolang nodig voor de uitvoering van de werken en de garantietermijn ({facts.warrantyYears} jaar), en zolang de wet ons verplicht boekhoudkundige stukken te bewaren (7 jaar).</li>
+        <li><strong>Serverlogs:</strong> kort, enkel zolang nodig voor de beveiliging.</li>
+        <li><strong>Statistieken:</strong> maximaal 14 maanden, en enkel als u toestemming gaf.</li>
+      </ul>
+
+      <h2>4. Met wie delen we uw gegevens?</h2>
+      <p>We verkopen uw gegevens niet. We schakelen enkel diensten in die we nodig hebben om de website en onze dienstverlening te laten werken (verwerkers), en die uw gegevens enkel volgens onze instructies gebruiken:</p>
+      <ul>
+        <li><strong>Resend</strong>: e-maildienst die de berichten van het offerteformulier naar ons doorstuurt.</li>
+        <li><strong>Vercel</strong>: hosting van de website.</li>
+        <li><strong>Google</strong> (Analytics) en <strong>Trustindex</strong> (reviews): enkel na uw toestemming.</li>
+        <li>Onze <strong>boekhouder</strong> en, waar de wet dat vereist, overheidsdiensten.</li>
+      </ul>
+      <p>Sommige van deze diensten zijn gevestigd buiten de Europese Economische Ruimte, bv. in de Verenigde Staten. Doorgifte gebeurt met passende waarborgen, zoals de standaardcontractbepalingen van de Europese Commissie of het EU-VS Data Privacy Framework.</p>
+
+      <h2>5. Cookies</h2>
+      <p>Welke cookies en vergelijkbare technieken we gebruiken, leest u in ons <a href="/cookiebeleid">cookiebeleid</a>. Uw keuze kan u altijd aanpassen via <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button>.</p>
+
+      <h2>6. Uw rechten</h2>
+      <p>U hebt het recht om:</p>
+      <ul>
+        <li>uw gegevens in te zien en een kopie te krijgen;</li>
+        <li>onjuiste gegevens te laten verbeteren;</li>
+        <li>uw gegevens te laten wissen, of de verwerking te laten beperken;</li>
+        <li>uw gegevens in een gangbaar formaat te ontvangen (overdraagbaarheid);</li>
+        <li>bezwaar te maken tegen verwerking op basis van ons gerechtvaardigd belang;</li>
+        <li>uw toestemming op elk moment in te trekken, zonder dat dit de eerdere verwerking onwettig maakt.</li>
+      </ul>
+      <p>Stuur uw verzoek naar <a href={`mailto:${facts.email}`}>{facts.email}</a>. We antwoorden binnen een maand. Om uw identiteit te controleren kunnen we u om een bewijs vragen.</p>
+
+      <h2>7. Klacht indienen</h2>
+      <p>Bent u niet tevreden over hoe we met uw gegevens omgaan? Neem dan eerst contact met ons op, zodat we het kunnen oplossen. U kan ook een klacht indienen bij de Gegevensbeschermingsautoriteit, Drukpersstraat 35, 1000 Brussel, <a href="mailto:contact@apd-gba.be">contact@apd-gba.be</a>, <a href="https://www.gegevensbeschermingsautoriteit.be" target="_blank" rel="noopener">www.gegevensbeschermingsautoriteit.be</a>.</p>
+
+      <h2>8. Geautomatiseerde beslissingen</h2>
+      <p>We nemen geen beslissingen over u die uitsluitend op geautomatiseerde verwerking berusten. De premie-check is een indicatieve berekening, geen beslissing of officiële simulatie.</p>
+
+      <h2>9. Wijzigingen</h2>
+      <p>We kunnen dit beleid aanpassen, bijvoorbeeld als de wet of onze werkwijze verandert. De datum bovenaan geeft aan wanneer het laatst werd bijgewerkt.</p>
     </div>
   </div>
 </section>
+</main>
+<LegalFoot />
 </Layout>

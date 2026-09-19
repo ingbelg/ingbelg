@@ -1,31 +1,81 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LegalBar from '../components/LegalBar.astro';
+import LegalFoot from '../components/LegalFoot.astro';
 import facts from '../data/site-facts.json';
 
 export const prerender = true;
 ---
-<Layout title="Cookiebeleid | INGBELG" description="Welke cookies de website van INGBELG gebruikt en waarom.">
+<Layout title="Cookiebeleid | INGBELG" description="Welke cookies en vergelijkbare technieken de website van INGBELG gebruikt, waarvoor, en hoe u uw keuze aanpast.">
+{/* ⚠️ CONFIRM T-04: standaardtekst, geen juridisch advies; laten nakijken vóór livegang. Pas de tabel aan zodra er nieuwe
+    diensten bijkomen (bv. advertentietools, social pixels) en controleer de exacte cookies van Trustindex in een echte browser. */}
+<LegalBar />
+<main id="main">
 <section class="section">
   <div class="container legal">
     <header class="sechead reveal">
       <p class="eyebrow"><span class="eyebrow__bar"></span>Cookiebeleid</p>
       <h1 class="h2">Welke <em>cookies</em> gebruiken we?</h1>
+      <p class="sechead__sub">Laatst bijgewerkt op {facts.privacyUpdated}.</p>
     </header>
 
     <div class="legal__body reveal">
-      <p class="lead">Deze website gebruikt een beperkt aantal cookies. We onderscheiden noodzakelijke cookies en analytische cookies.</p>
+      <p class="lead">Deze website werkt zonder toestemming enkel met wat strikt nodig is. Al het andere laden we pas nadat u daarvoor kiest.</p>
 
-      <h2>Noodzakelijke cookies</h2>
-      <p>Deze zijn nodig om de website te laten werken en onthouden bijvoorbeeld uw keuze in de cookiebanner (via <code>localStorage</code>, niet via een klassieke cookie). Ze worden altijd geplaatst, ook als u analytische cookies weigert.</p>
+      <h2>Wat zijn cookies?</h2>
+      <p>Cookies zijn kleine bestanden die een website op uw toestel bewaart. We gebruiken dat woord hier ook voor vergelijkbare technieken, zoals <code>localStorage</code> in uw browser en het laden van scripts van andere aanbieders.</p>
 
-      <h2>Analytische cookies (enkel met toestemming)</h2>
-      <p>Als u "Alles aanvaarden" kiest, gebruiken we Google Analytics (GA4) om te zien hoeveel mensen de site bezoeken, welke pagina's ze bekijken en of ze de contactformulier of premie-check gebruiken. Deze cookies worden pas geplaatst na uw toestemming, in lijn met Google Consent Mode v2. Kiest u "Alleen noodzakelijke", dan laden deze cookies niet.</p>
+      <h2>Wat gebruiken we?</h2>
+      <div class="legal__tablewrap">
+        <table class="legal__table">
+          <thead>
+            <tr><th>Wat</th><th>Aanbieder</th><th>Doel</th><th>Bewaartermijn</th><th>Toestemming</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ingbelg_consent</code> (localStorage)</td>
+              <td>INGBELG</td>
+              <td>Onthoudt uw cookiekeuze.</td>
+              <td>Tot u uw keuze wijzigt of uw browsergegevens wist.</td>
+              <td>Niet nodig (noodzakelijk)</td>
+            </tr>
+            <tr>
+              <td><code>_ga</code>, <code>_ga_*</code></td>
+              <td>Google Analytics 4 (Google)</td>
+              <td>Bezoekersstatistieken: hoeveel bezoekers, welke pagina's, gebruik van formulier en premie-check.</td>
+              <td>Tot 2 jaar. Gegevens in Analytics: 14 maanden.</td>
+              <td>Ja, categorie <strong>Analyse</strong></td>
+            </tr>
+            <tr>
+              <td>Widget met Google-reviews (scripts en opslag van Trustindex)</td>
+              <td>Trustindex (<code>cdn.trustindex.io</code>)</td>
+              <td>Toont onze Google-reviews op de website.</td>
+              <td>Volgens de aanbieder; zie het privacybeleid van Trustindex.</td>
+              <td>Ja, categorie <strong>Externe inhoud</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voordat u kiest, worden Google Analytics en de Trustindex-widget <strong>niet geladen</strong>. Uw browser maakt dan geen verbinding met die diensten.</p>
 
-      <h2>Uw keuze aanpassen</h2>
-      <p>U kan uw toestemming op elk moment intrekken door de sitegegevens van uw browser voor deze website te wissen — de cookiebanner verschijnt dan opnieuw bij uw volgende bezoek.</p>
+      <h2>Wat gebruiken we niet?</h2>
+      <ul>
+        <li>Geen advertentiecookies en geen tracking voor reclame.</li>
+        <li>Geen pixels van sociale netwerken.</li>
+        <li>Geen Google Fonts van een externe server: de lettertypes staan op onze eigen website.</li>
+      </ul>
 
-      <!-- ⚠️ CONFIRM T-04: bijwerken zodra een definitieve GA4-koppeling (PUBLIC_GA_ID) en eventuele advertising-tools zijn ingesteld. -->
+      <h2>Links naar andere websites</h2>
+      <p>Op de site staan links naar WhatsApp, Google Maps, Instagram en TikTok. Pas als u erop klikt, komt u op die websites terecht, met hun eigen cookies en privacybeleid.</p>
+
+      <h2>Uw keuze aanpassen of intrekken</h2>
+      <p>U kan uw keuze op elk moment wijzigen of intrekken via <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button> (u vindt die link ook onderaan elke pagina). Trekt u uw toestemming in, dan wissen we de Analytics-cookies en herladen we de pagina. Cookies kan u daarnaast altijd verwijderen of blokkeren via de instellingen van uw browser.</p>
+
+      <h2>Vragen?</h2>
+      <p>Lees ook ons <a href="/privacybeleid">privacybeleid</a>, of mail naar <a href={`mailto:${facts.email}`}>{facts.email}</a>.</p>
     </div>
   </div>
 </section>
+</main>
+<LegalFoot />
 </Layout>

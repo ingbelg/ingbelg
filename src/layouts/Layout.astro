@@ -1,5 +1,14 @@
 ---
 import facts from '../data/site-facts.json';
+// Lettertypes lokaal (fontsource) i.p.v. Google Fonts: geen IP-doorgifte aan Google, en sneller.
+import '@fontsource/roboto-condensed/latin-400.css';
+import '@fontsource/roboto-condensed/latin-500.css';
+import '@fontsource/roboto-condensed/latin-600.css';
+import '@fontsource/roboto-condensed/latin-700.css';
+import '@fontsource/nunito/latin-400.css';
+import '@fontsource/nunito/latin-600.css';
+import '@fontsource/nunito/latin-700.css';
+import '@fontsource/nunito/latin-800.css';
 
 interface Props {
   title?: string;
@@ -36,9 +45,6 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
      preview-domein laten staan. -->
 <meta name="robots" content="noindex, nofollow">
 <!-- ⚠️ CONFIRM T-06: finaal domein nog niet gekend (ingbelg.be?) — astro.config.mjs "site" en de canonical hierboven bijwerken zodra bekend. Zolang dit een *.vercel.app-preview is, hoort er een noindex-regel op te staan; die volgt zodra het echte domein vastligt. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 <script is:inline>
   /* Consent Mode v2 — standaardwaarden vóór alles, ook vóór gtag.js zelf laadt (T-01/T-04). */
@@ -107,11 +113,19 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
 <slot />
 
 <!-- ============ COOKIEBANNER (T-04) ============ -->
-<div class="cookiebar" id="cookiebar" hidden>
+<div class="cookiebar" id="cookiebar" role="dialog" aria-labelledby="cookieTitle" hidden>
   <div class="cookiebar__in">
-    <p>We gebruiken cookies om deze site goed te laten werken en, enkel met uw toestemming, om bezoek te analyseren. Lees ons <a href="/cookiebeleid">cookiebeleid</a>.</p>
+    <div class="cookiebar__txt">
+      <p><strong id="cookieTitle">Uw keuze over cookies.</strong> Deze site werkt met enkel noodzakelijke opslag. Met uw toestemming laden we ook Google Analytics (bezoekersstatistieken) en externe inhoud (Google-reviews via Trustindex). U kan uw keuze op elk moment aanpassen. Lees ons <a href="/cookiebeleid">cookiebeleid</a>.</p>
+      <div class="cookiebar__prefs" id="cookiePrefs" hidden>
+        <label class="cookiebar__pref"><input type="checkbox" checked disabled><span><strong>Noodzakelijk</strong> — onthoudt uw cookiekeuze. Altijd actief.</span></label>
+        <label class="cookiebar__pref"><input type="checkbox" id="prefAnalytics"><span><strong>Analyse</strong> — Google Analytics: hoeveel bezoekers, welke pagina's, gebruikte formulieren.</span></label>
+        <label class="cookiebar__pref"><input type="checkbox" id="prefExternal"><span><strong>Externe inhoud</strong> — Google-reviews, getoond via Trustindex.</span></label>
+      </div>
+    </div>
     <div class="cookiebar__actions">
       <button type="button" class="btn btn--glass" id="cookieReject"><span>Alleen noodzakelijke</span></button>
+      <button type="button" class="btn btn--glass" id="cookieSettings"><span>Instellingen</span></button>
       <button type="button" class="btn btn--primary" id="cookieAccept"><span>Alles aanvaarden</span></button>
     </div>
   </div>

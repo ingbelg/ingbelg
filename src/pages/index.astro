@@ -156,7 +156,7 @@ const faqItems = [
     </p>
 
     <div class="hero__trust reveal">
-      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?dc7618f81af7346705466e5f050"></script>
+      <div class="ti-slot" data-ti="dc7618f81af7346705466e5f050"></div>
     </div>
 
     <div class="hero__cta reveal">
@@ -414,7 +414,12 @@ const faqItems = [
     <!-- Live Trustindex-widget — klant heeft een betaald abonnement, statische kaarten
          zijn bewust weer verwijderd op zijn verzoek. -->
     <div class="reviews-widget reveal">
-      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?30693eb81611346370764c8da82"></script>
+      <div class="ti-slot" data-ti="30693eb81611346370764c8da82">
+        <div class="ti-placeholder">
+          <p><strong>Google-reviews</strong><br>Onze reviews worden getoond door Trustindex, een externe dienst. Uw gegevens worden pas met die dienst gedeeld nadat u dit toestaat.</p>
+          <button type="button" class="btn btn--primary" data-consent-external><span>Toestaan en reviews tonen</span></button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -818,7 +823,7 @@ const faqItems = [
   </div>
   <div class="container footer__trust">
     <span class="trustbadge trustbadge--widget">
-      <script is:inline defer async src="https://cdn.trustindex.io/loader.js?04fcd5881c17347ba2069b117f2"></script>
+      <span class="ti-slot" data-ti="04fcd5881c17347ba2069b117f2"></span>
     </span>
     <span class="trustbadge">{facts.warrantyYears} jaar garantie</span>
     <span class="trustbadge" data-confirm="C-08">{facts.roofsDone}+ daken gerealiseerd</span>
@@ -826,7 +831,7 @@ const faqItems = [
   <div class="footer__bar">
     <div class="container footer__bar-in">
       <p>&copy; <span id="year">2026</span> {facts.legalName}. Alle rechten voorbehouden.</p>
-      <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a></p>
+      <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a> &middot; <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button></p>
     </div>
   </div>
 </footer>
