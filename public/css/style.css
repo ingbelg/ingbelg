@@ -190,6 +190,7 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 .nav__mobilecta{display:none}
 
 .header__actions{display:flex;align-items:center;gap:14px}
+.header__actions .btn--primary{white-space:nowrap}
 .burger{
   display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:12px;
   background:#fff;cursor:pointer;padding:0;position:relative;
@@ -968,6 +969,8 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 
   .hero{min-height:640px}
   .hero__eyebrow{padding:9px 16px;gap:9px;font-size:12.5px;letter-spacing:.08em}
+  /* Grote knoppen ("Vraag een gratis plaatsbezoek") moeten op één regel passen */
+  .btn--lg{padding:17px 20px;gap:9px;font-size:15px;letter-spacing:.03em}
   .hero__in{padding-top:44px;padding-bottom:96px}
   .hero__title{max-width:none}
   .hero__trust{position:static;transform:none;margin:0 0 26px;max-width:none}
@@ -1019,6 +1022,12 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   .lb__nav--prev{left:10px}
   .lb__nav--next{right:10px}
   .lb__close{top:14px;right:14px;width:42px;height:42px;font-size:26px}
+}
+
+@media (max-width:360px){
+  .btn--lg{padding:16px 14px;gap:8px;font-size:13.5px;letter-spacing:.02em}
+  .btn--lg svg{width:16px;height:16px}
+  .about__cta .btn{padding:15px 18px;font-size:14px;letter-spacing:.03em}
 }
 
 @media (prefers-reduced-motion:reduce){
