@@ -416,6 +416,7 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 }
 .gal--tall{grid-row:span 2}
 .gal--wide{grid-column:span 2}
+.gal--big{grid-column:span 2;grid-row:span 2}
 .gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out),filter .6s var(--ease)}
 .gal:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .gal:hover img{transform:scale(1.1)}

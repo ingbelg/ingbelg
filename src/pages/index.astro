@@ -8,7 +8,7 @@ export const prerender = true;
 const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
 const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
 
-const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', normal: '' };
+const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', big: ' gal--big', normal: '' };
 
 const faqItems = [
   {

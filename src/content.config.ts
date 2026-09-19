@@ -24,7 +24,7 @@ const gallery = defineCollection({
     alt: z.string(),
     label: z.string(),
     caption: z.string(),
-    size: z.enum(['normal', 'tall', 'wide']).default('normal'),
+    size: z.enum(['normal', 'tall', 'wide', 'big']).default('normal'),
   }),
 });
 
