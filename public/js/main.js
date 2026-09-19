@@ -39,7 +39,42 @@
     burger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
   });
-  $$('#nav a').forEach(function (a) { a.addEventListener('click', closeNav); });
+  /* Menu-links: eerst het menu sluiten en de scroll-blokkade opheffen, DAN pas scrollen.
+     Het native anker-gedrag start de scroll in dezelfde tik waarin body-overflow wisselt en
+     kan dan wegvallen (vooral op mobiel, zodra de pagina al ver gescrold is). Daarom sturen
+     we de scroll zelf aan, en controleren we na afloop of het doel echt bovenaan staat:
+     lazy afbeeldingen/widgets boven het doel kunnen de pagina onderweg langer maken. */
+  var reduceMotionNav = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var jumpTo = function (target, smooth) {
+    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  };
+  $$('#nav a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var href = a.getAttribute('href') || '';
+      var target = href.length > 1 && href.charAt(0) === '#' ? document.getElementById(href.slice(1)) : null;
+      closeNav();
+      if (!target) return; // tel:, mailto: ... — laat de browser het afhandelen
+      e.preventDefault();
+
+      var stop = false;
+      var cancel = function () { stop = true; };
+      ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, cancel, { passive: true, once: true }); });
+
+      var settle = function () {
+        if (stop) return;
+        var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+        if (Math.abs(target.getBoundingClientRect().top - pad) > 6) jumpTo(target, false);
+      };
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          jumpTo(target, !reduceMotionNav);
+          if (history.pushState) history.pushState(null, '', href);
+          setTimeout(settle, 1000);
+          setTimeout(settle, 2000);
+        });
+      });
+    });
+  });
   window.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
   });
