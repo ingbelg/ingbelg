@@ -19,7 +19,7 @@
   /* ---------- Sticky header ---------- */
   var header = $('#header');
   var onScroll = function () {
-    header.classList.toggle('is-stuck', window.scrollY > 12);
+    if (header) header.classList.toggle('is-stuck', window.scrollY > 12);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -33,7 +33,7 @@
     burger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   };
-  burger.addEventListener('click', function () {
+  if (burger && nav) burger.addEventListener('click', function () {
     var open = nav.classList.toggle('is-open');
     burger.classList.toggle('is-open', open);
     burger.setAttribute('aria-expanded', String(open));
@@ -76,7 +76,7 @@
     });
   });
   window.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+    if (e.key === 'Escape' && nav && nav.classList.contains('is-open')) closeNav();
   });
 
   /* ---------- Reveal on scroll ---------- */
@@ -167,6 +167,7 @@
   });
 
   /* ---------- Lightbox ---------- */
+  if (document.getElementById('lightbox')) {
   var figures = $$('#gallery .gal');
   var lb = $('#lightbox'), lbImg = $('#lbImg'), lbCount = $('#lbCount');
   var idx = 0;
@@ -204,6 +205,8 @@
     if (e.key === 'ArrowRight') show(idx + 1);
   });
 
+  }
+
   /* ---------- Predvybor dienst (T-12) ---------- */
   var dienstSelect = $('select[name="dienst"]');
   var sourceBlockField = $('input[name="source_block"]');
@@ -220,6 +223,7 @@
   });
 
   /* ---------- Formulier ---------- */
+  if (document.getElementById('offerteForm')) {
   var form = $('#offerteForm');
   var msg = $('#formMsg');
   form.addEventListener('submit', function (e) {
@@ -296,4 +300,5 @@
       fallbackToMailto();
     });
   });
+  }
 })();
