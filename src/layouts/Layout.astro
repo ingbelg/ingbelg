@@ -13,11 +13,20 @@ import '@fontsource/nunito/latin-800.css';
 interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  image?: string;
 }
 const {
   title = 'Dakwerken Zottegem | Hellend & plat dak, asbest | INGBELG',
-  description = 'Dakwerker uit Zottegem met eigen ploeg: hellende en platte daken, asbestverwijdering, isolatie en gevel. Offerte binnen 48 uur, 15 jaar garantie.',
+  description = `Dakwerker uit Zottegem met eigen ploeg: hellende en platte daken, asbestverwijdering, isolatie en gevel. Offerte binnen ${facts.quoteHoursAfterVisit} uur, ${facts.warrantyYears} jaar garantie.`,
+  ogTitle = Astro.url.pathname === '/' ? 'INGBELG · Dakwerken in Zottegem en heel Oost-Vlaanderen' : title,
+  image = '/assets/og-image.jpg',
 } = Astro.props;
+
+// Eén bron voor de site-URL: astro.config.mjs ("site"), gestuurd door facts.launched + facts.siteUrl.
+const site = Astro.site ?? new URL(facts.siteUrl);
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL(image, site);
 
 const gaId = import.meta.env.PUBLIC_GA_ID || '';
 ---
@@ -33,18 +42,31 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="/assets/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:title" content="INGBELG · Dakwerken in Zottegem en heel Oost-Vlaanderen">
-<meta property="og:description" content="Uw dak in één keer goed. Gratis plaatsbezoek, offerte binnen 48 uur.">
-<!-- ⚠️ CONFIRM T-06: og:image moet absolute URL zijn op het finale domein, en een foto "na" van een echt project i.p.v. het logo -->
-<meta property="og:image" content="/assets/logo.png" data-confirm="T-06">
+<link rel="canonical" href={canonical.href} />
+{facts.launched
+  ? <meta name="robots" content="index, follow, max-image-preview:large">
+  : <meta name="robots" content="noindex, nofollow">}
+<script is:inline>
+  /* Extra zekerheid: het *.vercel.app-adres is nooit bedoeld voor Google (dubbele inhoud naast het echte domein). */
+  if (/\.vercel\.app$/.test(location.hostname)) {
+    var m = document.createElement('meta'); m.name = 'robots'; m.content = 'noindex, nofollow';
+    document.head.appendChild(m);
+  }
+</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_BE">
-<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-<!-- T-06: dit is nog het *.vercel.app preview-domein, niet het finale. Noindex tot het echte
-     domein (ingbelg.be?) vastligt — dan deze regel verwijderen en enkel een 301 op het
-     preview-domein laten staan. -->
-<meta name="robots" content="noindex, nofollow">
-<!-- ⚠️ CONFIRM T-06: finaal domein nog niet gekend (ingbelg.be?) — astro.config.mjs "site" en de canonical hierboven bijwerken zodra bekend. Zolang dit een *.vercel.app-preview is, hoort er een noindex-regel op te staan; die volgt zodra het echte domein vastligt. -->
+<meta property="og:site_name" content="INGBELG">
+<meta property="og:url" content={canonical.href}>
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={ogImage.href}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="INGBELG — recent opgeleverd dak in Oost-Vlaanderen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={ogTitle}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={ogImage.href}>
 <link rel="stylesheet" href="/css/style.css">
 <script is:inline>
   /* Consent Mode v2 — standaardwaarden vóór alles, ook vóór gtag.js zelf laadt (T-01/T-04). */
@@ -66,8 +88,11 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
   legalName: facts.legalName,
   alternateName: 'IngBelg Dakwerken',
   vatID: facts.vatCompact,
-  image: 'https://ingbelg.be/assets/logo-transparent.png',
-  url: 'https://ingbelg.be',
+  '@id': new URL('/#business', site).href,
+  image: ogImage.href,
+  logo: new URL('/assets/logo-transparent.png', site).href,
+  url: site.origin,
+  hasMap: facts.reviews.googleUrl,
   telephone: facts.phoneE164,
   email: facts.email,
   address: {

@@ -1,5 +1,13 @@
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
+
+// Eén schakelaar voor livegang: src/data/site-facts.json → "launched" + "siteUrl".
+//  - launched:false  → site = preview-domein, pagina's krijgen noindex, robots.txt zonder sitemap.
+//  - launched:true   → site = siteUrl (het echte domein), pagina's zijn indexeerbaar, sitemap wordt gemeld.
+// Canonical-tags, Open Graph, JSON-LD, sitemap.xml en robots.txt volgen automatisch deze waarde.
+const facts = JSON.parse(readFileSync(new URL('./src/data/site-facts.json', import.meta.url), 'utf8'));
+const PREVIEW_URL = 'https://ingbelg-site.vercel.app';
 
 // Output is 'server' so /api/contact can run server-side logic,
 // while index.astro sets `export const prerender = true` to stay fully static.
@@ -8,7 +16,5 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   output: 'server',
   adapter: vercel(),
-  // ⚠️ CONFIRM T-06: huidige Vercel-preview-URL, zet dit op het finale domein
-  // (ingbelg.be?) zodra dat bekend is — sitemap.xml en canonical-tags gebruiken dit.
-  site: 'https://ingbelg-site.vercel.app',
+  site: facts.launched ? facts.siteUrl : PREVIEW_URL,
 });

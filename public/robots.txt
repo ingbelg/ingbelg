@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# ⚠️ CONFIRM T-06: bijwerken zodra het finale domein bekend is (zie astro.config.mjs "site")
-Sitemap: https://ingbelg-site.vercel.app/sitemap.xml

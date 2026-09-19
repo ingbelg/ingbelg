@@ -60,5 +60,7 @@
     "facebook": ""
   },
   "_confirm": "⚠️ Nog te bevestigen door Magomed vóór livegang: roofsDone (400+), teamSize (20), foundedYear, of hij zelf op plaatsbezoeken komt, legalName (CV of BV — Trustlocal-profiel wijkt af), facebook-link. warrantyYears (15) en de ervaring van 14+ jaar blijven behouden zoals eerder bevestigd op basis van de brochure, ook al toont het Trustlocal-profiel andere cijfers (12 jaar garantie / 13 jaar ervaring / 7 jaar op de markt / 20 medewerkers / 'Ing Belg BV') — bewust niet overgenomen, wel te heroverwegen als de klant dit expliciet aangeeft.",
-  "privacyUpdated": "19 september 2026"
+  "privacyUpdated": "19 september 2026",
+  "launched": false,
+  "siteUrl": "https://ingbelg.be"
 }
