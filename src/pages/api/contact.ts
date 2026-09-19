@@ -33,6 +33,20 @@ export const POST: APIRoute = async ({ request }) => {
     }
   }
 
+  // Basisvalidatie aan de serverkant (de browser controleert dit ook, maar dit endpoint is publiek).
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(data.email).trim())) {
+    return new Response(JSON.stringify({ ok: false, error: 'invalid_email' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  if (Object.values(data).some((v) => String(v ?? '').length > 3000)) {
+    return new Response(JSON.stringify({ ok: false, error: 'too_long' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   const subject = `Offerteaanvraag — ${data.dienst}`;
   const body = [
     `Naam: ${data.naam}`,
@@ -52,6 +66,10 @@ export const POST: APIRoute = async ({ request }) => {
   // dit is de enige plek die dan moet wijzigen.
   const apiKey = import.meta.env.RESEND_API_KEY;
   const notifyTo = import.meta.env.CONTACT_NOTIFY_EMAIL || 'info@ingbelg.be';
+  // Afzender: zonder eigen, in Resend geverifieerd domein kan Resend enkel naar het account-adres
+  // zelf leveren (onboarding@resend.dev). Zet CONTACT_FROM_EMAIL zodra het domein is geverifieerd,
+  // bv. "INGBELG website <noreply@ingbelg.be>".
+  const fromAddress = import.meta.env.CONTACT_FROM_EMAIL || 'INGBELG website <onboarding@resend.dev>';
 
   if (!apiKey) {
     // Demo-omgeving: geen e-mailprovider gekoppeld. De aanvraag wordt gelogd
@@ -72,7 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'INGBELG website <onboarding@resend.dev>',
+        from: fromAddress,
         to: notifyTo,
         subject,
         text: body,

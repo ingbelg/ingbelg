@@ -290,7 +290,10 @@
     }).then(function (res) {
       if (!res.ok) throw new Error('server responded ' + res.status);
       return res.json();
-    }).then(function () {
+    }).then(function (data) {
+      // Geen e-mailprovider gekoppeld (delivered:false): de aanvraag is niet verstuurd. Toon dan geen
+      // bedankt-bericht maar val terug op mailto, zodat er nooit stilzwijgend een aanvraag verloren gaat.
+      if (data && data.delivered === false) { fallbackToMailto(); return; }
       msg.className = 'cform__msg ok';
       msg.textContent = 'Bedankt, ' + payload.naam + '. We bellen u binnen 1 werkdag terug op ' + payload.telefoon + '. Dringend? Bel +32 488 87 60 61.';
       form.reset();
