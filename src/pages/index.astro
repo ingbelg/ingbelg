@@ -614,7 +614,7 @@ const faqItems = [
 </section>
 
 <!-- ============ WAAR WE WERKEN (C-25, nieuw) ============ -->
-<section class="section section--soft" id="werkgebied">
+<section class="section" id="werkgebied" style="border-top:1px solid var(--line)">
   <div class="container">
     <header class="sechead sechead--center reveal">
       <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Waar we werken</p>
@@ -664,21 +664,6 @@ const faqItems = [
     acceptedAnswer: { '@type': 'Answer', text: item.a },
   })),
 })} />
-
-<!-- ============ CTA IMAGE BANNER ============ -->
-<section class="ctaimg">
-  <div class="ctaimg__media">
-    <img src="/assets/work/work-10.webp" alt="" width="1600" height="900" loading="lazy">
-    <div class="ctaimg__scrim"></div>
-  </div>
-  <div class="container ctaimg__in reveal">
-    <h2>Twijfelt u wat uw dak nodig heeft?</h2>
-    <!-- ⚠️ CONFIRM C-27: eerlijkheidsbelofte "ook als uw dak nog jaren meekan" -->
-    <p data-confirm="C-27">Stuur een foto via WhatsApp. U krijgt een eerlijk antwoord, ook als uw dak nog jaren meekan.</p>
-    <a class="btn btn--white btn--lg" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener"><span>Stuur een foto via WhatsApp</span></a>
-    <p style="margin-top:14px"><a href={`tel:${facts.phoneE164}`} style="color:#fff;text-decoration:underline">of bel {facts.phone}</a></p>
-  </div>
-</section>
 
 <!-- ============ CONTACT ============ -->
 <section class="section contact" id="contact">
