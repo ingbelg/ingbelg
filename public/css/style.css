@@ -469,6 +469,7 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 }
 .roof__stack--proof{min-height:0}
 .roof__stack--proof .roof__badge{padding:10px 16px;font-size:14.5px;letter-spacing:.06em}
+.roof__img--top img{object-position:center top}
 .roof__facts{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .roof__fact{
   padding:30px 26px;border-radius:var(--r-lg);
