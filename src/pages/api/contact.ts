@@ -137,6 +137,12 @@ async function createOdooLead(url: string, data: Record<string, string>, subject
   form.set('email_from', data.email);
   form.set('phone', data.telefoon);
   form.set('description', body);
+  // Verkoopteam en verkoper: Odoo bewaart die als verborgen velden in zijn eigen formulier,
+  // niet als instelling — dus we sturen ze zelf mee (ID's staan in /contactus van Odoo).
+  const teamId = import.meta.env.ODOO_LEAD_TEAM_ID;
+  const userId = import.meta.env.ODOO_LEAD_USER_ID;
+  if (teamId) form.set('team_id', teamId);
+  if (userId) form.set('user_id', userId);
   try {
     const res = await fetch(url, { method: 'POST', body: form, signal: AbortSignal.timeout(8000) });
     const text = await res.text();
