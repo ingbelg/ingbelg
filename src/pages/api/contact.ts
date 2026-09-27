@@ -62,6 +62,12 @@ export const POST: APIRoute = async ({ request }) => {
     data.bericht || '-',
   ].filter(Boolean).join('\n');
 
+  // Lead in Odoo CRM, naast de e-mail. Odoo Standard heeft geen externe API, dus we gebruiken het
+  // publieke websiteformulier van Odoo zelf (/website/form/crm.lead). Faalt dit, dan komt de
+  // aanvraag nog altijd per e-mail binnen — het antwoord aan de bezoeker hangt er niet van af.
+  const odooFormUrl = import.meta.env.ODOO_LEAD_FORM_URL;
+  const odooLead = odooFormUrl ? createOdooLead(odooFormUrl, data, subject, body) : Promise.resolve();
+
   // Provider: Resend (resend.com) — kies zelf een andere provider indien gewenst,
   // dit is de enige plek die dan moet wijzigen.
   const apiKey = import.meta.env.RESEND_API_KEY;
@@ -76,6 +82,7 @@ export const POST: APIRoute = async ({ request }) => {
     // i.p.v. verstuurd. Vóór livegang: RESEND_API_KEY (+ evt. CONTACT_NOTIFY_EMAIL)
     // instellen in .env — zie .env.example.
     console.log('[api/contact] Geen RESEND_API_KEY ingesteld — aanvraag alleen gelogd:\n' + body);
+    await odooLead;
     return new Response(JSON.stringify({ ok: true, delivered: false }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -97,6 +104,7 @@ export const POST: APIRoute = async ({ request }) => {
         reply_to: data.email,
       }),
     });
+    await odooLead;
 
     if (!res.ok) {
       console.error('[api/contact] Resend-fout:', await res.text());
@@ -112,9 +120,30 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('[api/contact] Netwerkfout:', err);
+    await odooLead;
     return new Response(JSON.stringify({ ok: false, error: 'network_error' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 };
+
+// Veldnamen = velden die Odoo via het websiteformulier op crm.lead toelaat.
+// Gooit nooit: fouten worden enkel gelogd.
+async function createOdooLead(url: string, data: Record<string, string>, subject: string, body: string) {
+  const form = new FormData();
+  form.set('name', data.gemeente ? `${subject} (${data.gemeente})` : subject);
+  form.set('contact_name', data.naam);
+  form.set('email_from', data.email);
+  form.set('phone', data.telefoon);
+  form.set('description', body);
+  try {
+    const res = await fetch(url, { method: 'POST', body: form, signal: AbortSignal.timeout(8000) });
+    const text = await res.text();
+    if (!res.ok || !/"id"\s*:\s*\d+/.test(text)) {
+      console.error('[api/contact] Odoo-lead niet aangemaakt:', res.status, text.slice(0, 300));
+    }
+  } catch (err) {
+    console.error('[api/contact] Odoo-lead netwerkfout:', err);
+  }
+}
