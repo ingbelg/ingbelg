@@ -1,0 +1,68 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, faqPremie, faqRegen, faqGarantie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+const page: LandingData = {
+  slug: 'asbestdak-vervangen',
+  title: 'Asbestdak vervangen in Zottegem | INGBELG',
+  description: `Asbestleien of golfplaten vervangen? We halen ze veilig weg, voeren ze correct af en leggen in dezelfde werf uw nieuwe, geïsoleerde dak. Gratis plaatsbezoek.`,
+  dienst: 'Asbestdak vervangen',
+  serviceType: 'Asbestdak vervangen',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  h1Main: 'Uw asbestdak veilig vervangen',
+  h1Sub: 'Asbest eraf, nieuw geïsoleerd dak erop, in één werf',
+  lead: `Asbestleien of golfplaten van vóór 2001? We halen ze er veilig af, voeren ze correct af en leggen in dezelfde werf uw nieuwe, geïsoleerde dak. U krijgt het attest van de verwijdering, dat u ook nodig hebt voor de premie.`,
+  /* Geen eigen foto van een asbestwerf beschikbaar: stockfoto als sfeerbeeld (decoratief, daarom geen alt-tekst). */
+  hero: { src: '/assets/services/asbestverwijdering.webp', alt: '' },
+  problems: [
+    { h: 'Er ligt nog asbest op het dak.', p: 'Leien of golfplaten van vóór 2001. We halen ze er veilig af en leggen in dezelfde werf uw nieuwe dak.' },
+    { h: 'U mag het dak niet reinigen of ontmossen.', p: 'Bij een asbestdak is dat niet toegelaten, en zonnepanelen plaatsen ook niet. Vervangen is dan de oplossing.' },
+    { h: 'U wilt zonnepanelen, maar het dak is oud.', p: 'Eerst het dak, dan de panelen. Zo moet er later niets opnieuw open.' },
+    { h: 'U verkoopt een woning van vóór 2001.', p: 'Dan hebt u een asbestattest nodig. Plant u toch dakwerken, laat het asbest dan meteen mee verwijderen.' },
+    { h: 'Het dak lekt of is verweerd.', p: 'Een nieuw, geïsoleerd dak in dezelfde werf is vaak slimmer dan herstellen op een oud dak.' },
+  ],
+  doTitle: 'Asbest eraf, nieuw dak erop, <em>in één werf</em>',
+  doLead: 'Eén ploeg, één aanspreekpunt en één planning: van het veilig verwijderen van het asbest tot het nieuwe, geïsoleerde dak.',
+  doTicks: [
+    'Veilige verwijdering en correcte afvoer',
+    'Attest van de verwijdering, ook nodig voor de premie',
+    'Nieuw, geïsoleerd dak in dezelfde werf',
+    'Eigen vaste ploeg en één aanspreekpunt',
+    'Verzekerd en volgens de WTCB-richtlijnen',
+    'Hulp bij uw premieaanvraag',
+  ],
+  doImages: [
+    { src: '/assets/services/hellende-daken-nieuw.webp', alt: 'Hellend dak met nieuwe antracietkleurige dakpannen', w: 1600, h: 900 },
+    { src: '/assets/work/work-09.webp', alt: 'Bungalow met nieuwe antracietkleurige dakpannen', w: 1600, h: 900 },
+  ],
+  steps: steps(
+    'Asbest eraf en nieuw dak erop in één werf. Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.',
+    { h: 'Veilig afgevoerd, elke avond waterdicht', p: "Het asbest wordt correct afgevoerd. Open dakvlakken gaan 's avonds onder ons zeil. Containers, valbeveiliging en opruim zitten in de prijs." },
+  ),
+  note: {
+    title: 'Premie en <em>6 % btw</em>',
+    text: 'Wordt uw nieuwe dak tegelijk geïsoleerd, dan kunt u mogelijk premies krijgen (Mijn VerbouwPremie, inkomenscategorie 3 of 4), en soms komt er een gemeentelijke premie bij. Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw in plaats van 21 %. In onze premie-check ziet u vooraf wat u terugkrijgt.',
+  },
+  faq: [
+    {
+      q: 'Moet mijn asbestdak weg?',
+      a: 'Niet meteen, zolang het in goede staat is. Maar u mag een asbestdak niet reinigen, ontmossen of er zonnepanelen op plaatsen. Verkoopt u een woning van vóór 2001, dan hebt u een asbestattest nodig. Plant u toch dakwerken, laat het asbest dan meteen mee verwijderen: dat kan in één werf met het nieuwe dak.',
+    },
+    faqKost,
+    {
+      q: 'Hoe lang duren de werken?',
+      a: 'Een hellend dak van een gemiddelde rijwoning: 5 tot 10 werkdagen. U krijgt de exacte planning vooraf op papier.',
+    },
+    faqPremie,
+    faqRegen,
+    faqGarantie,
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />

@@ -1,0 +1,62 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, faqPremie, faqRegen, faqGarantie, faqVergunning, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+const page: LandingData = {
+  slug: 'hellend-dak',
+  title: 'Hellend dak vernieuwen in Zottegem | INGBELG',
+  description: `Dak vernieuwen in Zottegem en Oost-Vlaanderen: dakpannen of natuurleien, nieuw onderdak en PIR-isolatie. Gratis plaatsbezoek, ${facts.warrantyYears} jaar garantie.`,
+  dienst: 'Hellende daken',
+  serviceType: 'Hellend dak vernieuwen',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  h1Main: 'Uw hellend dak vernieuwd',
+  h1Sub: 'Dakpannen of natuurleien, in Zottegem en heel Oost-Vlaanderen',
+  lead: `We vernieuwen uw dak tot op de kepers: nieuw onderdak, PIR-isolatie, nieuwe panlatten en een afwerking in dakpannen of natuurleien. Door onze eigen vaste ploeg, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
+  hero: { src: '/assets/services/hellende-daken-nieuw.webp', alt: 'Hellend dak met antracietkleurige dakpannen' },
+  problems: [
+    { h: 'Er komt water binnen.', p: 'Een vochtvlek op het plafond of verschoven pannen na een storm. Hoe sneller we kijken, hoe kleiner de schade.' },
+    { h: 'De zolder is ijskoud in de winter.', p: 'Vaak ontbreken isolatie en onderdak. Met 12 tot 16 cm PIR blijft de warmte binnen, en misschien hebt u recht op een premie.' },
+    { h: 'U kocht een woning met EPC E of F.', p: 'Dan moet u binnen zes jaar naar label D. Een geïsoleerd dak is daarvoor een logische eerste stap.' },
+    { h: 'Er ligt nog asbest op het dak.', p: 'Leien of golfplaten van vóór 2001. We halen ze er veilig af en leggen in dezelfde werf uw nieuwe dak.' },
+    { h: 'U wilt zonnepanelen, maar het dak is oud.', p: 'Eerst het dak, dan de panelen. Zo moet er later niets opnieuw open.' },
+  ],
+  doTitle: 'Een nieuw dak, <em>in één werf</em>',
+  doLead: 'Oude pannen of leien eraf, een nieuwe en goed geïsoleerde dakopbouw erop. Daarna is uw dak waterdicht en klaar voor de volgende decennia.',
+  doTicks: [
+    'Dakpannen of natuurleien',
+    'Nieuw onderdak en nieuwe panlatten',
+    'PIR-isolatie, meestal 12 tot 16 cm',
+    "Elk open dakvlak gaat 's avonds onder ons zeil",
+    'Containers, valbeveiliging en opruim zitten in de prijs',
+    'Hulp bij uw premieaanvraag',
+  ],
+  doImages: [
+    { src: '/assets/work/work-09.webp', alt: 'Bungalow met nieuwe antracietkleurige dakpannen', w: 1600, h: 900 },
+    { src: '/assets/work/work-06.webp', alt: 'Woning met bruine dakpannen en dakvenster, met de bestelwagen van INGBELG ervoor', w: 1600, h: 1200 },
+  ],
+  ba: true,
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum. Een hellend dak van een rijwoning duurt meestal 5 tot 10 werkdagen.'),
+  note: {
+    title: 'Premie en <em>6 % btw</em>',
+    text: 'Wordt uw dak tegelijk nieuw geïsoleerd (Rd-waarde van minstens 4,5 m²K/W, met PIR minstens 12 cm) en valt u in inkomenscategorie 3 of 4? Dan kunt u de Mijn VerbouwPremie krijgen. Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw in plaats van 21 %. Met onze premie-check ziet u vooraf wat u terugkrijgt.',
+  },
+  faq: [
+    faqKost,
+    {
+      q: 'Hoe lang duren de werken?',
+      a: 'Een hellend dak van een gemiddelde rijwoning: 5 tot 10 werkdagen. U krijgt de exacte planning vooraf op papier.',
+    },
+    faqRegen,
+    faqPremie,
+    faqGarantie,
+    faqVergunning,
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />

@@ -1,0 +1,60 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, faqPremie, faqRegen, faqGarantie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+const page: LandingData = {
+  slug: 'plat-dak-epdm',
+  title: 'Plat dak (EPDM) laten leggen in Zottegem | INGBELG',
+  description: `Plat dak vernieuwen met EPDM van Firestone of Resitrix, op nieuwe isolatie en met zo weinig mogelijk naden. Gratis plaatsbezoek, ${facts.warrantyYears} jaar garantie.`,
+  dienst: 'Platte daken',
+  serviceType: 'Plat dak vernieuwen (EPDM)',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  h1Main: 'Uw plat dak, waterdicht',
+  h1Sub: 'EPDM op een nieuwe isolatielaag, in Zottegem en heel Oost-Vlaanderen',
+  lead: `Voor een aanbouw, garage of dakterras leggen we EPDM van Firestone of Resitrix, altijd op een nieuwe isolatielaag. Met zo weinig mogelijk naden, want daar komt water het eerst binnen. ${facts.warrantyYears} jaar schriftelijke garantie.`,
+  hero: { src: '/assets/services/platte-daken-nieuw.webp', alt: 'Plat dak met een nieuwe EPDM-dakbedekking en afgewerkte dakranden' },
+  problems: [
+    { h: 'Er komt water binnen.', p: 'Een vochtvlek op het plafond onder uw plat dak. Hoe sneller we kijken, hoe kleiner de schade.' },
+    { h: 'De oude dakbedekking is aan het einde.', p: 'Scheuren, blazen of naden die loskomen. Dan is een nieuwe laag beter dan blijven herstellen.' },
+    { h: 'Plassen blijven dagenlang staan.', p: 'Water dat niet wegloopt, vraagt om een goede afwerking van afschot, dakranden en afvoer.' },
+    { h: 'Uw aanbouw of garage is koud.', p: 'Zonder isolatie verliest u warmte langs het dak. Een nieuwe isolatielaag eronder lost dat meteen op.' },
+    { h: 'U wilt een dakterras of een opbouw.', p: 'Dan is de opbouw van het dak belangrijk: eerst een degelijke basis, dan pas de afwerking.' },
+  ],
+  doTitle: 'EPDM met zo weinig <em>naden</em> mogelijk',
+  doLead: 'Een plat dak is pas droog als de details kloppen: de naden, de dakranden en de afvoer. Daar leggen wij de nadruk.',
+  doTicks: [
+    'EPDM van Firestone of Resitrix',
+    'Altijd op een nieuwe PIR-isolatielaag',
+    'Zorgvuldige afwerking van dakranden en afvoer',
+    "Elk open dakvlak gaat 's avonds onder ons zeil",
+    'Een plat dak duurt meestal 2 tot 5 werkdagen',
+    'Hulp bij uw premieaanvraag',
+  ],
+  doImages: [
+    { src: '/assets/services/platte-daken.webp', alt: 'Plat dak met afgewerkte dakrand naast een dak met dakpannen', w: 1024, h: 806 },
+    { src: '/assets/work/work-07.webp', alt: 'Plat dak met een dakopbouw bekleed met gevelpanelen', w: 1024, h: 576 },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum. Een plat dak duurt meestal 2 tot 5 werkdagen.'),
+  note: {
+    title: 'Premie en <em>6 % btw</em>',
+    text: 'Isoleren we uw plat dak tegelijk (Rd-waarde van minstens 4,5 m²K/W) en valt u in inkomenscategorie 3 of 4? Dan komt u mogelijk in aanmerking voor de Mijn VerbouwPremie. Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw in plaats van 21 %. Met onze premie-check ziet u vooraf wat u terugkrijgt.',
+  },
+  faq: [
+    faqKost,
+    {
+      q: 'Hoe lang duren de werken?',
+      a: 'Een plat dak of een gevelbekleding: meestal 2 tot 5 dagen. U krijgt de exacte planning vooraf op papier.',
+    },
+    faqRegen,
+    faqPremie,
+    faqGarantie,
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />
