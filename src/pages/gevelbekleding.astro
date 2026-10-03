@@ -1,0 +1,71 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, faqGarantie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Teksten komen uit src/content/services/05-gevelbekleding.json en de bevestigde antwoorden op de startpagina.
+   Bewust niets over onderhoud, levensduur of prijzen per materiaal: daar hebben we geen bevestigde cijfers van. */
+const page: LandingData = {
+  slug: 'gevelbekleding',
+  title: 'Gevelbekleding in Zottegem: hout, Trespa, Rockpanel | INGBELG',
+  description: `Nieuwe gevelbekleding in Zottegem en Oost-Vlaanderen: houten planchetten, Padouk, Trespa of Rockpanel. Gratis plaatsbezoek, ${facts.warrantyYears} jaar garantie.`,
+  dienst: 'Gevelbekleding',
+  serviceType: 'Gevelbekleding',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  h1Main: 'Uw gevel mooi bekleed',
+  h1Sub: 'Hout, Trespa of Rockpanel, in Zottegem en heel Oost-Vlaanderen',
+  lead: `Een nieuwe gevel beschermt uw muren tegen regen en geeft de woning een eigentijdse uitstraling. U kiest uit houten planchetten, Padouk, Trespa of Rockpanel. Door onze eigen vaste ploeg, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
+  hero: {
+    src: '/assets/services/gevelbekleding.webp',
+    srcset: '/assets/services/gevelbekleding-640.webp 640w, /assets/services/gevelbekleding.webp 1024w',
+    alt: 'Aanbouw met een gevel van houten planchetten en een groot glazen schuifraam',
+  },
+  problems: [
+    { h: 'Uw gevel ziet er verouderd uit.', p: 'Een nieuwe bekleding geeft de woning meteen een andere uitstraling, zonder dat u moet verhuizen of herbouwen.' },
+    { h: 'Regen trekt in uw muren.', p: 'Een gevelbekleding beschermt de muren tegen regen. Wij bekijken tijdens het plaatsbezoek wat uw gevel nodig heeft.' },
+    { h: 'Het dak wordt vernieuwd en de stelling staat er al.', p: 'Dan doen we de gevel in dezelfde werf. Eén planning, één ploeg, één factuur.' },
+    { h: 'U hebt een aanbouw of opbouw.', p: 'Een nieuwe uitbreiding vraagt een nette afwerking, in hout of in panelen.' },
+    { h: 'U weet niet welk materiaal past.', p: 'Hout, Padouk, Trespa of Rockpanel: we bespreken samen wat bij uw woning en uw wensen past.' },
+  ],
+  doTitle: 'Een gevel die <em>bij uw woning past</em>',
+  doLead: 'U kiest het materiaal, wij zorgen voor de uitvoering: van de onderconstructie tot de afwerking, met één vast aanspreekpunt.',
+  doTicks: [
+    'Houten planchetten',
+    'Padouk, een tropisch hardhout',
+    'Trespa-panelen',
+    'Rockpanel',
+    'In dezelfde werf als uw dak, als de stelling er al staat',
+    'Hulp bij de keuze tijdens het plaatsbezoek',
+  ],
+  doImages: [
+    { src: '/assets/work/work-07.webp', alt: 'Plat dak met een dakopbouw bekleed met gevelpanelen', w: 1024, h: 576 },
+    { src: '/assets/work/work-13.webp', alt: 'Houten daklijst met tandlijst, timmerwerk aan de dakrand', w: 1600, h: 1242 },
+  ],
+  steps: steps(
+    'Na uw akkoord krijgt u een vaste startdatum. Een gevelbekleding duurt meestal 2 tot 5 werkdagen.',
+    { h: 'Eén ploeg, elke dag opgeruimd', p: 'Dezelfde vaste ploeg werkt van begin tot einde. Containers, valbeveiliging en opruim zitten in de prijs. Uw tuin en oprit blijven heel.' },
+  ),
+  faq: [
+    faqKost,
+    {
+      q: 'Welke materialen kan ik kiezen?',
+      a: 'Houten planchetten, Padouk, Trespa of Rockpanel. Welk materiaal het best bij uw woning past, bespreken we tijdens het plaatsbezoek.',
+    },
+    {
+      q: 'Hoe lang duren de werken?',
+      a: 'Een gevelbekleding: meestal 2 tot 5 dagen. U krijgt de exacte planning vooraf op papier.',
+    },
+    {
+      q: 'Kan de gevel in dezelfde werf als het dak?',
+      a: 'Ja. Staat de stelling er al voor het dak, dan doen we de gevel in dezelfde werf. Dat scheelt tijd en u hebt maar één aanspreekpunt.',
+    },
+    faqGarantie,
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />

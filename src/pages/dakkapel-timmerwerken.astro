@@ -1,0 +1,63 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, faqGarantie, faqVergunning, faqRegen, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Teksten komen uit src/content/services/04-timmerwerken.json en de bevestigde antwoorden op de startpagina.
+   Bewust geen looptijd of prijs voor een dakkapel: daar is niets van bevestigd. */
+const page: LandingData = {
+  slug: 'dakkapel-timmerwerken',
+  title: 'Dakkapel en timmerwerken in Zottegem | INGBELG',
+  description: `Dakkapel plaatsen, nieuwe dakconstructie, dakgoten en houten afwerking in Zottegem en Oost-Vlaanderen. Gratis plaatsbezoek, ${facts.warrantyYears} jaar garantie.`,
+  dienst: 'Timmerwerken en dakkapellen',
+  serviceType: 'Dakkapel en timmerwerken',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  h1Main: 'Dakkapel en timmerwerken',
+  h1Sub: 'Nieuwe dakconstructies en houten afwerking, in Zottegem en heel Oost-Vlaanderen',
+  lead: `Nieuwe dakconstructies, dakkapellen, dakgoten en houten afwerking. Een dakkapel geeft uw zolder stahoogte en daglicht, en dus een kamer die u echt gebruikt. Door onze eigen vaste ploeg, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
+  hero: {
+    src: '/assets/services/timmerwerken.webp',
+    srcset: '/assets/services/timmerwerken-640.webp 640w, /assets/services/timmerwerken.webp 1024w',
+    alt: 'Houten dakconstructie van een nieuwe dakopbouw tijdens de werken',
+  },
+  problems: [
+    { h: 'De zolder is te laag of te donker.', p: 'Een dakkapel geeft stahoogte en daglicht, en maakt van uw zolder een kamer die u echt gebruikt.' },
+    { h: 'U hebt extra woonruimte nodig.', p: 'Vaak zit die al boven uw hoofd. Samen bekijken we wat het dak toelaat.' },
+    { h: 'Uw dakconstructie moet vernieuwd of aangepast worden.', p: 'Wij bouwen nieuwe dakconstructies in hout, door onze eigen timmerlieden.' },
+    { h: 'Uw dakgoten zijn aan vervanging toe.', p: 'Dakgoten plaatsen of vervangen kan in dezelfde werf als uw dak.' },
+    { h: 'De houten dakranden zijn verweerd.', p: 'Een nette houten afwerking van dakrand en daklijst geeft het dak weer een verzorgde uitstraling.' },
+  ],
+  doTitle: 'Timmerwerk door <em>eigen timmerlieden</em>',
+  doLead: 'Dakwerker en timmerman in één ploeg. Dat betekent één planning, één aanspreekpunt en geen wisselende onderaannemers.',
+  doTicks: [
+    'Dakkapellen',
+    'Nieuwe dakconstructies',
+    'Dakgoten plaatsen en vervangen',
+    'Houten afwerking van dakrand en daklijst',
+    'Technische gegevens voor uw vergunningsaanvraag',
+    'Eigen vaste ploeg en één aanspreekpunt',
+  ],
+  doImages: [
+    { src: '/assets/work/work-04.webp', alt: 'Luchtfoto van een nieuw pannendak met een dakkapel en een aanbouw met plat dak', w: 1600, h: 900 },
+    { src: '/assets/work/work-13.webp', alt: 'Houten daklijst met tandlijst, timmerwerk aan de dakrand', w: 1600, h: 1242 },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.'),
+  faq: [
+    faqKost,
+    faqVergunning,
+    {
+      q: 'Wat levert een dakkapel op?',
+      a: 'Een dakkapel geeft uw zolder stahoogte en daglicht, en dus een kamer die u echt gebruikt.',
+    },
+    faqRegen,
+    faqGarantie,
+    faqBtw,
+    faqGratis,
+  ],
+};
+
+---
+<LandingPage page={page} />

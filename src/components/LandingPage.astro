@@ -436,8 +436,8 @@ const isGuide = page.kind === 'guide';
             <option value="Hellende daken" selected={page.dienst === 'Hellende daken'}>Hellend dak</option>
             <option value="Platte daken" selected={page.dienst === 'Platte daken'}>Plat dak</option>
             <option value="Asbestdak vervangen" selected={page.dienst === 'Asbestdak vervangen'}>Asbestdak vervangen</option>
-            <option value="Gevelbekleding">Gevelbekleding</option>
-            <option value="Timmerwerken en dakkapellen">Timmerwerken / dakkapel</option>
+            <option value="Gevelbekleding" selected={page.dienst === 'Gevelbekleding'}>Gevelbekleding</option>
+            <option value="Timmerwerken en dakkapellen" selected={page.dienst === 'Timmerwerken en dakkapellen'}>Timmerwerken / dakkapel</option>
             <option value="Zonnepanelen">Zonnepanelen</option>
             <option value="Ecopanelen">Ecopanelen</option>
             <option value="Daklek / herstelling">Daklek / herstelling</option>
@@ -493,6 +493,8 @@ const isGuide = page.kind === 'guide';
         <li><a href="/hellend-dak">Hellend dak vernieuwen</a></li>
         <li><a href="/plat-dak-epdm">Plat dak (EPDM)</a></li>
         <li><a href="/asbestdak-vervangen">Asbestdak vervangen</a></li>
+        <li><a href="/gevelbekleding">Gevelbekleding</a></li>
+        <li><a href="/dakkapel-timmerwerken">Dakkapel en timmerwerken</a></li>
         <li><a href="/premies-dakwerken-2026">Premies dakwerken 2026</a></li>
         <li><a href="/#diensten">Alle diensten</a></li>
       </ul>
