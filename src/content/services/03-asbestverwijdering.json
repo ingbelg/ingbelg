@@ -11,5 +11,9 @@
   ],
   "imageWidth": 1600,
   "imageHeight": 1067,
-  "page": "/asbestdak-vervangen"
+  "page": "/asbestdak-vervangen",
+  "extra": {
+    "href": "/asbestdak-regels",
+    "label": "Asbestdak: de regels"
+  }
 }

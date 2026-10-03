@@ -12,6 +12,7 @@ const services = defineCollection({
     description: z.string(),
     tags: z.array(z.string()),
     page: z.string().optional(), // pad naar de eigen dienstpagina, bv. "/hellend-dak"
+    extra: z.object({ href: z.string(), label: z.string() }).optional(), // tweede verwijzing, bv. naar een uitlegpagina
   }),
 });
 

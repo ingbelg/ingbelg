@@ -1,0 +1,135 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqKost, faqGratis, faqBtw, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Alle regels komen van OVAM (Vlaamse Openbare Afvalstoffenmaatschappij), geraadpleegd op 3 oktober 2026:
+   - ovam.vlaanderen.be/asbest-verwijderen-of-niet   (goede/slechte staat, nooit bedekken, deadlines, verwijderen bij renovatie)
+   - ovam.vlaanderen.be/wie-mag-wat-verwijderen      (wat een particulier zelf mag)
+   - ovam.vlaanderen.be/actieplan-asbestafbouw       (2032 / 2034 / 2040, enkel publieke gebouwen verplicht)
+   - ovam.vlaanderen.be/veelgestelde-vragen-over-het-asbestattest (attest vanaf 23/11/2022, geldigheid)
+   - ovam.vlaanderen.be/ondersteuning-en-subsidies-voor-particulieren (ophaling via gemeente, Mijn VerbouwPremie enkel via aannemer)
+   Bewust NIET opgenomen: beschermingsmiddelen, hoeveelheden of afvoerprocedures voor zelfverwijdering (staat niet op de OVAM-pagina's),
+   en een erkenning of certificaat van INGBELG (niet bevestigd). Bij nieuwe regelgeving: deze pagina nalezen. */
+const page: LandingData = {
+  slug: 'asbestdak-regels',
+  kind: 'guide',
+  updated: 'oktober 2026',
+  title: 'Asbestdak: wat mag, wat moet en wat niet? Regels in Vlaanderen | INGBELG',
+  description: 'Moet uw asbestdak weg? Wat mag u nooit doen, wanneer is het asbestattest verplicht en welke hulp bestaat er? De regels in Vlaanderen, uitgelegd met bronnen van OVAM.',
+  dienst: 'Asbestdak vervangen',
+  serviceType: 'Asbestdak: regels en advies',
+  eyebrow: 'Asbestdak · Regels in Vlaanderen · 2026',
+  h1Main: 'Asbestdak: de regels',
+  h1Sub: 'Wat mag, wat moet en wat mag u nooit doen? Uitgelegd met bronnen van OVAM.',
+  lead: 'Een asbestdak hoeft niet altijd meteen weg, maar sommige dingen mag u er nooit mee doen. Hieronder staat wanneer verwijderen verplicht is, wat u zelf mag doen, wanneer u een asbestattest nodig hebt en welke hulp er bestaat.',
+  hero: {
+    src: '/assets/services/asbestverwijdering.webp',
+    srcset: '/assets/services/asbestverwijdering-640.webp 640w, /assets/services/asbestverwijdering-1024.webp 1024w, /assets/services/asbestverwijdering.webp 1600w',
+    alt: '',
+  },
+  problemsTitle: 'De regels <em>in het kort</em>',
+  problems: [
+    { h: 'Goede staat: niet verplicht', p: 'Een asbestdak in goede staat hoeft niet meteen weg. Is het broos, beschadigd of geeft het stof af, dan moet het wel weg.' },
+    { h: 'Bij renovatie wél', p: 'Wordt asbest tijdens renovatiewerken eenvoudig bereikbaar, dan moet het worden verwijderd.' },
+    { h: 'Nooit bedekken', p: 'Asbesthoudende dak- of gevelbekleding mag nooit worden bedekt, ook niet als maatregel om het risico te beheren.' },
+    { h: 'Attest bij verkoop', p: 'Verkoopt u een woning van vóór 2001, dan hebt u een asbestattest nodig. Vanaf 2032 geldt dat voor elke eigenaar.' },
+  ],
+  guide: [
+    {
+      h: 'Moet mijn asbestdak weg?',
+      paras: [
+        'Niet altijd. Volgens OVAM bestaat er <strong>geen algemene verwijderplicht</strong> voor een asbestdak in goede staat. Een asbesttoepassing in slechte staat moet wel weg: dat is een toepassing die broos of beschadigd is, afbrokkelt of stof afgeeft.',
+        'Er is één belangrijke uitzondering. Bij <strong>renovatiewerken</strong> moet alle asbest dat daardoor eenvoudig bereikbaar wordt, worden verwijderd. Wilt u uw dak dus vernieuwen, dan gaat het asbest mee weg.',
+      ],
+    },
+    {
+      h: 'Wat mag u nooit doen met een asbestdak?',
+      bullets: true,
+      list: [
+        'Het asbest <strong>breken</strong> of vergruizen.',
+        'Het <strong>afschuren</strong>.',
+        'Stukken <strong>van het dak naar beneden gooien</strong>.',
+        'Het asbest <strong>bedekken</strong>: asbesthoudende dak- of gevelbekleding mag nooit worden bedekt, ook niet als risicobeheermaatregel. In de praktijk betekent dat dat u er geen nieuwe dakbedekking of zonnepanelen op kunt leggen.',
+      ],
+      paras: ['Elke handeling die schadelijke asbestvezels vrijmaakt, is in Vlaanderen verboden.'],
+    },
+    {
+      h: 'Mag u asbest zelf verwijderen?',
+      paras: [
+        'Volgens OVAM mag een particulier <strong>hechtgebonden asbest buiten een gebouw</strong> (zoals golfplaten of leien op een dak) zelf verwijderen, als het materiaal niet beschadigd is. Is het wel beschadigd, dan mag dat enkel als er niemand in de buurt is en het materiaal niet verder beschadigt.',
+        'Voor niet-hechtgebonden asbest (zoals touwen, dichtingen en remvoeringen), spuitasbest, pleisterwerk, leidingisolatie en lijmlagen is een erkende asbestverwijderaar nodig.',
+        'Wij raden af om een asbestdak zelf af te halen. Op een dak komt werken op hoogte bij, en de asbestbonus van Mijn VerbouwPremie krijgt u <strong>enkel als een aannemer het asbest verwijdert</strong>. Doet u het zelf, dan valt die bonus weg.',
+      ],
+    },
+    {
+      h: 'Wanneer hebt u een asbestattest nodig?',
+      list: [
+        '<strong>Bij verkoop</strong> van een gebouw van vóór 2001. Dat is verplicht sinds 23 november 2022 en moet bij het compromis bezorgd worden.',
+        '<strong>Vanaf 2032</strong> moet elke eigenaar van een gebouw van vóór 2001 een geldig asbestattest hebben, ook zonder verkoop.',
+        'Het attest wordt opgemaakt door een <strong>erkend asbestinventarisdeskundige</strong>. U kiest zelf een deskundige uit de lijst van OVAM.',
+        'Het attest is meestal 10 jaar geldig, 5 jaar bij risicovolle asbesttoepassingen. Wordt er geen asbest gevonden, dan is het sinds 8 april 2024 onbeperkt geldig.',
+        'Is uw gebouw van na 2001, dan is er geen attest nodig.',
+      ],
+    },
+    {
+      h: 'En de data 2034 en 2040?',
+      paras: [
+        'Het Actieplan Asbestafbouw van de Vlaamse overheid mikt op een asbestveilige leefomgeving tegen 2040. De risicovolste toepassingen, zoals asbestcement op daken en gevels, moeten volgens het plan tegen 2034 weg. Alle andere asbest in slechte staat moet tegen 2040 weg.',
+        'Voorlopig zijn die data <strong>enkel wettelijk verplicht voor publieke gebouwen</strong>. Voor particulieren zijn ze streefdata. Voor u geldt de verplichting wanneer asbest tijdens renovatiewerken bereikbaar wordt, of wanneer het in slechte staat is.',
+      ],
+    },
+    {
+      h: 'Wat kost het en welke hulp bestaat er?',
+      list: [
+        '<strong>Ophaling via uw gemeente.</strong> Volgens OVAM kost de ophaling van asbestcement bij uw woning een zak ongeveer € 30 tot € 40 en een container € 170, inclusief beschermingsmiddelen en een adviesbrochure. Vraag de details na bij uw gemeente.',
+        '<strong>Asbestbonus van Mijn VerbouwPremie.</strong> € 8 per m² verwijderd asbest, voor maximaal 50 % van de totale factuur, voor inkomenscategorie 3 en 4 en samen met nieuwe dakisolatie. Alle voorwaarden staan in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
+        '<strong>Mijn VerbouwLening.</strong> Een voordelige lening tot € 60.000 voor woningkwaliteit en energieprestatie.',
+      ],
+    },
+    {
+      h: 'Hoe pakken wij een asbestdak aan?',
+      paras: [
+        'We halen het asbest veilig weg, voeren het correct af en leggen in dezelfde werf uw nieuwe, geïsoleerde dak. U krijgt het attest van de verwijdering, dat u ook nodig hebt voor de premie. Meer daarover leest u op de pagina <a href="/asbestdak-vervangen">asbestdak vervangen</a>.',
+        'Deze pagina is een uitleg van de regels, geen juridisch advies. Voor uw situatie geldt altijd de officiële informatie van OVAM.',
+      ],
+    },
+  ],
+  sources: [
+    { label: 'OVAM: asbest verwijderen of niet', href: 'https://ovam.vlaanderen.be/asbest-verwijderen-of-niet' },
+    { label: 'OVAM: wie mag wat verwijderen', href: 'https://ovam.vlaanderen.be/wie-mag-wat-verwijderen' },
+    { label: 'OVAM: actieplan asbestafbouw', href: 'https://ovam.vlaanderen.be/actieplan-asbestafbouw' },
+    { label: 'OVAM: veelgestelde vragen over het asbestattest', href: 'https://ovam.vlaanderen.be/veelgestelde-vragen-over-het-asbestattest' },
+    { label: 'OVAM: ondersteuning voor particulieren bij asbestverwijdering', href: 'https://ovam.vlaanderen.be/ondersteuning-en-subsidies-voor-particulieren' },
+  ],
+  steps: steps(
+    'Asbest eraf en nieuw dak erop in één werf. Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.',
+    { h: 'Veilig afgevoerd, elke avond waterdicht', p: "Het asbest wordt correct afgevoerd. Open dakvlakken gaan 's avonds onder ons zeil. Containers, valbeveiliging en opruim zitten in de prijs." },
+  ),
+  faq: [
+    {
+      q: 'Moet mijn asbestdak weg?',
+      a: 'Niet meteen, zolang het in goede staat is. Een asbestdak in slechte staat (broos, beschadigd, afbrokkelend of stof afgevend) moet wel weg. Ook bij renovatiewerken moet asbest dat eenvoudig bereikbaar wordt, worden verwijderd.',
+    },
+    {
+      q: 'Mag ik mijn asbestdak zelf afbreken?',
+      a: 'Een particulier mag hechtgebonden asbest buiten een gebouw onder voorwaarden zelf verwijderen, maar breken, afschuren of van het dak gooien is altijd verboden. Wij raden af om het zelf te doen: werken op hoogte is riskant en de asbestbonus van Mijn VerbouwPremie krijgt u enkel als een aannemer het asbest verwijdert.',
+    },
+    {
+      q: 'Wanneer is een asbestattest verplicht?',
+      a: 'Bij de verkoop van een gebouw van vóór 2001, sinds 23 november 2022. Vanaf 2032 moet elke eigenaar van een gebouw van vóór 2001 een geldig attest hebben. Het wordt opgemaakt door een erkend asbestinventarisdeskundige.',
+    },
+    {
+      q: 'Mag ik zonnepanelen op een asbestdak leggen?',
+      a: 'Nee. Asbesthoudende dakbekleding mag nooit worden bedekt, ook niet als risicobeheermaatregel. Eerst het asbest verwijderen en een nieuw dak leggen, dan pas de panelen.',
+    },
+    faqKost,
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />

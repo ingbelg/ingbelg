@@ -21,7 +21,7 @@ export interface LandingData {
   problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
   kind?: 'service' | 'guide';   // 'guide' = informatieve pagina (geen Service-schema, geen "Onze aanpak"-blok)
   updated?: string;             // bv. "oktober 2026" (enkel voor guide)
-  guide?: { h: string; paras?: string[]; list?: string[]; table?: { head: string[]; rows: string[][] } }[];
+  guide?: { h: string; paras?: string[]; list?: string[]; bullets?: boolean; table?: { head: string[]; rows: string[][] } }[];
   sources?: { label: string; href: string }[];
   doTitle?: string;             // titel van "wat we doen" (HTML toegestaan: <em>)
   doLead?: string;
@@ -30,7 +30,8 @@ export interface LandingData {
   ba?: boolean;                 // voor/na-sliders tonen
   photos?: { src: string; alt: string; w: number; h: number }[];
   steps: { h: string; p: string }[];
-  note?: { title: string; text: string };   // extra blok (premie/btw/asbestregels)
+  note?: { title: string; text: string };
+  related?: { text: string; href: string; label: string }; // verwijzing naar een verwante uitlegpagina (komt boven de CTA)   // extra blok (premie/btw/asbestregels)
   faq: { q: string; a: string }[];
   serviceType: string;
 }
@@ -154,7 +155,7 @@ const isGuide = page.kind === 'guide';
           <>
             {g.h && <h2>{g.h}</h2>}
             {g.paras && g.paras.map((t) => <p set:html={t}></p>)}
-            {g.list && <ul class="ticks" style="list-style:none;padding-left:0">{g.list.map((t) => <li set:html={t}></li>)}</ul>}
+            {g.list && (g.bullets ? <ul>{g.list.map((t) => <li set:html={t}></li>)}</ul> : <ul class="ticks" style="list-style:none;padding-left:0">{g.list.map((t) => <li set:html={t}></li>)}</ul>)}
             {g.table && (
               <div class="legal__tablewrap">
                 <table class="legal__table">
@@ -301,6 +302,14 @@ const isGuide = page.kind === 'guide';
         <a class="btn btn--primary" href="/#calculator"><span>Bereken uw premie</span></a>
         {!isGuide && <a class="btn btn--line" href="/premies-dakwerken-2026"><span>Alles over de premies 2026</span></a>}
       </p>
+    </div>
+  </section>
+)}
+
+{page.related && (
+  <section class="section" style="padding-block:clamp(36px,5vw,64px)">
+    <div class="container">
+      <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center">{page.related.text} <a href={page.related.href}><strong>{page.related.label}</strong></a></p>
     </div>
   </section>
 )}
@@ -496,6 +505,7 @@ const isGuide = page.kind === 'guide';
         <li><a href="/gevelbekleding">Gevelbekleding</a></li>
         <li><a href="/dakkapel-timmerwerken">Dakkapel en timmerwerken</a></li>
         <li><a href="/premies-dakwerken-2026">Premies dakwerken 2026</a></li>
+        <li><a href="/asbestdak-regels">Asbestdak: de regels</a></li>
         <li><a href="/#diensten">Alle diensten</a></li>
       </ul>
     </div>
