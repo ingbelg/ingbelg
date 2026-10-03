@@ -134,10 +134,11 @@ const faqItems = [
 {/* ============ HERO ============ */}
 <section class="hero" id="top">
   <div class="hero__media">
-    {/* T-08: preload="none" + Save-Data-check in main.js (skipVideoOnSaveData) laat op trage verbindingen enkel de poster zien */}
-    <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="none" poster="/assets/services/hellende-daken.webp">
-      <source src="/assets/hero_mobile.mp4" type="video/mp4" media="(max-width: 760px)">
-      <source src="/assets/hero.mp4" type="video/mp4">
+    {/* T-08: de video (16–19 MB) laadt pas na window.load via main.js — eerst de poster, zodat de video niet
+         concurreert met foto's/fonts/scripts. Bij Save-Data of zonder JS blijft het bij de poster. */}
+    <video class="hero__video" id="heroVideo" muted loop playsinline preload="none" poster="/assets/services/hellende-daken.webp">
+      <source data-src="/assets/hero_mobile.mp4" type="video/mp4" media="(max-width: 760px)">
+      <source data-src="/assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero__scrim"></div>
     <div class="hero__grain"></div>

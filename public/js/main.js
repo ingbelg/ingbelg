@@ -5,11 +5,17 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
-  /* ---------- Hero-video: niet laden bij Save-Data (T-08) ---------- */
+  /* ---------- Hero-video: pas laden na window.load, nooit bij Save-Data (T-08) ---------- */
   var heroVideo = $('#heroVideo');
-  if (heroVideo && navigator.connection && navigator.connection.saveData) {
-    heroVideo.removeAttribute('autoplay');
-    heroVideo.querySelectorAll('source').forEach(function (s) { s.remove(); });
+  if (heroVideo && !(navigator.connection && navigator.connection.saveData)) {
+    var startHeroVideo = function () {
+      heroVideo.querySelectorAll('source[data-src]').forEach(function (s) { s.src = s.getAttribute('data-src'); });
+      heroVideo.load();
+      var p = heroVideo.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    if (document.readyState === 'complete') startHeroVideo();
+    else window.addEventListener('load', startHeroVideo, { once: true });
   }
 
   /* ---------- Jaartal in footer ---------- */
