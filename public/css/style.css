@@ -782,6 +782,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 .calc__details{max-width:78ch;margin:10px auto 0;text-align:center}
 .calc__details summary{cursor:pointer;font-size:13.5px;color:var(--red);font-weight:700}
 .calc__details .calc__disclaimer{margin-top:10px}
+.calc__disclaimer a,.check a{color:var(--red);text-decoration:underline;text-underline-offset:2px}
 
 /* ============================================================
    LEGAL PAGES (privacybeleid / cookiebeleid)
@@ -793,6 +794,8 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 .legal__body h3{font-size:18px;text-transform:none;margin:24px 0 8px;color:var(--ink)}
 .legal__body ul{list-style:disc;padding-left:22px;margin:0 0 1.1em}
 .legal__body li{margin-bottom:6px;color:var(--ink-2)}
+.legal__swipe{display:none;font-size:14px;color:var(--slate);margin:0 0 .6em}
+@media (max-width:700px){.legal__swipe{display:block}}
 .legal__tablewrap{overflow-x:auto;margin:0 0 1.4em;border:1px solid var(--line);border-radius:var(--r)}
 .legal__table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
 .legal__table th,.legal__table td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
@@ -1064,6 +1067,10 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   .btn--lg{padding:16px 14px;gap:8px;font-size:13.5px;letter-spacing:.02em}
   .btn--lg svg{width:16px;height:16px}
   .about__cta .btn{padding:15px 18px;font-size:14px;letter-spacing:.03em}
+  /* Smalle telefoons (320 px): "PLAATSBEZOEK" paste niet in zijn kolom en stak buiten het scherm */
+  .mobilebar{padding-left:8px;padding-right:8px;gap:6px;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.25fr)}
+  .mobilebar a{min-width:0;padding:12px 4px;gap:5px;font-size:12.5px;letter-spacing:.02em}
+  .mobilebar a svg{width:15px;height:15px}
 }
 
 @media (prefers-reduced-motion:reduce){
