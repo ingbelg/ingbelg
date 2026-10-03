@@ -259,11 +259,12 @@ const faqItems = [
           <div class="svc__img"><img src={s.data.image} alt={s.data.title} width={s.data.imageWidth} height={s.data.imageHeight} loading="lazy" /></div>
           <div class="svc__body">
             <span class="svc__num">{s.data.num}</span>
-            <h3>{s.data.title}</h3>
+            <h3>{s.data.page ? <a href={s.data.page}>{s.data.title}</a> : s.data.title}</h3>
             <p>{s.data.description}</p>
             <ul class="svc__tags">
               {s.data.tags.map((tag) => <li>{tag}</li>)}
             </ul>
+            {s.data.page && <a class="svc__more" href={s.data.page}>Meer over {s.data.title.toLowerCase()}</a>}
             <a class="svc__link" href="#contact" data-service={s.data.title}>Vraag een plaatsbezoek
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>

@@ -11,6 +11,7 @@ const services = defineCollection({
     imageHeight: z.number(),
     description: z.string(),
     tags: z.array(z.string()),
+    page: z.string().optional(), // pad naar de eigen dienstpagina, bv. "/hellend-dak"
   }),
 });
 

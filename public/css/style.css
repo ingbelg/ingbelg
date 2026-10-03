@@ -396,6 +396,9 @@ a.topbar__item:hover svg{transform:scale(1.2)}
   border:1px solid var(--line);transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
 }
 .svc:hover .svc__tags li{background:rgba(211,55,44,.07);color:var(--red);border-color:rgba(211,55,44,.2)}
+.svc__body h3 a{color:inherit}
+.svc__more{display:inline-block;align-self:flex-start;margin:0 0 20px;font-weight:700;font-size:15px;color:var(--red);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(211,55,44,.35)}
+.svc__more:hover{text-decoration-color:var(--red)}
 .svc__link{
   display:inline-flex;align-items:center;gap:9px;
   font-family:var(--font-head);font-size:15px;font-weight:700;letter-spacing:.09em;
