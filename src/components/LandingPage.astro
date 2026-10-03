@@ -15,7 +15,7 @@ export interface LandingData {
   h1Main: string;
   h1Sub: string;
   lead: string;
-  hero: { src: string; alt: string };
+  hero: { src: string; alt: string; srcset?: string };
   ogImage?: string;
   problems: { h: string; p: string }[];
   problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
@@ -95,7 +95,7 @@ const isGuide = page.kind === 'guide';
 {/* ============ HERO ============ */}
 <section class="hero" id="top">
   <div class="hero__media">
-    <img class="hero__video" src={page.hero.src} alt={page.hero.alt} width="1600" height="900" fetchpriority="high">
+    <img class="hero__video" src={page.hero.src} srcset={page.hero.srcset} sizes={page.hero.srcset ? '100vw' : undefined} alt={page.hero.alt} width="1600" height="900" fetchpriority="high" decoding="async">
     <div class="hero__scrim"></div>
     <div class="hero__grain"></div>
   </div>
