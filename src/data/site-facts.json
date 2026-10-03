@@ -1,5 +1,5 @@
 {
-  "legalName": "INGBELG CV",
+  "legalName": "Ing Belg BV",
   "vat": "BE 0721.841.831",
   "vatCompact": "BE0721841831",
   "phone": "+32 488 87 60 61",
@@ -59,8 +59,8 @@
     "tiktok": "https://www.tiktok.com/@ingbelg_belgium",
     "facebook": "https://www.facebook.com/people/IngBelg/61593614665497/"
   },
-  "_confirm": "Bevestigd door de klant (2026-10-03): roofsDone (400+), teamSize (20), warrantyYears (15 jaar op werken en materialen, ook op de offertes), callback/offertetermijnen, actieradius, merken Firestone/Rockpanel. Nog open: legalName (CV of BV — Odoo en offertes zeggen \"Ing Belg bv\"), foundedYear.",
-  "privacyUpdated": "30 september 2026",
+  "_confirm": "Bevestigd door de klant (2026-10-03): roofsDone (400+), teamSize (20), warrantyYears (15 jaar op werken en materialen, ook op de offertes), callback/offertetermijnen, actieradius, merken Firestone/Rockpanel. legalName = \"Ing Belg BV\" volgens de KBO (Kruispuntbank van Ondernemingen, geraadpleegd 2026-10-03: Ing Belg, besloten vennootschap, actief, Hoogstraat 59 Zottegem, begin 5 maart 2019). Nog open: foundedYear (ervaring ≠ oprichtingsdatum).",
+  "privacyUpdated": "3 oktober 2026",
   "launched": true,
   "siteUrl": "https://ingbelg.be"
 }
