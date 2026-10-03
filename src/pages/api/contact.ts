@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import facts from '../../data/site-facts.json';
+import { callbackDeadline } from '../../lib/callback';
 
 // Server-side route — draait altijd live, wordt niet mee statisch gebouwd.
 export const prerender = false;
@@ -48,7 +50,11 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const subject = `Offerteaanvraag — ${data.dienst}`;
+  // De site belooft een terugbelafspraak binnen X werkdag: zet de deadline zichtbaar bovenaan (mail én Odoo-lead).
+  const deadline = callbackDeadline();
   const body = [
+    deadline ? `TERUGBELLEN VÓÓR: ${deadline} (belofte: binnen ${facts.callbackWorkdays} werkdag)` : null,
+    deadline ? '' : null,
     `Naam: ${data.naam}`,
     `Telefoon: ${data.telefoon}`,
     `E-mail: ${data.email}`,
