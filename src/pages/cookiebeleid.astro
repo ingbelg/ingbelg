@@ -5,6 +5,9 @@ import LegalFoot from '../components/LegalFoot.astro';
 import facts from '../data/site-facts.json';
 
 export const prerender = true;
+
+/* Advertentietekst staat enkel op de pagina als Google Ads effectief aan staat (PUBLIC_ADS_ID). */
+const adsOn = !!import.meta.env.PUBLIC_ADS_ID;
 ---
 <Layout title="Cookiebeleid | INGBELG" description="Welke cookies en vergelijkbare technieken de website van INGBELG gebruikt, waarvoor, en hoe u uw keuze aanpast.">
 {/* ⚠️ CONFIRM T-04: standaardtekst, geen juridisch advies; laten nakijken vóór livegang. Pas de tabel aan zodra er nieuwe
@@ -46,6 +49,15 @@ export const prerender = true;
               <td>Tot 2 jaar. Gegevens in Analytics: 14 maanden.</td>
               <td>Ja, categorie <strong>Analyse</strong></td>
             </tr>
+            {adsOn && (
+              <tr>
+                <td><code>_gcl_*</code>, <code>_gac_*</code>, <code>IDE</code> en verwante Google Ads-cookies</td>
+                <td>Google Ads (Google)</td>
+                <td>Meten of een advertentie tot een aanvraag of oproep leidt (conversiemeting) en advertenties tonen.</td>
+                <td>Tot 90 dagen (indicatief; zie Google).</td>
+                <td>Ja, categorie <strong>Marketing</strong></td>
+              </tr>
+            )}
             <tr>
               <td>Widget met Google-reviews (scripts en opslag van Trustindex)</td>
               <td>Trustindex (<code>cdn.trustindex.io</code>)</td>
@@ -56,11 +68,13 @@ export const prerender = true;
           </tbody>
         </table>
       </div>
-      <p>Voordat u kiest, worden Google Analytics en de Trustindex-widget <strong>niet geladen</strong>. Uw browser maakt dan geen verbinding met die diensten.</p>
+      <p>Voordat u kiest, worden {adsOn ? 'Google Analytics, Google Ads' : 'Google Analytics'} en de Trustindex-widget <strong>niet geladen</strong>. Uw browser maakt dan geen verbinding met die diensten.</p>
 
       <h2>Wat gebruiken we niet?</h2>
       <ul>
-        <li>Geen advertentiecookies en geen tracking voor reclame.</li>
+        {adsOn
+          ? <li>Geen advertentiecookies zonder uw toestemming voor de categorie Marketing. Zonder die toestemming meten we geen advertentieresultaten.</li>
+          : <li>Geen advertentiecookies en geen tracking voor reclame.</li>}
         <li>Geen pixels van sociale netwerken.</li>
         <li>Geen Google Fonts van een externe server: de lettertypes staan op onze eigen website.</li>
       </ul>

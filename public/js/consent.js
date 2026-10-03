@@ -4,12 +4,22 @@
    - noodzakelijk : altijd aan (enkel localStorage 'ingbelg_consent', onthoudt de keuze)
    - analytics    : Google Analytics 4, pas geladen na toestemming
    - external     : externe inhoud van derden (Google-reviews via Trustindex), pas geladen na toestemming
-   Advertentie-signalen staan altijd op 'denied': deze site gebruikt geen advertenties. */
+   - marketing    : Google Ads (conversiemeting), ENKEL actief als PUBLIC_ADS_ID is ingesteld (data-ads-id op <body>).
+                    Zonder dat ID bestaat deze categorie niet en blijven alle advertentie-signalen op 'denied'. */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'ingbelg_consent';
-  var gaId = document.body.getAttribute('data-ga-id') || '';
+  var body = document.body;
+  var gaId = body.getAttribute('data-ga-id') || '';
+  var adsId = body.getAttribute('data-ads-id') || '';
+  var hasAds = !!adsId;
+  /* Conversielabels van Google Ads (optioneel): event van de site → label uit het Ads-account. */
+  var adsLabels = {
+    lead_form_submit: body.getAttribute('data-ads-lead-label') || '',
+    click_call: body.getAttribute('data-ads-call-label') || '',
+    click_whatsapp: body.getAttribute('data-ads-whatsapp-label') || ''
+  };
 
   var $ = function (s) { return document.querySelector(s); };
   var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
@@ -21,44 +31,53 @@
     if (!raw) return null;
     try {
       var o = JSON.parse(raw);
-      if (o && o.v === 2) return { analytics: !!o.analytics, external: !!o.external };
+      if (o && o.v === 2) {
+        /* Advertenties net ingeschakeld en de bezoeker kreeg de marketingvraag nog niet → opnieuw vragen. */
+        if (hasAds && typeof o.marketing === 'undefined') return null;
+        return { analytics: !!o.analytics, external: !!o.external, marketing: hasAds && !!o.marketing };
+      }
     } catch (e) { /* oude waarde 'granted'/'denied' (v1) → opnieuw vragen */ }
     return null;
   };
   var write = function (c) {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        v: 2, analytics: !!c.analytics, external: !!c.external, ts: new Date().toISOString()
+        v: 2, analytics: !!c.analytics, external: !!c.external, marketing: hasAds && !!c.marketing,
+        ts: new Date().toISOString()
       }));
     } catch (e) { /* privé-modus */ }
   };
 
-  /* ---------- Google Analytics ---------- */
-  var loadGa = function () {
-    if (!gaId || document.getElementById('ga4-script')) return;
+  /* ---------- Google tag (Analytics en/of Ads) ---------- */
+  var configured = { ga: false, ads: false };
+  var loadGtag = function () {
+    var id = gaId || adsId;
+    if (!id || document.getElementById('gtag-script')) return;
     var s = document.createElement('script');
-    s.id = 'ga4-script';
+    s.id = 'gtag-script';
     s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
     document.head.appendChild(s);
     window.gtag('js', new Date());
-    window.gtag('config', gaId);
   };
-  var applyAnalytics = function (on) {
+  var applyConsent = function (c) {
+    var ads = hasAds && c.marketing ? 'granted' : 'denied';
     window.gtag('consent', 'update', {
-      ad_storage: 'denied',
-      analytics_storage: on ? 'granted' : 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
+      ad_storage: ads,
+      analytics_storage: c.analytics ? 'granted' : 'denied',
+      ad_user_data: ads,
+      ad_personalization: ads
     });
-    if (on) loadGa();
+    if (c.analytics || (hasAds && c.marketing)) loadGtag();
+    if (c.analytics && gaId && !configured.ga) { window.gtag('config', gaId); configured.ga = true; }
+    if (hasAds && c.marketing && !configured.ads) { window.gtag('config', adsId); configured.ads = true; }
   };
-  var clearGaCookies = function () {
+  var clearGoogleCookies = function () {
     var parts = window.location.hostname.split('.');
     var domains = ['', window.location.hostname, '.' + window.location.hostname, '.' + parts.slice(-2).join('.')];
     document.cookie.split(';').forEach(function (c) {
       var name = c.split('=')[0].trim();
-      if (!/^(_ga|_gid|_gat)/.test(name)) return;
+      if (!/^(_ga|_gid|_gat|_gcl|_gac)/.test(name)) return;
       domains.forEach(function (d) {
         document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/' + (d ? ';domain=' + d : '');
       });
@@ -83,8 +102,10 @@
   var prefs = $('#cookiePrefs');
   var prefAnalytics = $('#prefAnalytics');
   var prefExternal = $('#prefExternal');
+  var prefMarketing = $('#prefMarketing');
   var btnSettings = $('#cookieSettings');
   var prefsOpen = false;
+  var none = { analytics: false, external: false, marketing: false };
 
   var setPrefsOpen = function (open) {
     prefsOpen = open;
@@ -96,9 +117,10 @@
   };
   var showBar = function (withPrefs) {
     if (!bar) return;
-    var cur = read() || { analytics: false, external: false };
+    var cur = read() || none;
     if (prefAnalytics) prefAnalytics.checked = cur.analytics;
     if (prefExternal) prefExternal.checked = cur.external;
+    if (prefMarketing) prefMarketing.checked = cur.marketing;
     setPrefsOpen(!!withPrefs);
     bar.hidden = false;
   };
@@ -108,24 +130,28 @@
     var prev = read();
     write(c);
     hideBar();
-    var revoked = prev && ((prev.analytics && !c.analytics) || (prev.external && !c.external));
+    var revoked = prev && ((prev.analytics && !c.analytics) || (prev.external && !c.external) || (prev.marketing && !c.marketing));
     if (revoked) {
-      // Ingetrokken: analytics-cookies wissen en de pagina herladen zodat externe scripts verdwijnen.
-      clearGaCookies();
+      // Ingetrokken: Google-cookies wissen en de pagina herladen zodat externe scripts verdwijnen.
+      clearGoogleCookies();
       window.location.reload();
       return;
     }
-    applyAnalytics(c.analytics);
+    applyConsent(c);
     if (c.external) loadExternal();
   };
 
   var acceptBtn = $('#cookieAccept');
   var rejectBtn = $('#cookieReject');
-  if (acceptBtn) acceptBtn.addEventListener('click', function () { save({ analytics: true, external: true }); });
-  if (rejectBtn) rejectBtn.addEventListener('click', function () { save({ analytics: false, external: false }); });
+  if (acceptBtn) acceptBtn.addEventListener('click', function () { save({ analytics: true, external: true, marketing: true }); });
+  if (rejectBtn) rejectBtn.addEventListener('click', function () { save(none); });
   if (btnSettings) btnSettings.addEventListener('click', function () {
     if (!prefsOpen) { setPrefsOpen(true); return; }
-    save({ analytics: !!(prefAnalytics && prefAnalytics.checked), external: !!(prefExternal && prefExternal.checked) });
+    save({
+      analytics: !!(prefAnalytics && prefAnalytics.checked),
+      external: !!(prefExternal && prefExternal.checked),
+      marketing: !!(prefMarketing && prefMarketing.checked)
+    });
   });
 
   /* Footer/cookiebeleid: "Cookie-instellingen" heropent de banner met de huidige keuze. */
@@ -135,8 +161,8 @@
     var ext = e.target.closest && e.target.closest('[data-consent-external]');
     if (ext) {
       e.preventDefault();
-      var cur = read() || { analytics: false, external: false };
-      save({ analytics: cur.analytics, external: true });
+      var cur = read() || none;
+      save({ analytics: cur.analytics, external: true, marketing: cur.marketing });
     }
   });
 
@@ -145,7 +171,7 @@
   /* ---------- Start ---------- */
   var stored = read();
   if (stored) {
-    applyAnalytics(stored.analytics);
+    applyConsent(stored);
     if (stored.external) loadExternal();
   } else {
     showBar(false);
@@ -155,6 +181,12 @@
   window.ingbelgTrack = function (name, params) {
     window.dataLayer = window.dataLayer || [];
     window.gtag('event', name, params || {});
+    /* Google Ads-conversie: enkel met toestemming voor marketing en als er een label is ingesteld. */
+    var label = adsLabels[name];
+    var cur = read();
+    if (hasAds && label && cur && cur.marketing) {
+      window.gtag('event', 'conversion', { send_to: adsId + '/' + label });
+    }
   };
 
   document.addEventListener('click', function (e) {

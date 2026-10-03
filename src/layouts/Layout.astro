@@ -29,6 +29,12 @@ const canonical = new URL(Astro.url.pathname, site);
 const ogImage = new URL(image, site);
 
 const gaId = import.meta.env.PUBLIC_GA_ID || '';
+/* Google Ads: alles hieronder blijft leeg tot er een Ads-account is. Leeg = geen marketingcategorie in de banner,
+   geen advertentie-signalen, geen conversies (zie public/js/consent.js). */
+const adsId = import.meta.env.PUBLIC_ADS_ID || '';
+const adsLeadLabel = import.meta.env.PUBLIC_ADS_LEAD_LABEL || '';
+const adsCallLabel = import.meta.env.PUBLIC_ADS_CALL_LABEL || '';
+const adsWhatsappLabel = import.meta.env.PUBLIC_ADS_WHATSAPP_LABEL || '';
 ---
 
 <!DOCTYPE html>
@@ -134,18 +140,19 @@ const gaId = import.meta.env.PUBLIC_GA_ID || '';
      manipulatie beschouwen. Rating/aantal reviews staat wel zichtbaar in de tekst (C-01, C-07, C-20). */
 })} />
 </head>
-<body data-ga-id={gaId}>
+<body data-ga-id={gaId} data-ads-id={adsId} data-ads-lead-label={adsLeadLabel} data-ads-call-label={adsCallLabel} data-ads-whatsapp-label={adsWhatsappLabel}>
 <slot />
 
 {/* ============ COOKIEBANNER (T-04) ============ */}
 <div class="cookiebar" id="cookiebar" role="dialog" aria-labelledby="cookieTitle" hidden>
   <div class="cookiebar__in">
     <div class="cookiebar__txt">
-      <p><strong id="cookieTitle">Uw keuze over cookies.</strong> Deze site werkt met enkel noodzakelijke opslag. Met uw toestemming laden we ook Google Analytics (bezoekersstatistieken) en externe inhoud (Google-reviews via Trustindex). U kan uw keuze op elk moment aanpassen. Lees ons <a href="/cookiebeleid">cookiebeleid</a>.</p>
+      <p><strong id="cookieTitle">Uw keuze over cookies.</strong> Deze site werkt met enkel noodzakelijke opslag. Met uw toestemming laden we ook Google Analytics (bezoekersstatistieken){adsId ? ', Google Ads (meten of onze advertenties tot een aanvraag leiden)' : ''} en externe inhoud (Google-reviews via Trustindex). U kan uw keuze op elk moment aanpassen. Lees ons <a href="/cookiebeleid">cookiebeleid</a>.</p>
       <div class="cookiebar__prefs" id="cookiePrefs" hidden>
         <label class="cookiebar__pref"><input type="checkbox" checked disabled><span><strong>Noodzakelijk</strong> — onthoudt uw cookiekeuze. Altijd actief.</span></label>
         <label class="cookiebar__pref"><input type="checkbox" id="prefAnalytics"><span><strong>Analyse</strong> — Google Analytics: hoeveel bezoekers, welke pagina's, gebruikte formulieren.</span></label>
         <label class="cookiebar__pref"><input type="checkbox" id="prefExternal"><span><strong>Externe inhoud</strong> — Google-reviews, getoond via Trustindex.</span></label>
+        {adsId && <label class="cookiebar__pref"><input type="checkbox" id="prefMarketing"><span><strong>Marketing</strong> — Google Ads: meten of een advertentie tot een aanvraag of oproep leidt, en advertenties tonen.</span></label>}
       </div>
     </div>
     <div class="cookiebar__actions">

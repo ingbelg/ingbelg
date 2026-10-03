@@ -5,6 +5,9 @@ import LegalFoot from '../components/LegalFoot.astro';
 import facts from '../data/site-facts.json';
 
 export const prerender = true;
+
+/* Advertentietekst staat enkel op de pagina als Google Ads effectief aan staat (PUBLIC_ADS_ID). */
+const adsOn = !!import.meta.env.PUBLIC_ADS_ID;
 ---
 <Layout title="Privacybeleid | INGBELG" description="Hoe INGBELG omgaat met uw persoonsgegevens: welke gegevens, waarom, hoe lang, met wie en welke rechten u hebt.">
 {/* ⚠️ CONFIRM T-04: dit is een standaardtekst op basis van de AVG/GDPR, geen juridisch sluitend advies.
@@ -51,6 +54,13 @@ export const prerender = true;
       <h3>Bezoekersstatistieken (Google Analytics)</h3>
       <p>Enkel als u daarvoor toestemming geeft in de cookiebanner. We zien dan hoeveel mensen de site bezoeken, welke onderdelen ze bekijken en of ze het formulier of de premie-check gebruiken. <em>Basis:</em> uw toestemming (art. 6.1.a AVG), die u op elk moment kan intrekken.</p>
 
+      {adsOn && (
+        <>
+          <h3>Advertenties meten (Google Ads)</h3>
+          <p>Enkel als u daarvoor toestemming geeft (categorie Marketing in de cookiebanner). We zien dan of een advertentie van ons tot een offerteaanvraag, een oproep of een WhatsApp-bericht leidde, en Google kan advertenties tonen. We krijgen geen persoonlijke gegevens van u via Google; het gaat om geaggregeerde resultaten. <em>Basis:</em> uw toestemming (art. 6.1.a AVG), die u op elk moment kan intrekken.</p>
+        </>
+      )}
+
       <h3>Externe inhoud (Google-reviews via Trustindex)</h3>
       <p>Enkel als u daarvoor toestemming geeft, laden we de reviewwidget van Trustindex. Uw browser maakt dan verbinding met die dienst. <em>Basis:</em> uw toestemming (art. 6.1.a AVG), die u op elk moment kan intrekken.</p>
 
@@ -59,7 +69,7 @@ export const prerender = true;
         <li><strong>Aanvragen die niet tot een opdracht leiden:</strong> maximaal 2 jaar na ons laatste contact.</li>
         <li><strong>Klanten:</strong> zolang nodig voor de uitvoering van de werken en de garantietermijn ({facts.warrantyYears} jaar), en zolang de wet ons verplicht boekhoudkundige stukken te bewaren (7 jaar).</li>
         <li><strong>Serverlogs:</strong> kort, enkel zolang nodig voor de beveiliging.</li>
-        <li><strong>Statistieken:</strong> maximaal 14 maanden, en enkel als u toestemming gaf.</li>
+        <li><strong>Statistieken{adsOn && ' en advertentiemeting'}:</strong> maximaal 14 maanden, en enkel als u toestemming gaf.</li>
       </ul>
 
       <h2>4. Met wie delen we uw gegevens?</h2>
@@ -68,7 +78,7 @@ export const prerender = true;
         <li><strong>Resend</strong>: e-maildienst die de berichten van het offerteformulier naar ons doorstuurt.</li>
         <li><strong>Vercel</strong>: hosting van de website.</li>
         <li><strong>Odoo</strong>: ons klantenbeheer en onze administratie; aanvragen via het formulier komen daar rechtstreeks terecht.</li>
-        <li><strong>Google</strong> (Analytics) en <strong>Trustindex</strong> (reviews): enkel na uw toestemming.</li>
+        <li><strong>Google</strong> ({adsOn ? 'Analytics en Ads' : 'Analytics'}) en <strong>Trustindex</strong> (reviews): enkel na uw toestemming.</li>
         <li>Onze <strong>boekhouder</strong> en, waar de wet dat vereist, overheidsdiensten.</li>
       </ul>
       <p>Sommige van deze diensten zijn gevestigd buiten de Europese Economische Ruimte, bv. in de Verenigde Staten. Doorgifte gebeurt met passende waarborgen, zoals de standaardcontractbepalingen van de Europese Commissie of het EU-VS Data Privacy Framework.</p>
