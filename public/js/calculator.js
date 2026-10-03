@@ -161,7 +161,7 @@
   var render = function (r) {
     var rows = '';
 
-    rows += '<li><span>Rd-waarde isolatie (indicatief)</span><strong>R ' + r.rWaarde.toFixed(1) + '</strong></li>';
+    rows += '<li><span>Rd-waarde isolatie (indicatief)</span><strong>R ' + r.rWaarde.toFixed(1).replace('.', ',') + '</strong></li>';
 
     var sup1 = false, sup2 = false, sup3 = false;
 
