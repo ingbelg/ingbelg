@@ -88,8 +88,14 @@
   };
 
   var bepaalCategorie = function (gezin, personen, inkomen) {
+    var n = Math.max(0, parseFloat(personen) || 0);
+    /* Officiële tabel (vlaanderen.be, "Mijn VerbouwPremie voor eigenaar-bewoner", vanaf 1/1/2026):
+       "alleenstaand + 1 persoon ten laste" heeft dezelfde grenzen als de kolom "koppel";
+       pas vanaf de 2e persoon ten laste komt er €4.420 per persoon bij. Voor een koppel telt elke persoon ten laste. */
     var basis = GRENZEN[gezin] || GRENZEN.koppel;
-    var toeslag = Math.max(0, parseFloat(personen) || 0) * TOESLAG_PER_PERSOON;
+    var extra = n;
+    if (gezin === 'alleenstaand' && n >= 1) { basis = GRENZEN.koppel; extra = n - 1; }
+    var toeslag = extra * TOESLAG_PER_PERSOON;
     if (inkomen <= basis.cat4 + toeslag) return 'cat4';
     if (inkomen <= basis.cat3 + toeslag) return 'cat3';
     return 'ineligible';

@@ -18,10 +18,15 @@ export interface LandingData {
   hero: { src: string; alt: string };
   ogImage?: string;
   problems: { h: string; p: string }[];
-  doTitle: string;              // titel van "wat we doen" (HTML toegestaan: <em>)
-  doLead: string;
-  doTicks: string[];
-  doImages: { src: string; alt: string; w: number; h: number }[]; // 2 beelden
+  problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
+  kind?: 'service' | 'guide';   // 'guide' = informatieve pagina (geen Service-schema, geen "Onze aanpak"-blok)
+  updated?: string;             // bv. "oktober 2026" (enkel voor guide)
+  guide?: { h: string; paras?: string[]; list?: string[]; table?: { head: string[]; rows: string[][] } }[];
+  sources?: { label: string; href: string }[];
+  doTitle?: string;             // titel van "wat we doen" (HTML toegestaan: <em>)
+  doLead?: string;
+  doTicks?: string[];
+  doImages?: { src: string; alt: string; w: number; h: number }[]; // 2 beelden
   ba?: boolean;                 // voor/na-sliders tonen
   photos?: { src: string; alt: string; w: number; h: number }[];
   steps: { h: string; p: string }[];
@@ -35,6 +40,7 @@ const { page } = Astro.props;
 const wa = `https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`;
 const siteUrl = (Astro.site ?? new URL(facts.siteUrl)).origin;
 const pageUrl = `${siteUrl}/${page.slug}`;
+const isGuide = page.kind === 'guide';
 ---
 <Layout title={page.title} description={page.description} image={page.ogImage}>
 
@@ -125,7 +131,7 @@ const pageUrl = `${siteUrl}/${page.slug}`;
 <section class="section usp" id="usp">
   <div class="container">
     <header class="sechead sechead--center">
-      <h2 class="h2">Herkent u <em>dit</em>?</h2>
+      <h2 class="h2" set:html={page.problemsTitle ?? 'Herkent u <em>dit</em>?'}></h2>
     </header>
     <div class="adv__grid">
       {page.problems.map((x) => (
@@ -138,7 +144,40 @@ const pageUrl = `${siteUrl}/${page.slug}`;
   </div>
 </section>
 
+{/* ============ GIDS (enkel kind="guide") ============ */}
+{page.guide && (
+  <section class="section" id="gids">
+    <div class="container legal">
+      <div class="legal__body">
+        {page.updated && <p class="sechead__sub" style="margin-top:0">Laatst bijgewerkt: {page.updated}.</p>}
+        {page.guide.map((g) => (
+          <>
+            {g.h && <h2>{g.h}</h2>}
+            {g.paras && g.paras.map((t) => <p set:html={t}></p>)}
+            {g.list && <ul class="ticks" style="list-style:none;padding-left:0">{g.list.map((t) => <li set:html={t}></li>)}</ul>}
+            {g.table && (
+              <div class="legal__tablewrap">
+                <table class="legal__table">
+                  <thead><tr>{g.table.head.map((c) => <th>{c}</th>)}</tr></thead>
+                  <tbody>{g.table.rows.map((r) => <tr>{r.map((c) => <td set:html={c}></td>)}</tr>)}</tbody>
+                </table>
+              </div>
+            )}
+          </>
+        ))}
+        {page.sources && (
+          <>
+            <h2>Bronnen</h2>
+            <ul>{page.sources.map((x) => <li><a href={x.href} target="_blank" rel="noopener">{x.label}</a></li>)}</ul>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+)}
+
 {/* ============ WAT WE DOEN ============ */}
+{page.doTitle && page.doImages && (
 <section class="about section section--soft" id="aanpak">
   <div class="container about__grid">
     <div class="about__media reveal">
@@ -154,7 +193,7 @@ const pageUrl = `${siteUrl}/${page.slug}`;
       <h2 class="h2" set:html={page.doTitle}></h2>
       <p class="lead">{page.doLead}</p>
       <ul class="ticks">
-        {page.doTicks.map((t) => <li>{t}</li>)}
+        {(page.doTicks ?? []).map((t) => <li>{t}</li>)}
       </ul>
       <div class="about__cta">
         <a class="btn btn--primary" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
@@ -163,6 +202,7 @@ const pageUrl = `${siteUrl}/${page.slug}`;
     </div>
   </div>
 </section>
+)}
 
 {/* ============ VOOR/NA + FOTO'S ============ */}
 {(page.ba || (page.photos && page.photos.length)) && (
@@ -257,8 +297,9 @@ const pageUrl = `${siteUrl}/${page.slug}`;
         <h2 class="h2" set:html={page.note.title}></h2>
       </header>
       <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center">{page.note.text}</p>
-      <p class="reveal" style="text-align:center;margin-top:28px">
-        <a class="btn btn--line" href="/#calculator"><span>Bereken uw premie</span></a>
+      <p class="reveal" style="text-align:center;margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn--primary" href="/#calculator"><span>Bereken uw premie</span></a>
+        {!isGuide && <a class="btn btn--line" href="/premies-dakwerken-2026"><span>Alles over de premies 2026</span></a>}
       </p>
     </div>
   </section>
@@ -301,15 +342,24 @@ const pageUrl = `${siteUrl}/${page.slug}`;
 <script type="application/ld+json" set:html={JSON.stringify({
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'Service',
-      '@id': `${pageUrl}#service`,
-      name: page.dienst,
-      serviceType: page.serviceType,
-      url: pageUrl,
-      provider: { '@id': new URL('/#business', siteUrl).href },
-      areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
-    },
+    isGuide
+      ? {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          name: page.title,
+          url: pageUrl,
+          inLanguage: 'nl-BE',
+          isPartOf: { '@id': new URL('/#business', siteUrl).href },
+        }
+      : {
+          '@type': 'Service',
+          '@id': `${pageUrl}#service`,
+          name: page.dienst,
+          serviceType: page.serviceType,
+          url: pageUrl,
+          provider: { '@id': new URL('/#business', siteUrl).href },
+          areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
+        },
     {
       '@type': 'FAQPage',
       mainEntity: page.faq.map((item) => ({
@@ -392,7 +442,7 @@ const pageUrl = `${siteUrl}/${page.slug}`;
             <option value="Ecopanelen">Ecopanelen</option>
             <option value="Daklek / herstelling">Daklek / herstelling</option>
             <option value="Totaalrenovatie">Totaalrenovatie</option>
-            <option value="Weet ik nog niet">Weet ik nog niet</option>
+            <option value="Weet ik nog niet" selected={page.dienst === 'Weet ik nog niet'}>Weet ik nog niet</option>
           </select>
         </label>
         <label class="field">
@@ -443,6 +493,7 @@ const pageUrl = `${siteUrl}/${page.slug}`;
         <li><a href="/hellend-dak">Hellend dak vernieuwen</a></li>
         <li><a href="/plat-dak-epdm">Plat dak (EPDM)</a></li>
         <li><a href="/asbestdak-vervangen">Asbestdak vervangen</a></li>
+        <li><a href="/premies-dakwerken-2026">Premies dakwerken 2026</a></li>
         <li><a href="/#diensten">Alle diensten</a></li>
       </ul>
     </div>

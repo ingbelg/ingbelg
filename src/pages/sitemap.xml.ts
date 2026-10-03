@@ -4,7 +4,7 @@ import facts from '../data/site-facts.json';
 export const prerender = true;
 
 // Priorities/changefreq zijn bewust weggelaten (Google negeert ze); lastmod = datum van de build.
-const PAGES = ['/', '/hellend-dak', '/plat-dak-epdm', '/asbestdak-vervangen', '/privacybeleid', '/cookiebeleid'];
+const PAGES = ['/', '/hellend-dak', '/plat-dak-epdm', '/asbestdak-vervangen', '/premies-dakwerken-2026', '/privacybeleid', '/cookiebeleid'];
 
 export const GET: APIRoute = ({ site }) => {
   const base = (site ?? new URL(facts.siteUrl)).toString().replace(/\/$/, '');
