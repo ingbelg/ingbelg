@@ -12,3 +12,6 @@ dist/
 .env*.local
 .vercel/
 
+
+# Локальные заметки Claude (как и CLAUDE.md, не в git)
+.claude/notes/
