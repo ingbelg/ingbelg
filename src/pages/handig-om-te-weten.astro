@@ -1,0 +1,61 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import { faqKost, faqGratis, faqBtw, faqPremie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Overzicht van de uitlegpagina's. Een nieuwe uitlegpagina: hier een kaart toevoegen, in die pagina
+   parent: { name: 'Handig om te weten', href: '/handig-om-te-weten' } zetten en de pagina in sitemap.xml.ts opnemen. */
+const page: LandingData = {
+  slug: 'handig-om-te-weten',
+  kind: 'guide',
+  title: 'Handig om te weten: premies, asbest en renovatieplicht | INGBELG',
+  description: 'Uitleg over dakwerken in Vlaanderen: de dakpremie 2026, de regels rond asbestdaken en de renovatieverplichting bij een woning met EPC E of F. Met officiële bronnen.',
+  dienst: 'Weet ik nog niet',
+  serviceType: 'Uitleg over dakwerken',
+  eyebrow: 'Uitleg · Premies · Regels',
+  crumb: 'Handig om te weten',
+  h1Main: 'Handig om te weten',
+  h1Sub: 'Premies, regels en verplichtingen rond uw dak, uitgelegd met officiële bronnen.',
+  lead: 'Voor u aan uw dak begint, wilt u weten waar u recht op hebt en wat er moet. Hier vindt u onze uitleg, telkens nagekeken op de websites van de Vlaamse overheid en OVAM.',
+  hero: {
+    src: '/assets/services/platte-daken-nieuw.webp',
+    srcset: '/assets/services/platte-daken-nieuw-640.webp 640w, /assets/services/platte-daken-nieuw-1024.webp 1024w, /assets/services/platte-daken-nieuw.webp 1600w',
+    alt: 'Plat dak met een nieuwe EPDM-dakbedekking en afgewerkte dakranden',
+  },
+  problems: [],
+  articles: [
+    {
+      href: '/premies-dakwerken-2026',
+      tag: 'Premies',
+      title: 'Dakpremie 2026',
+      text: 'Wat krijgt u terug voor dakisolatie? Percentages, maxima, inkomensgrenzen, de asbestbonus en 6 % btw.',
+      img: '/assets/services/platte-daken-nieuw-640.webp',
+      alt: 'Plat dak met een nieuwe EPDM-dakbedekking',
+      w: 640, h: 564,
+    },
+    {
+      href: '/asbestdak-regels',
+      tag: 'Asbest',
+      title: 'Asbestdak: de regels',
+      text: 'Moet uw asbestdak weg? Wat mag u nooit doen, wanneer hebt u een asbestattest nodig en welke hulp bestaat er?',
+      img: '/assets/services/asbestverwijdering-640.webp',
+      alt: '',
+      w: 640, h: 427,
+    },
+    {
+      href: '/renovatieverplichting-epc',
+      tag: 'Renovatieplicht',
+      title: 'Woning met EPC E of F',
+      text: 'Kocht u een woning met label E of F? Dan moet u binnen zes jaar naar label D. Voor wie, uitzonderingen en boetes.',
+      img: '/assets/services/hellende-daken-nieuw-640.webp',
+      alt: 'Hellend dak met antracietkleurige dakpannen',
+      w: 640, h: 360,
+    },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.'),
+  faq: [faqPremie, faqBtw, faqKost, faqGratis],
+};
+---
+<LandingPage page={page} />

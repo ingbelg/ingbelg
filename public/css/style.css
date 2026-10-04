@@ -368,6 +368,9 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 }
 .svc__img{flex:none}
 .svc:hover{transform:translateY(-12px);box-shadow:var(--shadow-lg);border-color:transparent}
+/* Overzicht van uitlegpagina's (/handig-om-te-weten): zelfde kaarten, vaste rij zonder brede laatste kaart */
+.articles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:28px}
+.articles .svc__more{margin-bottom:0}
 .services .svc:last-child{
   grid-column:1 / -1;display:grid;grid-template-columns:minmax(260px,38%) 1fr;align-items:stretch;
 }
