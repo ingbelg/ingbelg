@@ -520,6 +520,8 @@ a.topbar__item:hover svg{transform:scale(1.2)}
 .adv__card p{margin:0;color:var(--slate);font-size:16.2px;transition:color .4s var(--ease)}
 .adv__card:hover h3{color:#fff}
 .adv__card:hover p{color:rgba(255,255,255,.76)}
+.adv__more{display:inline-block;margin-top:14px;font-weight:700;color:var(--red);text-decoration:underline;text-underline-offset:2px;transition:color .4s var(--ease)}
+.adv__card:hover .adv__more{color:#fff}
 
 /* ============================================================
    CTA BAND

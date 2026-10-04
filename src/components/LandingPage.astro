@@ -509,7 +509,7 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
             <option value="Timmerwerken en dakkapellen" selected={page.dienst === 'Timmerwerken en dakkapellen'}>Timmerwerken / dakkapel</option>
             <option value="Zonnepanelen">Zonnepanelen</option>
             <option value="Ecopanelen">Ecopanelen</option>
-            <option value="Daklek / herstelling">Daklek / herstelling</option>
+            <option value="Daklek / herstelling" selected={page.dienst === 'Daklek / herstelling'}>Daklek / herstelling</option>
             <option value="Totaalrenovatie">Totaalrenovatie</option>
             <option value="Weet ik nog niet" selected={page.dienst === 'Weet ik nog niet'}>Weet ik nog niet</option>
           </select>
@@ -564,6 +564,7 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
         <li><a href="/asbestdak-vervangen">Asbestdak vervangen</a></li>
         <li><a href="/gevelbekleding">Gevelbekleding</a></li>
         <li><a href="/dakkapel-timmerwerken">Dakkapel en timmerwerken</a></li>
+        <li><a href="/dakherstelling">Daklek herstellen</a></li>
         <li><a href="/handig-om-te-weten">Handig om te weten</a></li>
         <li><a href="/#diensten">Alle diensten</a></li>
       </ul>

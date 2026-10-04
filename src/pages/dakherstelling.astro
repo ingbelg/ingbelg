@@ -1,0 +1,74 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqGratis, faqBtw } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Bevestigd door Magomed (2026-10-03): lekken herstellen + eerlijk advies "herstellen of vernieuwen".
+   Bewust NIET beloofd: dezelfde dag ter plaatse, noodafdekking, garantietermijn op herstellingen, prijzen. */
+const page: LandingData = {
+  slug: 'dakherstelling',
+  title: 'Daklek herstellen in Zottegem | INGBELG',
+  description: `Lekt uw dak? We zoeken waar het water binnenkomt en herstellen pannen, leien, aansluitingen, dakgoten of uw plat dak. Zottegem en Oost-Vlaanderen. We bellen u binnen ${facts.callbackWorkdays} werkdag terug.`,
+  dienst: 'Daklek / herstelling',
+  serviceType: 'Daklek herstellen',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  crumb: 'Daklek herstellen',
+  h1Main: 'Lekt uw dak?',
+  h1Sub: 'We zoeken de oorzaak en herstellen het, in Zottegem en heel Oost-Vlaanderen',
+  lead: `Een vochtvlek op het plafond, druppels op zolder of verschoven pannen na een storm: hoe sneller we kijken, hoe kleiner de schade. Stuur gerust eerst een foto via WhatsApp. We bellen u binnen ${facts.callbackWorkdays} werkdag terug voor een afspraak.`,
+  hero: { src: '/assets/work/work-12.webp', srcset: '/assets/work/work-12-640.webp 640w, /assets/work/work-12-1024.webp 1024w, /assets/work/work-12.webp 1600w', alt: 'Luchtfoto van een pannendak met schoorsteen, dakkapellen en dakvensters' },
+  problems: [
+    { h: 'Een vochtvlek op het plafond.', p: 'De oorzaak zit niet altijd recht boven de vlek: water loopt vaak eerst langs het onderdak of de kepers. Daarom zoeken we waar het echt binnenkomt.' },
+    { h: 'Verschoven pannen na een storm.', p: 'Eén pan die scheef ligt of gebroken is, laat bij elke bui water door. Hoe sneller die weer goed ligt, hoe minder schade.' },
+    { h: 'Water rond de schoorsteen of het dakvenster.', p: 'De aansluitingen rond een schoorsteen, dakvenster of dakkapel verslijten met de jaren. Daar komt water vaak het eerst binnen.' },
+    { h: 'Een dakgoot die overloopt of lekt.', p: 'Een verstopte of lekke goot laat het water langs de gevel of in de muur lopen, in plaats van naar de afvoer.' },
+    { h: 'Scheuren of plassen op het plat dak.', p: 'Naden die loskomen, blazen of scheuren in de dakbedekking. Op een plat dak blijft water liggen tot het een weg naar binnen vindt.' },
+  ],
+  doTitle: 'Eerst de <em>oorzaak</em>, dan de herstelling',
+  doLead: 'Een lek dichtsmeren zonder te weten waar het water vandaan komt, lost zelden iets op. We zoeken de echte oorzaak en zeggen u eerlijk wat nodig is: een herstelling, of toch een nieuw dak.',
+  doTicks: [
+    'Verschoven of gebroken pannen en leien',
+    'Aansluitingen rond schoorsteen, dakvenster en dakkapel',
+    'Dakgoten en afvoeren',
+    'Naden en scheuren in een plat dak',
+    'Stuur vooraf een foto via WhatsApp',
+    'Herstellen als het kan, vernieuwen als het moet',
+  ],
+  doImages: [
+    { src: '/assets/services/hellende-daken.webp', alt: 'Woning met een pannendak en de bestelwagen van INGBELG ervoor', w: 1024, h: 794 },
+    { src: '/assets/work/work-03.webp', alt: 'Luchtfoto van een woning met een pannendak, een plat dak en dakvensters', w: 1600, h: 900 },
+  ],
+  steps: [
+    { h: 'Bel of stuur een foto', p: `Via WhatsApp, het formulier of de telefoon. We bellen u binnen ${facts.callbackWorkdays} werkdag terug om een moment af te spreken.` },
+    { h: 'Gratis plaatsbezoek', p: 'We komen ter plaatse en zoeken waar het water echt binnenkomt, ook als dat niet recht boven de vlek is.' },
+    { h: `Offerte binnen ${facts.quoteHoursAfterVisit} uur na het plaatsbezoek`, p: 'Wat we herstellen, met welk materiaal en wat het kost. En ook wat er niet in zit.' },
+    { h: 'Elke avond waterdicht', p: "Moet er een stuk dak open, dan gaat het 's avonds onder ons zeil. Ook als er 's nachts een onverwachte bui valt." },
+    { h: 'Herstellen als het kan', p: 'Kan uw dak na de herstelling nog jaren mee, dan zeggen we dat ook. Is het aan het einde, dan leggen we uit waarom, en beslist u.' },
+  ],
+  related: { text: 'Komen de lekken steeds terug en is uw dak aan het einde? Lees hoe we een hellend dak in één werf vernieuwen.', href: '/hellend-dak', label: 'Hellend dak vernieuwen →' },
+  faq: [
+    {
+      q: 'Kunt u snel komen?',
+      a: `Bel ons of stuur een WhatsApp met een foto van de vochtvlek en van het dak. We bellen u binnen ${facts.callbackWorkdays} werkdag terug om een moment af te spreken. Met een foto weten we vooraf al beter waar we moeten zoeken.`,
+    },
+    {
+      q: 'Wat kost een herstelling?',
+      a: `Dat hangt af van de oorzaak en van hoe bereikbaar die plek is. Daarom geven we geen prijs aan de telefoon, wel een offerte binnen ${facts.quoteHoursAfterVisit} uur na het plaatsbezoek.`,
+    },
+    {
+      q: 'Herstellen of een nieuw dak?',
+      a: 'Is uw dak verder in goede staat, dan herstellen we wat stuk is. Komen de lekken op meerdere plaatsen terug of is de dakbedekking aan het einde, dan zeggen we u dat eerlijk en leggen we uit waarom. U beslist.',
+    },
+    {
+      q: 'Is elke vochtvlek een daklek?',
+      a: 'Niet altijd. Vocht kan ook komen van condens onder een slecht geïsoleerd dak, of van een lekkende dakgoot of gevel. Tijdens het plaatsbezoek zoeken we de echte oorzaak.',
+    },
+    faqBtw,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />
