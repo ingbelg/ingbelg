@@ -13,6 +13,7 @@ export interface LandingData {
   dienst: string;               // moet exact overeenkomen met een <option value> van het formulier
   eyebrow: string;
   h1Main: string;
+  crumb: string;                // korte naam in het kruimelpad (zichtbaar + BreadcrumbList)
   h1Sub: string;
   lead: string;
   hero: { src: string; alt: string; srcset?: string };
@@ -101,6 +102,12 @@ const isGuide = page.kind === 'guide';
     <div class="hero__grain"></div>
   </div>
   <div class="container hero__in">
+    <nav class="crumbs" aria-label="Kruimelpad">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">{page.crumb}</li>
+      </ol>
+    </nav>
     <p class="hero__eyebrow"><span class="hero__dot"></span><span class="hero__eyebrow-txt">{page.eyebrow}</span></p>
     <h1 class="hero__title">
       <span class="h1-main">{page.h1Main}</span>
@@ -217,8 +224,8 @@ const isGuide = page.kind === 'guide';
         <div class="ba-grid reveal">
           <div class="ba">
             <div class="ba__slider">
-              <div class="ba__img ba__img--before"><img src="/assets/na_antrociet.webp" alt="Dak na renovatie — antraciet dakpannen" width="1280" height="720" loading="lazy"></div>
-              <div class="ba__img ba__img--after"><img src="/assets/voor_antrociet.webp" alt="Dak voor renovatie — antraciet dakpannen" width="1280" height="960" loading="lazy"></div>
+              <div class="ba__img ba__img--before"><img src="/assets/na_antrociet.webp" alt="Dak na renovatie — antraciet dakpannen" width="1024" height="576" loading="lazy"></div>
+              <div class="ba__img ba__img--after"><img src="/assets/voor_antrociet.webp" alt="Dak voor renovatie — antraciet dakpannen" width="1024" height="768" loading="lazy"></div>
               <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
               <div class="ba__handle" aria-hidden="true"></div>
               <span class="ba__tag ba__tag--before">Voor</span>
@@ -228,8 +235,8 @@ const isGuide = page.kind === 'guide';
           </div>
           <div class="ba">
             <div class="ba__slider">
-              <div class="ba__img ba__img--before"><img src="/assets/na_rood.webp" alt="Dak na renovatie — rode dakpannen" width="1600" height="1200" loading="lazy" style="object-position:center 15%"></div>
-              <div class="ba__img ba__img--after"><img src="/assets/voor_rood.webp" alt="Dak voor renovatie — rode dakpannen" width="1093" height="722" loading="lazy"></div>
+              <div class="ba__img ba__img--before"><img src="/assets/na_rood.webp" alt="Dak na renovatie — rode dakpannen" width="1024" height="768" loading="lazy" style="object-position:center 15%"></div>
+              <div class="ba__img ba__img--after"><img src="/assets/voor_rood.webp" alt="Dak voor renovatie — rode dakpannen" width="1024" height="676" loading="lazy"></div>
               <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
               <div class="ba__handle" aria-hidden="true"></div>
               <span class="ba__tag ba__tag--before">Voor</span>
@@ -369,6 +376,13 @@ const isGuide = page.kind === 'guide';
           provider: { '@id': new URL('/#business', siteUrl).href },
           areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
         },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', siteUrl).href },
+        { '@type': 'ListItem', position: 2, name: page.crumb, item: pageUrl },
+      ],
+    },
     {
       '@type': 'FAQPage',
       mainEntity: page.faq.map((item) => ({
