@@ -26,6 +26,7 @@ const faqItems = [
   {
     q: 'Kan ik nog genieten van premies?',
     a: 'Ja, als u in inkomenscategorie 3 of 4 valt. Sinds 1 maart 2026 krijgen de twee hoogste inkomenscategorieën geen dakpremie meer. Voor categorie 4 gaat het om maximaal 50 % van de factuur (tot € 5.750), voor categorie 3 om maximaal 35 % (tot € 4.025). Voorwaarde: het dak wordt tegelijk nieuw geïsoleerd, met een Rd-waarde van minstens 4,5 m²K/W. Soms komen er gemeentelijke premies bij. Tijdens het plaatsbezoek rekenen we het samen na.',
+    more: { href: '/premies-dakwerken-2026', label: 'Alles over de dakpremie 2026' },
   },
   {
     q: 'Hoe dik wordt de isolatielaag?',
@@ -34,10 +35,12 @@ const faqItems = [
   {
     q: 'Moet mijn asbestdak weg?',
     a: 'Niet meteen, zolang het in goede staat is. Maar u mag een asbestdak niet reinigen, ontmossen of er zonnepanelen op plaatsen. Verkoopt u een woning van vóór 2001, dan hebt u een asbestattest nodig. Plant u toch dakwerken, laat het asbest dan meteen mee verwijderen: dat kan in één werf met het nieuwe dak.',
+    more: { href: '/asbestdak-regels', label: 'De regels voor asbestdaken' },
   },
   {
     q: 'Ik kocht een woning met EPC E of F. Wat nu?',
     a: 'Dan moet u de woning binnen zes jaar na de aankoop naar minstens label D brengen. Dakisolatie is daarvoor vaak een logische eerste stap. Breng uw EPC mee naar het plaatsbezoek, dan zeggen we welke dakwerken het meeste opleveren.',
+    more: { href: '/renovatieverplichting-epc', label: 'De renovatieverplichting uitgelegd' },
   },
   {
     q: 'Wat als het regent tijdens de werken?',
@@ -632,7 +635,7 @@ const faqItems = [
       {faqItems.map((item) => (
         <details class="faq__item reveal">
           <summary>{item.q}<i></i></summary>
-          <div class="faq__body"><p>{item.a}</p></div>
+          <div class="faq__body"><p>{item.a}</p>{item.more && <p class="faq__more"><a href={item.more.href}>{item.more.label}</a></p>}</div>
         </details>
       ))}
     </div>
@@ -766,7 +769,7 @@ const faqItems = [
       <p class="footer__vat">BTW {facts.vat}</p>
     </div>
     <div class="footer__col">
-      <h4>Diensten</h4>
+      <h3>Diensten</h3>
       <ul>
         <li><a href="/hellend-dak">Hellende daken</a></li>
         <li><a href="/plat-dak-epdm">Platte daken</a></li>
@@ -778,7 +781,7 @@ const faqItems = [
       </ul>
     </div>
     <div class="footer__col">
-      <h4>Navigatie</h4>
+      <h3>Navigatie</h3>
       <ul>
         <li><a href="#over">Over ons</a></li>
         <li><a href="#realisaties">Realisaties</a></li>
@@ -791,7 +794,7 @@ const faqItems = [
       </ul>
     </div>
     <div class="footer__col">
-      <h4>Contact</h4>
+      <h3>Contact</h3>
       <ul>
         <li><a href={`tel:${facts.phoneE164}`}>{facts.phone}</a></li>
         <li><a href={`mailto:${facts.email}`}>{facts.email}</a></li>

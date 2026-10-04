@@ -23,7 +23,8 @@ export interface LandingData {
   problems: { h: string; p: string }[];
   problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
   kind?: 'service' | 'guide';   // 'guide' = informatieve pagina (geen Service-schema, geen "Onze aanpak"-blok)
-  updated?: string;             // bv. "oktober 2026" (enkel voor guide)
+  published?: string;           // ISO-datum eerste publicatie, bv. "2026-10-03" (enkel voor guide → Article-schema)
+  updated?: string;             // ISO-datum laatste controle met de bronnen (zichtbaar + dateModified)
   guide?: { h: string; paras?: string[]; list?: string[]; bullets?: boolean; table?: { head: string[]; rows: string[][] } }[];
   sources?: { label: string; href: string }[];
   doTitle?: string;             // titel van "wat we doen" (HTML toegestaan: <em>)
@@ -45,6 +46,8 @@ const wa = `https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURICo
 const siteUrl = (Astro.site ?? new URL(facts.siteUrl)).origin;
 const pageUrl = `${siteUrl}/${page.slug}`;
 const isGuide = page.kind === 'guide';
+const isArticle = isGuide && !page.articles && !!page.updated;
+const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <Layout title={page.title} description={page.description} image={page.ogImage}>
 
@@ -161,6 +164,7 @@ const isGuide = page.kind === 'guide';
 {page.articles && (
 <section class="section usp" id="artikels">
   <div class="container">
+    <h2 class="sr-only">Alle uitleg</h2>
     <div class="articles">
       {page.articles.map((a) => (
         <article class="svc reveal">
@@ -183,7 +187,7 @@ const isGuide = page.kind === 'guide';
   <section class="section" id="gids">
     <div class="container legal">
       <div class="legal__body">
-        {page.updated && <p class="sechead__sub" style="margin-top:0">Laatst bijgewerkt: {page.updated}.</p>}
+        {page.updated && <p class="sechead__sub" style="margin-top:0">Laatst nagekeken met de officiële bronnen: <time datetime={page.updated}>{nlDate(page.updated)}</time>.</p>}
         {page.guide.map((g) => (
           <>
             {g.h && <h2>{g.h}</h2>}
@@ -402,6 +406,21 @@ const isGuide = page.kind === 'guide';
           provider: { '@id': new URL('/#business', siteUrl).href },
           areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
         },
+    ...(isArticle
+      ? [{
+          '@type': 'Article',
+          '@id': `${pageUrl}#article`,
+          headline: page.title.replace(/ \| INGBELG$/, ''),
+          description: page.description,
+          image: new URL(page.ogImage ?? page.hero.src, siteUrl).href,
+          inLanguage: 'nl-BE',
+          datePublished: page.published ?? page.updated,
+          dateModified: page.updated,
+          mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+          author: { '@id': new URL('/#business', siteUrl).href },
+          publisher: { '@id': new URL('/#business', siteUrl).href },
+        }]
+      : []),
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -538,7 +557,7 @@ const isGuide = page.kind === 'guide';
       <p class="footer__vat">BTW {facts.vat}</p>
     </div>
     <div class="footer__col">
-      <h4>Diensten</h4>
+      <h3>Diensten</h3>
       <ul>
         <li><a href="/hellend-dak">Hellend dak vernieuwen</a></li>
         <li><a href="/plat-dak-epdm">Plat dak (EPDM)</a></li>
@@ -550,7 +569,7 @@ const isGuide = page.kind === 'guide';
       </ul>
     </div>
     <div class="footer__col">
-      <h4>Contact</h4>
+      <h3>Contact</h3>
       <ul>
         <li><a href={`tel:${facts.phoneE164}`}>{facts.phone}</a></li>
         <li><a href={`mailto:${facts.email}`}>{facts.email}</a></li>
