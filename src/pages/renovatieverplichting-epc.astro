@@ -1,0 +1,130 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import { faqKost, faqGratis, faqBtw, faqPremie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Alle regels komen van vlaanderen.be, geraadpleegd op 4 oktober 2026:
+   - vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen
+     (label E/F → D, 6 jaar voor lopende én nieuwe overdrachten, finaal goedgekeurd 12/12/2025; voorbeeld akte 1/2/2024 → 1/2/2030;
+      soorten overdrachten, uitzonderingen, sloop, appartementen 50 % + 1, nieuw EPC, boete € 500–€ 5.000; verstrengingspad afgeschaft)
+   Bewust NIET opgenomen: welke werken precies label D opleveren (verschilt per woning, staat niet op de officiële pagina),
+   de EPC-labelpremie (afgeschaft, zie premies-dakwerken-2026) en bedragen of voorwaarden van leningen (niet nagekeken).
+   Bij nieuwe regelgeving: deze pagina nalezen. */
+const page: LandingData = {
+  slug: 'renovatieverplichting-epc',
+  kind: 'guide',
+  updated: 'oktober 2026',
+  title: 'Woning gekocht met EPC E of F? De renovatieverplichting uitgelegd | INGBELG',
+  description: 'Kocht u een woning met EPC-label E of F? Dan moet u binnen 6 jaar naar label D. Voor wie het geldt, de termijn, uitzonderingen en boetes, uitgelegd met bronnen van de Vlaamse overheid.',
+  dienst: 'Hellende daken',
+  serviceType: 'Renovatieverplichting: uitleg',
+  eyebrow: 'EPC E of F · Renovatieverplichting · 2026',
+  crumb: 'Renovatieverplichting EPC',
+  h1Main: 'Woning met EPC E of F',
+  h1Sub: 'Wat de renovatieverplichting voor u betekent, uitgelegd met bronnen van de Vlaamse overheid.',
+  lead: 'Kocht u een huis of appartement met EPC-label E of F? Dan moet u het binnen zes jaar renoveren tot minstens label D. Hieronder staat voor wie dat geldt, vanaf wanneer de termijn loopt, welke uitzonderingen er zijn en wat er gebeurt als u te laat bent.',
+  hero: {
+    src: '/assets/services/hellende-daken-nieuw.webp',
+    srcset: '/assets/services/hellende-daken-nieuw-640.webp 640w, /assets/services/hellende-daken-nieuw-1024.webp 1024w, /assets/services/hellende-daken-nieuw.webp 1600w',
+    alt: 'Hellend dak met antracietkleurige dakpannen',
+  },
+  problemsTitle: 'De regels <em>in het kort</em>',
+  problems: [
+    { h: 'Label E of F gekocht', p: 'Nieuwe eigenaars van een woning of appartement met EPC-label E of F moeten renoveren tot minstens label D.' },
+    { h: 'Zes jaar de tijd', p: 'De termijn loopt vanaf de datum van de notariële akte. Hij werd verlengd van vijf naar zes jaar, ook voor lopende aankopen.' },
+    { h: 'Label D blijft de norm', p: 'Het geplande strengere pad naar label C, B en A is afgeschaft. Label D is het vereiste niveau.' },
+    { h: 'Bewijs met een nieuw EPC', p: 'Na de werken laat u een nieuw EPC opmaken. Zonder geldig EPC volgt na zes jaar een boete.' },
+  ],
+  guide: [
+    {
+      h: 'Wat is de renovatieverplichting?',
+      paras: [
+        'Sinds <strong>1 januari 2023</strong> geldt in Vlaanderen een renovatieverplichting voor woongebouwen: huizen en appartementen. Wie een woning met <strong>EPC-label E of F</strong> verwerft, moet ze binnen zes jaar energetisch renoveren tot minstens <strong>label D</strong>.',
+        'De verplichting geldt per wooneenheid. Bij een appartement gaat het dus om uw eigen appartement.',
+      ],
+    },
+    {
+      h: 'Hoeveel tijd hebt u?',
+      paras: [
+        'U hebt <strong>zes jaar</strong>. De termijn begint op de datum van de authentieke akte bij de notaris, of op de datum waarop een recht van opstal of erfpacht werd gevestigd.',
+        'Vroeger was dat vijf jaar. De verlenging naar zes jaar geldt <strong>voor lopende en nieuwe overdrachten</strong> en werd finaal goedgekeurd op 12 december 2025. Een voorbeeld van de Vlaamse overheid: is de akte verleden op 1 februari 2024, dan moet u vóór 1 februari 2030 aan de verplichting voldoen.',
+      ],
+    },
+    {
+      h: 'Voor wie geldt het, en voor wie niet?',
+      bullets: true,
+      list: [
+        'Het geldt bij een <strong>verkoop, ruil, schenking</strong> of inbreng in een vennootschap van de volle eigendom, en bij de vestiging van een <strong>recht van opstal of erfpacht</strong>.',
+        'Ook een <strong>tweede verblijf</strong> of vakantiewoning valt eronder.',
+        'Het geldt <strong>niet</strong> bij een erfenis, bij fusies en opslorpingen van vennootschappen, voor beschermd onroerend erfgoed en bij bepaalde overdrachten na een echtscheiding of het einde van een samenwoning.',
+        'Wordt het gebouw <strong>binnen zes jaar gesloopt</strong>, dan hoeft het niet aan de verplichting te voldoen.',
+      ],
+    },
+    {
+      h: 'Wordt het later nog strenger?',
+      paras: [
+        'Nee. Oorspronkelijk zou de verplichting stap voor stap strenger worden, met label C vanaf 2028 en later B en A. Dat <strong>verstrengingspad is afgeschaft</strong>. Label D blijft het vereiste niveau.',
+      ],
+    },
+    {
+      h: 'Hoe toont u aan dat u voldoet?',
+      paras: [
+        'Na de werken laat u een <strong>nieuw EPC</strong> opmaken door een energiedeskundige. Dat EPC komt automatisch in de databank van de Vlaamse overheid terecht.',
+        'Is er zes jaar na de overdracht geen nieuw EPC, of toont het EPC dat de woning label D niet haalt, dan start het Vlaams Energie- en Klimaatagentschap een handhavingsprocedure. Voor een woning gaat het om een <strong>boete van € 500 tot € 5.000</strong>. De boete heft de verplichting niet op: u krijgt een nieuwe termijn om alsnog te renoveren.',
+      ],
+    },
+    {
+      h: 'En bij een appartementsgebouw?',
+      paras: [
+        'Sommige werken gebeuren aan de gemeenschappelijke delen, zoals de isolatie van het dak. Volgens de Vlaamse overheid kan de vereniging van mede-eigenaars wettelijk verplichte werken beslissen met een <strong>gewone meerderheid (50 % + 1)</strong>.',
+      ],
+    },
+    {
+      h: 'Welke steun bestaat er?',
+      list: [
+        '<strong>Mijn VerbouwPremie voor dakisolatie</strong>, voor inkomenscategorie 3 en 4. Alle bedragen en voorwaarden staan in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
+        '<strong>6 % btw</strong> in plaats van 21 % voor werken aan een woning die ouder is dan 10 jaar en vooral als privéwoning dient.',
+        'Leningen en fiscale steun: kijk voor de actuele voorwaarden op de pagina\'s van de Vlaamse overheid.',
+      ],
+    },
+    {
+      h: 'Welke werken hebt u nodig?',
+      paras: [
+        'Dat verschilt per woning. Op uw EPC staan aanbevelingen voor de woning. Hoeveel een bepaalde ingreep uw label verbetert, berekent een energiedeskundige.',
+        'Het dak is vaak een goed vertrekpunt, omdat er bij een oude woning dikwijls weinig of geen isolatie ligt. Wij isoleren het dak met PIR van 12 tot 16 cm, goed voor een Rd-waarde van minstens 4,5 m²K/W, en vernieuwen in dezelfde werf het onderdak en de dakbedekking. Het EPC zelf maken wij niet op: daarvoor hebt u een energiedeskundige nodig.',
+        'Deze pagina is een uitleg van de regels, geen juridisch advies. Voor uw situatie geldt altijd de officiële informatie van de Vlaamse overheid.',
+      ],
+    },
+  ],
+  sources: [
+    { label: 'Renovatieverplichting voor residentiële gebouwen (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen' },
+    { label: 'Mijn VerbouwPremie voor dak (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/mijn-verbouwpremie-voor-dak' },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.'),
+  faq: [
+    {
+      q: 'Ik kocht een woning met label E of F. Wat moet ik doen?',
+      a: 'U moet de woning binnen zes jaar na de notariële akte renoveren tot minstens EPC-label D, en dat aantonen met een nieuw EPC. De zes jaar geldt ook voor aankopen van vóór de verlenging.',
+    },
+    {
+      q: 'Wat als ik niet op tijd klaar ben?',
+      a: 'Dan riskeert u een boete van € 500 tot € 5.000 per woning. De verplichting blijft daarna bestaan: u krijgt een nieuwe termijn om te renoveren.',
+    },
+    {
+      q: 'Moet ik later naar label C, B of A?',
+      a: 'Nee. Het geplande verstrengingspad is afgeschaft. Label D is het vereiste niveau.',
+    },
+    {
+      q: 'Is dakisolatie genoeg om label D te halen?',
+      a: 'Dat hangt af van uw woning. Een energiedeskundige kan berekenen welk label u haalt na de werken. Het dak is vaak een goed vertrekpunt, en voor dakisolatie bestaat een premie.',
+    },
+    faqPremie,
+    faqBtw,
+    faqKost,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />
