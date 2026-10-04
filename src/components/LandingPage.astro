@@ -20,7 +20,7 @@ export interface LandingData {
   lead: string;
   hero: { src: string; alt: string; srcset?: string };
   ogImage?: string;
-  problems: { h: string; p: string }[];
+  problems: { h: string; p: string; link?: { href: string; label: string } }[];
   problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
   kind?: 'service' | 'guide';   // 'guide' = informatieve pagina (geen Service-schema, geen "Onze aanpak"-blok)
   published?: string;           // ISO-datum eerste publicatie, bv. "2026-10-03" (enkel voor guide → Article-schema)
@@ -153,6 +153,7 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
         <article class="adv__card reveal">
           <h3>{x.h}</h3>
           <p>{x.p}</p>
+          {x.link && <a class="adv__more" href={x.link.href}>{x.link.label}</a>}
         </article>
       ))}
     </div>

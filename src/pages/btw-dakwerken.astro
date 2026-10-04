@@ -1,0 +1,140 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import { faqKost, faqGratis, faqPremie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Alle regels komen van FOD Financiën, geraadpleegd op 4 oktober 2026:
+   - fin.belgium.be/nl/particulieren/woning/bouwen-verbouwen/verbouwen/verbouwen-btw-tarief
+     (ouder dan 10 jaar: datum eerste ingebruikneming telt voor een volledig jaar + datum eerste factuur; voorbeeld 2012 → voorschotfactuur
+      5/11/2022 = ok; > 50 % privé; voorbeeld 30 % beroep + volledig dak = 6 % op het geheel, enkel muren beroepsruimte = 21 %;
+      verstrekt en gefactureerd aan de gebruiker; materialen via aannemer 6 %, zelf gekocht 21 %; omvorming/renovatie/verbetering/herstelling/
+      onderhoud, niet reiniging; afbraak die niet voorafgaat aan renovatie 21 %; architect/studiewerk 21 %; vermelding op de factuur sinds
+      1/7/2022, 1 maand om schriftelijk te betwisten; voorwaarde niet voldaan → 21 % en de klant is aansprakelijk; bijgebouwde oppervlakte
+      niet groter dan het behouden deel, behouden dragende structuur ≥ 50 % in lopende meters)
+   - Lijst "Btw-tarief van toepassing op bepaalde soorten werken" (fin.belgium.be, pdf): "isolatie van de woning" → 6 %.
+   Bewust NIET opgenomen: afbraak en heropbouw (eigen regels, enkel een verwijzing), het verlaagd tarief voor nieuwbouw/sociale
+   woningen, zonnepanelen (niet nagekeken). Bij nieuwe regels: deze pagina nalezen, ook faqBtw in landing-shared.ts en de FAQ op de startpagina. */
+const page: LandingData = {
+  slug: 'btw-dakwerken',
+  kind: 'guide',
+  published: '2026-10-04',
+  updated: '2026-10-04',
+  title: '6 % of 21 % btw op dakwerken? De regels uitgelegd | INGBELG',
+  description: 'Wanneer betaalt u 6 % btw op een nieuw dak, dakisolatie of een herstelling? De voorwaarden (woning ouder dan 10 jaar, privéwoning, via een aannemer) uitgelegd met bronnen van FOD Financiën.',
+  dienst: 'Weet ik nog niet',
+  serviceType: '6 % btw op dakwerken: uitleg',
+  eyebrow: 'Btw · Renovatie · 2026',
+  parent: { name: 'Handig om te weten', href: '/handig-om-te-weten' },
+  crumb: '6 % btw op dakwerken',
+  h1Main: '6 % btw op dakwerken',
+  h1Sub: 'Wanneer het verlaagd tarief geldt, uitgelegd met bronnen van FOD Financiën.',
+  lead: 'Voor renovatiewerken aan een woning die ouder is dan 10 jaar betaalt u 6 % btw in plaats van 21 %. Dat geldt ook voor een nieuw dak, dakisolatie of een herstelling. Hieronder staan de voorwaarden, wat er op de factuur komt en wanneer toch 21 % geldt.',
+  hero: {
+    src: '/assets/work/work-12.webp',
+    srcset: '/assets/work/work-12-640.webp 640w, /assets/work/work-12-1024.webp 1024w, /assets/work/work-12.webp 1600w',
+    alt: 'Luchtfoto van een woning met een antracietkleurig pannendak, een stenen schoorsteen, twee dakkapellen en een dakvenster',
+  },
+  problemsTitle: 'De voorwaarden <em>in het kort</em>',
+  problems: [
+    { h: 'Ouder dan 10 jaar', p: 'De woning werd voor het eerst in gebruik genomen in een kalenderjaar dat minstens tien jaar voor de eerste factuur ligt.' },
+    { h: 'Vooral privéwoning', p: 'Na de werken gebruikt u de woning voor meer dan 50 % als privéwoning.' },
+    { h: 'Via een aannemer', p: 'De aannemer levert de werken en factureert ze aan wie de woning bewoont: eigenaar, huurder of vruchtgebruiker.' },
+    { h: 'Renovatie, geen nieuwbouw', p: 'Omvorming, renovatie, verbetering, herstelling of onderhoud. Wordt het te ingrijpend, dan geldt 21 %.' },
+  ],
+  guide: [
+    {
+      h: 'Wanneer betaalt u 6 % btw?',
+      paras: [
+        'Het verlaagd tarief van <strong>6 %</strong> geldt voor werken die dienen voor de omvorming, de renovatie, de verbetering, de herstelling of het onderhoud van een woning. Reiniging valt er niet onder. Voor dakwerken gaat het dus om een nieuw dak op een bestaande woning, dakisolatie, of de herstelling van een lek.',
+        'In de lijst van FOD Financiën met soorten werken staat <strong>isolatie van de woning</strong> uitdrukkelijk bij de werken aan 6 %.',
+      ],
+    },
+    {
+      h: 'Hoe wordt de 10 jaar geteld?',
+      paras: [
+        'Twee data tellen: de datum van <strong>eerste ingebruikneming</strong> van de woning, die telt voor een volledig jaar, en de datum van de <strong>eerste factuur</strong> voor de werken. Dat kan ook een voorschotfactuur zijn.',
+        'Een voorbeeld van FOD Financiën: een woning werd voor het eerst bewoond in de loop van 2012, en de eerste (voorschot)factuur dateert van 5 november 2022. Dan is de woning oud genoeg.',
+      ],
+    },
+    {
+      h: 'En als u een deel voor uw beroep gebruikt?',
+      paras: [
+        'De woning moet na de werken voor <strong>meer dan 50 %</strong> als privéwoning dienen. FOD Financiën geeft precies een voorbeeld met een dak: gebruikt u 30 % van uw woning voor uw (bij)beroep en laat u uw <strong>volledige dak</strong> vernieuwen, dan geldt 6 % voor het geheel van de werken.',
+        'Laat u daarentegen enkel werken uitvoeren aan een aparte ruimte die u voor uw beroep gebruikt, dan geldt 21 %.',
+      ],
+    },
+    {
+      h: 'Materiaal: via de aannemer of zelf gekocht?',
+      paras: [
+        'Koopt de aannemer de materialen en factureert hij ze samen met de werken, dan kan het geheel onder 6 % vallen. Koopt u zelf bouwmaterialen, dan betaalt u daarop <strong>altijd 21 %</strong>.',
+        'Bij ons zitten de materialen in de offerte, samen met de werken.',
+      ],
+    },
+    {
+      h: 'Wat komt er op de factuur?',
+      paras: [
+        'U hoeft geen apart attest meer in te vullen. Sinds <strong>1 juli 2022</strong> staat er op de factuur een vermelding: als u niet binnen <strong>één maand</strong> schriftelijk betwist, erkent u dat',
+      ],
+      bullets: true,
+      list: [
+        'de woning voor het eerst in gebruik werd genomen in een kalenderjaar dat minstens tien jaar voorafgaat aan de eerste factuur;',
+        'de woning na de werken uitsluitend of hoofdzakelijk als privéwoning wordt gebruikt;',
+        'de werken worden geleverd en gefactureerd aan een eindverbruiker.',
+      ],
+    },
+    {
+      h: 'Wat als een voorwaarde niet klopt?',
+      paras: [
+        'Is minstens één voorwaarde niet voldaan, dan geldt het normale tarief van <strong>21 %</strong>. Volgens FOD Financiën bent u als klant voor die voorwaarden aansprakelijk voor de btw die verschuldigd is. Lees de vermelding op de factuur dus na, en meld het binnen de maand als iets niet klopt.',
+      ],
+    },
+    {
+      h: 'Wanneer geldt toch 21 %?',
+      bullets: true,
+      list: [
+        '<strong>Afbraakwerken</strong> die niet voorafgaan aan renovatiewerken, herstellingen of onderhoud.',
+        '<strong>Studiewerk en toezicht</strong> door architecten, landmeters en ingenieurs.',
+        'Materialen die u <strong>zelf</strong> koopt.',
+        'Werken die zo ingrijpend zijn dat ze als <strong>nieuwbouw</strong> gelden. Bij een uitbreiding, zoals een opbouw op het dak, mag de bijgebouwde oppervlakte niet groter zijn dan het oude, behouden deel. En van de dragende structuur moet minstens 50 % (in lopende meters) behouden blijven.',
+      ],
+    },
+    {
+      h: 'Woning jonger dan 10 jaar, of afbreken en heropbouwen?',
+      paras: [
+        'Voor een woning jonger dan 10 jaar geldt 21 % op renovatiewerken. Voor het afbreken en heropbouwen van een woning gelden aparte regels: die vindt u bij FOD Financiën.',
+        'Deze pagina is een uitleg van de regels, geen fiscaal advies. Voor uw situatie geldt altijd de officiële informatie van FOD Financiën. Bij twijfel: bel FOD Financiën op 02 572 57 57.',
+      ],
+    },
+  ],
+  sources: [
+    { label: 'Verbouwen: btw-tarief (FOD Financiën)', href: 'https://fin.belgium.be/nl/particulieren/woning/bouwen-verbouwen/verbouwen/verbouwen-btw-tarief' },
+    { label: 'Btw-tarief van toepassing op bepaalde soorten werken (FOD Financiën, pdf)', href: 'https://fin.belgium.be/sites/default/files/media/documents/verbouwen-btw-tarief-toepassing-soorten-werken.pdf' },
+    { label: 'Afbraak en heropbouw (FOD Financiën)', href: 'https://fin.belgium.be/nl/particulieren/woning/bouwen-verbouwen/afbraak-wederopbouw' },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.'),
+  faq: [
+    {
+      q: 'Betaal ik 6 % btw op een nieuw dak?',
+      a: 'Ja, als uw woning ouder is dan 10 jaar, u ze na de werken vooral als privéwoning gebruikt en een aannemer de werken uitvoert en factureert. Dat geldt ook voor dakisolatie en herstellingen.',
+    },
+    {
+      q: 'Moet ik nog een attest invullen?',
+      a: 'Nee. Sinds 1 juli 2022 staat de vermelding op de factuur zelf. Klopt er iets niet, dan meldt u dat binnen één maand schriftelijk.',
+    },
+    {
+      q: 'Ik koop zelf de dakpannen. Betaal ik dan ook 6 %?',
+      a: 'Nee. Op materialen die u zelf koopt, betaalt u altijd 21 % btw. Enkel wat de aannemer levert en samen met de werken factureert, kan onder 6 % vallen.',
+    },
+    {
+      q: 'Ik heb een bureau aan huis. Geldt 6 % dan nog?',
+      a: 'Ja, zolang u de woning voor meer dan 50 % als privéwoning gebruikt. Laat u uw volledige dak vernieuwen, dan geldt 6 % voor alle werken. Werken aan enkel uw beroepsruimte gaan aan 21 %.',
+    },
+    faqPremie,
+    faqKost,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />
