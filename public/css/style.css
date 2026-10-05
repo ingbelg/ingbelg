@@ -163,11 +163,11 @@ a.topbar__item:hover svg{transform:scale(1.2)}
   transition:box-shadow .4s var(--ease),padding .4s var(--ease);
 }
 .header.is-stuck{box-shadow:0 12px 34px -22px rgba(14,17,22,.5)}
-.header__in{display:flex;align-items:center;gap:24px;min-height:88px;transition:min-height .4s var(--ease)}
+/* Hoogte van de header blijft gelijk bij scrollen: een krimpende sticky header verschuift de pagina,
+   de browser corrigeert de scroll terug onder de drempel en de header 'blijft hangen' (scroll-lus). */
+.header__in{display:flex;align-items:center;gap:24px;min-height:88px}
 .brand{flex-shrink:0}
-.header.is-stuck .header__in{min-height:74px}
-.brand img{height:52px;width:auto;transition:transform .5s var(--ease-out),height .4s var(--ease)}
-.header.is-stuck .brand img{height:44px}
+.brand img{height:52px;width:auto;transition:transform .5s var(--ease-out)}
 .brand:hover img{transform:scale(1.04)}
 
 .nav{margin-left:auto}
