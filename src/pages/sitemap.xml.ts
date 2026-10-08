@@ -16,10 +16,10 @@ const PAGES: [string, string][] = [
   ['/gevelbekleding', '2026-10-03'],
   ['/dakkapel-timmerwerken', '2026-10-03'],
   ['/dakherstelling', '2026-10-04'],
-  ['/premies-dakwerken-2026', '2026-10-03'],
-  ['/asbestdak-regels', '2026-10-03'],
+  ['/premies-dakwerken-2026', '2026-10-08'],
+  ['/asbestdak-regels', '2026-10-08'],
   ['/renovatieverplichting-epc', '2026-10-04'],
-  ['/btw-dakwerken', '2026-10-04'],
+  ['/btw-dakwerken', '2026-10-08'],
   ['/handig-om-te-weten', '2026-10-04'],
 ];
 
