@@ -17,4 +17,7 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   site: facts.launched ? facts.siteUrl : PREVIEW_URL,
+  // /pagina/ → 308 naar /pagina (de adapter zet dit om in een Vercel-route);
+  // anders bestaat elke pagina twee keer en indexeert Google beide.
+  trailingSlash: 'never',
 });
