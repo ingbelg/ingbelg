@@ -1,0 +1,64 @@
+---
+/* Footer van alle pagina's. Welke links erin staan, komt uit src/data/navigation.ts;
+   de startpagina toont daarnaast een kolom "Navigatie" en de vertrouwensbalk. */
+import facts from '../../data/site-facts.json';
+import type { NavLink } from '../../data/navigation';
+
+interface Props {
+  services: NavLink[];
+  navigation?: NavLink[]; // extra kolom "Navigatie" (startpagina)
+  trust?: boolean;        // balk met Google-reviews, garantie en aantal daken
+}
+const { services, navigation, trust = false } = Astro.props;
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="/assets/logo.png" alt="INGBELG" class="footer__logo" width="430" height="207">
+      <p>INGBELG &middot; Dak- en renovatiewerken uit {facts.address.city}<br>Hellende en platte daken, asbestverwijdering, isolatie en gevelbekleding.</p>
+      <p class="footer__vat">BTW {facts.vat}</p>
+    </div>
+    <div class="footer__col">
+      <h3>Diensten</h3>
+      <ul>
+        {services.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    {navigation && (
+      <div class="footer__col">
+        <h3>Navigatie</h3>
+        <ul>
+          {navigation.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+    )}
+    <div class="footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href={`tel:${facts.phoneE164}`}>{facts.phone}</a></li>
+        <li><a href={`mailto:${facts.email}`}>{facts.email}</a></li>
+        <li><a href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">{facts.address.street}, {facts.address.postalCode} {facts.address.city}</a></li>
+      </ul>
+      <ul class="footer__social" style="margin-top:14px">
+        <li><a href={facts.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href={facts.social.tiktok} target="_blank" rel="noopener">TikTok</a></li>
+        {facts.social.facebook && <li><a href={facts.social.facebook} target="_blank" rel="noopener">Facebook</a></li>}
+      </ul>
+    </div>
+  </div>
+  {trust && (
+    <div class="container footer__trust">
+      <span class="trustbadge trustbadge--widget">
+        <span class="ti-slot" data-ti="04fcd5881c17347ba2069b117f2"></span>
+      </span>
+      <span class="trustbadge">{facts.warrantyYears} jaar garantie</span>
+      <span class="trustbadge">{facts.roofsDone}+ daken gerealiseerd</span>
+    </div>
+  )}
+  <div class="footer__bar">
+    <div class="container footer__bar-in">
+      <p>&copy; <span id="year">2026</span> {facts.legalName}. Alle rechten voorbehouden.</p>
+      <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a> &middot; <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button></p>
+    </div>
+  </div>
+</footer>

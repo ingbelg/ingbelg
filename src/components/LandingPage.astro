@@ -4,6 +4,10 @@
    en de cookie-/consentlogica. Bevat bewust GEEN eigen CSS en geen eigen JS.
    Teksten komen uit de pagina-bestanden en mogen enkel bevestigde feiten bevatten (zie site-facts.json). */
 import Layout from '../layouts/Layout.astro';
+import Topbar from './site/Topbar.astro';
+import SiteHeader from './site/SiteHeader.astro';
+import SiteFooter from './site/SiteFooter.astro';
+import { FOOTER_SERVICES_LANDING } from '../data/navigation';
 import facts from '../data/site-facts.json';
 
 export interface LandingData {
@@ -54,49 +58,10 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
 <a class="skip-link" href="#main">Ga naar inhoud</a>
 
 {/* ============ TOPBAR ============ */}
-<div class="topbar">
-  <div class="container topbar__in">
-    <div class="topbar__left">
-      <a class="topbar__item" href={`tel:${facts.phoneE164}`}>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-        <span>{facts.phone}</span>
-      </a>
-      <a class="topbar__item" href={`https://wa.me/${facts.phoneE164.replace('+', '')}`} target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg>
-        <span>WhatsApp</span>
-      </a>
-      <a class="topbar__item topbar__rating" href={facts.reviews.googleUrl} target="_blank" rel="noopener">
-        <span aria-hidden="true">★</span>
-        <span>{facts.reviews.score} · {facts.reviews.count} reviews</span>
-      </a>
-      <span class="topbar__item topbar__item--muted">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></svg>
-        <span>{facts.address.street}, {facts.address.city}</span>
-      </span>
-    </div>
-    <div class="topbar__right">
-      <span class="topbar__badge">BTW {facts.vat}</span>
-    </div>
-  </div>
-</div>
+<Topbar />
 
 {/* ============ HEADER (zonder menu: één doel = het formulier) ============ */}
-<header class="header" id="header">
-  <div class="container header__in">
-    <a class="brand" href="/" aria-label="INGBELG — naar de startpagina">
-      <img src="/assets/logo-transparent.png" alt="INGBELG — algemene dakwerken en renovatie" width="430" height="207">
-    </a>
-    <div class="header__actions">
-      <a class="btn btn--line btn--icon" href={`tel:${facts.phoneE164}`} aria-label={`Bel ${facts.phone}`} title={facts.phone}>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-      </a>
-      <a class="btn btn--primary" href="#contact">
-        <span>Gratis plaatsbezoek</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
-</header>
+<SiteHeader brandHref="/" brandLabel="INGBELG — naar de startpagina" />
 
 <main id="main">
 {/* ============ HERO ============ */}
@@ -551,48 +516,7 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
 </main>
 
 {/* ============ FOOTER ============ */}
-<footer class="footer">
-  <div class="container footer__grid">
-    <div class="footer__brand">
-      <img src="/assets/logo.png" alt="INGBELG" class="footer__logo" width="430" height="207">
-      <p>INGBELG &middot; Dak- en renovatiewerken uit {facts.address.city}<br>Hellende en platte daken, asbestverwijdering, isolatie en gevelbekleding.</p>
-      <p class="footer__vat">BTW {facts.vat}</p>
-    </div>
-    <div class="footer__col">
-      <h3>Diensten</h3>
-      <ul>
-        <li><a href="/hellend-dak">Hellend dak vernieuwen</a></li>
-        <li><a href="/plat-dak-epdm">Plat dak (EPDM)</a></li>
-        <li><a href="/dakisolatie">Dakisolatie</a></li>
-        <li><a href="/asbestdak-vervangen">Asbestdak vervangen</a></li>
-        <li><a href="/gevelbekleding">Gevelbekleding</a></li>
-        <li><a href="/dakkapel-timmerwerken">Dakkapel en timmerwerken</a></li>
-        <li><a href="/dakherstelling">Daklek herstellen</a></li>
-        <li><a href="/handig-om-te-weten">Handig om te weten</a></li>
-        <li><a href="/#diensten">Alle diensten</a></li>
-      </ul>
-    </div>
-    <div class="footer__col">
-      <h3>Contact</h3>
-      <ul>
-        <li><a href={`tel:${facts.phoneE164}`}>{facts.phone}</a></li>
-        <li><a href={`mailto:${facts.email}`}>{facts.email}</a></li>
-        <li><a href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">{facts.address.street}, {facts.address.postalCode} {facts.address.city}</a></li>
-      </ul>
-      <ul class="footer__social" style="margin-top:14px">
-        <li><a href={facts.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href={facts.social.tiktok} target="_blank" rel="noopener">TikTok</a></li>
-        {facts.social.facebook && <li><a href={facts.social.facebook} target="_blank" rel="noopener">Facebook</a></li>}
-      </ul>
-    </div>
-  </div>
-  <div class="footer__bar">
-    <div class="container footer__bar-in">
-      <p>&copy; <span id="year">2026</span> {facts.legalName}. Alle rechten voorbehouden.</p>
-      <p><a href="/privacybeleid">Privacybeleid</a> &middot; <a href="/cookiebeleid">Cookiebeleid</a> &middot; <button type="button" class="linkbtn" data-cookie-settings>Cookie-instellingen</button></p>
-    </div>
-  </div>
-</footer>
+<SiteFooter services={FOOTER_SERVICES_LANDING} />
 
 <div class="mobilebar">
   <a href={`tel:${facts.phoneE164}`}><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>Bellen</a>
