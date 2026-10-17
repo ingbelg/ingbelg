@@ -1,0 +1,72 @@
+---
+import LandingPage from '../components/LandingPage.astro';
+import type { LandingData } from '../components/LandingPage.astro';
+import facts from '../data/site-facts.json';
+import { faqGratis, faqBtw, faqPremie, faqRegen, faqGarantie, steps } from '../data/landing-shared';
+
+export const prerender = true;
+
+/* Enkel feiten die al op de site staan (hellend-dak, plat-dak-epdm, premies-dakwerken-2026):
+   PIR 12–16 cm bij een nieuw hellend dak, altijd een nieuwe PIR-laag onder EPDM, Rd ≥ 4,5 voor de premie.
+   Niet beweerd (nog niet bevestigd door de klant): isoleren langs binnen, zoldervloer, sarking als apart product. */
+const page: LandingData = {
+  slug: 'dakisolatie',
+  title: 'Dakisolatie in Zottegem: dak isoleren met premie | INGBELG',
+  description: `Dak isoleren in Zottegem en Oost-Vlaanderen: PIR-isolatie bij een nieuw hellend of plat dak, Rd 4,5 voor de premie en 6 % btw. ${facts.warrantyYears} jaar garantie.`,
+  dienst: 'Dakisolatie',
+  serviceType: 'Dakisolatie',
+  eyebrow: 'Dakwerker uit Zottegem · eigen ploeg',
+  crumb: 'Dakisolatie',
+  h1Main: 'Uw dak goed geïsoleerd',
+  h1Sub: 'PIR-isolatie bij een nieuw hellend of plat dak, in Zottegem en heel Oost-Vlaanderen',
+  lead: `We isoleren uw dak samen met de vernieuwing: bij een hellend dak met 12 tot 16 cm PIR onder een nieuw onderdak, bij een plat dak altijd met een nieuwe PIR-laag onder het EPDM. Zo haalt u de Rd-waarde voor de premie. Door onze eigen vaste ploeg, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
+  hero: { src: '/assets/services/hellende-daken-nieuw.webp', srcset: '/assets/services/hellende-daken-nieuw-640.webp 640w, /assets/services/hellende-daken-nieuw-1024.webp 1024w, /assets/services/hellende-daken-nieuw.webp 1600w', alt: 'Nieuw geïsoleerd hellend dak met antracietkleurige dakpannen' },
+  problems: [
+    { h: 'De zolder is ijskoud in de winter.', p: 'Vaak ontbreken isolatie en onderdak. Met 12 tot 16 cm PIR blijft de warmte binnen.', link: { href: '/hellend-dak', label: 'Meer over een nieuw hellend dak' } },
+    { h: 'Uw aanbouw of garage is koud.', p: 'Zonder isolatie verliest u warmte langs het platte dak. Een nieuwe isolatielaag onder het EPDM lost dat op.', link: { href: '/plat-dak-epdm', label: 'Meer over een plat dak' } },
+    { h: 'U kocht een woning met EPC E of F.', p: 'Dan moet u binnen zes jaar naar label D. Een geïsoleerd dak is daarvoor een logische eerste stap.', link: { href: '/renovatieverplichting-epc', label: 'De renovatieverplichting uitgelegd' } },
+    { h: 'U wilt de premie niet mislopen.', p: 'De nieuwe isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen. Met PIR is dat minstens 12 cm.', link: { href: '/premies-dakwerken-2026', label: 'Wat krijgt u terug?' } },
+    { h: 'Er ligt nog asbest op het dak.', p: 'Laat u het asbest verwijderen terwijl we isoleren? Dan komt er voor categorie 3 en 4 een asbestbonus bij de premie.', link: { href: '/asbestdak-vervangen', label: 'Meer over asbestdaken' } },
+  ],
+  doTitle: 'Isoleren en vernieuwen, <em>in één werf</em>',
+  doLead: 'Het dak gaat toch open. Dan isoleren we het meteen goed, zodat de warmte binnen blijft en u later niets opnieuw moet openleggen.',
+  doTicks: [
+    'Hellend dak: PIR onder een nieuw onderdak, meestal 12 tot 16 cm',
+    'Plat dak: altijd een nieuwe PIR-laag onder het EPDM',
+    'Rd-waarde van minstens 4,5 m²K/W, de grens voor de premie',
+    'Hulp bij uw premieaanvraag',
+    "Elk open dakvlak gaat 's avonds onder ons zeil",
+    'Containers, valbeveiliging en opruim zitten in de prijs',
+  ],
+  doImages: [
+    { src: '/assets/work/work-10.webp', alt: 'Langgerekte woning in de stellingen met een nieuwe donkere dakbedekking', w: 1600, h: 900 },
+    { src: '/assets/work/work-08.webp', alt: 'Luchtfoto van een bungalow met een nieuw donker dak en een plat dak ernaast', w: 1600, h: 1200 },
+  ],
+  steps: steps('Na uw akkoord krijgt u een vaste startdatum. Hoe lang de werken duren, hangt af van uw dak; u krijgt de planning vooraf op papier.'),
+  related: { text: 'Wilt u weten wat u terugkrijgt voor dakisolatie, en hoe u de premie aanvraagt?', href: '/premies-dakwerken-2026', label: 'De dakpremie 2026 uitgelegd →' },
+  note: {
+    title: 'Premie en <em>6 % btw</em>',
+    text: 'Haalt de nieuwe isolatie een Rd-waarde van minstens 4,5 m²K/W en valt u in inkomenscategorie 3 of 4? Dan kunt u de Mijn VerbouwPremie krijgen: maximaal 50 % van de factuur (tot € 5.750) of 35 % (tot € 4.025). Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw in plaats van 21 %. Met onze premie-check ziet u vooraf wat u terugkrijgt.',
+  },
+  faq: [
+    {
+      q: 'Wat kost dakisolatie?',
+      a: 'Dat hangt af van de oppervlakte, het type dak en wat er nu onder de pannen of de dakbedekking zit. Daarom geven we geen prijs aan de telefoon, wel een offerte binnen 48 uur na het plaatsbezoek, per post uitgeschreven. Met de premie-check ziet u vooraf al wat u terugkrijgt.',
+    },
+    {
+      q: 'Welke isolatie heb ik nodig?',
+      a: 'Voor de premie moet de nieuwe isolatielaag een Rd-waarde van minstens 4,5 m²K/W halen. Met PIR is daar minstens 12 cm voor nodig; bij een hellend dak adviseren we meestal 12 tot 16 cm.',
+    },
+    faqPremie,
+    {
+      q: 'Hoe vraag ik de premie aan?',
+      a: 'Na de werken, via het Mijn VerbouwLoket. U voegt de eindfactuur en het attest van de aannemer voor de plaatsing van de isolatie toe. Wij helpen u daarbij.',
+    },
+    faqBtw,
+    faqRegen,
+    faqGarantie,
+    faqGratis,
+  ],
+};
+---
+<LandingPage page={page} />

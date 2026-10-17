@@ -10,8 +10,9 @@ export const prerender = true;
 // Privacy-/cookiebeleid staan er bewust niet in (geen zoekwaarde; ze blijven gewoon bereikbaar via links).
 const PAGES: [string, string][] = [
   ['/', '2026-10-17'],
-  ['/hellend-dak', '2026-10-04'],
+  ['/hellend-dak', '2026-10-17'],
   ['/plat-dak-epdm', '2026-10-04'],
+  ['/dakisolatie', '2026-10-17'],
   ['/asbestdak-vervangen', '2026-10-03'],
   ['/gevelbekleding', '2026-10-03'],
   ['/dakkapel-timmerwerken', '2026-10-03'],
