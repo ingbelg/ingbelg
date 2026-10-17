@@ -9,7 +9,7 @@ export const prerender = true;
 // Uitlegpagina's: zelfde datum als `updated` in het paginabestand.
 // Privacy-/cookiebeleid staan er bewust niet in (geen zoekwaarde; ze blijven gewoon bereikbaar via links).
 const PAGES: [string, string][] = [
-  ['/', '2026-10-04'],
+  ['/', '2026-10-17'],
   ['/hellend-dak', '2026-10-04'],
   ['/plat-dak-epdm', '2026-10-04'],
   ['/asbestdak-vervangen', '2026-10-03'],

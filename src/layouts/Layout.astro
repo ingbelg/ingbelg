@@ -17,8 +17,10 @@ interface Props {
   image?: string;
 }
 const {
-  title = 'Dakwerken Zottegem | Hellend & plat dak, asbest | INGBELG',
-  description = `Dakwerker uit Zottegem met eigen ploeg: hellende en platte daken, asbestverwijdering, isolatie en gevel. Offerte binnen ${facts.quoteHoursAfterVisit} uur, ${facts.warrantyYears} jaar garantie.`,
+  // Standaardwaarden = de homepage (andere pagina's geven hun eigen title/description mee).
+  // Afgestemd op Search Console: "dakwerken zottegem" en "dakwerker zottegem" zijn de grootste zoekopdrachten.
+  title = `Dakwerken Zottegem · Dakwerker, ${facts.warrantyYears} jaar garantie | INGBELG`,
+  description = `Dakwerker uit Zottegem met eigen ploeg: hellend en plat dak, asbest, isolatie en gevel. ${facts.reviews.score} ★ op Google (${facts.reviews.count} reviews). Offerte ${facts.quoteHoursAfterVisit} u na plaatsbezoek.`,
   ogTitle = Astro.url.pathname === '/' ? 'INGBELG · Dakwerken in Zottegem en heel Oost-Vlaanderen' : title,
   image = '/assets/og-image.jpg',
 } = Astro.props;
