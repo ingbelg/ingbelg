@@ -1,0 +1,28 @@
+---
+/* Startpagina — REVIEWS (C-20, verplaatst na Realisaties) */
+import facts from '../../data/site-facts.json';
+---
+<section class="section section--soft" id="reviews">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Wat klanten zeggen</p>
+      <h2 class="h2">Wat klanten zeggen <em>na de oplevering</em></h2>
+      <p class="sechead__sub">Live overzicht van onze reviews, rechtstreeks van Google.</p>
+    </header>
+
+    <p class="sechead sechead--center reveal" style="margin-bottom:36px">
+      <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
+    </p>
+
+    {/* Live Trustindex-widget — klant heeft een betaald abonnement, statische kaarten
+         zijn bewust weer verwijderd op zijn verzoek. */}
+    <div class="reviews-widget reveal">
+      <div class="ti-slot" data-ti="30693eb81611346370764c8da82">
+        <div class="ti-placeholder">
+          <p><strong>Google-reviews</strong><br>Onze reviews worden getoond door Trustindex, een externe dienst. Uw gegevens worden pas met die dienst gedeeld nadat u dit toestaat.</p>
+          <button type="button" class="btn btn--primary" data-consent-external><span>Toestaan en reviews tonen</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

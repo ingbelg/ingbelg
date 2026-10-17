@@ -1,0 +1,56 @@
+---
+/* Startpagina — REALISATIES */
+import { getCollection } from 'astro:content';
+import facts from '../../data/site-facts.json';
+
+const gallery = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
+
+const sizeClass: Record<string, string> = { tall: ' gal--tall', wide: ' gal--wide', big: ' gal--big', normal: '' };
+---
+<section class="section" id="realisaties">
+  <div class="container">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Realisaties</p>
+      <h2 class="h2">Voor en <em>na</em></h2>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="ba-grid reveal">
+      <div class="ba">
+        <div class="ba__slider">
+          <div class="ba__img ba__img--before"><img src="/assets/na_antrociet.webp" alt="Dak na renovatie — antraciet dakpannen" width="1024" height="576" loading="lazy"></div>
+          <div class="ba__img ba__img--after"><img src="/assets/voor_antrociet.webp" alt="Dak voor renovatie — antraciet dakpannen" width="1024" height="768" loading="lazy"></div>
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+          <div class="ba__handle" aria-hidden="true"></div>
+          <span class="ba__tag ba__tag--before">Voor</span>
+          <span class="ba__tag ba__tag--after">Na</span>
+        </div>
+        <p class="ba__label">Antraciet dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
+      </div>
+      <div class="ba">
+        <div class="ba__slider">
+          <div class="ba__img ba__img--before"><img src="/assets/na_rood.webp" alt="Dak na renovatie — rode dakpannen" width="1024" height="768" loading="lazy" style="object-position:center 15%"></div>
+          <div class="ba__img ba__img--after"><img src="/assets/voor_rood.webp" alt="Dak voor renovatie — rode dakpannen" width="1024" height="676" loading="lazy"></div>
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+          <div class="ba__handle" aria-hidden="true"></div>
+          <span class="ba__tag ba__tag--before">Voor</span>
+          <span class="ba__tag ba__tag--after">Na</span>
+        </div>
+        <p class="ba__label">Rode dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
+      </div>
+    </div>
+
+    <div class="gallery" id="gallery">
+      {gallery.map((g) => (
+        <figure class={`gal reveal${sizeClass[g.data.size]}`}>
+          <img src={g.data.image} alt={g.data.alt} width={g.data.imageWidth} height={g.data.imageHeight} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+
+    <p class="sechead sechead--center reveal" style="margin-top:36px">
+      <a class="btn btn--line" href={facts.social.instagram} target="_blank" rel="noopener"><span>Meer werven op Instagram →</span></a>
+    </p>
+  </div>
+</section>

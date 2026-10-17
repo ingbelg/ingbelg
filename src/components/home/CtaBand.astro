@@ -1,0 +1,16 @@
+---
+/* Startpagina — CTA BAND (C-23) */
+import facts from '../../data/site-facts.json';
+---
+<section class="cta">
+  <div class="container cta__in reveal">
+    <div>
+      <h2 class="cta__title">Eén plaatsbezoek. <em>Daarna weet u het.</em></h2>
+      <p class="cta__sub">Daarna weet u wat uw dak nodig heeft en wat het kost. Gratis en vrijblijvend. U beslist pas als u de offerte in handen hebt.</p>
+    </div>
+    <div class="cta__actions">
+      <a class="btn btn--white btn--lg" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+      <a class="btn btn--glass btn--lg" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+---
+/* Startpagina — HERO */
+import { getCollection } from 'astro:content';
+import facts from '../../data/site-facts.json';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
+---
+<section class="hero" id="top">
+  <div class="hero__media">
+    {/* T-08: preload="none" + Save-Data-check in main.js (skipVideoOnSaveData) laat op trage verbindingen enkel de poster zien */}
+    <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="none" poster="/assets/services/hellende-daken.webp">
+      <source src="/assets/hero_mobile.mp4" type="video/mp4" media="(max-width: 760px)">
+      <source src="/assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero__scrim"></div>
+    <div class="hero__grain"></div>
+  </div>
+
+  <div class="container hero__in">
+    <p class="hero__eyebrow reveal"><span class="hero__dot"></span><span class="hero__eyebrow-txt"><span>Dakwerker uit Zottegem&nbsp;&middot;</span> <span>eigen ploeg&nbsp;&middot;</span> <span>heel Oost-Vlaanderen</span></span></p>
+    <h1 class="hero__title reveal">
+      <span class="h1-main">Uw dak in één keer goed.</span><br>
+      <span class="h1-sub">Dakwerken in Zottegem en heel Oost-Vlaanderen</span>
+    </h1>
+    <p class="hero__lead reveal">
+      Hellende en platte daken, asbestverwijdering, isolatie en gevelbekleding, gelegd
+      door onze eigen ploeg. Na het plaatsbezoek hebt u binnen {facts.quoteHoursAfterVisit} uur
+      een offerte waarin alles staat. Op het werk krijgt u {facts.warrantyYears} jaar garantie, op papier.
+    </p>
+
+    <div class="hero__trust reveal">
+      <div class="ti-slot" data-ti="dc7618f81af7346705466e5f050"></div>
+    </div>
+
+    <div class="hero__cta reveal">
+      <a class="btn btn--primary btn--lg" href="#contact">
+        <span>Vraag een gratis plaatsbezoek</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--glass btn--lg" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener">
+        <span>Stuur een foto via WhatsApp →</span>
+      </a>
+    </div>
+    <p class="hero__note reveal">
+      Gratis en vrijblijvend &middot; we bellen u binnen {facts.callbackWorkdays} werkdag terug voor een afspraak
+    </p>
+
+    <ul class="hero__stats reveal">
+      <li><strong class="count" data-count={facts.quoteHoursAfterVisit} data-suffix="u">{facts.quoteHoursAfterVisit}u</strong><span>Offerte na plaatsbezoek</span></li>
+      <li><strong class="count" data-count={facts.warrantyYears} data-suffix=" jaar">{facts.warrantyYears} jaar</strong><span>Garantie op papier</span></li>
+      <li><strong class="count" data-count={facts.roofsDone} data-suffix="+">{facts.roofsDone}+</strong><span>Daken gelegd</span></li>
+      <li><strong class="count-rating">{facts.reviews.score} ★</strong><span>Uit {facts.reviews.count} reviews</span></li>
+    </ul>
+  </div>
+
+  <a class="hero__scroll" href="#usp" aria-label="Scroll naar beneden">
+    <span class="hero__scroll-line"></span>
+    <span class="hero__scroll-txt">Scroll</span>
+  </a>
+</section>

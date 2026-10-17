@@ -1,0 +1,88 @@
+---
+/* Startpagina — FAQ (C-26) */
+import facts from '../../data/site-facts.json';
+
+const faqItems = [
+  {
+    q: 'Wat kost een nieuw dak?',
+    a: 'Dat hangt af van de oppervlakte, het type dak en wat er onder de pannen zit. Daarom geven we geen prijs aan de telefoon, wel een offerte binnen 48 uur na het plaatsbezoek, per post uitgeschreven. Met de premie-check hierboven ziet u vooraf al wat u terugkrijgt.',
+  },
+  {
+    q: 'Zijn de offertes gratis?',
+    a: 'Ja. Het plaatsbezoek en de offerte zijn gratis en vrijblijvend. Pas als u de offerte ondertekent, gaan we aan de slag.',
+  },
+  {
+    q: 'Betaal ik 6 % of 21 % btw?',
+    a: 'Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u 6 % btw op de werken in plaats van 21 %. Wij passen dat correct toe op de factuur. Voor een woning jonger dan 10 jaar geldt 21 %.',
+    more: { href: '/btw-dakwerken', label: '6 % btw op dakwerken uitgelegd' },
+  },
+  {
+    q: 'Kan ik nog genieten van premies?',
+    a: 'Ja, als u in inkomenscategorie 3 of 4 valt. Sinds 1 maart 2026 krijgen de twee hoogste inkomenscategorieën geen dakpremie meer. Voor categorie 4 gaat het om maximaal 50 % van de factuur (tot € 5.750), voor categorie 3 om maximaal 35 % (tot € 4.025). Voorwaarde: het dak wordt tegelijk nieuw geïsoleerd, met een Rd-waarde van minstens 4,5 m²K/W. Soms komen er gemeentelijke premies bij. Tijdens het plaatsbezoek rekenen we het samen na.',
+    more: { href: '/premies-dakwerken-2026', label: 'Alles over de dakpremie 2026' },
+  },
+  {
+    q: 'Hoe dik wordt de isolatielaag?',
+    a: 'Dik genoeg voor de premie-eis: een Rd-waarde van minstens 4,5 m²K/W. Met PIR is daar minstens 12 cm voor nodig. Meestal adviseren we 12 tot 16 cm, afhankelijk van de dakopbouw en hoe zuinig u wilt wonen.',
+  },
+  {
+    q: 'Moet mijn asbestdak weg?',
+    a: 'Niet meteen, zolang het in goede staat is. Maar u mag een asbestdak niet reinigen, ontmossen of er zonnepanelen op plaatsen. Verkoopt u een woning van vóór 2001, dan hebt u een asbestattest nodig. Plant u toch dakwerken, laat het asbest dan meteen mee verwijderen: dat kan in één werf met het nieuwe dak.',
+    more: { href: '/asbestdak-regels', label: 'De regels voor asbestdaken' },
+  },
+  {
+    q: 'Ik kocht een woning met EPC E of F. Wat nu?',
+    a: 'Dan moet u de woning binnen zes jaar na de aankoop naar minstens label D brengen. Dakisolatie is daarvoor vaak een logische eerste stap. Breng uw EPC mee naar het plaatsbezoek, dan zeggen we welke dakwerken het meeste opleveren.',
+    more: { href: '/renovatieverplichting-epc', label: 'De renovatieverplichting uitgelegd' },
+  },
+  {
+    q: 'Wat als het regent tijdens de werken?',
+    a: "Dan blijft uw woning droog. Elk dakvlak dat open ligt, dekken we aan het einde van de werkdag af met ons eigen zeil. Ook als er 's nachts een onverwachte bui valt.",
+  },
+  {
+    q: 'Hoe lang duren de werken?',
+    a: 'Een hellend dak van een gemiddelde rijwoning: 5 tot 10 werkdagen. Een plat dak of een gevelbekleding: meestal 2 tot 5 dagen. U krijgt de exacte planning vooraf op papier.',
+  },
+  {
+    q: 'Welke garantie krijg ik?',
+    a: `${facts.warrantyYears} jaar schriftelijke garantie op het uitgevoerde werk en de materialen. U krijgt het garantiedocument bij de oplevering.`,
+  },
+  {
+    q: 'Heb ik een vergunning nodig?',
+    a: 'Voor het vernieuwen van een dak in dezelfde vorm meestal niet. Verandert de vorm, de hoogte of komt er een dakkapel bij, dan vaak wel. Informeer altijd bij uw gemeente; wij bezorgen u de technische gegevens voor de aanvraag.',
+  },
+  {
+    q: 'In welke regio werkt INGBELG?',
+    a: 'In Zottegem, de deelgemeenten en de buurgemeenten, en voor grotere projecten in heel Oost- en West-Vlaanderen, Vlaams-Brabant en Antwerpen. Twijfelt u of uw adres binnen ons werkgebied valt? Bel ons gerust.',
+  },
+];
+---
+<section class="section section--soft" id="faq">
+  <div class="container faq__wrap">
+    <div class="faq__intro reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>FAQ</p>
+      <h2 class="h2">Veelgestelde <em>vragen</em></h2>
+      <p class="sechead__sub">Staat uw vraag er niet bij? Bel ons gerust, we helpen u meteen verder.</p>
+      <a class="btn btn--line" href="mailto:info@ingbelg.be"><span>Stel uw vraag</span></a>
+    </div>
+
+    <div class="faq" id="faqList">
+      {faqItems.map((item) => (
+        <details class="faq__item reveal">
+          <summary>{item.q}<i></i></summary>
+          <div class="faq__body"><p>{item.a}</p>{item.more && <p class="faq__more"><a href={item.more.href}>{item.more.label}</a></p>}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+})} />

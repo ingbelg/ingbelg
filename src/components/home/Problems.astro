@@ -1,0 +1,39 @@
+---
+/* Startpagina — HERKENT U DIT? (C-10, vervangt USP) */
+import facts from '../../data/site-facts.json';
+---
+<section class="section usp" id="usp">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <h2 class="h2">Vijf redenen waarom mensen ons <em>bellen</em></h2>
+    </header>
+    <div class="adv__grid">
+      <article class="adv__card reveal">
+        <h3>Er komt water binnen.</h3>
+        <p>Een vochtvlek op het plafond of verschoven pannen na een storm. Hoe sneller we kijken, hoe kleiner de schade.</p>
+        <a class="adv__more" href="/dakherstelling">Meer over daklekken</a>
+      </article>
+      <article class="adv__card reveal">
+        <h3>Er ligt nog asbest op het dak.</h3>
+        <p>Leien of golfplaten van vóór 2001. We halen ze er veilig af en leggen in dezelfde werf uw nieuwe dak.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>De zolder is ijskoud in de winter.</h3>
+        <p>Vaak ontbreken isolatie en onderdak. Met 12 tot 16 cm PIR blijft de warmte binnen, en misschien hebt u recht op een premie.</p>
+        <a class="adv__more" href="/dakisolatie">Meer over dakisolatie</a>
+      </article>
+      <article class="adv__card reveal">
+        <h3>U kocht een woning met EPC E of F.</h3>
+        <p>Dan moet u binnen zes jaar naar label D. Een geïsoleerd dak is daarvoor een logische eerste stap.</p>
+      </article>
+      <article class="adv__card reveal">
+        <h3>U wilt zonnepanelen, maar het dak is oud.</h3>
+        <p>Eerst het dak, dan de panelen. Zo moet er later niets opnieuw open.</p>
+      </article>
+    </div>
+    <p class="sechead sechead--center reveal" style="margin-top:36px">
+      Twijfelt u? <a class="btn btn--line" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener"><span>Stuur een foto van uw dak via WhatsApp</span></a>
+      <span style="display:block;margin-top:22px">U krijgt een eerlijk antwoord, ook als uw dak nog jaren meekan.</span>
+    </p>
+  </div>
+</section>

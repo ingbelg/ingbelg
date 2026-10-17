@@ -1,0 +1,89 @@
+---
+/* Startpagina — PREMIE-CALCULATOR */
+---
+<section class="section calc-sec" id="calculator">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Premie-check &middot; 2 minuten</p>
+      <h2 class="h2">Waar heeft u <em>recht</em> op?</h2>
+      <p class="sechead__sub">De Vlaamse dakpremie bestaat nog. Sinds 1 maart 2026 is ze er enkel voor inkomenscategorie 3 en 4; wie daarin valt, krijgt tot 50&nbsp;% van de factuur terug, met een maximum van &euro;5.750. Daarnaast betaalt u voor een woning ouder dan 10 jaar 6&nbsp;% btw in plaats van 21&nbsp;%, los van uw inkomen. Vul uw gegevens in en zie meteen waar u recht op hebt.</p>
+    </header>
+
+    <div class="calc reveal">
+      <form class="calc__form" id="calcForm" novalidate>
+        <div class="calc__row">
+          <label class="field">
+            <span>Type dak</span>
+            <select name="type" id="calcType">
+              <option value="hellend">Hellend dak</option>
+              <option value="plat">Plat dak</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Dakoppervlakte (m²)</span>
+            <input type="number" name="m2" id="calcM2" min="1" max="500" step="1" value="100">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Isolatiedikte (PIR)</span>
+          <select name="dikte" id="calcDikte">
+            <option value="12">12 cm</option>
+            <option value="14" selected>14 cm</option>
+            <option value="16">16 cm</option>
+          </select>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="asbest" id="calcAsbest">
+          <span>Vóór de isolatie moet er asbest verwijderd worden</span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="btw10jaar" id="calcBtw10jaar">
+          <span>Mijn woning is ouder dan 10 jaar en ik gebruik ze zelf als woning</span>
+        </label>
+
+        <div class="calc__row">
+          <label class="field">
+            <span>Gezinssamenstelling</span>
+            <select name="gezin" id="calcGezin">
+              <option value="alleenstaand">Alleenstaand</option>
+              <option value="koppel" selected>Koppel of samenwonend</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Personen ten laste</span>
+            <input type="number" name="personen" id="calcPersonen" min="0" max="10" step="1" value="0">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Gezamenlijk belastbaar jaarinkomen huishouden (€)</span>
+          <input type="number" name="inkomen" id="calcInkomen" min="0" step="500" placeholder="Bv. 55000">
+        </label>
+
+        <label class="field">
+          <span>Gemeente</span>
+          <input type="text" name="gemeente" id="calcGemeente" placeholder="Bv. Zottegem">
+        </label>
+
+        <button class="btn btn--primary btn--lg btn--block" type="submit">
+          <span>Bereken mijn premies</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+
+      <div class="calc__result" id="calcResult">
+        <p class="calc__placeholder">Vul het formulier in en klik op <strong>“Bereken mijn premies”</strong> om uw indicatieve totaal te bekijken.</p>
+      </div>
+    </div>
+
+    <p class="calc__disclaimer">Alle regels in gewone taal: <a href="/premies-dakwerken-2026">dakpremie 2026 uitgelegd</a>.</p>
+    <p class="calc__disclaimer">Indicatief. Het definitieve bedrag hoort u bij de officiële aanvraag. Wat de werken kosten, hangt af van uw dak en staat in de offerte na het plaatsbezoek.</p>
+    <details class="calc__details">
+      <summary>Voorwaarden en bronnen</summary>
+      <p class="calc__disclaimer">Indicatieve demoberekening op basis van de officiële Mijn VerbouwPremie-regels voor dakwerken (vlaanderen.be, geraadpleegd augustus 2026). Sinds 1 maart 2026 komen enkel inkomenscategorie 3 en 4 nog in aanmerking voor de dakisolatiepremie — dit is geen officiële simulatie. Voorwaarden: de woning moet aangesloten zijn op het elektriciteitsnet van vóór 1 januari 2006, de isolatie moet een Rd-waarde van minstens 4,5 m²K/W halen, en het factuurbedrag moet minstens €1.000 (excl. btw) bedragen. De asbestbonus geldt enkel als een aannemer het asbest verwijdert. Deze rekentool gaat uit van een eigenaar-bewoner van een eengezinswoning — voor verhuurders, investeerders en appartementsgebouwen gelden andere bedragen. De vroegere totaalrenovatiebonus/EPC-labelpremie is sinds 2026 volledig afgeschaft. De exacte inkomenscategorie en bedragen worden pas definitief bevestigd bij de officiële aanvraag via mijnverbouwpremie.be — gebruik deze tool als eerste inschatting, niet als eindresultaat.</p>
+    </details>
+  </div>
+</section>
