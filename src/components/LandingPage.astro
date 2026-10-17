@@ -8,6 +8,20 @@ import Topbar from './site/Topbar.astro';
 import SiteHeader from './site/SiteHeader.astro';
 import SiteFooter from './site/SiteFooter.astro';
 import ContactSection from './site/ContactSection.astro';
+import LandingHero from './landing/LandingHero.astro';
+import TrustBar from './landing/TrustBar.astro';
+import LandingProblems from './landing/LandingProblems.astro';
+import GuideOverview from './landing/GuideOverview.astro';
+import GuideBody from './landing/GuideBody.astro';
+import ServiceDo from './landing/ServiceDo.astro';
+import ServicePhotos from './landing/ServicePhotos.astro';
+import LandingReviews from './landing/LandingReviews.astro';
+import LandingSteps from './landing/LandingSteps.astro';
+import LandingNote from './landing/LandingNote.astro';
+import LandingRelated from './landing/LandingRelated.astro';
+import LandingCta from './landing/LandingCta.astro';
+import LandingFaq from './landing/LandingFaq.astro';
+import LandingSchema from './landing/LandingSchema.astro';
 import { FOOTER_SERVICES_LANDING } from '../data/navigation';
 import facts from '../data/site-facts.json';
 
@@ -16,16 +30,6 @@ import type { LandingData } from '../types/pages';
 
 interface Props { page: LandingData }
 const { page } = Astro.props;
-const wa = `https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`;
-const siteUrl = (Astro.site ?? new URL(facts.siteUrl)).origin;
-const pageUrl = `${siteUrl}/${page.slug}`;
-// Per soort pagina een eigen, smal type (src/types/pages.ts); hier één keer bepaald.
-const svc = page.kind === 'guide' || page.kind === 'overview' ? undefined : page;
-const guide = page.kind === 'guide' ? page : undefined;
-const overview = page.kind === 'overview' ? page : undefined;
-const isGuide = !svc;      // informatieve pagina (gids of overzicht)
-const isArticle = !!guide; // gids met Article-schema
-const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <Layout title={page.title} description={page.description} image={page.ogImage}>
 
@@ -39,346 +43,40 @@ const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString(
 
 <main id="main">
 {/* ============ HERO ============ */}
-<section class="hero" id="top">
-  <div class="hero__media">
-    <img class="hero__video" src={page.hero.src} srcset={page.hero.srcset} sizes={page.hero.srcset ? '100vw' : undefined} alt={page.hero.alt} width="1600" height="900" fetchpriority="high" decoding="async">
-    <div class="hero__scrim"></div>
-    <div class="hero__grain"></div>
-  </div>
-  <div class="container hero__in">
-    <nav class="crumbs" aria-label="Kruimelpad">
-      <ol>
-        <li><a href="/">Home</a></li>
-        {guide && <li><a href={guide.parent.href}>{guide.parent.name}</a></li>}
-        <li aria-current="page">{page.crumb}</li>
-      </ol>
-    </nav>
-    <p class="hero__eyebrow"><span class="hero__dot"></span><span class="hero__eyebrow-txt">{page.eyebrow}</span></p>
-    <h1 class="hero__title">
-      <span class="h1-main">{page.h1Main}</span>
-      <span class="h1-sub">{page.h1Sub}</span>
-    </h1>
-    <p class="hero__lead">{page.lead}</p>
-    <div class="hero__cta">
-      <a class="btn btn--primary btn--lg" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
-      <a class="btn btn--glass btn--lg" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
-    </div>
-    <p class="hero__note">Gratis en vrijblijvend &middot; we bellen u binnen {facts.callbackWorkdays} werkdag terug voor een afspraak &middot; <a href={wa} target="_blank" rel="noopener">Stuur een foto via WhatsApp</a></p>
-  </div>
-</section>
+<LandingHero page={page} />
 
 {/* ============ VERTROUWEN ============ */}
-<section class="brands">
-  <div class="container">
-    <p class="brands__label">Zo werken wij:</p>
-    <ul class="brands__row">
-      <li>Volgens de WTCB-richtlijnen</li>
-      <li>Verzekerd</li>
-      <li>{facts.warrantyYears} jaar schriftelijke garantie</li>
-      <li>{facts.roofsDone}+ daken gerealiseerd</li>
-    </ul>
-  </div>
-</section>
+<TrustBar page={page} />
 
 {/* ============ HERKENT U DIT? ============ */}
-{page.problems.length > 0 && (
-<section class="section usp" id="usp">
-  <div class="container">
-    <header class="sechead sechead--center">
-      <h2 class="h2" set:html={page.problemsTitle ?? 'Herkent u <em>dit</em>?'}></h2>
-    </header>
-    <div class="adv__grid">
-      {page.problems.map((x) => (
-        <article class="adv__card reveal">
-          <h3>{x.h}</h3>
-          <p>{x.p}</p>
-          {x.link && <a class="adv__more" href={x.link.href}>{x.link.label}</a>}
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-)}
+<LandingProblems page={page} />
 
 {/* ============ OVERZICHT UITLEGPAGINA'S (enkel bij kind="overview") ============ */}
-{overview && (
-<section class="section usp" id="artikels">
-  <div class="container">
-    <h2 class="sr-only">Alle uitleg</h2>
-    <div class="articles">
-      {overview.articles.map((a) => (
-        <article class="svc reveal">
-          <div class="svc__img"><img src={a.img} alt={a.alt} width={a.w} height={a.h} loading="lazy"></div>
-          <div class="svc__body">
-            <ul class="svc__tags"><li>{a.tag}</li></ul>
-            <h3><a href={a.href}>{a.title}</a></h3>
-            <p>{a.text}</p>
-            <a class="svc__more" href={a.href}>Lees de uitleg</a>
-          </div>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
-)}
+<GuideOverview page={page} />
 
 {/* ============ GIDS (enkel kind="guide") ============ */}
-{guide && (
-  <section class="section" id="gids">
-    <div class="container legal">
-      <div class="legal__body">
-        {guide.updated && <p class="sechead__sub" style="margin-top:0">Laatst nagekeken met de officiële bronnen: <time datetime={guide.updated}>{nlDate(guide.updated)}</time>.</p>}
-        {guide.guide.map((g) => (
-          <>
-            {g.h && <h2>{g.h}</h2>}
-            {g.paras && g.paras.map((t) => <p set:html={t}></p>)}
-            {g.list && (g.bullets ? <ul>{g.list.map((t) => <li set:html={t}></li>)}</ul> : <ul class="ticks" style="list-style:none;padding-left:0">{g.list.map((t) => <li set:html={t}></li>)}</ul>)}
-            {g.table && (
-              <div class="legal__tablewrap">
-                <table class="legal__table">
-                  <thead><tr>{g.table.head.map((c) => <th>{c}</th>)}</tr></thead>
-                  <tbody>{g.table.rows.map((r) => <tr>{r.map((c) => <td set:html={c}></td>)}</tr>)}</tbody>
-                </table>
-              </div>
-            )}
-          </>
-        ))}
-        {guide.sources && (
-          <>
-            <h2>Bronnen</h2>
-            <ul>{guide.sources.map((x) => <li><a href={x.href} target="_blank" rel="noopener">{x.label}</a></li>)}</ul>
-          </>
-        )}
-      </div>
-    </div>
-  </section>
-)}
+<GuideBody page={page} />
 
 {/* ============ WAT WE DOEN ============ */}
-{svc && (
-<section class="about section section--soft" id="aanpak">
-  <div class="container about__grid">
-    <div class="about__media reveal">
-      <div class="about__img about__img--main">
-        <img src={svc.doImages[0].src} alt={svc.doImages[0].alt} width={svc.doImages[0].w} height={svc.doImages[0].h} loading="lazy">
-      </div>
-      <div class="about__img about__img--sub">
-        <img src={svc.doImages[1].src} alt={svc.doImages[1].alt} width={svc.doImages[1].w} height={svc.doImages[1].h} loading="lazy">
-      </div>
-    </div>
-    <div class="about__body reveal">
-      <p class="eyebrow"><span class="eyebrow__bar"></span>Onze aanpak</p>
-      <h2 class="h2" set:html={svc.doTitle}></h2>
-      <p class="lead">{svc.doLead}</p>
-      <ul class="ticks">
-        {svc.doTicks.map((t) => <li>{t}</li>)}
-      </ul>
-      <div class="about__cta">
-        <a class="btn btn--primary" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
-        <a class="btn btn--line" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-)}
+<ServiceDo page={page} />
 
 {/* ============ VOOR/NA + FOTO'S ============ */}
-{svc && (svc.ba || (svc.photos && svc.photos.length)) && (
-  <section class="section" id="realisaties">
-    <div class="container">
-      <header class="sechead sechead--center reveal">
-        <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Uit onze praktijk</p>
-        <h2 class="h2">Dit leveren we <em>op</em></h2>
-      </header>
-      {svc.ba && (
-        <div class="ba-grid reveal">
-          <div class="ba">
-            <div class="ba__slider">
-              <div class="ba__img ba__img--before"><img src="/assets/na_antrociet.webp" alt="Dak na renovatie — antraciet dakpannen" width="1024" height="576" loading="lazy"></div>
-              <div class="ba__img ba__img--after"><img src="/assets/voor_antrociet.webp" alt="Dak voor renovatie — antraciet dakpannen" width="1024" height="768" loading="lazy"></div>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
-              <div class="ba__handle" aria-hidden="true"></div>
-              <span class="ba__tag ba__tag--before">Voor</span>
-              <span class="ba__tag ba__tag--after">Na</span>
-            </div>
-            <p class="ba__label">Antraciet dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
-          </div>
-          <div class="ba">
-            <div class="ba__slider">
-              <div class="ba__img ba__img--before"><img src="/assets/na_rood.webp" alt="Dak na renovatie — rode dakpannen" width="1024" height="768" loading="lazy" style="object-position:center 15%"></div>
-              <div class="ba__img ba__img--after"><img src="/assets/voor_rood.webp" alt="Dak voor renovatie — rode dakpannen" width="1024" height="676" loading="lazy"></div>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
-              <div class="ba__handle" aria-hidden="true"></div>
-              <span class="ba__tag ba__tag--before">Voor</span>
-              <span class="ba__tag ba__tag--after">Na</span>
-            </div>
-            <p class="ba__label">Rode dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
-          </div>
-        </div>
-      )}
-      {svc.photos && svc.photos.length > 0 && (
-        <div class="roof__stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:28px">
-          {svc.photos.map((ph) => (
-            <img src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} loading="lazy" style="width:100%;height:auto;border-radius:14px;display:block">
-          ))}
-        </div>
-      )}
-    </div>
-  </section>
-)}
+<ServicePhotos page={page} />
 
 {/* ============ REVIEWS (Trustindex, pas na toestemming) ============ */}
-<section class="section section--soft" id="reviews">
-  <div class="container">
-    <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Wat klanten zeggen</p>
-      <h2 class="h2">Wat klanten zeggen <em>na de oplevering</em></h2>
-      <p class="sechead__sub">{facts.reviews.score}/5 op Google, op basis van {facts.reviews.count} reviews.</p>
-    </header>
-    <p class="sechead sechead--center reveal" style="margin-bottom:36px">
-      <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
-    </p>
-    <div class="reviews-widget reveal">
-      <div class="ti-slot" data-ti="30693eb81611346370764c8da82">
-        <div class="ti-placeholder">
-          <p><strong>Google-reviews</strong><br>Onze reviews worden getoond door Trustindex, een externe dienst. Uw gegevens worden pas met die dienst gedeeld nadat u dit toestaat.</p>
-          <button type="button" class="btn btn--primary" data-consent-external><span>Toestaan en reviews tonen</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<LandingReviews page={page} />
 
 {/* ============ ZO GAAT HET ============ */}
-<section class="section adv" id="voordelen">
-  <div class="container">
-    <header class="sechead sechead--center reveal">
-      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Zo gaat het</p>
-      <h2 class="h2">Van eerste bezoek tot <em>oplevering</em></h2>
-    </header>
-    <ol class="steps">
-      {page.steps.map((s, i) => (
-        <li class="steps__item reveal">
-          <span class="steps__num">{String(i + 1).padStart(2, '0')}</span>
-          <h3>{s.h}</h3>
-          <p>{s.p}</p>
-        </li>
-      ))}
-    </ol>
-  </div>
-</section>
-
-{page.note && (
-  <section class="section section--soft" id="goed-om-te-weten">
-    <div class="container">
-      <header class="sechead sechead--center reveal">
-        <h2 class="h2" set:html={page.note.title}></h2>
-      </header>
-      <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center">{page.note.text}</p>
-      <p class="reveal" style="text-align:center;margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn--primary" href="/#calculator"><span>Bereken uw premie</span></a>
-        {!isGuide && <a class="btn btn--line" href="/premies-dakwerken-2026"><span>Alles over de premies 2026</span></a>}
-      </p>
-    </div>
-  </section>
-)}
-
-{page.related && (
-  <section class="section" style="padding-block:clamp(36px,5vw,64px)">
-    <div class="container">
-      <p class="lead reveal" style="max-width:820px;margin-inline:auto;text-align:center">{page.related.text} <a href={page.related.href}><strong>{page.related.label}</strong></a></p>
-    </div>
-  </section>
-)}
+<LandingSteps page={page} />
+<LandingNote page={page} />
+<LandingRelated page={page} />
 
 {/* ============ CTA ============ */}
-<section class="cta">
-  <div class="container cta__in reveal">
-    <div>
-      <h2 class="cta__title">Eén plaatsbezoek. <em>Daarna weet u het.</em></h2>
-      <p class="cta__sub">Daarna weet u wat uw dak nodig heeft en wat het kost. Gratis en vrijblijvend. U beslist pas als u de offerte in handen hebt.</p>
-    </div>
-    <div class="cta__actions">
-      <a class="btn btn--white btn--lg" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
-      <a class="btn btn--glass btn--lg" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
-    </div>
-  </div>
-</section>
+<LandingCta page={page} />
 
 {/* ============ FAQ ============ */}
-<section class="section section--soft" id="faq">
-  <div class="container faq__wrap">
-    <div class="faq__intro reveal">
-      <p class="eyebrow"><span class="eyebrow__bar"></span>FAQ</p>
-      <h2 class="h2">Veelgestelde <em>vragen</em></h2>
-      <p class="sechead__sub">Staat uw vraag er niet bij? Bel ons gerust, we helpen u meteen verder.</p>
-      <a class="btn btn--line" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
-    </div>
-    <div class="faq">
-      {page.faq.map((item) => (
-        <details class="faq__item reveal">
-          <summary>{item.q}<i></i></summary>
-          <div class="faq__body"><p>{item.a}</p></div>
-        </details>
-      ))}
-    </div>
-  </div>
-</section>
-
-<script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@graph': [
-    isGuide
-      ? {
-          '@type': overview ? 'CollectionPage' : 'WebPage',
-          '@id': `${pageUrl}#webpage`,
-          name: page.title,
-          url: pageUrl,
-          inLanguage: 'nl-BE',
-          isPartOf: { '@id': new URL('/#business', siteUrl).href },
-        }
-      : {
-          '@type': 'Service',
-          '@id': `${pageUrl}#service`,
-          name: page.dienst,
-          serviceType: page.serviceType,
-          url: pageUrl,
-          provider: { '@id': new URL('/#business', siteUrl).href },
-          areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
-        },
-    ...(isArticle
-      ? [{
-          '@type': 'Article',
-          '@id': `${pageUrl}#article`,
-          headline: page.title.replace(/ \| INGBELG$/, ''),
-          description: page.description,
-          image: new URL(page.ogImage ?? page.hero.src, siteUrl).href,
-          inLanguage: 'nl-BE',
-          datePublished: guide?.published ?? guide?.updated,
-          dateModified: guide?.updated,
-          mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
-          author: { '@id': new URL('/#business', siteUrl).href },
-          publisher: { '@id': new URL('/#business', siteUrl).href },
-        }]
-      : []),
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', siteUrl).href },
-        ...(guide ? [{ '@type': 'ListItem', position: 2, name: guide.parent.name, item: new URL(guide.parent.href, siteUrl).href }] : []),
-        { '@type': 'ListItem', position: guide ? 3 : 2, name: page.crumb, item: pageUrl },
-      ],
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: page.faq.map((item) => ({
-        '@type': 'Question',
-        name: item.q,
-        acceptedAnswer: { '@type': 'Answer', text: item.a },
-      })),
-    },
-  ],
-})} />
+<LandingFaq page={page} />
+<LandingSchema page={page} />
 
 {/* ============ CONTACT ============ */}
 <ContactSection dienst={page.dienst} sourceBlock={`Landingspagina /${page.slug}`} />

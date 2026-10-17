@@ -1,0 +1,66 @@
+---
+/* Dienst-/gidspagina — JSON-LD (Service/WebPage, Article, BreadcrumbList, FAQPage) */
+import facts from '../../data/site-facts.json';
+import type { LandingData } from '../../types/pages';
+import { pageKinds } from '../../lib/page-kind';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+const { guide, overview, isGuide, isArticle } = pageKinds(page);
+const siteUrl = (Astro.site ?? new URL(facts.siteUrl)).origin;
+const pageUrl = `${siteUrl}/${page.slug}`;
+---
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    isGuide
+      ? {
+          '@type': overview ? 'CollectionPage' : 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          name: page.title,
+          url: pageUrl,
+          inLanguage: 'nl-BE',
+          isPartOf: { '@id': new URL('/#business', siteUrl).href },
+        }
+      : {
+          '@type': 'Service',
+          '@id': `${pageUrl}#service`,
+          name: page.dienst,
+          serviceType: page.serviceType,
+          url: pageUrl,
+          provider: { '@id': new URL('/#business', siteUrl).href },
+          areaServed: { '@type': 'AdministrativeArea', name: 'Oost-Vlaanderen' },
+        },
+    ...(isArticle
+      ? [{
+          '@type': 'Article',
+          '@id': `${pageUrl}#article`,
+          headline: page.title.replace(/ \| INGBELG$/, ''),
+          description: page.description,
+          image: new URL(page.ogImage ?? page.hero.src, siteUrl).href,
+          inLanguage: 'nl-BE',
+          datePublished: guide?.published ?? guide?.updated,
+          dateModified: guide?.updated,
+          mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+          author: { '@id': new URL('/#business', siteUrl).href },
+          publisher: { '@id': new URL('/#business', siteUrl).href },
+        }]
+      : []),
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', siteUrl).href },
+        ...(guide ? [{ '@type': 'ListItem', position: 2, name: guide.parent.name, item: new URL(guide.parent.href, siteUrl).href }] : []),
+        { '@type': 'ListItem', position: guide ? 3 : 2, name: page.crumb, item: pageUrl },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: page.faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+  ],
+})} />

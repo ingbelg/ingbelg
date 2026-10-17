@@ -1,0 +1,29 @@
+---
+/* Dienst-/gidspagina — OVERZICHT UITLEGPAGINA'S */
+import type { LandingData } from '../../types/pages';
+import { pageKinds } from '../../lib/page-kind';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+const { svc, overview } = pageKinds(page);
+---
+{overview && (
+<section class="section usp" id="artikels">
+  <div class="container">
+    <h2 class="sr-only">Alle uitleg</h2>
+    <div class="articles">
+      {overview.articles.map((a) => (
+        <article class="svc reveal">
+          <div class="svc__img"><img src={a.img} alt={a.alt} width={a.w} height={a.h} loading="lazy"></div>
+          <div class="svc__body">
+            <ul class="svc__tags"><li>{a.tag}</li></ul>
+            <h3><a href={a.href}>{a.title}</a></h3>
+            <p>{a.text}</p>
+            <a class="svc__more" href={a.href}>Lees de uitleg</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+)}

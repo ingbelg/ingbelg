@@ -1,0 +1,26 @@
+---
+/* Dienst-/gidspagina — FAQ */
+import facts from '../../data/site-facts.json';
+import type { LandingData } from '../../types/pages';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+---
+<section class="section section--soft" id="faq">
+  <div class="container faq__wrap">
+    <div class="faq__intro reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>FAQ</p>
+      <h2 class="h2">Veelgestelde <em>vragen</em></h2>
+      <p class="sechead__sub">Staat uw vraag er niet bij? Bel ons gerust, we helpen u meteen verder.</p>
+      <a class="btn btn--line" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
+    </div>
+    <div class="faq">
+      {page.faq.map((item) => (
+        <details class="faq__item reveal">
+          <summary>{item.q}<i></i></summary>
+          <div class="faq__body"><p>{item.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

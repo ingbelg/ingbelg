@@ -1,0 +1,25 @@
+---
+/* Dienst-/gidspagina — HERKENT U DIT? */
+import type { LandingData } from '../../types/pages';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+---
+{page.problems.length > 0 && (
+<section class="section usp" id="usp">
+  <div class="container">
+    <header class="sechead sechead--center">
+      <h2 class="h2" set:html={page.problemsTitle ?? 'Herkent u <em>dit</em>?'}></h2>
+    </header>
+    <div class="adv__grid">
+      {page.problems.map((x) => (
+        <article class="adv__card reveal">
+          <h3>{x.h}</h3>
+          <p>{x.p}</p>
+          {x.link && <a class="adv__more" href={x.link.href}>{x.link.label}</a>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+)}

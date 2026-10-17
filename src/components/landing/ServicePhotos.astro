@@ -1,0 +1,52 @@
+---
+/* Dienst-/gidspagina — VOOR/NA */
+import type { LandingData } from '../../types/pages';
+import { pageKinds } from '../../lib/page-kind';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+const { svc } = pageKinds(page);
+---
+{svc && (svc.ba || (svc.photos && svc.photos.length)) && (
+  <section class="section" id="realisaties">
+    <div class="container">
+      <header class="sechead sechead--center reveal">
+        <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Uit onze praktijk</p>
+        <h2 class="h2">Dit leveren we <em>op</em></h2>
+      </header>
+      {svc.ba && (
+        <div class="ba-grid reveal">
+          <div class="ba">
+            <div class="ba__slider">
+              <div class="ba__img ba__img--before"><img src="/assets/na_antrociet.webp" alt="Dak na renovatie — antraciet dakpannen" width="1024" height="576" loading="lazy"></div>
+              <div class="ba__img ba__img--after"><img src="/assets/voor_antrociet.webp" alt="Dak voor renovatie — antraciet dakpannen" width="1024" height="768" loading="lazy"></div>
+              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+              <div class="ba__handle" aria-hidden="true"></div>
+              <span class="ba__tag ba__tag--before">Voor</span>
+              <span class="ba__tag ba__tag--after">Na</span>
+            </div>
+            <p class="ba__label">Antraciet dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
+          </div>
+          <div class="ba">
+            <div class="ba__slider">
+              <div class="ba__img ba__img--before"><img src="/assets/na_rood.webp" alt="Dak na renovatie — rode dakpannen" width="1024" height="768" loading="lazy" style="object-position:center 15%"></div>
+              <div class="ba__img ba__img--after"><img src="/assets/voor_rood.webp" alt="Dak voor renovatie — rode dakpannen" width="1024" height="676" loading="lazy"></div>
+              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Sleep om voor en na te vergelijken">
+              <div class="ba__handle" aria-hidden="true"></div>
+              <span class="ba__tag ba__tag--before">Voor</span>
+              <span class="ba__tag ba__tag--after">Na</span>
+            </div>
+            <p class="ba__label">Rode dakpannen &middot; hellend dak &middot; INGBELG-werf</p>
+          </div>
+        </div>
+      )}
+      {svc.photos && svc.photos.length > 0 && (
+        <div class="roof__stack" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:28px">
+          {svc.photos.map((ph) => (
+            <img src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} loading="lazy" style="width:100%;height:auto;border-radius:14px;display:block">
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+)}

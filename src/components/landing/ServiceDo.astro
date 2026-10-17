@@ -1,0 +1,36 @@
+---
+/* Dienst-/gidspagina — WAT WE DOEN */
+import facts from '../../data/site-facts.json';
+import type { LandingData } from '../../types/pages';
+import { pageKinds } from '../../lib/page-kind';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+const { svc } = pageKinds(page);
+---
+{svc && (
+<section class="about section section--soft" id="aanpak">
+  <div class="container about__grid">
+    <div class="about__media reveal">
+      <div class="about__img about__img--main">
+        <img src={svc.doImages[0].src} alt={svc.doImages[0].alt} width={svc.doImages[0].w} height={svc.doImages[0].h} loading="lazy">
+      </div>
+      <div class="about__img about__img--sub">
+        <img src={svc.doImages[1].src} alt={svc.doImages[1].alt} width={svc.doImages[1].w} height={svc.doImages[1].h} loading="lazy">
+      </div>
+    </div>
+    <div class="about__body reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Onze aanpak</p>
+      <h2 class="h2" set:html={svc.doTitle}></h2>
+      <p class="lead">{svc.doLead}</p>
+      <ul class="ticks">
+        {svc.doTicks.map((t) => <li>{t}</li>)}
+      </ul>
+      <div class="about__cta">
+        <a class="btn btn--primary" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+        <a class="btn btn--line" href={`tel:${facts.phoneE164}`}><span>{facts.phone}</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+)}

@@ -1,0 +1,40 @@
+---
+/* Dienst-/gidspagina — GIDS */
+import type { LandingData } from '../../types/pages';
+import { pageKinds } from '../../lib/page-kind';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+const { guide } = pageKinds(page);
+const nlDate = (iso: string) => new Date(iso + 'T12:00:00Z').toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+{guide && (
+  <section class="section" id="gids">
+    <div class="container legal">
+      <div class="legal__body">
+        {guide.updated && <p class="sechead__sub" style="margin-top:0">Laatst nagekeken met de officiële bronnen: <time datetime={guide.updated}>{nlDate(guide.updated)}</time>.</p>}
+        {guide.guide.map((g) => (
+          <>
+            {g.h && <h2>{g.h}</h2>}
+            {g.paras && g.paras.map((t) => <p set:html={t}></p>)}
+            {g.list && (g.bullets ? <ul>{g.list.map((t) => <li set:html={t}></li>)}</ul> : <ul class="ticks" style="list-style:none;padding-left:0">{g.list.map((t) => <li set:html={t}></li>)}</ul>)}
+            {g.table && (
+              <div class="legal__tablewrap">
+                <table class="legal__table">
+                  <thead><tr>{g.table.head.map((c) => <th>{c}</th>)}</tr></thead>
+                  <tbody>{g.table.rows.map((r) => <tr>{r.map((c) => <td set:html={c}></td>)}</tr>)}</tbody>
+                </table>
+              </div>
+            )}
+          </>
+        ))}
+        {guide.sources && (
+          <>
+            <h2>Bronnen</h2>
+            <ul>{guide.sources.map((x) => <li><a href={x.href} target="_blank" rel="noopener">{x.label}</a></li>)}</ul>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+)}

@@ -1,0 +1,19 @@
+---
+/* Dienst-/gidspagina — VERTROUWEN */
+import facts from '../../data/site-facts.json';
+import type { LandingData } from '../../types/pages';
+
+interface Props { page: LandingData }
+const { page } = Astro.props;
+---
+<section class="brands">
+  <div class="container">
+    <p class="brands__label">Zo werken wij:</p>
+    <ul class="brands__row">
+      <li>Volgens de WTCB-richtlijnen</li>
+      <li>Verzekerd</li>
+      <li>{facts.warrantyYears} jaar schriftelijke garantie</li>
+      <li>{facts.roofsDone}+ daken gerealiseerd</li>
+    </ul>
+  </div>
+</section>
