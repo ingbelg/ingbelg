@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import facts from '../../data/site-facts.json';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.num.localeCompare(b.data.num));
+import Icon from '../site/Icon.astro';
 ---
 <section class="hero" id="top">
   <div class="hero__media">
@@ -35,7 +36,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.num.loc
     <div class="hero__cta reveal">
       <a class="btn btn--primary btn--lg" href="#contact">
         <span>Vraag een gratis plaatsbezoek</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <Icon name="arrow" />
       </a>
       <a class="btn btn--glass btn--lg" href={`https://wa.me/${facts.phoneE164.replace('+', '')}?text=${encodeURIComponent('Hallo INGBELG, hierbij een foto van mijn dak. Mijn gemeente: ')}`} target="_blank" rel="noopener">
         <span>Stuur een foto via WhatsApp →</span>
