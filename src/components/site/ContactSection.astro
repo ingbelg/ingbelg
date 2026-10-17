@@ -1,0 +1,107 @@
+---
+/* Contactblok met het offerteformulier (#offerteForm → public/js/main.js → /api/contact → e-mail + Odoo).
+   Eén formulier voor alle pagina's; de keuzelijst komt uit src/data/navigation.ts. */
+import facts from '../../data/site-facts.json';
+import { FORM_SERVICES, type ServiceValue } from '../../data/navigation';
+
+interface Props {
+  dienst?: ServiceValue;   // vooraf gekozen dienst (dienstpagina)
+  sourceBlock?: string;    // herkomst voor de lead, bv. "Landingspagina /hellend-dak"
+}
+const { dienst, sourceBlock } = Astro.props;
+---
+<section class="section contact" id="contact">
+  <div class="container">
+    <header class="sechead sechead--center reveal">
+      <p class="eyebrow eyebrow--center"><span class="eyebrow__bar"></span>Contact</p>
+      <h2 class="h2">Vraag uw <em>gratis plaatsbezoek</em> aan</h2>
+      <p class="sechead__sub">Vul het formulier in, bel of stuur een WhatsApp. We bellen u binnen {facts.callbackWorkdays} werkdag terug om een moment af te spreken.</p>
+    </header>
+
+    <div class="contact__grid">
+      <div class="contact__info">
+        <a class="cinfo reveal" href={`tel:${facts.phoneE164}`}>
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg></span>
+          <span class="cinfo__txt"><strong>Telefoon</strong><em>{facts.phone}</em></span>
+        </a>
+        <a class="cinfo reveal" href={`https://wa.me/${facts.phoneE164.replace('+', '')}`} target="_blank" rel="noopener">
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2m5.1 14.1c-.2.6-1.2 1.2-1.7 1.2s-1.1.2-3.6-.8-4-3.5-4.2-3.7-1.2-1.6-1.2-3 .8-2.1 1-2.4.6-.3.8-.3h.6c.2 0 .4 0 .7.5s.9 2.1 1 2.3.1.3 0 .5-.2.5-.4.7-.4.4-.2.7 1 1.5 2 2.4a8 8 0 0 0 2.1 1.2c.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3s.1.7-.1 1.3"/></svg></span>
+          <span class="cinfo__txt"><strong>WhatsApp</strong><em>{facts.phone}</em></span>
+        </a>
+        <a class="cinfo reveal" href={`mailto:${facts.email}`}>
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
+          <span class="cinfo__txt"><strong>E-mail</strong><em>{facts.email}</em></span>
+        </a>
+        <a class="cinfo reveal" href="https://maps.google.com/?q=Hoogstraat+59+Zottegem" target="_blank" rel="noopener">
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></svg></span>
+          <span class="cinfo__txt"><strong>Adres</strong><em>{facts.address.street}, {facts.address.postalCode} {facts.address.city}</em></span>
+        </a>
+        <div class="cinfo cinfo--static reveal">
+          <span class="cinfo__ico"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 4h-2v7.4l5.2 3.1 1-1.7-4.2-2.5z"/></svg></span>
+          <span class="cinfo__txt">
+            <strong>Openingsuren</strong>
+            {facts.openingHours.map((slot) => <em>{slot.label}: {slot.opens} – {slot.closes}</em>)}
+            {facts.closedDays.map((day) => <em>{day}: gesloten</em>)}
+          </span>
+        </div>
+      </div>
+
+      <form class="cform reveal" id="offerteForm" novalidate>
+        <div class="cform__row">
+          <label class="field">
+            <span>Naam <i>*</i></span>
+            <input type="text" name="naam" required placeholder="Uw voor- en achternaam">
+          </label>
+          <label class="field">
+            <span>Telefoon <i>*</i></span>
+            <input type="tel" name="telefoon" required placeholder="+32 4.. .. .. ..">
+          </label>
+        </div>
+        <div class="cform__row">
+          <label class="field">
+            <span>E-mail <i>*</i></span>
+            <input type="email" name="email" required placeholder="naam@voorbeeld.be">
+          </label>
+          <label class="field">
+            <span>Gemeente <i>*</i></span>
+            <input type="text" name="gemeente" required placeholder="Bv. Zottegem">
+          </label>
+        </div>
+        <label class="field">
+          <span>Wat moet er gebeuren? <i>*</i></span>
+          <select name="dienst" required>
+            <option value="">Kies een dienst…</option>
+            {FORM_SERVICES.map((o) => <option value={o.value} selected={o.value === dienst}>{o.label}</option>)}
+          </select>
+        </label>
+        <label class="field">
+          <span>Wanneer wilt u starten?</span>
+          <select name="timing">
+            <option value="">Kies een periode…</option>
+            <option>Zo snel mogelijk</option>
+            <option>Binnen 3 maanden</option>
+            <option>Later dit jaar</option>
+            <option>Ik oriënteer me nog</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Uw project (optioneel)</span>
+          <textarea name="bericht" rows="5" placeholder="Bv. rijwoning, oude pannen, zolder niet geïsoleerd…"></textarea>
+        </label>
+        <input type="text" name="website" class="cform__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source_block" value={sourceBlock}>
+        <input type="hidden" name="premie_summary">
+        <label class="check">
+          <input type="checkbox" name="akkoord" required>
+          <span>Ik ga akkoord dat INGBELG mijn gegevens gebruikt om over deze aanvraag contact met mij op te nemen. Lees ons <a href="/privacybeleid">privacybeleid</a>.</span>
+        </label>
+        <button class="btn btn--primary btn--lg btn--block" type="submit">
+          <span>Plaatsbezoek aanvragen</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cform__note">Gratis en vrijblijvend &middot; we bellen u binnen {facts.callbackWorkdays} werkdag terug voor een afspraak</p>
+        <p class="cform__msg" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
