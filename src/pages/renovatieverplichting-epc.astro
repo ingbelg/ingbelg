@@ -9,6 +9,9 @@ export const prerender = true;
    - vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen
      (label E/F → D, 6 jaar voor lopende én nieuwe overdrachten, finaal goedgekeurd 12/12/2025; voorbeeld akte 1/2/2024 → 1/2/2030;
       soorten overdrachten, uitzonderingen, sloop, appartementen 50 % + 1, nieuw EPC, boete € 500–€ 5.000; verstrengingspad afgeschaft)
+     Opnieuw nagekeken op 21 oktober 2026; toen ook opgenomen: resterende termijn bij doorverkoop of erfenis, 'Test uw EPC' en de energiekaart,
+     nieuw EPC hoeft niet gemeld te worden (komt automatisch bij VEKA), en de namen van de steunmaatregelen (onroerende voorheffing, Mijn VerbouwLening,
+     renovatiekrediet met rentesubsidie) zonder bedragen of voorwaarden.
    Bewust NIET opgenomen: welke werken precies label D opleveren (verschilt per woning, staat niet op de officiële pagina),
    de EPC-labelpremie (afgeschaft, zie premies-dakwerken-2026) en bedragen of voorwaarden van leningen (niet nagekeken).
    Bij nieuwe regelgeving: deze pagina nalezen. */
@@ -16,15 +19,15 @@ const page: LandingData = {
   slug: 'renovatieverplichting-epc',
   kind: 'guide',
   published: '2026-10-04',
-  updated: '2026-10-04',
-  title: 'Woning gekocht met EPC E of F? De renovatieverplichting uitgelegd | INGBELG',
-  description: 'Kocht u een woning met EPC-label E of F? Dan moet u binnen 6 jaar naar label D. Voor wie het geldt, de termijn, uitzonderingen en boetes, uitgelegd met bronnen van de Vlaamse overheid.',
+  updated: '2026-10-21',
+  title: 'Woning met EPC F of E: wat nu? Renovatieplicht uitgelegd | INGBELG',
+  description: 'Woning met EPC-label F of E gekocht? Binnen 6 jaar naar label D. Wat u nu doet, waar de kosten van afhangen, welke steun er is en de boetes, met bronnen van de Vlaamse overheid.',
   dienst: 'Hellende daken',
   serviceType: 'Renovatieverplichting: uitleg',
   eyebrow: 'EPC E of F · Renovatieverplichting · 2026',
   parent: { name: 'Handig om te weten', href: '/handig-om-te-weten' },
   crumb: 'Renovatieverplichting EPC',
-  h1Main: 'Woning met EPC E of F',
+  h1Main: 'Woning met EPC E of F: wat nu?',
   h1Sub: 'Wat de renovatieverplichting voor u betekent, uitgelegd met bronnen van de Vlaamse overheid.',
   lead: 'Kocht u een huis of appartement met EPC-label E of F? Dan moet u het binnen zes jaar renoveren tot minstens label D. Hieronder staat voor wie dat geldt, vanaf wanneer de termijn loopt, welke uitzonderingen er zijn en wat er gebeurt als u te laat bent.',
   hero: {
@@ -52,6 +55,17 @@ const page: LandingData = {
       paras: [
         'U hebt <strong>zes jaar</strong>. De termijn begint op de datum van de authentieke akte bij de notaris, of op de datum waarop een recht van opstal of erfpacht werd gevestigd.',
         'Vroeger was dat vijf jaar. De verlenging naar zes jaar geldt <strong>voor lopende en nieuwe overdrachten</strong> en werd finaal goedgekeurd op 12 december 2025. Een voorbeeld van de Vlaamse overheid: is de akte verleden op 1 februari 2024, dan moet u vóór 1 februari 2030 aan de verplichting voldoen.',
+        'Rust er al een renovatieverplichting op de woning, bijvoorbeeld omdat de vorige eigenaar ze binnen zijn termijn doorverkoopt of nalaat, dan moet de nieuwe eigenaar binnen de <strong>resterende termijn</strong> voldoen aan de eisen die voor de vorige eigenaar golden.',
+      ],
+    },
+    {
+      h: 'Woning met EPC F of E gekocht: wat doet u nu?',
+      list: [
+        '<strong>1. Noteer uw deadline.</strong> Tel zes jaar bij de datum van de notariële akte.',
+        '<strong>2. Bekijk de aanbevelingen op uw EPC.</strong> Daar staat wat de energieprestatie van uw woning het meest verbetert. Met de online toepassing ‘Test uw EPC’ van de Vlaamse overheid kunt u zelf al nagaan hoe uw woning scoort.',
+        '<strong>3. Laat een energiedeskundige rekenen.</strong> Een energiedeskundige type A berekent welk label u na bepaalde werken haalt. U vindt er een in uw buurt via de energiekaart.',
+        '<strong>4. Vraag offertes en plan de werken.</strong> Mijn VerbouwPremie vraagt u pas aan na de werken, met de facturen. Hoe dat gaat, leest u in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
+        '<strong>5. Laat na de werken een nieuw EPC opmaken.</strong> Melden hoeft niet: de energiedeskundige dient het EPC in en het komt automatisch bij het Vlaams Energie- en Klimaatagentschap terecht.',
       ],
     },
     {
@@ -84,11 +98,18 @@ const page: LandingData = {
       ],
     },
     {
+      h: 'Wat kost een renovatie van label F naar D?',
+      paras: [
+        'Daar bestaat geen vast bedrag voor. Het hangt af van de woning: hoe groot ze is, wat er al geïsoleerd is en welke werken nodig zijn om label D te halen. De aanbevelingen op uw EPC en de berekening van een energiedeskundige tonen welke werken het meest opleveren.',
+        'Voor het dak krijgt u van ons een offerte binnen 48 uur na het plaatsbezoek, gratis en vrijblijvend. Een deel van de kosten krijgt u terug via premies en een lager btw-tarief, zie hieronder.',
+      ],
+    },
+    {
       h: 'Welke steun bestaat er?',
       list: [
         '<strong>Mijn VerbouwPremie voor dakisolatie</strong>, voor inkomenscategorie 3 en 4. Alle bedragen en voorwaarden staan in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
-        '<strong>6 % btw</strong> in plaats van 21 % voor werken aan een woning die ouder is dan 10 jaar en vooral als privéwoning dient.',
-        'Leningen en fiscale steun: kijk voor de actuele voorwaarden op de pagina\'s van de Vlaamse overheid.',
+        '<strong>6 % btw</strong> in plaats van 21 % voor werken aan een woning die ouder is dan 10 jaar en vooral als privéwoning dient. Zie onze uitleg over <a href="/btw-dakwerken">6 % btw op dakwerken</a>.',
+        '<strong>Vermindering van de onroerende voorheffing</strong> na een energetische renovatie, en leningen zoals <strong>Mijn VerbouwLening</strong> en het <strong>renovatiekrediet met rentesubsidie</strong>. Kijk voor de actuele voorwaarden op de pagina\'s van de Vlaamse overheid.',
       ],
     },
     {
@@ -109,6 +130,14 @@ const page: LandingData = {
     {
       q: 'Ik kocht een woning met label E of F. Wat moet ik doen?',
       a: 'U moet de woning binnen zes jaar na de notariële akte renoveren tot minstens EPC-label D, en dat aantonen met een nieuw EPC. De zes jaar geldt ook voor aankopen van vóór de verlenging.',
+    },
+    {
+      q: 'Wat kost het om van EPC F naar label D te gaan?',
+      a: 'Daar is geen vast bedrag voor: het hangt af van de woning en van de werken die nodig zijn. Een energiedeskundige berekent welke werken label D opleveren. Voor het dak maken wij een gratis offerte, binnen 48 uur na het plaatsbezoek. Premies en 6 % btw verlagen de rekening.',
+    },
+    {
+      q: 'Ik koop een woning waarop al een renovatieverplichting rust. Wat dan?',
+      a: 'Dan moet u binnen de resterende termijn voldoen aan de eisen die voor de vorige eigenaar golden. De verkoper moet in de advertentie vermelden dat er een renovatieverplichting op de woning rust.',
     },
     {
       q: 'Wat als ik niet op tijd klaar ben?',

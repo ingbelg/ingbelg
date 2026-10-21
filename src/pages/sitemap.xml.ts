@@ -19,7 +19,7 @@ const PAGES: [string, string][] = [
   ['/dakherstelling', '2026-10-04'],
   ['/premies-dakwerken-2026', '2026-10-17'],
   ['/asbestdak-regels', '2026-10-21'],
-  ['/renovatieverplichting-epc', '2026-10-04'],
+  ['/renovatieverplichting-epc', '2026-10-21'],
   ['/btw-dakwerken', '2026-10-17'],
   ['/handig-om-te-weten', '2026-10-04'],
 ];
