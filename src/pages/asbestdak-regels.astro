@@ -6,7 +6,8 @@ import { faqKost, faqGratis, faqBtw, steps } from '../data/landing-shared';
 
 export const prerender = true;
 
-/* Alle regels komen van OVAM (Vlaamse Openbare Afvalstoffenmaatschappij), geraadpleegd op 3 oktober 2026:
+/* Alle regels komen van OVAM (Vlaamse Openbare Afvalstoffenmaatschappij), geraadpleegd op 3 oktober 2026
+   (mijlpalen 2034/2040 en "enkel verplicht voor publieke gebouwen" opnieuw nagekeken op 21 oktober 2026; 2035 komt bij OVAM niet voor):
    - ovam.vlaanderen.be/asbest-verwijderen-of-niet   (goede/slechte staat, nooit bedekken, deadlines, verwijderen bij renovatie)
    - ovam.vlaanderen.be/wie-mag-wat-verwijderen      (wat een particulier zelf mag)
    - ovam.vlaanderen.be/actieplan-asbestafbouw       (2032 / 2034 / 2040, enkel publieke gebouwen verplicht)
@@ -18,9 +19,9 @@ const page: LandingData = {
   slug: 'asbestdak-regels',
   kind: 'guide',
   published: '2026-10-03',
-  updated: '2026-10-08',
-  title: 'Asbestdak: wat mag, wat moet en wat niet? Regels in Vlaanderen | INGBELG',
-  description: 'Moet uw asbestdak weg? Wat mag u nooit doen, wanneer is het asbestattest verplicht en welke hulp bestaat er? De regels in Vlaanderen, uitgelegd met bronnen van OVAM.',
+  updated: '2026-10-21',
+  title: 'Asbestdak: deadline 2034 en 2040, wat moet en wat mag | INGBELG',
+  description: 'Moet uw asbestdak verplicht weg, en tegen wanneer? De deadlines 2034 en 2040, wat u nooit mag doen en wanneer u een asbestattest nodig hebt. Met bronnen van OVAM.',
   dienst: 'Asbestdak vervangen',
   serviceType: 'Asbestdak: regels en advies',
   eyebrow: 'Asbestdak · Regels in Vlaanderen · 2026',
@@ -79,7 +80,7 @@ const page: LandingData = {
       ],
     },
     {
-      h: 'Tegen wanneer moet een asbestdak weg? (2034 en 2040)',
+      h: 'Deadline: tegen wanneer moet een asbestdak weg? (2034 en 2040)',
       paras: [
         'Het Actieplan Asbestafbouw van de Vlaamse overheid mikt op een asbestveilige leefomgeving tegen 2040. De risicovolste toepassingen, zoals asbestcement op daken en gevels, moeten volgens het plan tegen 2034 weg. Alle andere asbest in slechte staat moet tegen 2040 weg.',
         'Voorlopig zijn die data <strong>enkel wettelijk verplicht voor publieke gebouwen</strong>. Voor particulieren zijn ze streefdata. Voor u geldt de verplichting wanneer asbest tijdens renovatiewerken bereikbaar wordt, of wanneer het in slechte staat is.',
@@ -118,7 +119,11 @@ const page: LandingData = {
       a: 'Voor particulieren is er geen vaste einddatum. Het Actieplan Asbestafbouw van de Vlaamse overheid mikt erop dat asbestcement op daken en gevels tegen 2034 weg is, maar die data zijn voorlopig enkel wettelijk verplicht voor publieke gebouwen. Voor u is verwijderen verplicht als het dak in slechte staat is, of als het asbest bij renovatiewerken bereikbaar wordt.',
     },
     {
-      q: 'Moet mijn asbestdak weg?',
+      q: 'Moet mijn asbestdak tegen 2035 weg?',
+      a: 'Nee, 2035 staat niet in de Vlaamse regels. Het Actieplan Asbestafbouw werkt met twee mijlpalen: 2034 voor asbestcement op daken en gevels, en 2040 voor alle andere asbest in slechte staat. Wettelijk vast liggen die data enkel voor publieke gebouwen. Deze uitleg gaat over Vlaanderen; in Brussel en Wallonië gelden eigen regels.',
+    },
+    {
+      q: 'Is het verplicht om mijn asbestdak te laten verwijderen?',
       a: 'Niet meteen, zolang het in goede staat is. Een asbestdak in slechte staat (broos, beschadigd, afbrokkelend of stof afgevend) moet wel weg. Ook bij renovatiewerken moet asbest dat eenvoudig bereikbaar wordt, worden verwijderd.',
     },
     {
