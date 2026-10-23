@@ -56,7 +56,6 @@
     { "source": "/author/admin", "destination": "/", "permanent": true },
     { "source": "/author/admin/", "destination": "/", "permanent": true },
     { "source": "/sample-page", "destination": "/", "permanent": true },
-    { "source": "/sample-page/", "destination": "/", "permanent": true },
-    { "source": "/intern", "destination": "https://ingbelg-offerte.ingbelg-offerte-online.workers.dev/", "permanent": false }
+    { "source": "/sample-page/", "destination": "/", "permanent": true }
   ]
 }
