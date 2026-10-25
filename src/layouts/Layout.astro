@@ -100,6 +100,8 @@ const adsWhatsappLabel = import.meta.env.PUBLIC_ADS_WHATSAPP_LABEL || '';
   image: ogImage.href,
   logo: new URL('/assets/logo-transparent.png', site).href,
   url: site.origin,
+  description: `Dak- en renovatiebedrijf uit Zottegem met een eigen, vaste ploeg van ${facts.teamSize} vakmensen: hellende en platte daken (EPDM), asbestdak vervangen, dakisolatie, dakherstellingen en gevelbekleding in Oost-Vlaanderen, met ${facts.warrantyYears} jaar schriftelijke garantie op werk en materialen.`,
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: facts.teamSize },
   hasMap: facts.reviews.googleUrl,
   telephone: facts.phoneE164,
   email: facts.email,
@@ -133,7 +135,7 @@ const adsWhatsappLabel = import.meta.env.PUBLIC_ADS_WHATSAPP_LABEL || '';
     '@type': 'OfferCatalog',
     name: 'Dakwerken',
     itemListElement: [
-      'Hellende daken', 'Platte daken EPDM', 'Asbestdak vervangen', 'Gevelbekleding',
+      'Hellende daken', 'Platte daken EPDM', 'Asbestdak vervangen', 'Dakisolatie', 'Dakherstelling', 'Gevelbekleding',
       'Timmerwerken en dakkapellen', 'Zonnepanelen', 'Ecopanelen',
     ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   },
