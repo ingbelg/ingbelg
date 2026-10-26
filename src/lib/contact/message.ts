@@ -7,6 +7,8 @@ export function buildLeadMessage(data: LeadData): LeadMessage {
   const subject = `Offerteaanvraag — ${data.dienst}`;
   // De site belooft een terugbelafspraak binnen X werkdag: zet de deadline zichtbaar bovenaan (mail én Odoo-lead).
   const deadline = callbackDeadline();
+  // Herkomst (UTM / advertentieklik) komt van de browser: één regel, kort gehouden.
+  const herkomst = String(data.herkomst || '').replace(/[\r\n]+/g, ' ').trim().slice(0, 200);
   const body = [
     deadline ? `TERUGBELLEN VÓÓR: ${deadline} (belofte: binnen ${facts.callbackWorkdays} werkdag)` : null,
     deadline ? '' : null,
@@ -17,6 +19,7 @@ export function buildLeadMessage(data: LeadData): LeadMessage {
     `Dienst: ${data.dienst}`,
     `Timing: ${data.timing || '-'}`,
     `Bron: ${data.source_block || '-'}`,
+    herkomst ? `Herkomst: ${herkomst}` : null,
     data.premie_summary ? `Premie-check: ${data.premie_summary}` : null,
     '',
     'Project:',

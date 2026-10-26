@@ -247,6 +247,18 @@
       return;
     }
 
+    /* Herkomst van de bezoeker uit de adresbalk (UTM, Google Ads-klik, ChatGPT-advertentie).
+       Enkel gelezen bij het versturen, niets opgeslagen op het toestel. */
+    var trafficSource = function () {
+      var q = new URLSearchParams(window.location.search);
+      var parts = ['utm_source', 'utm_medium', 'utm_campaign'].map(function (k) { return q.get(k) || ''; }).filter(Boolean);
+      var clicks = [];
+      if (q.get('gclid') || q.get('gbraid') || q.get('wbraid')) clicks.push('Google Ads-klik');
+      if (q.get('oppref')) clicks.push('ChatGPT-advertentie');
+      var out = parts.join(' / ') + (clicks.length ? (parts.length ? ' ' : '') + '(' + clicks.join(', ') + ')' : '');
+      return out.slice(0, 200);
+    };
+
     var d = new FormData(form);
     var payload = {
       naam: d.get('naam'),
@@ -258,7 +270,8 @@
       bericht: d.get('bericht') || '',
       website: d.get('website') || '',
       source_block: d.get('source_block') || '',
-      premie_summary: d.get('premie_summary') || ''
+      premie_summary: d.get('premie_summary') || '',
+      herkomst: trafficSource()
     };
 
     var fallbackToMailto = function () {
