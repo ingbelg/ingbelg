@@ -2,7 +2,7 @@
    Volgorde is bewust: ongeldige JSON → honeypot → verplichte velden → e-mail → lengte. */
 import type { LeadData } from './types';
 
-const REQUIRED_FIELDS = ['naam', 'telefoon', 'email', 'dienst'] as const;
+const REQUIRED_FIELDS = ['naam', 'telefoon', 'dienst'] as const;
 
 export type ParseResult =
   | { kind: 'ok'; data: LeadData }
@@ -26,8 +26,10 @@ export async function parseLead(request: Request): Promise<ParseResult> {
     }
   }
 
+  // E-mail is optioneel (we bellen terug), maar als het is ingevuld moet het kloppen.
   // Basisvalidatie aan de serverkant (de browser controleert dit ook, maar dit endpoint is publiek).
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(data.email).trim())) {
+  const email = String(data.email ?? '').trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     return { kind: 'invalid', status: 400, payload: { ok: false, error: 'invalid_email' } };
   }
   if (Object.values(data).some((v) => String(v ?? '').length > 3000)) {

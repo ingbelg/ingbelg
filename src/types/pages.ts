@@ -26,6 +26,7 @@ interface PageBase {
   note?: { title: string; text: string };                  // extra blok (premie/btw/asbestregels)
   related?: { text: string; href: string; label: string }; // verwijzing naar een verwante uitlegpagina (boven de CTA)
   faq: { q: string; a: string }[];
+  reviewQuotes?: { text: string; author: string; date: string }[]; // letterlijk uit Google-reviews (zichtbaar zonder toestemming voor Trustindex)
 }
 
 /** Dienstpagina: Service-schema + blok "wat we doen". */

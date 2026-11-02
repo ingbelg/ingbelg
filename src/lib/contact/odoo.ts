@@ -13,7 +13,8 @@ export function odooChannel(env: ContactEnv): SideChannel | null {
       const form = new FormData();
       form.set('name', data.gemeente ? `${subject} (${data.gemeente})` : subject);
       form.set('contact_name', data.naam);
-      form.set('email_from', data.email);
+      const email = String(data.email ?? '').trim();
+      if (email) form.set('email_from', email);
       form.set('phone', data.telefoon);
       form.set('description', body);
       // Verkoopteam en verkoper: Odoo bewaart die als verborgen velden in zijn eigen formulier,

@@ -13,6 +13,17 @@ const { page } = Astro.props;
       <h2 class="h2">Wat klanten zeggen <em>na de oplevering</em></h2>
       <p class="sechead__sub">{facts.reviews.score}/5 op Google, op basis van {facts.reviews.count} reviews.</p>
     </header>
+    {page.reviewQuotes && (
+      <div class="quotes">
+        {page.reviewQuotes.map((q) => (
+          <figure class="quote reveal">
+            <span class="quote__stars" role="img" aria-label="5 op 5 sterren">★★★★★</span>
+            <blockquote>&ldquo;{q.text}&rdquo;</blockquote>
+            <figcaption><strong>{q.author}</strong> &middot; Google-review, {q.date}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )}
     <p class="sechead sechead--center reveal" style="margin-bottom:36px">
       <a class="btn btn--line" href={facts.reviews.googleUrl} target="_blank" rel="noopener"><span>Alle reviews op Google →</span></a>
     </p>

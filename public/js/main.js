@@ -238,6 +238,8 @@
         var valid = f.type === 'checkbox' ? f.checked : f.value.trim() !== '';
         if (valid && f.type === 'email') valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim());
         if (!valid) { f.classList.add('is-error'); ok = false; }
+      } else if (f.type === 'email' && f.value.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim())) {
+        f.classList.add('is-error'); ok = false;
       }
     });
 
@@ -278,7 +280,7 @@
       var body =
         'Naam: ' + payload.naam + '\n' +
         'Telefoon: ' + payload.telefoon + '\n' +
-        'E-mail: ' + payload.email + '\n' +
+        'E-mail: ' + (payload.email || '-') + '\n' +
         'Gemeente: ' + (payload.gemeente || '-') + '\n' +
         'Dienst: ' + payload.dienst + '\n\n' +
         'Project:\n' + (payload.bericht || '-');

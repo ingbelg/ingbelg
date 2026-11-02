@@ -13,7 +13,7 @@ const PAGES: [string, string][] = [
   ['/hellend-dak', '2026-10-17'],
   ['/plat-dak-epdm', '2026-10-04'],
   ['/dakisolatie', '2026-10-17'],
-  ['/asbestdak-vervangen', '2026-10-03'],
+  ['/asbestdak-vervangen', '2026-11-02'],
   ['/gevelbekleding', '2026-10-03'],
   ['/dakkapel-timmerwerken', '2026-10-03'],
   ['/dakherstelling', '2026-11-02'],

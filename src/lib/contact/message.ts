@@ -14,7 +14,7 @@ export function buildLeadMessage(data: LeadData): LeadMessage {
     deadline ? '' : null,
     `Naam: ${data.naam}`,
     `Telefoon: ${data.telefoon}`,
-    `E-mail: ${data.email}`,
+    `E-mail: ${String(data.email ?? '').trim() || '-'}`,
     `Gemeente: ${data.gemeente || '-'}`,
     `Dienst: ${data.dienst}`,
     `Timing: ${data.timing || '-'}`,

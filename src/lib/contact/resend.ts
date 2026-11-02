@@ -24,7 +24,7 @@ export function resendChannel(env: ContactEnv): PrimaryChannel | null {
           to: notifyTo,
           subject,
           text: body,
-          reply_to: data.email,
+          ...(String(data.email ?? '').trim() ? { reply_to: String(data.email).trim() } : {}),
         }),
       });
       if (!res.ok) console.error('[api/contact] Resend-fout:', await res.text());
