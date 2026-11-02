@@ -17,6 +17,8 @@ interface PageBase {
   lead: string;
   crumb: string;                // korte naam in het kruimelpad (zichtbaar + BreadcrumbList)
   hero: { src: string; alt: string; srcset?: string };
+  heroWhatsapp?: boolean;       // tweede knop in de hero: foto via WhatsApp i.p.v. telefoon (telefoon staat dan in de regel eronder)
+  noWarrantyClaim?: boolean;    // geen garantietermijn in de vertrouwensbalk (bv. herstellingen: bewust niet beloofd)
   ogImage?: string;
   problems: { h: string; p: string; link?: { href: string; label: string } }[];
   problemsTitle?: string;       // standaard: "Herkent u dit?" (HTML toegestaan: <em>)
