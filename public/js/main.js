@@ -5,6 +5,25 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* ---------- Herkomst meenemen tijdens het bezoek ----------
+     Klikt iemand vanaf een advertentie door naar een andere pagina van de site, dan gaan de kenmerken uit de
+     adresbalk mee in de link, zodat het formulier ze nog kent. Niets opgeslagen op het toestel. */
+  var hereParams = new URLSearchParams(window.location.search);
+  var carriedParams = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid', 'gbraid', 'wbraid', 'oppref']
+    .filter(function (k) { return hereParams.get(k); });
+  if (carriedParams.length) {
+    var carryOver = function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || a.origin !== window.location.origin || a.pathname === window.location.pathname) return;
+      if (/\.[a-z0-9]+$/i.test(a.pathname)) return; /* bestanden, geen pagina's */
+      var url = new URL(a.href);
+      carriedParams.forEach(function (k) { if (!url.searchParams.has(k)) url.searchParams.set(k, hereParams.get(k)); });
+      a.href = url.href;
+    };
+    document.addEventListener('click', carryOver, true);
+    document.addEventListener('auxclick', carryOver, true);
+  }
+
   /* ---------- Hero-video: niet laden bij Save-Data (T-08) ---------- */
   var heroVideo = $('#heroVideo');
   if (heroVideo && navigator.connection && navigator.connection.saveData) {
