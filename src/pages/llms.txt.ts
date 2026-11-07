@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import facts from '../data/site-facts.json';
-import { SERVICES } from '../data/navigation';
+import { SERVICES, type Service } from '../data/navigation';
 
 export const prerender = true;
 
@@ -9,7 +9,7 @@ export const prerender = true;
 // zodat dit bestand mee verandert met de site. Google gebruikt llms.txt niet: verwacht er geen rankingeffect van.
 export const GET: APIRoute = ({ site }) => {
   const base = (site ?? new URL(facts.siteUrl)).toString().replace(/\/$/, '');
-  const services = Object.values(SERVICES)
+  const services = (Object.values(SERVICES) as Service[])
     .filter((s) => s.page)
     .map((s) => `- [${s.landingLabel ?? s.value}](${base}${s.page})`);
   const a = facts.address;
