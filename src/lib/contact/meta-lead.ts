@@ -43,14 +43,16 @@ export async function parseMetaLead(request: Request, key: string | undefined): 
   }
 
   const naam = pick(raw, ['naam', 'full_name', 'name', 'volledige_naam']);
-  const telefoon = pick(raw, ['telefoon', 'phone_number', 'phone', 'telefoonnummer']);
+  // Meta zet in exports en de Sheets-koppeling soms een typevoorvoegsel voor waarden ("p:+32…", "z:9620").
+  const unprefix = (v: string) => v.replace(/^[a-z]{1,2}:(?=[+\d])/i, '');
+  const telefoon = unprefix(pick(raw, ['telefoon', 'phone_number', 'phone', 'telefoonnummer']));
   if (!naam) return { kind: 'invalid', status: 400, payload: { ok: false, error: 'missing_field', field: 'naam' } };
   if (!telefoon) return { kind: 'invalid', status: 400, payload: { ok: false, error: 'missing_field', field: 'telefoon' } };
 
   // Een ongeldig adres zou de e-mail (reply-to) laten mislukken: dan gaat het mee in de tekst in plaats van in het veld.
   const rawEmail = pick(raw, ['email', 'e-mail', 'e_mail']);
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(rawEmail) ? rawEmail : '';
-  const postcode = pick(raw, ['postcode', 'post_code', 'zip', 'zip_code']);
+  const postcode = unprefix(pick(raw, ['postcode', 'post_code', 'zip', 'zip_code']));
   const gemeente = pick(raw, ['gemeente', 'city', 'stad']);
   const dienst = pick(raw, ['dienst', 'service', 'wat_wilt_u_laten_doen']);
   const campagne = pick(raw, ['campaign_name', 'campagne']);
