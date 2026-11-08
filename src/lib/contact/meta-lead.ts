@@ -55,6 +55,7 @@ export async function parseMetaLead(request: Request, key: string | undefined): 
   const postcode = unprefix(pick(raw, ['postcode', 'post_code', 'zip', 'zip_code']));
   const gemeente = pick(raw, ['gemeente', 'city', 'stad']);
   const dienst = pick(raw, ['dienst', 'service', 'wat_wilt_u_laten_doen']);
+  const timing = pick(raw, ['timing', 'wanneer']);
   const campagne = pick(raw, ['campaign_name', 'campagne']);
   const advertentie = pick(raw, ['ad_name', 'advertentie']);
   const formulier = pick(raw, ['form_name', 'formulier']);
@@ -79,7 +80,9 @@ export async function parseMetaLead(request: Request, key: string | undefined): 
       telefoon,
       email,
       gemeente: [gemeente, postcode].filter(Boolean).join(' ') || '',
-      dienst: dienst || 'Aanvraag via Meta-advertentie',
+      // «Meta» altijd in de leadnaam, zodat deze leads in Odoo te filteren zijn.
+      dienst: dienst ? `${dienst} (via Meta)` : 'Aanvraag via Meta-advertentie',
+      timing,
       source_block: 'Meta-leadformulier (Facebook/Instagram)',
       herkomst,
       bericht: details,
