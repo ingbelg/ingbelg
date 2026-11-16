@@ -9,14 +9,19 @@ export const prerender = true;
 /* Alle cijfers komen van de officiële pagina's van de Vlaamse overheid (geraadpleegd 3 oktober 2026):
    - "Mijn VerbouwPremie voor dak": percentages, maxima, factuurgrenzen, Rd-waarde, elektriciteitsnet vóór 1/1/2006, asbestbonus, wegvallen cat. 1 en 2 per 1/3/2026
    - "Mijn VerbouwPremie voor eigenaar-bewoner": inkomensgrenzen vanaf 1/1/2026
+   Opnieuw nagekeken op 16 november 2026 (zelfde pagina's): bedragen, maxima, factuurgrenzen, Rd-waarde, datum 2006 en documenten ongewijzigd.
+   Toen ook opgenomen: de premie van 50 %/35 % geldt "voor isolatie en renovatie samen"; welke dakwerken meetellen (enkel samen met nieuwe
+   isolatie, enkel dak van verwarmde ruimtes, door een aannemer); en Mijn VerbouwLening (bedrag, looptijd, rente 2026, premie lost lening af —
+   bron: …/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening).
+   Regels 2027: de overheid heeft een simulator 2027, maar nog geen gewijzigde bedragen op de pagina → niet vermeld; nalezen rond 15/12.
    Bij een nieuwe regelgeving of indexering: pas deze pagina én public/js/calculator.js samen aan. */
 const page: LandingData = {
   slug: 'premies-dakwerken-2026',
   kind: 'guide',
   published: '2026-10-03',
-  updated: '2026-10-08',
-  title: 'Dakpremie 2026 aanvragen: tot € 5.750 voor dakisolatie',
-  description: 'Premie voor dakisolatie 2026: 50 % (max. € 5.750) of 35 % (max. € 4.025) voor categorie 3 en 4. Voorwaarden en aanvragen via Mijn VerbouwLoket.',
+  updated: '2026-11-16',
+  title: 'Dakpremie 2026 aanvragen: tot € 5.750 voor dak en isolatie',
+  description: 'Dakpremie 2026: 50 % (max. € 5.750) of 35 % (max. € 4.025) op isolatie en dakwerken samen, voor categorie 3 en 4. Welke werken meetellen en hoe u aanvraagt.',
   dienst: 'Weet ik nog niet',
   serviceType: 'Premies dakwerken',
   eyebrow: 'Dakpremie · Mijn VerbouwPremie · 2026',
@@ -24,26 +29,26 @@ const page: LandingData = {
   crumb: 'Dakpremie 2026',
   h1Main: 'Dakpremie 2026',
   h1Sub: 'Wat krijgt u terug voor dakisolatie? Zo werkt Mijn VerbouwPremie.',
-  lead: 'Sinds 1 maart 2026 krijgen enkel nog de inkomenscategorieën 3 en 4 een premie voor dakisolatie. Hieronder staat wat u kan krijgen, waaraan uw woning moet voldoen en hoe u het aanvraagt. Wilt u het meteen weten? Gebruik onze premie-check.',
+  lead: 'Sinds 1 maart 2026 krijgen enkel nog de inkomenscategorieën 3 en 4 een dakpremie. Die premie geldt voor de isolatie én voor de andere dakwerken die u tegelijk laat doen, zoals dakpannen, onderdak en goten. Hieronder staat wat u kan krijgen, welke werken meetellen, waaraan uw woning moet voldoen en hoe u het aanvraagt. Wilt u het meteen weten? Gebruik onze premie-check.',
   hero: { src: '/assets/services/hellende-daken-nieuw.webp', srcset: '/assets/services/hellende-daken-nieuw-640.webp 640w, /assets/services/hellende-daken-nieuw-1024.webp 1024w, /assets/services/hellende-daken-nieuw.webp 1600w', alt: 'Hellend dak met nieuwe antracietkleurige dakpannen' },
   problemsTitle: 'De cijfers <em>in het kort</em>',
   problems: [
-    { h: 'Categorie 4: 50 %', p: 'Tot 50 % van de factuur (excl. btw), met een maximum van € 5.750.' },
-    { h: 'Categorie 3: 35 %', p: 'Tot 35 % van de factuur (excl. btw), met een maximum van € 4.025.' },
-    { h: 'Asbestbonus: € 8 per m²', p: 'Bovenop de premie, als er asbest wordt verwijderd. Maximaal 50 % van de totale factuur.' },
+    { h: 'Categorie 4: 50 %', p: 'Tot 50 % van de factuur (excl. btw) voor isolatie en dakwerken samen, met een maximum van € 5.750.' },
+    { h: 'Categorie 3: 35 %', p: 'Tot 35 % van de factuur (excl. btw) voor isolatie en dakwerken samen, met een maximum van € 4.025.' },
+    { h: 'Asbestbonus: € 8 per m²', p: 'Bovenop de premie, als er asbest wordt verwijderd. Maximaal 50 % van de totale factuur.' },
     { h: '6 % btw', p: 'Bij een privéwoning ouder dan 10 jaar, los van uw inkomen.' },
   ],
   guide: [
     {
       h: 'Hoeveel dakpremie krijgt u in 2026?',
       paras: [
-        'De Vlaamse overheid betaalt een deel van uw factuur terug als u uw dak laat isoleren. Hoeveel, hangt af van uw inkomenscategorie. Het factuurbedrag (zonder btw) telt mee tussen € 1.000 en € 11.500. Daarom ligt het maximum precies op 50 % of 35 % van € 11.500.',
+        'De Vlaamse overheid betaalt een deel van uw factuur terug als u uw dak laat isoleren. Hoeveel, hangt af van uw inkomenscategorie. Het percentage geldt voor de isolatie en de andere dakwerken samen. Het factuurbedrag (zonder btw) telt mee tussen € 1.000 en € 11.500. Daarom ligt het maximum precies op 50 % of 35 % van € 11.500.',
       ],
       table: {
-        head: ['Inkomenscategorie', 'Premie voor dakisolatie', 'Maximum'],
+        head: ['Inkomenscategorie', 'Premie voor isolatie en dakwerken samen', 'Maximum'],
         rows: [
-          ['Categorie 4', '50 % van de factuur (excl. btw)', '€ 5.750'],
-          ['Categorie 3', '35 % van de factuur (excl. btw)', '€ 4.025'],
+          ['Categorie 4', '50 % van de factuur (excl. btw)', '€ 5.750'],
+          ['Categorie 3', '35 % van de factuur (excl. btw)', '€ 4.025'],
           ['Categorie 1 en 2', 'Geen dakpremie meer sinds 1 maart 2026', '–'],
         ],
       },
@@ -56,15 +61,15 @@ const page: LandingData = {
       table: {
         head: ['Categorie', 'Alleenstaand', 'Alleenstaand met 1 persoon ten laste, of koppel'],
         rows: [
-          ['Categorie 4', 'tot € 24.750', 'tot € 37.110'],
-          ['Categorie 3', 'tot € 43.240', 'tot € 60.520'],
+          ['Categorie 4', 'tot € 24.750', 'tot € 37.110'],
+          ['Categorie 3', 'tot € 43.240', 'tot € 60.520'],
           ['Hoger dan categorie 3', 'geen dakpremie', 'geen dakpremie'],
         ],
       },
     },
     {
       h: '',
-      paras: ['Voor elke bijkomende persoon ten laste gaan de grenzen met € 4.420 omhoog. Twijfelt u over uw categorie? Gebruik de officiële simulator op mijnverbouwpremie.be, of vul uw gegevens in onze premie-check in.'],
+      paras: ['Voor elke bijkomende persoon ten laste gaan de grenzen met € 4.420 omhoog. Twijfelt u over uw categorie? Gebruik de officiële simulator op mijnverbouwpremie.be, of vul uw gegevens in onze premie-check in.'],
     },
     {
       h: 'Aan welke voorwaarden moet uw woning en uw dak voldoen?',
@@ -72,19 +77,49 @@ const page: LandingData = {
         'U bent <strong>eigenaar-bewoner</strong> van de woning. Voor verhuurders, beleggers en appartementsgebouwen gelden andere bedragen; zie de officiële website.',
         'De woning is <strong>vóór 1 januari 2006</strong> aangesloten op het elektriciteitsnet.',
         'De nieuwe isolatielaag haalt een <strong>Rd-waarde van minstens 4,5 m²K/W</strong>. Met PIR-isolatie betekent dat minstens 12 cm. Hoe wij dat aanpakken, leest u bij <a href="/dakisolatie">dakisolatie</a>. Vernieuwt u meteen het hele dak? Lees dan ook <a href="/hellend-dak">hellend dak vernieuwen</a> of <a href="/plat-dak-epdm">plat dak in EPDM</a>.',
-        'Het factuurbedrag is minstens <strong>€ 1.000</strong> (excl. btw).',
+        'Het factuurbedrag is minstens <strong>€ 1.000</strong> (excl. btw).',
+      ],
+    },
+    {
+      h: 'Welke dakwerken tellen mee voor de premie?',
+      paras: [
+        'Volgens de Vlaamse overheid tellen deze werken mee, als een aannemer ze uitvoert <strong>en het dak tegelijk nieuwe isolatie krijgt</strong> met een Rd-waarde van minstens 4,5 m²K/W:',
+      ],
+      bullets: true,
+      list: [
+        'de nieuwe dakisolatie, of zoldervloerisolatie bij een onverwarmde zolder;',
+        'de dakstructuur afbreken en vernieuwen, bijvoorbeeld nieuwe kepers, en houten dakstructuren behandelen tegen zwammen en insecten;',
+        'een nieuw onderdak bij een hellend dak;',
+        'een nieuwe waterdichte dakbedekking, zoals dakpannen of roofing;',
+        'dakramen en lichtkoepels, als het glas een Ug-waarde van maximaal 1,0 W/m²K heeft, en lichtkokers;',
+        'een dakkapel, met de zijwanden;',
+        'nieuwe dakgoten en afvoerpijpen;',
+        'werken aan de schouw, als ze samengaan met werken aan de dakstructuur of de dakbedekking.',
+      ],
+    },
+    {
+      h: '',
+      paras: [
+        'Enkel het dak boven verwarmde ruimtes telt mee, dus geen onverwarmde bijgebouwen of losse garages. Een nieuw dak <strong>zonder nieuwe isolatie</strong> geeft geen premie. Vernieuwt u het dak, dan is het dus de moeite om het meteen te isoleren: dan telt de hele factuur van de categorie dak mee, tot € 11.500 excl. btw.',
       ],
     },
     {
       h: 'Asbestbonus bij een asbestdak',
       paras: [
-        'Laat u tegelijk met de dakisolatie asbest verwijderen? Dan komt er een bonus van <strong>€ 8 per m² verwijderd asbest</strong> bij, voor maximaal 50 % van de totale factuur. Dat geldt voor categorie 3 en 4, en enkel als <strong>een aannemer het asbest verwijdert</strong>; zelf verwijderen telt niet mee. De regels rond asbestdaken leest u op de pagina <a href="/asbestdak-regels">asbestdak: de regels</a>. Meer over onze aanpak vindt u op de pagina <a href="/asbestdak-vervangen">asbestdak vervangen</a>.',
+        'Laat u tegelijk met de dakisolatie asbest verwijderen? Dan komt er een bonus van <strong>€ 8 per m² verwijderd asbest</strong> bij, voor maximaal 50 % van de totale factuur. Dat geldt voor categorie 3 en 4, en enkel als <strong>een aannemer het asbest verwijdert</strong>; zelf verwijderen telt niet mee. De regels rond asbestdaken leest u op de pagina <a href="/asbestdak-regels">asbestdak: de regels</a>. Meer over onze aanpak vindt u op de pagina <a href="/asbestdak-vervangen">asbestdak vervangen</a>.',
       ],
     },
     {
       h: '6 % btw, los van de premie',
       paras: [
         'Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u <strong>6 % btw</strong> op de werken in plaats van 21 %. Dat geldt voor iedereen, ongeacht het inkomen. Wij passen dit correct toe op de factuur. Alle voorwaarden staan in onze uitleg over <a href="/btw-dakwerken">6 % btw op dakwerken</a>.',
+      ],
+    },
+    {
+      h: 'Lenen voor uw dak: Mijn VerbouwLening',
+      paras: [
+        'Met <strong>Mijn VerbouwLening</strong> van de Vlaamse overheid leent u <strong>€ 4.000 tot € 60.000</strong>, over maximaal 25 jaar, zonder dossierkosten. Bij een aanvraag in 2026 betalen eigenaar-bewoners in categorie 4 <strong>0 % rente</strong>, in categorie 3 <strong>0,5 %</strong> en in categorie 2 1,5 %. Categorie 1 komt niet in aanmerking. Let op, geld lenen kost ook geld.',
+        'Leent u voor dezelfde werken waarvoor u de dakpremie krijgt, dan gaat de premie naar de afbetaling van de lening, niet naar uw rekening. U vraagt beide aan via het Mijn VerbouwLoket. Wie wil weten hoe zo\'n renovatie past bij een woning met EPC E of F, leest onze uitleg over de <a href="/renovatieverplichting-epc">renovatieverplichting</a>.',
       ],
     },
     {
@@ -112,6 +147,7 @@ const page: LandingData = {
   sources: [
     { label: 'Mijn VerbouwPremie voor dak (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/mijn-verbouwpremie-voor-dak' },
     { label: 'Mijn VerbouwPremie voor eigenaar-bewoner: inkomenscategorieën (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/wie-kan-mijn-verbouwpremie-aanvragen/mijn-verbouwpremie-voor-eigenaar-bewoner' },
+    { label: 'Mijn VerbouwLening: bedrag en rentevoet (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening' },
     { label: 'Aanvragen en simulator: mijnverbouwpremie.be', href: 'https://www.mijnverbouwpremie.be' },
     { label: 'Mijn VerbouwLoket (premie aanvragen)', href: 'https://loket.mijnverbouwpremie.be' },
   ],
@@ -133,7 +169,15 @@ const page: LandingData = {
     },
     {
       q: 'Hoeveel dakpremie krijg ik in 2026?',
-      a: 'Inkomenscategorie 4 krijgt 50 % van de factuur (excl. btw) terug, tot maximaal € 5.750. Categorie 3 krijgt 35 %, tot maximaal € 4.025. Sinds 1 maart 2026 krijgen categorie 1 en 2 geen dakpremie meer.',
+      a: 'Inkomenscategorie 4 krijgt 50 % van de factuur (excl. btw) terug, tot maximaal € 5.750. Categorie 3 krijgt 35 %, tot maximaal € 4.025. Dat percentage geldt voor de isolatie en de andere dakwerken samen. Sinds 1 maart 2026 krijgen categorie 1 en 2 geen dakpremie meer.',
+    },
+    {
+      q: 'Krijg ik een premie voor een nieuw dak, zoals dakpannen, onderdak of goten?',
+      a: 'Ja, als u in categorie 3 of 4 valt en het dak tegelijk nieuwe isolatie krijgt met een Rd-waarde van minstens 4,5 m²K/W. Dan tellen ook de dakbedekking, het onderdak, de dakstructuur, dakramen, een dakkapel en de goten mee voor de premie. Een nieuw dak zonder nieuwe isolatie geeft geen premie.',
+    },
+    {
+      q: 'Kan ik de dakpremie combineren met een lening?',
+      a: 'Ja, met Mijn VerbouwLening: € 4.000 tot € 60.000 over maximaal 25 jaar, bij een aanvraag in 2026 aan 0 % rente voor categorie 4 en 0,5 % voor categorie 3. De premie gaat dan naar de afbetaling van de lening. Let op, geld lenen kost ook geld.',
     },
     {
       q: 'Welke woningen komen in aanmerking?',
@@ -141,7 +185,7 @@ const page: LandingData = {
     },
     {
       q: 'Wat is het minimale factuurbedrag?',
-      a: 'Minstens € 1.000 (excl. btw). Er wordt gerekend met een factuurbedrag tot € 11.500 (excl. btw).',
+      a: 'Minstens € 1.000 (excl. btw). Er wordt gerekend met een factuurbedrag tot € 11.500 (excl. btw).',
     },
     {
       q: 'Welke isolatie heb ik nodig?',
@@ -149,7 +193,7 @@ const page: LandingData = {
     },
     {
       q: 'Krijg ik ook een premie voor asbestverwijdering?',
-      a: 'Ja, als u tegelijk met de dakisolatie asbest verwijdert: € 8 per m² verwijderd asbest, voor maximaal 50 % van de totale factuur, voor categorie 3 en 4. Het asbest moet door een aannemer worden verwijderd; zelf doen telt niet mee.',
+      a: 'Ja, als u tegelijk met de dakisolatie asbest verwijdert: € 8 per m² verwijderd asbest, voor maximaal 50 % van de totale factuur, voor categorie 3 en 4. Het asbest moet door een aannemer worden verwijderd; zelf doen telt niet mee.',
     },
     {
       q: 'Wat als mijn inkomen te hoog is voor de premie?',

@@ -8,20 +8,29 @@ export const prerender = true;
 /* Alle regels komen van vlaanderen.be, geraadpleegd op 4 oktober 2026:
    - vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen
      (label E/F → D, 6 jaar voor lopende én nieuwe overdrachten, finaal goedgekeurd 12/12/2025; voorbeeld akte 1/2/2024 → 1/2/2030;
-      soorten overdrachten, uitzonderingen, sloop, appartementen 50 % + 1, nieuw EPC, boete € 500–€ 5.000; verstrengingspad afgeschaft)
+      soorten overdrachten, uitzonderingen, sloop, appartementen 50 % + 1, nieuw EPC, boete € 500–€ 5.000; verstrengingspad afgeschaft)
      Opnieuw nagekeken op 21 oktober 2026; toen ook opgenomen: resterende termijn bij doorverkoop of erfenis, 'Test uw EPC' en de energiekaart,
      nieuw EPC hoeft niet gemeld te worden (komt automatisch bij VEKA), en de namen van de steunmaatregelen (onroerende voorheffing, Mijn VerbouwLening,
      renovatiekrediet met rentesubsidie) zonder bedragen of voorwaarden.
+   Opnieuw nagekeken op 16 november 2026 (vlaanderen.be):
+   - renovatieverplichting: regels ongewijzigd; nieuw opgenomen: energienorm voor huurwoningen vanaf 1/1/2030 en het aangekondigde
+     'genuanceerd handhavingskader' (nog niet uitgewerkt);
+   - Mijn VerbouwLening (…/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening en …/wie-in-aanmerking-komt…):
+     € 4.000–€ 60.000, max. 25 jaar, geen dossierkosten, rente bij aanvraag in 2026 voor eigenaar-bewoners cat. 4: 0 %, cat. 3: 0,5 %, cat. 2: 1,5 %;
+     cat. 1 komt niet in aanmerking; premie wordt gebruikt om de lening af te lossen;
+   - vermindering onroerende voorheffing voor energiezuinige gebouwen: AFGESCHAFT voor vergunningsaanvragen vanaf 1/10/2025
+     (gold sowieso enkel bij herbouw of ingrijpende energetische renovatie met E-peil) → uit de lijst met steun gehaald;
+   - renovatiekrediet met rentesubsidie: STOPGEZET voor aankopen (akte) vanaf 1/1/2025 → uit de lijst met steun gehaald.
    Bewust NIET opgenomen: welke werken precies label D opleveren (verschilt per woning, staat niet op de officiële pagina),
-   de EPC-labelpremie (afgeschaft, zie premies-dakwerken-2026) en bedragen of voorwaarden van leningen (niet nagekeken).
-   Bij nieuwe regelgeving: deze pagina nalezen. */
+   de EPC-labelpremie (afgeschaft, zie premies-dakwerken-2026) en richtprijzen per label (enkel commerciële schattingen, geen officiële bron).
+   Bij nieuwe regelgeving: deze pagina nalezen. Rentevoeten van Mijn VerbouwLening wijzigen elk jaar in januari. */
 const page: LandingData = {
   slug: 'renovatieverplichting-epc',
   kind: 'guide',
   published: '2026-10-04',
-  updated: '2026-10-21',
-  title: 'Woning met EPC F of E: wat nu? Renovatieplicht uitgelegd | INGBELG',
-  description: 'Woning met EPC-label F of E gekocht? Binnen 6 jaar naar label D. Wat u nu doet, waar de kosten van afhangen, welke steun er is en de boetes, met bronnen van de Vlaamse overheid.',
+  updated: '2026-11-16',
+  title: 'EPC F of E: wat te doen en wat kost de renovatie? | INGBELG',
+  description: 'Woning met EPC F of E gekocht? Binnen 6 jaar naar label D. Wat te doen, waar de kosten van afhangen, premies en lenen tot € 60.000, met bronnen van de Vlaamse overheid.',
   dienst: 'Hellende daken',
   serviceType: 'Renovatieverplichting: uitleg',
   eyebrow: 'EPC E of F · Renovatieverplichting · 2026',
@@ -59,7 +68,7 @@ const page: LandingData = {
       ],
     },
     {
-      h: 'Woning met EPC F of E gekocht: wat doet u nu?',
+      h: 'Woning met EPC F of E gekocht: wat te doen?',
       list: [
         '<strong>1. Noteer uw deadline.</strong> Tel zes jaar bij de datum van de notariële akte.',
         '<strong>2. Bekijk de aanbevelingen op uw EPC.</strong> Daar staat wat de energieprestatie van uw woning het meest verbetert. Met de online toepassing ‘Test uw EPC’ van de Vlaamse overheid kunt u zelf al nagaan hoe uw woning scoort.',
@@ -88,7 +97,14 @@ const page: LandingData = {
       h: 'Hoe toont u aan dat u voldoet?',
       paras: [
         'Na de werken laat u een <strong>nieuw EPC</strong> opmaken door een energiedeskundige. Dat EPC komt automatisch in de databank van de Vlaamse overheid terecht.',
-        'Is er zes jaar na de overdracht geen nieuw EPC, of toont het EPC dat de woning label D niet haalt, dan start het Vlaams Energie- en Klimaatagentschap een handhavingsprocedure. Voor een woning gaat het om een <strong>boete van € 500 tot € 5.000</strong>. De boete heft de verplichting niet op: u krijgt een nieuwe termijn om alsnog te renoveren.',
+        'Is er zes jaar na de overdracht geen nieuw EPC, of toont het EPC dat de woning label D niet haalt, dan start het Vlaams Energie- en Klimaatagentschap een handhavingsprocedure. Voor een woning gaat het om een <strong>boete van € 500 tot € 5.000</strong>. De boete heft de verplichting niet op: u krijgt een nieuwe termijn om alsnog te renoveren.',
+        'De Vlaamse regering kondigde aan dat er voor woningen een genuanceerder kader voor die handhaving komt. Hoe dat eruitziet, is nog niet bekend. Tot dan gelden de regels hierboven.',
+      ],
+    },
+    {
+      h: 'Verhuurt u de woning?',
+      paras: [
+        'Los van de renovatieverplichting voor nieuwe eigenaars komt er vanaf <strong>1 januari 2030</strong> een energienorm voor huurwoningen. Een woning die verhuurd wordt, moet dan een minimaal EPC-label halen, en die eis wordt geleidelijk strenger.',
       ],
     },
     {
@@ -98,18 +114,61 @@ const page: LandingData = {
       ],
     },
     {
-      h: 'Wat kost een renovatie van label F naar D?',
+      h: 'Wat kost een renovatie van EPC F naar label D?',
       paras: [
-        'Daar bestaat geen vast bedrag voor. Het hangt af van de woning: hoe groot ze is, wat er al geïsoleerd is en welke werken nodig zijn om label D te halen. De aanbevelingen op uw EPC en de berekening van een energiedeskundige tonen welke werken het meest opleveren.',
-        'Voor het dak krijgt u van ons een offerte binnen 48 uur na het plaatsbezoek, gratis en vrijblijvend. Een deel van de kosten krijgt u terug via premies en een lager btw-tarief, zie hieronder.',
+        'Daar bestaat geen vast bedrag voor, en de Vlaamse overheid geeft er ook geen. Bedragen die u online ziet, zijn schattingen van bedrijven. Wat u echt betaalt, hangt af van:',
+      ],
+      bullets: true,
+      list: [
+        '<strong>Waar u vertrekt.</strong> Een woning die net in label F valt, heeft minder werk nodig dan een woning diep in label F.',
+        '<strong>Wat al in orde is.</strong> Is het dak al geïsoleerd, of zit er al dubbel glas in? Dan valt dat deel weg.',
+        '<strong>Welke werken label D opleveren.</strong> Dat verschilt per woning en berekent een energiedeskundige.',
+        '<strong>Wat u terugkrijgt en wat u kunt lenen.</strong> Premies en 6 % btw verlagen de rekening; met Mijn VerbouwLening spreidt u de kosten. Zie hieronder.',
+      ],
+    },
+    {
+      h: '',
+      paras: [
+        'Voor het dak krijgt u van ons een offerte binnen 48 uur na het plaatsbezoek, gratis en vrijblijvend. Daarin staat per post wat we doen en wat het kost. Een prijs zonder de woning te zien, geven we niet.',
       ],
     },
     {
       h: 'Welke steun bestaat er?',
       list: [
-        '<strong>Mijn VerbouwPremie voor dakisolatie</strong>, voor inkomenscategorie 3 en 4. Alle bedragen en voorwaarden staan in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
+        '<strong>Mijn VerbouwPremie voor het dak</strong>, voor inkomenscategorie 3 en 4: 50 % of 35 % van de factuur (excl. btw), tot € 5.750. Die premie geldt voor de isolatie én de andere dakwerken samen, zoals dakpannen, onderdak en goten, op voorwaarde dat het dak tegelijk nieuw geïsoleerd wordt. Alle voorwaarden staan in onze uitleg over de <a href="/premies-dakwerken-2026">dakpremie 2026</a>.',
         '<strong>6 % btw</strong> in plaats van 21 % voor werken aan een woning die ouder is dan 10 jaar en vooral als privéwoning dient. Zie onze uitleg over <a href="/btw-dakwerken">6 % btw op dakwerken</a>.',
-        '<strong>Vermindering van de onroerende voorheffing</strong> na een energetische renovatie, en leningen zoals <strong>Mijn VerbouwLening</strong> en het <strong>renovatiekrediet met rentesubsidie</strong>. Kijk voor de actuele voorwaarden op de pagina\'s van de Vlaamse overheid.',
+        '<strong>Mijn VerbouwLening</strong>: een lening van € 4.000 tot € 60.000, terug te betalen over maximaal 25 jaar, zonder dossierkosten. Ze is bedoeld voor werken aan woningkwaliteit en energieprestatie, zoals isolatie.',
+      ],
+    },
+    {
+      h: 'Mijn VerbouwLening: wat betaalt u aan rente?',
+      paras: [
+        'De rente hangt af van uw inkomenscategorie, dezelfde als bij Mijn VerbouwPremie. Voor eigenaar-bewoners die de lening in 2026 aanvragen:',
+      ],
+      table: {
+        head: ['Inkomenscategorie', 'Rentevoet bij aanvraag in 2026'],
+        rows: [
+          ['Categorie 4', '0 %'],
+          ['Categorie 3', '0,5 %'],
+          ['Categorie 2', '1,5 %'],
+          ['Categorie 1', 'komt niet in aanmerking'],
+        ],
+      },
+    },
+    {
+      h: '',
+      paras: [
+        'De rente die geldt op de dag van uw aanvraag, blijft de hele looptijd dezelfde. Elk jaar in januari wordt de rentevoet voor nieuwe aanvragen aangepast. Het Energiehuis bekijkt hoeveel u kunt lenen en over hoeveel jaar. Krijgt u voor dezelfde werken ook Mijn VerbouwPremie, dan gaat die premie naar de afbetaling van de lening, niet naar uw rekening. Let op, geld lenen kost ook geld.',
+        'U vraagt de lening aan via het Mijn VerbouwLoket. Wat u maandelijks afbetaalt, berekent u met de officiële simulator van de Vlaamse overheid.',
+      ],
+    },
+    {
+      h: 'Welke steun bestaat niet meer?',
+      bullets: true,
+      list: [
+        'De <strong>vermindering van de onroerende voorheffing</strong> voor energiezuinige woningen is afgeschaft voor vergunningsaanvragen vanaf 1 oktober 2025. Ze gold bovendien enkel bij herbouw of een ingrijpende energetische renovatie, niet bij gewone renovatiewerken.',
+        'Het <strong>renovatiekrediet met rentesubsidie</strong> is stopgezet voor woningen die vanaf 1 januari 2025 gekocht zijn.',
+        'De <strong>EPC-labelpremie</strong> bestaat niet meer.',
       ],
     },
     {
@@ -124,6 +183,10 @@ const page: LandingData = {
   sources: [
     { label: 'Renovatieverplichting voor residentiële gebouwen (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/kopen-en-verkopen/een-huis-of-appartement-kopen/renovatieverplichting-voor-residentiele-gebouwen' },
     { label: 'Mijn VerbouwPremie voor dak (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/mijn-verbouwpremie-voor-dak' },
+    { label: 'Mijn VerbouwLening: bedrag en rentevoet (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening' },
+    { label: 'Mijn VerbouwLening: wie komt in aanmerking (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/lenen-voor-een-woning/mijn-verbouwlening/wie-in-aanmerking-komt-voor-mijn-verbouwlening' },
+    { label: 'Vermindering van de onroerende voorheffing voor energiezuinige gebouwen (vlaanderen.be)', href: 'https://www.vlaanderen.be/belastingen-en-begroting/vlaamse-belastingen/onroerende-voorheffing/verminderingen-van-de-onroerende-voorheffing/vermindering-van-de-onroerende-voorheffing-voor-energiezuinige-gebouwen' },
+    { label: 'Renovatiekrediet met rentesubsidie, uitdovend (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/lenen-voor-een-woning/renovatiekrediet-met-rentesubsidie-bij-energierenovatie-na-aankoop-uitdovend' },
   ],
   steps: steps('Na uw akkoord krijgt u een vaste startdatum en de planning vooraf op papier.'),
   faq: [
@@ -136,12 +199,20 @@ const page: LandingData = {
       a: 'Daar is geen vast bedrag voor: het hangt af van de woning en van de werken die nodig zijn. Een energiedeskundige berekent welke werken label D opleveren. Voor het dak maken wij een gratis offerte, binnen 48 uur na het plaatsbezoek. Premies en 6 % btw verlagen de rekening.',
     },
     {
+      q: 'Kan ik lenen voor de renovatie van een woning met EPC F?',
+      a: 'Ja, met Mijn VerbouwLening van de Vlaamse overheid: € 4.000 tot € 60.000, over maximaal 25 jaar, zonder dossierkosten. Bij een aanvraag in 2026 betalen eigenaar-bewoners in inkomenscategorie 4 0 % rente, in categorie 3 0,5 % en in categorie 2 1,5 %. Categorie 1 komt niet in aanmerking. Let op, geld lenen kost ook geld.',
+    },
+    {
+      q: 'Krijg ik nog een vermindering van de onroerende voorheffing?',
+      a: 'Voor gewone renovatiewerken niet. De vermindering voor energiezuinige woningen gold enkel bij herbouw of een ingrijpende energetische renovatie, en is afgeschaft voor vergunningsaanvragen vanaf 1 oktober 2025.',
+    },
+    {
       q: 'Ik koop een woning waarop al een renovatieverplichting rust. Wat dan?',
       a: 'Dan moet u binnen de resterende termijn voldoen aan de eisen die voor de vorige eigenaar golden. De verkoper moet in de advertentie vermelden dat er een renovatieverplichting op de woning rust.',
     },
     {
       q: 'Wat als ik niet op tijd klaar ben?',
-      a: 'Dan riskeert u een boete van € 500 tot € 5.000 per woning. De verplichting blijft daarna bestaan: u krijgt een nieuwe termijn om te renoveren.',
+      a: 'Dan riskeert u een boete van € 500 tot € 5.000 per woning. De verplichting blijft daarna bestaan: u krijgt een nieuwe termijn om te renoveren.',
     },
     {
       q: 'Moet ik later naar label C, B of A?',
