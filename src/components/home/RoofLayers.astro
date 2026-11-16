@@ -51,7 +51,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
     <div class="dak3d__grid">
       <div class="dak3d__stage">
-        <img class="dak3d__poster" src={`/assets/dak3d/d/f${pad(LAST)}.webp`} width="1000" height="750" loading="lazy" decoding="async"
+        <img class="dak3d__poster" src={`/assets/dak3d/d/f${pad(LAST)}.webp`}
+             srcset={`/assets/dak3d/m/f${pad(LAST)}.webp 640w, /assets/dak3d/d/f${pad(LAST)}.webp 1000w`}
+             sizes="(max-width: 900px) 100vw, 640px" width="1000" height="750" loading="lazy" decoding="async"
              alt="Doorsnede van een dak: kepers, PIR-isolatie, onderdak, panlatten en dakpannen, naast een plat dak in EPDM" />
         <canvas class="dak3d__canvas" width="1000" height="750" aria-hidden="true"></canvas>
       </div>

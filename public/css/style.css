@@ -1075,7 +1075,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 @media (max-width:900px){
   .dak3d__grid{grid-template-columns:1fr;gap:0}
   .dak3d__stage{top:70px;z-index:2;background:var(--white);box-shadow:0 14px 18px -16px rgba(14,17,22,.25)}
-  .dak3d__step{min-height:48vh;padding:22px 0}
+  .dak3d__step{min-height:52vh;padding:22px 0}
   .dak3d__step:first-child{border-top:1px solid var(--line)}
 }
 @media (prefers-reduced-motion:reduce){

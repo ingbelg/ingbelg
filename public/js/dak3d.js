@@ -8,6 +8,8 @@
   var sec = document.querySelector('.dak3d');
   if (!sec) return;
   var canvas = sec.querySelector('.dak3d__canvas');
+  var stage = sec.querySelector('.dak3d__stage');
+  var oneCol = window.matchMedia('(max-width: 900px)');
   var steps = Array.prototype.slice.call(sec.querySelectorAll('.dak3d__step'));
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !canvas || !canvas.getContext || !('IntersectionObserver' in window)) return;
@@ -47,9 +49,16 @@
     pump();
   }
 
+  // leeslijn: midden van het scherm; op de telefoon staat het beeld bovenaan vast, dan het midden van de ruimte eronder
+  function line() {
+    if (!oneCol.matches) return window.innerHeight * 0.5;
+    var b = stage.getBoundingClientRect().bottom;
+    return b + (window.innerHeight - b) * 0.4;
+  }
+
   // welk beeld hoort bij de huidige scrollpositie: tussen de middens van twee stappen wordt geïnterpoleerd
   function want() {
-    var mid = window.innerHeight * 0.5;
+    var mid = line();
     var c = steps.map(function (s) { var r = s.getBoundingClientRect(); return r.top + r.height / 2; });
     var f = steps.map(function (s) { return +s.getAttribute('data-frame'); });
     if (mid <= c[0]) return f[0];
@@ -80,7 +89,7 @@
   }
 
   function mark() {
-    var mid = window.innerHeight * 0.5, best = 0, bd = Infinity;
+    var mid = line(), best = 0, bd = Infinity;
     steps.forEach(function (s, i) {
       var r = s.getBoundingClientRect(); var d = Math.abs(r.top + r.height / 2 - mid);
       if (d < bd) { bd = d; best = i; }
