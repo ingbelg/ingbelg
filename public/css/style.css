@@ -1052,3 +1052,33 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
+
+/* ============ UW DAK, LAAG PER LAAG (startpagina, vooraf gerenderde 3D-beelden) ============ */
+.dak3d{background:var(--white)}
+.dak3d__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:start}
+.dak3d__stage{position:sticky;top:112px;aspect-ratio:4/3;width:100%}
+.dak3d__stage img,.dak3d__stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.dak3d__canvas{opacity:0;transition:opacity .5s var(--ease)}
+.dak3d.is-live .dak3d__canvas{opacity:1}
+.dak3d.is-live .dak3d__poster{visibility:hidden}
+.dak3d__steps{list-style:none;margin:0;padding:0}
+.dak3d__step{min-height:58vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:28px 0;border-top:1px solid var(--line)}
+.dak3d__step:first-child{border-top:0}
+.dak3d.is-js .dak3d__step{opacity:.32;transition:opacity .35s var(--ease)}
+.dak3d.is-js .dak3d__step.is-active{opacity:1}
+.dak3d__num{font:700 15px/1 var(--font-head);color:var(--red);letter-spacing:.06em;margin-bottom:10px}
+.dak3d__step h3{font:700 clamp(24px,2.4vw,32px)/1.12 var(--font-head);margin:0 0 10px;color:var(--ink)}
+.dak3d__step p{margin:0;color:var(--slate);max-width:44ch}
+.dak3d__badge{display:inline-block;margin-top:14px;background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:6px 12px;border-radius:999px;text-decoration:none}
+.dak3d__badge:hover{background:var(--red-dark)}
+.dak3d__cta{margin-top:22px}
+@media (max-width:900px){
+  .dak3d__grid{grid-template-columns:1fr;gap:0}
+  .dak3d__stage{top:70px;z-index:2;background:var(--white);box-shadow:0 14px 18px -16px rgba(14,17,22,.25)}
+  .dak3d__step{min-height:48vh;padding:22px 0}
+  .dak3d__step:first-child{border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  .dak3d__stage{position:relative;top:auto}
+  .dak3d__step{min-height:0}
+}

@@ -1,0 +1,76 @@
+---
+/* Startpagina — UW DAK, LAAG PER LAAG
+   Eigen 3D-model (Blender), vooraf gerenderd: 57 beelden in /assets/dak3d/{d,m}/fNN.webp.
+   Geen WebGL: /js/dak3d.js laadt de beelden pas vlak voor de sectie en kiest het beeld volgens het scrollen.
+   Zonder JS of met 'minder beweging': één stilstaand beeld met alle lagen. Teksten = wat al op de site staat. */
+import facts from '../../data/site-facts.json';
+
+const FRAMES = 57;
+const LAST = FRAMES - 1;
+const steps = [
+  {
+    frame: 0, title: 'Tot op de kepers',
+    text: 'We vernieuwen uw dak tot op de kepers: de oude pannen of leien gaan eraf.',
+    link: { href: '/hellend-dak', label: 'Meer over hellend dak vernieuwen' },
+  },
+  {
+    frame: 14, title: 'PIR-isolatie, meestal 12 tot 16 cm',
+    text: 'Zo haalt de nieuwe isolatie een Rd-waarde van minstens 4,5 m²K/W, de waarde voor de dakpremie.',
+    badge: { href: '/premies-dakwerken-2026', label: 'Telt mee voor de dakpremie' },
+    link: { href: '/dakisolatie', label: 'Meer over dakisolatie' },
+  },
+  {
+    frame: 28, title: 'Een nieuw onderdak',
+    text: 'Over de isolatie komt een nieuw onderdak.',
+  },
+  {
+    frame: 42, title: 'Nieuwe panlatten',
+    text: 'Op het onderdak komen nieuwe panlatten, de basis voor de dakbedekking.',
+  },
+  {
+    frame: LAST, title: 'Dakpannen of natuurleien',
+    text: `Daarna is uw dak waterdicht en geïsoleerd, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
+    link: { href: '/hellend-dak', label: 'Meer over hellend dak vernieuwen' },
+  },
+  {
+    frame: LAST, title: 'Plat dak: EPDM op nieuwe isolatie',
+    text: 'Voor aanbouw, garage of dakterras leggen we EPDM van Firestone of Resitrix, altijd op een nieuwe isolatielaag.',
+    link: { href: '/plat-dak-epdm', label: 'Meer over plat dak in EPDM' },
+    cta: true,
+  },
+];
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<section class="section dak3d" id="dakopbouw" data-frames={FRAMES}>
+  <div class="container">
+    <header class="sechead reveal">
+      <p class="eyebrow"><span class="eyebrow__bar"></span>Zo bouwen wij uw dak op</p>
+      <h2 class="h2">Uw dak, <em>laag per laag</em></h2>
+      <p class="sechead__sub">Scrol verder en zie hoe een dak van INGBELG wordt opgebouwd, van de kepers tot de pannen.</p>
+    </header>
+
+    <div class="dak3d__grid">
+      <div class="dak3d__stage">
+        <img class="dak3d__poster" src={`/assets/dak3d/d/f${pad(LAST)}.webp`} width="1000" height="750" loading="lazy" decoding="async"
+             alt="Doorsnede van een dak: kepers, PIR-isolatie, onderdak, panlatten en dakpannen, naast een plat dak in EPDM" />
+        <canvas class="dak3d__canvas" width="1000" height="750" aria-hidden="true"></canvas>
+      </div>
+
+      <ol class="dak3d__steps">
+        {steps.map((s, i) => (
+          <li class="dak3d__step" data-frame={s.frame}>
+            <span class="dak3d__num">{pad(i + 1)}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            {s.badge && <a class="dak3d__badge" href={s.badge.href}>{s.badge.label}</a>}
+            {s.link && <a class="adv__more" href={s.link.href}>{s.link.label}</a>}
+            {s.cta && (
+              <a class="btn btn--primary dak3d__cta" href="#contact"><span>Vraag een gratis plaatsbezoek</span></a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+<script is:inline src="/js/dak3d.js" defer></script>
