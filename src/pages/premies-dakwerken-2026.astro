@@ -11,8 +11,7 @@ export const prerender = true;
    - "Mijn VerbouwPremie voor eigenaar-bewoner": inkomensgrenzen vanaf 1/1/2026
    Opnieuw nagekeken op 16 november 2026 (zelfde pagina's): bedragen, maxima, factuurgrenzen, Rd-waarde, datum 2006 en documenten ongewijzigd.
    Toen ook opgenomen: de premie van 50 %/35 % geldt "voor isolatie en renovatie samen"; welke dakwerken meetellen (enkel samen met nieuwe
-   isolatie, enkel dak van verwarmde ruimtes, door een aannemer); en Mijn VerbouwLening (bedrag, looptijd, rente 2026, premie lost lening af —
-   bron: …/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening).
+   isolatie, enkel dak van verwarmde ruimtes, door een aannemer). Leningen (Mijn VerbouwLening) bewust NIET vermeld: beslissing Murat 16/11/2026.
    Regels 2027: de overheid heeft een simulator 2027, maar nog geen gewijzigde bedragen op de pagina → niet vermeld; nalezen rond 15/12.
    Bij een nieuwe regelgeving of indexering: pas deze pagina én public/js/calculator.js samen aan. */
 const page: LandingData = {
@@ -100,7 +99,7 @@ const page: LandingData = {
     {
       h: '',
       paras: [
-        'Enkel het dak boven verwarmde ruimtes telt mee, dus geen onverwarmde bijgebouwen of losse garages. Een nieuw dak <strong>zonder nieuwe isolatie</strong> geeft geen premie. Vernieuwt u het dak, dan is het dus de moeite om het meteen te isoleren: dan telt de hele factuur van de categorie dak mee, tot € 11.500 excl. btw.',
+        'Enkel het dak boven verwarmde ruimtes telt mee, dus geen onverwarmde bijgebouwen of losse garages. Een nieuw dak <strong>zonder nieuwe isolatie</strong> geeft geen premie. Vernieuwt u het dak, dan is het dus de moeite om het meteen te isoleren: dan telt de hele factuur van de categorie dak mee, tot € 11.500 excl. btw. Kocht u een woning met EPC E of F? Lees dan ook onze uitleg over de <a href="/renovatieverplichting-epc">renovatieverplichting</a>.',
       ],
     },
     {
@@ -113,13 +112,6 @@ const page: LandingData = {
       h: '6 % btw, los van de premie',
       paras: [
         'Is uw woning ouder dan 10 jaar en gebruikt u ze vooral als privéwoning? Dan betaalt u <strong>6 % btw</strong> op de werken in plaats van 21 %. Dat geldt voor iedereen, ongeacht het inkomen. Wij passen dit correct toe op de factuur. Alle voorwaarden staan in onze uitleg over <a href="/btw-dakwerken">6 % btw op dakwerken</a>.',
-      ],
-    },
-    {
-      h: 'Lenen voor uw dak: Mijn VerbouwLening',
-      paras: [
-        'Met <strong>Mijn VerbouwLening</strong> van de Vlaamse overheid leent u <strong>€ 4.000 tot € 60.000</strong>, over maximaal 25 jaar, zonder dossierkosten. Bij een aanvraag in 2026 betalen eigenaar-bewoners in categorie 4 <strong>0 % rente</strong>, in categorie 3 <strong>0,5 %</strong> en in categorie 2 1,5 %. Categorie 1 komt niet in aanmerking. Let op, geld lenen kost ook geld.',
-        'Leent u voor dezelfde werken waarvoor u de dakpremie krijgt, dan gaat de premie naar de afbetaling van de lening, niet naar uw rekening. U vraagt beide aan via het Mijn VerbouwLoket. Wie wil weten hoe zo\'n renovatie past bij een woning met EPC E of F, leest onze uitleg over de <a href="/renovatieverplichting-epc">renovatieverplichting</a>.',
       ],
     },
     {
@@ -147,7 +139,6 @@ const page: LandingData = {
   sources: [
     { label: 'Mijn VerbouwPremie voor dak (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/mijn-verbouwpremie-voor-dak' },
     { label: 'Mijn VerbouwPremie voor eigenaar-bewoner: inkomenscategorieën (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/bouwen-en-verbouwen/premies-voor-renovatie/mijn-verbouwpremie/wie-kan-mijn-verbouwpremie-aanvragen/mijn-verbouwpremie-voor-eigenaar-bewoner' },
-    { label: 'Mijn VerbouwLening: bedrag en rentevoet (vlaanderen.be)', href: 'https://www.vlaanderen.be/bouwen-wonen-en-energie/lenen-voor-een-woning/mijn-verbouwlening/wat-is-het-bedrag-en-de-rentevoet-van-mijn-verbouwlening' },
     { label: 'Aanvragen en simulator: mijnverbouwpremie.be', href: 'https://www.mijnverbouwpremie.be' },
     { label: 'Mijn VerbouwLoket (premie aanvragen)', href: 'https://loket.mijnverbouwpremie.be' },
   ],
@@ -174,10 +165,6 @@ const page: LandingData = {
     {
       q: 'Krijg ik een premie voor een nieuw dak, zoals dakpannen, onderdak of goten?',
       a: 'Ja, als u in categorie 3 of 4 valt en het dak tegelijk nieuwe isolatie krijgt met een Rd-waarde van minstens 4,5 m²K/W. Dan tellen ook de dakbedekking, het onderdak, de dakstructuur, dakramen, een dakkapel en de goten mee voor de premie. Een nieuw dak zonder nieuwe isolatie geeft geen premie.',
-    },
-    {
-      q: 'Kan ik de dakpremie combineren met een lening?',
-      a: 'Ja, met Mijn VerbouwLening: € 4.000 tot € 60.000 over maximaal 25 jaar, bij een aanvraag in 2026 aan 0 % rente voor categorie 4 en 0,5 % voor categorie 3. De premie gaat dan naar de afbetaling van de lening. Let op, geld lenen kost ook geld.',
     },
     {
       q: 'Welke woningen komen in aanmerking?',
