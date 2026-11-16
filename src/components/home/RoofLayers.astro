@@ -40,6 +40,7 @@ const steps = [
   },
 ];
 const pad = (n: number) => String(n).padStart(2, '0');
+const ALT = 'Doorsnede van een dak: kepers, PIR-isolatie, onderdak, panlatten en dakpannen, naast een plat dak in EPDM';
 ---
 <section class="section dak3d" id="dakopbouw" data-frames={FRAMES}>
   <div class="container">
@@ -51,10 +52,12 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
     <div class="dak3d__grid">
       <div class="dak3d__stage">
-        <img class="dak3d__poster" src={`/assets/dak3d/d/f${pad(LAST)}.webp`}
-             srcset={`/assets/dak3d/m/f${pad(LAST)}.webp 640w, /assets/dak3d/d/f${pad(LAST)}.webp 1000w`}
-             sizes="(max-width: 900px) 100vw, 640px" width="1000" height="750" loading="lazy" decoding="async"
-             alt="Doorsnede van een dak: kepers, PIR-isolatie, onderdak, panlatten en dakpannen, naast een plat dak in EPDM" />
+        {/* Beeld en script pas na de eerste interactie (scrollen, tikken, toets): tijdens het laden van de pagina
+            gebeurt hier niets, anders gaat de TBT op de telefoon omhoog (gemeten 16-17/11/2026). Zonder JS: <noscript>. */}
+        <img class="dak3d__poster" data-src={`/assets/dak3d/d/f${pad(LAST)}.webp`}
+             data-srcset={`/assets/dak3d/m/f${pad(LAST)}.webp 640w, /assets/dak3d/d/f${pad(LAST)}.webp 1000w`}
+             sizes="(max-width: 900px) 100vw, 640px" width="1000" height="750" decoding="async" alt={ALT} />
+        <noscript><img class="dak3d__poster" src={`/assets/dak3d/d/f${pad(LAST)}.webp`} width="1000" height="750" alt={ALT} /></noscript>
         <canvas class="dak3d__canvas" width="1000" height="750" aria-hidden="true"></canvas>
       </div>
 
@@ -75,4 +78,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </div>
   </div>
 </section>
-<script is:inline src="/js/dak3d.js" defer></script>
+<script is:inline>
+(function () {
+  var ev = ['scroll', 'pointerdown', 'touchstart', 'keydown'], done = false;
+  function go() {
+    if (done) return; done = true;
+    ev.forEach(function (e) { removeEventListener(e, go); });
+    var s = document.createElement('script'); s.src = '/js/dak3d.js'; s.async = true; document.body.appendChild(s);
+  }
+  ev.forEach(function (e) { addEventListener(e, go, { passive: true }); });
+  if (location.hash === '#dakopbouw') addEventListener('load', go);
+})();
+</script>

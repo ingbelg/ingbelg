@@ -1,6 +1,6 @@
 /* INGBELG — 'Uw dak, laag per laag' (startpagina).
    Vooraf gerenderde beelden (eigen Blender-model), geen WebGL.
-   - Beelden laden pas als de sectie op ~1 scherm afstand is, na het laden van de pagina.
+   - Dit script zelf wordt pas geladen na de eerste interactie (zie RoofLayers.astro); beelden pas als de sectie op ~250 px is.
    - Telefoon (≤ 760 px): kleinere beelden uit /m/.
    - 'Minder beweging' of geen canvas: het stilstaande beeld blijft staan, alle stappen zichtbaar.
    - Tekenen alleen tijdens scrollen (requestAnimationFrame), geen lus in de achtergrond. */
@@ -11,11 +11,16 @@
   var stage = sec.querySelector('.dak3d__stage');
   var oneCol = window.matchMedia('(max-width: 900px)');
   var steps = Array.prototype.slice.call(sec.querySelectorAll('.dak3d__step'));
+  // stilstaand beeld (ook voor 'minder beweging'): pas nu invullen, het script laadt na de eerste interactie
+  var poster = sec.querySelector('img.dak3d__poster[data-src]');
+  if (poster) {
+    if (poster.getAttribute('data-srcset')) poster.setAttribute('srcset', poster.getAttribute('data-srcset'));
+    poster.src = poster.getAttribute('data-src');
+  }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !canvas || !canvas.getContext || !('IntersectionObserver' in window)) return;
 
-  sec.classList.add('is-js');
-  var ctx = canvas.getContext('2d');
+  var ctx = null;   // pas aanmaken als de sectie in de buurt komt
   var N = parseInt(sec.getAttribute('data-frames'), 10) || 57;
   var small = window.matchMedia('(max-width: 760px)').matches;
   var base = '/assets/dak3d/' + (small ? 'm' : 'd') + '/f';
@@ -107,25 +112,35 @@
     requestAnimationFrame(function () { ticking = false; mark(); draw(false); });
   }
 
+  // bij het laden van de pagina doet dit script niets behalve twee observers zetten:
+  // geen metingen (die dwingen een volledige lay-out af), geen klassen, geen listeners
   var near = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (e.isIntersecting) {
+        if (!ctx) { ctx = canvas.getContext('2d'); sec.classList.add('is-js'); }
         var go = function () { load(); };
         if (document.readyState === 'complete') ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 200));
         else window.addEventListener('load', go, { once: true });
         near.disconnect();
       }
     });
-  }, { rootMargin: '900px 0px' });
+  }, { rootMargin: '250px 0px' });
   near.observe(sec);
 
   var inView = false;
   new IntersectionObserver(function (es) {
     es.forEach(function (e) {
-      if (e.isIntersecting && !inView) { inView = true; window.addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
-      else if (!e.isIntersecting && inView) { inView = false; window.removeEventListener('scroll', onScroll); }
+      if (e.isIntersecting && !inView) {
+        inView = true;
+        if (!ctx) { ctx = canvas.getContext('2d'); sec.classList.add('is-js'); }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        onScroll();
+      } else if (!e.isIntersecting && inView) {
+        inView = false;
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+      }
     });
   }).observe(sec);
-  window.addEventListener('resize', onScroll, { passive: true });
-  mark();
 })();

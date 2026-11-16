@@ -1058,6 +1058,7 @@ a.cinfo:hover .cinfo__ico svg{fill:#fff}
 .dak3d__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:start}
 .dak3d__stage{position:sticky;top:112px;aspect-ratio:4/3;width:100%}
 .dak3d__stage img,.dak3d__stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.dak3d__poster:not([src]){visibility:hidden}
 .dak3d__canvas{opacity:0;transition:opacity .5s var(--ease)}
 .dak3d.is-live .dak3d__canvas{opacity:1}
 .dak3d.is-live .dak3d__poster{visibility:hidden}
