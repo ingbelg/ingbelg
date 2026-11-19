@@ -21,7 +21,7 @@
   if (reduce || !canvas || !canvas.getContext || !('IntersectionObserver' in window)) return;
 
   var ctx = null;   // pas aanmaken als de sectie in de buurt komt
-  var N = parseInt(sec.getAttribute('data-frames'), 10) || 57;
+  var N = parseInt(sec.getAttribute('data-frames'), 10) || 73;
   var small = window.matchMedia('(max-width: 760px)').matches;
   var base = '/assets/dak3d/' + (small ? 'm' : 'd') + '/f';
   var imgs = new Array(N);

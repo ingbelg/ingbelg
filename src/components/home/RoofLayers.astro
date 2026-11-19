@@ -1,12 +1,15 @@
 ---
 /* Startpagina — UW DAK, LAAG PER LAAG
-   Eigen 3D-model (Blender), vooraf gerenderd: 57 beelden in /assets/dak3d/{d,m}/fNN.webp.
+   Eigen 3D-model (Blender), vooraf gerenderd: 73 beelden in /assets/dak3d/{d,m}/fNN.webp.
    Geen WebGL: /js/dak3d.js laadt de beelden pas vlak voor de sectie en kiest het beeld volgens het scrollen.
    Zonder JS of met 'minder beweging': één stilstaand beeld met alle lagen. Teksten = wat al op de site staat. */
 import facts from '../../data/site-facts.json';
 
-const FRAMES = 57;
+const FRAMES = 73;
 const LAST = FRAMES - 1;
+/* Opbouw zoals INGBELG het doet (bevestigd door de zaakvoerder, 19/11/2026):
+   kepers, dampscherm, isolatie, onderdak, sarkinglatten, panlatten, dakpannen.
+   In de animatie komt elke laag in 12 beelden: dampscherm 12, PIR 24, onderdak 36, sarkinglatten 48, panlatten 60, pannen 72. */
 const steps = [
   {
     frame: 0, title: 'Tot op de kepers',
@@ -14,33 +17,32 @@ const steps = [
     link: { href: '/hellend-dak', label: 'Meer over hellend dak vernieuwen' },
   },
   {
-    frame: 14, title: 'PIR-isolatie, meestal 12 tot 16 cm',
+    frame: 12, title: 'Een dampscherm',
+    text: 'Eerst komt er een dampscherm op de kepers. Het houdt het vocht uit de woning weg van de isolatie.',
+  },
+  {
+    frame: 24, title: 'PIR-isolatie, meestal 12 tot 16 cm',
     text: 'Zo haalt de nieuwe isolatie een Rd-waarde van minstens 4,5 m²K/W, de waarde voor de dakpremie.',
     badge: { href: '/premies-dakwerken-2026', label: 'Telt mee voor de dakpremie' },
     link: { href: '/dakisolatie', label: 'Meer over dakisolatie' },
   },
   {
-    frame: 28, title: 'Een nieuw onderdak',
-    text: 'Over de isolatie komt een nieuw onderdak.',
+    frame: 36, title: 'Een nieuw onderdak',
+    text: 'Over de isolatie komt een nieuw onderdak. Het beschermt de isolatie langs boven.',
   },
   {
-    frame: 42, title: 'Nieuwe panlatten',
-    text: 'Op het onderdak komen nieuwe panlatten, de basis voor de dakbedekking.',
+    frame: 60, title: 'Sarkinglatten en panlatten',
+    text: 'Op het onderdak komen sarkinglatten in de richting van de helling, en daarop de panlatten: de basis voor de dakbedekking.',
   },
   {
     frame: LAST, title: 'Dakpannen of natuurleien',
     text: `Daarna is uw dak waterdicht en geïsoleerd, met ${facts.warrantyYears} jaar schriftelijke garantie.`,
     link: { href: '/hellend-dak', label: 'Meer over hellend dak vernieuwen' },
-  },
-  {
-    frame: LAST, title: 'Plat dak: EPDM op nieuwe isolatie',
-    text: 'Voor aanbouw, garage of dakterras leggen we EPDM van Firestone of Resitrix, altijd op een nieuwe isolatielaag.',
-    link: { href: '/plat-dak-epdm', label: 'Meer over plat dak in EPDM' },
     cta: true,
   },
 ];
 const pad = (n: number) => String(n).padStart(2, '0');
-const ALT = 'Doorsnede van een dak: kepers, PIR-isolatie, onderdak, panlatten en dakpannen, naast een plat dak in EPDM';
+const ALT = 'Doorsnede van een dak: kepers, dampscherm, PIR-isolatie, onderdak, sarkinglatten, panlatten en dakpannen, naast een plat dak in EPDM';
 ---
 <section class="section dak3d" id="dakopbouw" data-frames={FRAMES}>
   <div class="container">
